@@ -25,7 +25,7 @@ const fadeUp: Variants = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
- 
+
 const panel: Variants = {
     hidden: { opacity: 0, y: 40 },
     show: { opacity: 1, y: 0, transition: { duration: 1, ease, delay: 0.35, staggerChildren: 0.12, delayChildren: 0.5 } },
@@ -59,18 +59,18 @@ export default function CausesHero({ data, stats }: CausesHeroProps) {
                     variants={container}
                     initial={reduce ? false : "hidden"}
                     animate="show"
-                    className="relative grid items-center gap-14 py-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20 lg:py-28"
+                    className="relative grid items-end gap-14 py-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20 lg:py-28"
                 >
                     <div>
-                        <BreadCrumb  
-                        breadcrumb={breadcrumb}/>
+                        <BreadCrumb
+                            breadcrumb={breadcrumb} />
                         {eyebrow && <Eyebrow eyebrow={eyebrow} />}
 
                         <HeroTitle titleStart={titleStart}
                             titleAccent={titleAccent} />
 
                         {description && (
-                            <div className="mt-8">
+                            <div className="mt-8 lg:hidden blick">
                                 <Description description={description} variant="body" />
                             </div>
                         )}
@@ -83,38 +83,13 @@ export default function CausesHero({ data, stats }: CausesHeroProps) {
                             </motion.div>
                         )}
                     </div>
-
-                    {/* Totals */}
-                    {stats.length > 0 && (
-                        <motion.dl
-                            variants={panel}
-                            className="relative bg-[#17261e] p-8 ring-1 ring-[#e8c99a]/15 sm:p-10"
-                        >
-                            {stats.map((s, i) => (
-                                <motion.div
-                                    key={s.label}
-                                    variants={fadeUp}
-                                    className={`relative flex flex-col-reverse ${i === 0 ? "pb-8" : "py-8"} ${i === stats.length - 1 ? "pb-0" : ""}`}
-                                >
-                                    {i > 0 && (
-                                        <motion.span
-                                            variants={line}
-                                            aria-hidden="true"
-                                            className="absolute left-0 top-0 h-px w-full origin-left bg-[#e8c99a]/25"
-                                        />
-                                    )}
-                                    <dt className="mt-3 text-[15px] text-[#bdb7aa]">{s.label}</dt>
-                                    <dd
-                                        className={`m-0 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] font-medium leading-none tracking-[-0.02em] text-[#ece6da]
-                      ${i === 0 ? "text-[clamp(48px,5.4vw,84px)]" : "text-[clamp(38px,4vw,60px)]"}`}
-                                    >
-                                        {s.prefix}
-                                        <CountUp value={s.value} />
-                                    </dd>
-                                </motion.div>
-                            ))}
-                        </motion.dl>
-                    )}
+                    <div className="lg:block hidden">
+                        {description && (
+                            <div className="mt-8">
+                                <Description description={description} variant="body" />
+                            </div>
+                        )}
+                    </div>
                 </motion.div>
             </MainContainer>
         </section>

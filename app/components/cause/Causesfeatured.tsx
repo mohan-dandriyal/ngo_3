@@ -49,10 +49,8 @@ const bar: Variants = {
 export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     const reduce = useReducedMotion();
     const [imgFailed, setImgFailed] = useState(!cause.image);
-    const [picked, setPicked] = useState(0);
+    const [picked] = useState(0);
 
-    const currency = cause.currency || "INR";
-    const pct = percentOf(cause.raised, cause.goal);
     const amounts = cause.amounts ?? [];
     const chosen = amounts[picked];
 
@@ -111,11 +109,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
                         <span className="absolute bottom-5 left-5 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#e8c99a]">
                             {cause.category}
                         </span>
-                        {daysLeft !== null && (
-                            <span className="absolute right-5 top-5 bg-[#e0503a] px-4 py-2.5 text-[14px] font-semibold text-[#14110c]">
-                                {daysLeft} {labels.daysLabel}
-                            </span>
-                        )}
+                        
                     </motion.div>
 
                     {/* Content */}

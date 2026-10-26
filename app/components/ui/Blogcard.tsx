@@ -93,19 +93,7 @@ export function FeaturedPost({ post }: { post: Post }) {
         </h3>
         {post.excerpt && <p className="mt-5 max-w-[56ch] text-[15px] leading-[1.85] text-[#bdb7aa]">{post.excerpt}</p>}
 
-        <span className="relative mt-7 inline-flex items-center gap-3 pb-1.5 text-sm tracking-[0.02em] text-[#ece6da]">
-          Read story
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-            strokeLinejoin="round" aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-            <path d="M3 11L11 3M4.5 3H11v6.5" />
-          </svg>
-          <span
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-[0.35] bg-[#e0503a] transition-transform
-                       duration-500 ease-out group-hover:scale-x-100"
-          />
-        </span>
+       
       </div>
     </motion.article>
   );

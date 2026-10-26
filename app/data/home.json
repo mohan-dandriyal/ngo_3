@@ -5,18 +5,13 @@
         "titleAccent": "with showing up.",
         "description": "We back the people building a fairer, greener, more possible everyday — one local idea at a time.",
         "primaryBtn": {
-            "text": "Make a difference",
-            "linkTo": "#"
-        },
-        "secondaryBtn": {
             "text": "Our story",
             "linkTo": "/about"
         },
+       
         "image": {
             "src": "/img-3.jpg",
-            "alt": "Graffiti on a street utility box reading Be the Change",
-            "counter": "01 / 04",
-            "location": "Chittagong, Bangladesh"
+            "alt": "Graffiti on a street utility box reading Be the Change"
         },
         "badge": ""
     },
@@ -33,7 +28,6 @@
         "titleStart": "Our work is",
         "titleAccent": "rooted",
         "titleEnd": "locally.",
-        "meta": "03 programs / 2025",
         "programs": [
             {
                 "title": "The Water Table",
@@ -95,7 +89,7 @@
                 "category": "Health",
                 "image": "/img-5.jpg",
                 "imageAlt": "A nurse examining a patient at a mobile clinic",
-                "linkText": "Explore All",
+                "linkText": "Explore",
                 "linkTo": "/our-cause/health-camps-on-wheels"
             }
         ]

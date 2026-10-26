@@ -23,44 +23,9 @@
         "We drill deep-bore hand pumps close to where families live and add a filtration unit at each site. A trained committee of villagers owns the pump, collects a small monthly fee and fixes faults, so the water keeps flowing long after we leave.",
         "Each village is mapped, tested before and after, and tracked publicly on this page."
       ],
-      "highlights": [
-        { "label": "Villages", "value": "20" },
-        { "label": "People reached", "value": "about 18,000" },
-        { "label": "Walk to water", "value": "under 500 m" },
-        { "label": "Repair committees", "value": "20 trained" }
-      ],
-      "fundsUse": [
-        { "label": "Pumps and filtration units", "percent": 62 },
-        { "label": "Committee training and spare parts", "percent": 18 },
-        { "label": "Water testing and monitoring", "percent": 10 },
-        { "label": "Field team and logistics", "percent": 10 }
-      ],
-      "milestones": [
-        {
-          "title": "Village survey and site selection",
-          "description": "All 20 villages surveyed and borewell sites confirmed with each panchayat.",
-          "date": "Jan 2026",
-          "status": "done"
-        },
-        {
-          "title": "First 8 pumps installed",
-          "description": "Eight hand pumps with filters are live and tested.",
-          "date": "Jun 2026",
-          "status": "done"
-        },
-        {
-          "title": "Pumps 9 to 15",
-          "description": "Drilling is under way in the next seven villages.",
-          "date": "Nov 2026",
-          "status": "current"
-        },
-        {
-          "title": "Final 5 villages and handover",
-          "description": "Last pumps installed and all committees certified.",
-          "date": "Mar 2027",
-          "status": "upcoming"
-        }
-      ],
+  
+    
+     
       "updates": [
         {
           "date": "2026-10-12",
@@ -101,18 +66,8 @@
         "This campaign covers those basics, so a child can stay in class. We work with local schools, who tell us which children are most at risk of leaving.",
         "Attendance is tracked each term and shared here."
       ],
-      "highlights": [
-        { "label": "Children supported", "value": "1,200" },
-        { "label": "Partner schools", "value": "18" },
-        { "label": "Meals per school day", "value": "1" },
-        { "label": "Target attendance", "value": "90%" }
-      ],
-      "fundsUse": [
-        { "label": "Books and learning kits", "percent": 35 },
-        { "label": "Midday meals", "percent": 35 },
-        { "label": "Uniforms and shoes", "percent": 20 },
-        { "label": "Tracking and field team", "percent": 10 }
-      ],
+     
+     
       "milestones": [
         {
           "title": "Partner schools signed up",
@@ -139,6 +94,7 @@
           "status": "upcoming"
         }
       ],
+
       "updates": [
         {
           "date": "2026-10-05",
@@ -146,10 +102,7 @@
           "body": "Teachers report fewer absences since meals started. We will publish the numbers once the term closes."
         }
       ],
-      "team": [
-        { "name": "Education lead (add name)", "role": "Works with schools and teachers" },
-        { "name": "Field coordinator (add name)", "role": "Delivers kits and checks meals" }
-      ],
+     
       "faqs": [
         {
           "question": "How are children chosen?",

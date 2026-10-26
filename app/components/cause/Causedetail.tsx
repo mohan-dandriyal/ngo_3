@@ -89,16 +89,7 @@ export default function CauseDetail({
   const customValue = Number(custom);
   const hasCustom = custom !== "" && customValue > 0;
   const finalAmount = hasCustom ? customValue : selected;
-  const selectedImpact = hasCustom
-    ? null
-    : amounts.find((a) => a.value === selected)?.impact;
 
-  const percent = percentOf(cause.raised, cause.goal);
-
-  // cause.linkTo now points at this page, so build the donate link from the slug
-  const donateHref = `/donate?cause=${cause.slug}${
-    finalAmount ? `&amount=${finalAmount}` : ""
-  }`;
 
   return (
     <main className="bg-[#0A0B09] text-[#EAE3D6]">
@@ -153,26 +144,8 @@ export default function CauseDetail({
               {cause.description}
             </p>
 
-            <dl className="mt-10 grid grid-cols-2 gap-px border border-white/10 bg-white/10 md:grid-cols-4">
-              <Stat
-                label={labels.raisedLabel}
-                value={`${currencySymbol}${formatNumber(cause.raised)}`}
-              />
-              <Stat
-                label={labels.goalLabel}
-                value={`${currencySymbol}${formatNumber(cause.goal)}`}
-              />
-              <Stat
-                label={labels.supportersLabel}
-                value={formatNumber(cause.supporters)}
-              />
-              {daysLeft !== null && (
-                <Stat label={labels.daysLabel} value={String(daysLeft)} />
-              )}
-            </dl>
-
             {details && (
-              <div className="mt-14 space-y-12 md:mt-20 md:space-y-16">
+              <div className="mt-14 space-y-12 md:mt-15 md:space-y-16">
                 {/* Story */}
                 <Section title={detailLabels.storyTitle}>
                   <div className="max-w-2xl space-y-5 text-base leading-8 text-[#B9B5AC] md:text-lg">
@@ -186,49 +159,9 @@ export default function CauseDetail({
                   </p>
                 </Section>
 
-                {/* Highlights */}
-                {details.highlights.length > 0 && (
-                  <Section title={detailLabels.highlightsTitle}>
-                    <dl className="grid grid-cols-2 gap-px border border-white/10 bg-white/10 md:grid-cols-4">
-                      {details.highlights.map((item) => (
-                        <Stat
-                          key={item.label}
-                          label={item.label}
-                          value={item.value}
-                        />
-                      ))}
-                    </dl>
-                  </Section>
-                )}
+             
 
-                {/* Where the money goes */}
-                {details.fundsUse.length > 0 && (
-                  <Section title={detailLabels.fundsTitle}>
-                    <ul className="max-w-2xl space-y-6">
-                      {details.fundsUse.map((item) => (
-                        <li key={item.label}>
-                          <div className="mb-2 flex items-baseline justify-between gap-4 text-sm">
-                            <span>{item.label}</span>
-                            <span className="text-[#B9B5AC]">
-                              {item.percent}%
-                            </span>
-                          </div>
-                          <div className="h-1.5 w-full bg-white/10">
-                            <motion.div
-                              className="h-full bg-[#EE503B]"
-                              initial={{
-                                width: reduceMotion ? `${item.percent}%` : 0,
-                              }}
-                              whileInView={{ width: `${item.percent}%` }}
-                              viewport={{ once: true, margin: "-40px" }}
-                              transition={{ duration: 0.8, ease: "easeOut" }}
-                            />
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </Section>
-                )}
+              
 
                 {/* Milestones */}
                 {details.milestones.length > 0 && (
@@ -273,45 +206,6 @@ export default function CauseDetail({
                   </Section>
                 )}
 
-                {/* Updates */}
-                {details.updates.length > 0 && (
-                  <Section title={detailLabels.updatesTitle}>
-                    <div className="divide-y divide-white/10 border-y border-white/10">
-                      {details.updates.map((update) => (
-                        <article key={update.date + update.title} className="py-6">
-                          <time
-                            dateTime={update.date}
-                            className="text-xs text-[#B9B5AC]"
-                          >
-                            {formatDate(update.date)}
-                          </time>
-                          <h3 className="mt-2 font-serif text-xl">
-                            {update.title}
-                          </h3>
-                          <p className="mt-2 max-w-2xl text-sm leading-7 text-[#B9B5AC]">
-                            {update.body}
-                          </p>
-                        </article>
-                      ))}
-                    </div>
-                  </Section>
-                )}
-
-                {/* Team */}
-                {details.team.length > 0 && (
-                  <Section title={detailLabels.teamTitle}>
-                    <ul className="grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2">
-                      {details.team.map((member) => (
-                        <li key={member.name} className="bg-[#0A0B09] p-5">
-                          <p className="font-serif text-lg">{member.name}</p>
-                          <p className="mt-1 text-sm text-[#B9B5AC]">
-                            {member.role}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </Section>
-                )}
 
                 {/* FAQ */}
                 {details.faqs.length > 0 && (
@@ -375,16 +269,6 @@ export default function CauseDetail({
                         <h3 className="font-serif text-2xl leading-tight text-white">
                           {item.title}
                         </h3>
-                        <div className="mt-4 h-1 w-full bg-white/20">
-                          <div
-                            className="h-full bg-[#EE503B]"
-                            style={{ width: `${p}%` }}
-                          />
-                        </div>
-                        <p className="mt-2 text-xs text-white/75">
-                          {currencySymbol}
-                          {formatNumber(item.raised)} {grid.raisedLabel} · {p}%
-                        </p>
                       </div>
                     </div>
                   </Link>
@@ -394,37 +278,6 @@ export default function CauseDetail({
           </section>
         )}
 
-        {/* CTA */}
-        <section className="mt-20 border-t border-white/10 pt-12 md:mt-28">
-          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div>
-              <Eyebrow eyebrow={cta.eyebrow} />
-              <SectionTitle
-                titleStart={cta.titleStart}
-                titleAccent={cta.titleAccent}
-              />
-              <p className="mt-5 max-w-xl text-sm leading-7 text-[#B9B5AC] md:text-base">
-                {cta.description}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={cta.primaryButton.link}
-                className="inline-flex items-center gap-3 bg-[#EE503B] px-6 py-4 text-sm text-white transition-colors hover:bg-[#d9442f]"
-              >
-                {cta.primaryButton.text}
-                <ArrowUpRight size={18} aria-hidden="true" />
-              </Link>
-              <Link
-                href={cta.secondaryButton.link}
-                className="inline-flex items-center border border-white/15 px-6 py-4 text-sm transition-colors hover:border-[#EE503B] hover:text-[#EE503B]"
-              >
-                {cta.secondaryButton.text}
-              </Link>
-            </div>
-          </div>
-        </section>
       </div>
     </main>
   );
@@ -436,14 +289,5 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
       <h2 className="mb-6 font-serif text-2xl sm:text-3xl">{title}</h2>
       {children}
     </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-[#0A0B09] p-5">
-      <dd className="font-serif text-2xl sm:text-3xl">{value}</dd>
-      <dt className="mt-1 text-xs text-[#B9B5AC]">{label}</dt>
-    </div>
   );
 }

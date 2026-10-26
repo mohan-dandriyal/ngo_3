@@ -37,18 +37,18 @@
       {
         "id": "partner",
         "icon": "handshake",
-        "title": "Partner with us",
+        "title": "Contact Number",
         "description": "Let's work together to create lasting change.",
-        "value": "Explore partnerships",
-        "link": "/partnerships"
+        "value": "+1 00000 00000",
+        "link": "tel:+1000000000"
       },
       {
-        "id": "volunteer",
-        "icon": "heart-handshake",
-        "title": "Volunteer",
+        "id": "address",
+        "icon": "Address",
+        "title": "Address",
         "description": "Bring your time, skills, and passion to our mission.",
-        "value": "Join our team",
-        "link": "/volunteer"
+        "value": "12 Foundation Road, New Delhi 110001",
+        "link": "#"
       }
     ],
     "form": {

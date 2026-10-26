@@ -5,6 +5,7 @@ import { FeaturedPost, PostRow } from "@/app/components/ui/Blogcard";
 import { HomeBlogContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
+import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -64,10 +65,10 @@ export default function HomeBlog({ data }: HomeBlogContent) {
 
             {linkText && (
               <motion.div variants={rise} className="lg:pb-3">
-                <a
+                <Link
                   href={linkTo || "#"}
                   className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#ece6da]
-                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+                          focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                 >
                   {linkText}
                   <svg
@@ -81,7 +82,7 @@ export default function HomeBlog({ data }: HomeBlogContent) {
                     aria-hidden="true"
                     className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
                   />
-                </a>
+                </Link>
               </motion.div>
             )}
           </motion.div>

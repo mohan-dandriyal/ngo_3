@@ -191,19 +191,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
           </div>
         )}
 
-        <div className="mt-16 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-md font-serif text-xl italic text-[#B9B5AC]">
-            {data.bottomNote}
-          </p>
-
-          <Link
-            href={data.bottomLink}
-            className="inline-flex items-center gap-3 self-start text-sm transition-colors hover:text-[#EE503B] sm:self-auto"
-          >
-            {data.bottomLinkText}
-            <ArrowDownRight size={18} aria-hidden="true" />
-          </Link>
-        </div>
+        
       </div>
 
       {/* Lightbox popup */}
@@ -287,10 +275,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                   </h3>
                 </div>
 
-                <p className="text-xs text-white/60">
-                  {String((selectedIndex ?? 0) + 1).padStart(2, "0")} /{" "}
-                  {String(filteredItems.length).padStart(2, "0")}
-                </p>
+               
               </figcaption>
             </motion.figure>
           </motion.div>

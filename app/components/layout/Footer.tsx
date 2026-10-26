@@ -267,49 +267,6 @@ export default function Footer() {
                                 </>
                             )}
 
-                            {newsletter && (
-                                <div className="mt-10">
-                                    <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-2xl font-medium text-[#ece6da]">
-                                        {newsletter.title}
-                                    </h3>
-                                    {status === "done" ? (
-                                        <p role="status" className="mt-4 text-[15px] text-[#e8c99a]">
-                                            {newsletter.successText || "Thanks for subscribing. Check your inbox to confirm."}
-                                        </p>
-                                    ) : (
-                                        <form onSubmit={onSubscribe} className="mt-4">
-                                            <label htmlFor="wkx-newsletter" className="sr-only">
-                                                Email address
-                                            </label>
-                                            <div className="flex border border-[#e8c99a]/30 transition-colors focus-within:border-[#e8c99a]">
-                                                <input
-                                                    id="wkx-newsletter"
-                                                    type="email"
-                                                    required
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    placeholder={newsletter.placeholder || "Your email address"}
-                                                    className="min-w-0 flex-1 bg-transparent px-4 py-3.5 text-[15px] text-[#f1ece1] outline-none
-                                   placeholder:text-[#8f8a80]"
-                                                />
-                                                <button
-                                                    type="submit"
-                                                    className="group inline-flex items-center gap-2 bg-[#e8c99a] px-4 text-[14px] font-semibold
-                                   text-[#14110c] outline-none transition-colors hover:bg-[#f1d9b3]
-                                   focus-visible:ring-2 focus-visible:ring-[#f1ece1]"
-                                                >
-                                                    {newsletter.btnText || "Subscribe"}
-                                                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-                                                        strokeLinejoin="round" aria-hidden="true"
-                                                        className="h-3 w-3 transition-transform group-hover:translate-x-0.5">
-                                                        <path d="M2 7h10M8 3l4 4-4 4" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    )}
-                                </div>
-                            )}
                         </motion.div>
                     </motion.div>
                 </div>
