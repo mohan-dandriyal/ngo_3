@@ -12,7 +12,9 @@ function ContactUs() {
         </div>
 
         <div>
-          <ContactSection data={data.contactSection} />
+          <ContactSection
+            data={data.contactSection as React.ComponentProps<typeof ContactSection>['data']}
+          />
         </div>
     </div>
   )

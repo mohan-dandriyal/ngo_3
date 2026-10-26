@@ -20,8 +20,6 @@ export default function ProgramsPage() {
     <main>
       <ProgramsHero data={data.programsHero} programs={data.programs} />
       <ProgramsShowcase data={data.programsShowcase} programs={data.programs} />
-      {/* <ProgramsApproach data={data.approach} /> */}
-      {/* <ProgramsCta data={data.cta} /> */}
     </main>
   );
 }

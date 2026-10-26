@@ -19,6 +19,7 @@ export type ProgramItem = {
 };
 
 export type ProgramsHeroData = {
+    breadcrumb : { label: string; linkTo?: string }[];
     eyebrow?: string;
     titleStart: string;
     titleAccent: string;

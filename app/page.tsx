@@ -1,6 +1,5 @@
 import Hero from './components/home/Hero';
 import home from "@/app/data/home.json";
-import cause from '@/app/data/cause.json'
 import blog from '@/app/data/blog.json'
 
 import HomeAbout from './components/home/HomeAbout';
@@ -21,11 +20,29 @@ export default function Home() {
       </div>
 
       <div className='bg-[#0a0a09] w-full py-20'>
-        <HomePrograms data={home.homePrograms} />
+        <HomePrograms
+          data={{
+            ...home.homePrograms,
+            programs: home.homePrograms.programs.map((program) => ({
+              ...program,
+              linkText: 'Learn more',
+              linkTo: '/programs',
+            })),
+          }}
+        />
       </div>
 
       <div className='bg-[#e8e1d5] w-full'>
-        <HomeCauses data={home.homeCause} />
+        <HomeCauses
+          data={{
+            ...home.homeCause,
+            causeItem: home.homeCause.causes.map((cause) => ({
+              ...cause,
+              raised: 0,
+              goal: 0,
+            })),
+          }}
+        />
       </div>
 
       <div className='bg-[#17261e] w-full'>

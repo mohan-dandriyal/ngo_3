@@ -11,10 +11,17 @@ import {
   type Variants,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import type { ProgramItem, ProgramsShowcaseData } from "@/app/types/program";
+import type { ProgramItem } from "@/app/types/program";
 import MainContainer from "../ui/MainContainer";
 import { Description, Eyebrow, SectionTitle } from "../ui/SectionContent";
 import CountUp from "@/app/components/program/Countup";
+
+interface ProgramsShowcaseData {
+  eyebrow?: string;
+  titleStart?: string;
+  titleAccent?: string;
+  description?: string;
+}
 
 interface ProgramsShowcaseProps {
   data: ProgramsShowcaseData;
@@ -47,6 +54,7 @@ const rule: Variants = {
 
 function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boolean; reduce: boolean | null }) {
   const [imgFailed, setImgFailed] = useState(!program.image);
+  const programLink = program as ProgramItem & { linkText?: string; linkTo?: string };
 
   // The picture drifts slowly inside its frame while scrolling
   const frameRef = useRef<HTMLDivElement>(null);
@@ -148,14 +156,14 @@ function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boo
             </ul>
           )}
 
-          {program.linkText && (
+          {programLink.linkText && (
             <motion.div variants={fadeUp} className="mt-10">
               <Link
-                href={program.linkTo || "#"}
+                href={programLink.linkTo || "#"}
                 className="group relative inline-flex items-center gap-3 pb-2 text-sm font-medium tracking-[0.02em] text-[#14110c]
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
               >
-                {program.linkText}
+                {programLink.linkText}
                 <ArrowUpRight
                   size={16}
                   aria-hidden="true"

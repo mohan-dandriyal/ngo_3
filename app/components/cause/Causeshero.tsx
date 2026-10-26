@@ -25,14 +25,7 @@ const fadeUp: Variants = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
-const headline: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-const word: Variants = {
-    hidden: { y: "110%" },
-    show: { y: 0, transition: { duration: 1.1, ease } },
-};
+ 
 const panel: Variants = {
     hidden: { opacity: 0, y: 40 },
     show: { opacity: 1, y: 0, transition: { duration: 1, ease, delay: 0.35, staggerChildren: 0.12, delayChildren: 0.5 } },

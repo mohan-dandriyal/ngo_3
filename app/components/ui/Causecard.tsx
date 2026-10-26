@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { animate, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { causeItem } from "@/app/types/home";
+import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -21,19 +22,19 @@ const pictureVariants: Variants = {
   show: { scale: 1, transition: { duration: 1.6, ease, delay: 0.15 } },
 };
 
+
+
+
 /* Numbers count up the first time they scroll into view */
 function CountUp({ value, format }: { value: number; format: (n: number) => string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = useReducedMotion();
   const [display, setDisplay] = useState(0);
+  const displayedValue = reduce ? value : display;
 
   useEffect(() => {
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
-    if (!inView) return;
+    if (reduce || !inView) return;
     const controls = animate(0, value, {
       duration: 1.8,
       ease: [0.2, 0.8, 0.15, 1],
@@ -42,11 +43,15 @@ function CountUp({ value, format }: { value: number; format: (n: number) => stri
     return () => controls.stop();
   }, [inView, value, reduce]);
 
-  return <span ref={ref}>{format(display)}</span>;
+  return <span ref={ref}>{format(displayedValue)}</span>;
 }
 
-export function CauseCard({ causeItem }: causeItem) {
-  const [imgFailed, setImgFailed] = useState(!causeItem.image);
+
+
+
+
+export function CauseCard({ causeItem }: { causeItem: causeItem }) {
+  const [imgFailed, setImgFailed] = useState<boolean>(false);
 
   const goal = causeItem.goal || 0;
   const raised = causeItem.raised || 0;
@@ -134,7 +139,7 @@ export function CauseCard({ causeItem }: causeItem) {
           </div>
         )}
 
-        <a
+        <Link
           href={causeItem.linkTo || "#"}
           className="group/btn relative mt-8 inline-flex items-center justify-between gap-5 self-start overflow-hidden
                      bg-[#14110c] px-6 py-4 text-[15px] font-medium tracking-[0.01em] text-[#f1ece1]
@@ -157,7 +162,7 @@ export function CauseCard({ causeItem }: causeItem) {
           >
             <path d="M3 11L11 3M4.5 3H11v6.5" />
           </svg>
-        </a>
+        </Link>
       </div>
     </motion.article>
   );
