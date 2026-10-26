@@ -75,8 +75,8 @@ function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabe
 
         <div>
           {
-            cause?.btnText &&
-            <Link href={cause.linkTo} className="group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
+            cause.linkTo &&
+            <Link href={cause.linkTo || ""} className="group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
                       text-[#f1ece1] hover:text-[#dc4d32] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" >
               {cause?.btnText}
 
@@ -170,7 +170,11 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
           >
             <AnimatePresence mode="popLayout">
               {visible.map((c) => (
-                <CauseCard key={c.slug} cause={c} labels={labels} />
+                <div key={c.slug}>
+                  <Link href={c.linkTo || ""} >
+                    <CauseCard cause={c} labels={labels} />
+                  </Link>
+                </div>
               ))}
             </AnimatePresence>
           </motion.div>

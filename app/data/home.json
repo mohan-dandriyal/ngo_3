@@ -1,19 +1,40 @@
 {
-    "hero": {
-        "eyebrow": "A different kind of progress",
-        "titleLight": "Change starts",
-        "titleAccent": "with showing up.",
-        "description": "We back the people building a fairer, greener, more possible everyday — one local idea at a time.",
-        "primaryBtn": {
-            "text": "Our story",
-            "linkTo": "/about"
+    
+        "hero": {
+            "eyebrow": "A different kind of progress",
+            "titleLight": "Change starts",
+            "titleAccent": "with showing up.",
+            "description": "We back the people building a fairer, greener, more possible everyday — one local idea at a time.",
+            "primaryBtn": {
+                "text": "Our story",
+                "linkTo": "/about"
+            },
+            "secondaryBtn": {
+                "text": "Explore our work",
+                "linkTo": "/our-programs"
+            },
+            "images": [
+                {
+                    "src": "/img-3.jpg",
+                    "alt": "Community members working together to create change",
+                    "badge": "People powered change"
+                },
+                {
+                    "src": "/img-4.jpg",
+                    "alt": "Volunteers supporting a local community",
+                    "badge": "Stronger together"
+                },
+                {
+                    "src": "/img-6.jpg",
+                    "alt": "Children learning in a community classroom",
+                    "badge": "A brighter future"
+                }
+            ],
+            "slider": {
+                "autoplay": true,
+                "interval": 5000
+            }
         },
-        "image": {
-            "src": "/img-3.jpg",
-            "alt": "Graffiti on a street utility box reading Be the Change"
-        },
-        "badge": ""
-    },
     "homeAbout": {
         "eyebrow": "About WKX",
         "titleLight": "The future is not a place we arrive at.",

@@ -19,34 +19,14 @@
     "clean-water-villages": {
       "location": "Barmer and Jaisalmer districts, Rajasthan",
       "story": [
-        "In these villages, women and children walk up to three kilometres every day to fetch water, and often it is not safe to drink. Missed school days and repeat stomach illness are common.",
-        "We drill deep-bore hand pumps close to where families live and add a filtration unit at each site. A trained committee of villagers owns the pump, collects a small monthly fee and fixes faults, so the water keeps flowing long after we leave.",
-        "Each village is mapped, tested before and after, and tracked publicly on this page."
-      ],
-      "updates": [
         {
-          "date": "2026-10-12",
-          "title": "Pump 8 is running in Sodakor",
-          "body": "Water tests came back clean on the first try. The village committee collected its first monthly contribution this week."
-        },
-        {
-          "date": "2026-08-30",
-          "title": "Committee training completed for 6 villages",
-          "body": "Twenty-four villagers learned to service the pump, replace seals and keep a simple maintenance log."
-        }
-      ],
-      "team": [
-        {
-          "name": "Project lead (add name)",
-          "role": "Oversees drilling and installation"
-        },
-        {
-          "name": "Water engineer (add name)",
-          "role": "Site checks and water quality testing"
-        },
-        {
-          "name": "Community organiser (add name)",
-          "role": "Works with village committees"
+          "title": "Bringing Safe Water Closer to Every Family",
+          "dis": [
+            "In Barmer and Jaisalmer, women and children can walk up to three kilometres each day to collect water. The water is not always safe to drink, and the time spent fetching it can mean missed school, fewer work hours and repeated stomach illnesses.",
+            "We install deep-bore hand pumps close to where families live and fit each site with a filtration unit. Before a source is used, water quality is checked and the site is mapped so the community can understand where its water comes from.",
+            "Each pump is supported by a trained village committee. Members learn basic maintenance, keep a simple service log and collect a small monthly contribution for spare parts and repairs. This helps the water point remain useful long after installation.",
+            "We track each village from site assessment to installation and follow-up testing. Progress updates are shared here so supporters can see what has been completed and what still needs attention."
+          ]
         }
       ],
       "faqs": [
@@ -67,9 +47,15 @@
     "school-for-every-child": {
       "location": "Rural districts of Bihar and Uttar Pradesh",
       "story": [
-        "Many children drop out of school not because they don't want to learn, but because a uniform, a set of books or a midday meal is out of reach for their family.",
-        "This campaign covers those basics, so a child can stay in class. We work with local schools, who tell us which children are most at risk of leaving.",
-        "Attendance is tracked each term and shared here."
+        {
+          "title": "Helping Every Child Stay in School",
+          "dis": [
+            "Many children leave school not because they lack curiosity, but because their families cannot always afford uniforms, books, shoes or daily meals. These basic needs can become barriers to attendance and learning.",
+            "This programme works with local schools to identify children who are most at risk of dropping out. Support is directed toward practical essentials that help children arrive at school prepared and ready to participate.",
+            "Alongside learning kits, the programme is expanding meal support with partner schools. Teachers and school teams help monitor attendance and identify when a child may need additional support.",
+            "Attendance and delivery milestones are reviewed each term. We share progress updates so families, schools and supporters can understand what has been delivered and where further help is needed."
+          ]
+        }
       ],
       "milestones": [
         {
@@ -97,13 +83,6 @@
           "status": "upcoming"
         }
       ],
-      "updates": [
-        {
-          "date": "2026-10-05",
-          "title": "Attendance up in the first 10 schools",
-          "body": "Teachers report fewer absences since meals started. We will publish the numbers once the term closes."
-        }
-      ],
       "faqs": [
         {
           "question": "How are children chosen?",
@@ -118,11 +97,16 @@
     "health-camps-on-wheels": {
       "location": "Remote blocks of Odisha and Jharkhand",
       "story": [
-        "For many families the nearest hospital is hours away, so check-ups are skipped and small problems become serious.",
-        "Our mobile clinics visit each village on a fixed schedule with a nurse, basic diagnostics and a stock of essential medicines. Patients who need more are referred to the nearest hospital, and we follow up.",
-        "You can see each clinic's route and the number of patients seen in the updates below."
+        {
+          "title": "Taking Essential Healthcare to Remote Communities",
+          "dis": [
+            "For families in remote parts of Odisha and Jharkhand, reaching the nearest hospital can take hours. As a result, routine check-ups may be delayed and manageable health problems can become more serious.",
+            "Mobile clinics bring basic healthcare closer to villages on a planned route. Each visit can include a nurse, basic diagnostic equipment and a supply of essential medicines for common health needs.",
+            "When a patient needs treatment beyond the clinic’s capacity, the team provides a referral to an appropriate nearby health facility and follows up where possible. Clear routes and visit schedules help communities know when care will be available.",
+            "Clinic activity is monitored through village visits, patient counts and service updates. These records help the team identify communities that need more regular access and plan future visits."
+          ]
+        }
       ],
-   
       "milestones": [
         {
           "title": "Clinic 1 and 2 on the road",
@@ -157,10 +141,16 @@
     "skills-for-steady-incomes": {
       "location": "Peri-urban areas around Lucknow and Kanpur",
       "story": [
-        "A skill, a few tools and a small grant can change what a family earns. Many women and young people here have the ability to start a business but not the starting capital.",
-        "Participants complete a short training course, choose a trade such as tailoring, repairs or food preparation, and receive a starter kit and a small grant. A mentor checks in for six months."
+        {
+          "title": "Building Skills for More Reliable Incomes",
+          "dis": [
+            "Many women and young people have the motivation to earn an income but lack access to practical training, tools or the small amount of starting capital needed to begin.",
+            "Participants take a short, hands-on training course and choose a trade that fits their interests and local demand, such as tailoring, repairs or food preparation. Training is designed to help participants build useful skills they can apply in everyday work.",
+            "After training, eligible participants receive a starter kit and a small grant to help them begin working. A mentor checks in over the following six months to discuss progress, challenges and next steps.",
+            "The programme tracks enrolment, training completion and the transition into trading or paid work. Income reviews help the team understand which types of support are working and where participants need additional guidance."
+          ]
+        }
       ],
-    
       "milestones": [
         {
           "title": "First cohort of 60 enrolled",
@@ -195,10 +185,16 @@
     "rebuild-village-libraries": {
       "location": "Villages across Uttarakhand and Himachal Pradesh",
       "story": [
-        "A quiet place with books can change how a child sees school. Many village libraries here have leaking roofs, empty shelves or have been closed for years.",
-        "Volunteers and local carpenters repair each building, build shelves and stock age-appropriate books in Hindi and English. Every library is run by a local reading group that keeps it open."
+        {
+          "title": "Reopening Village Libraries and Growing a Love of Reading",
+          "dis": [
+            "A welcoming library can give children a quiet place to read, learn and imagine new possibilities. In some villages, however, library buildings have leaking roofs, empty shelves or have remained closed for years.",
+            "Volunteers and local carpenters help repair buildings, restore shelves and organise age-appropriate books in Hindi and English. The work focuses on making each space safe, useful and inviting for children and families.",
+            "Local reading groups are involved from the beginning and help manage opening hours, lending and activities. Community ownership makes it easier for each library to stay active after the initial repairs are complete.",
+            "Progress is tracked through library reopenings, book collections and the establishment of local reading groups. Future updates will share completed repairs and the next locations scheduled for support."
+          ]
+        }
       ],
-   
       "milestones": [
         {
           "title": "First 4 libraries reopened",
@@ -230,42 +226,55 @@
         }
       ]
     },
-    "clean-water-for-villages": {
+    "Clean-water-for-villages": {
       "location": "Villages across Uttarakhand and Himachal Pradesh",
       "story": [
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, nesciunt. Vel nesciunt fugit suscipit incidunt sit deserunt voluptates magnam ex autem nostrum molestias illo laboriosam eaque placeat quae repellat vero deleniti necessitatibus fuga maiores, ab delectus? Labore sint error dolor, dolorum eligendi odio officiis, iusto sunt ab voluptatum deserunt necessitatibus.",
-
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, nesciunt. Vel nesciunt fugit suscipit incidunt sit deserunt voluptates magnam ex autem nostrum molestias illo laboriosam eaque placeat quae repellat vero deleniti necessitatibus fuga maiores, ab delectus? Labore sint error dolor, dolorum eligendi odio officiis, iusto sunt ab voluptatum deserunt necessitatibus."
+        {
+          "title": "Creating Sustainable Access to Clean Village Water",
+          "dis": [
+            "Reliable access to safe water supports health, education and daily life. In villages where water sources are distant or unreliable, families may spend hours collecting water and still have concerns about its quality.",
+            "This initiative aims to improve local access by assessing village needs, identifying suitable water points and planning installations with community members. Water quality checks help guide decisions about filtration and ongoing use.",
+            "Community participation is central to long-term maintenance. Local representatives can help monitor water points, report faults and coordinate repairs so that infrastructure continues to serve households.",
+            "Progress updates should document the villages assessed, water points installed, test results and maintenance arrangements. This makes the work easier for residents and supporters to follow."
+          ]
+        }
       ],
-     
       "milestones": [
         {
-          "title": "First 4 libraries reopened",
-          "description": "Repairs done, shelves built and books in place.",
-          "date": "Aug 2026",
-          "status": "done"
-        },
-        {
-          "title": "Libraries 5 to 8",
-          "description": "Roof repairs and shelving under way.",
-          "date": "Dec 2026",
+          "title": "Village water needs assessed",
+          "description": "Priority villages and suitable water points are identified with community input.",
+          "date": "Nov 2026",
           "status": "current"
         },
         {
-          "title": "Final 4 libraries",
-          "description": "Repairs, books and reading group set-up.",
+          "title": "Water points installed and tested",
+          "description": "Installations are checked and water quality results are recorded before regular use.",
+          "date": "Feb 2027",
+          "status": "upcoming"
+        },
+        {
+          "title": "Community maintenance groups trained",
+          "description": "Local groups receive guidance on routine checks, reporting faults and arranging repairs.",
           "date": "Apr 2027",
           "status": "upcoming"
         }
       ],
       "faqs": [
         {
-          "question": "Who looks after the library afterwards?",
-          "answer": "A local reading group, trained by us, manages opening hours and lending."
+          "question": "How are villages selected?",
+          "answer": "Priority is based on local water access needs, source suitability and consultation with community representatives."
         },
         {
-          "question": "Can I donate books instead of money?",
-          "answer": "Book donations are welcome through our team, so we can match titles to what each library needs."
+          "question": "How do you check water quality?",
+          "answer": "Water is tested as part of the site assessment and follow-up process. Results and next steps should be included in project updates."
+        },
+        {
+          "question": "Who maintains the water point?",
+          "answer": "Community representatives are involved in monitoring and reporting issues, with maintenance arrangements planned for each site."
+        },
+        {
+          "question": "How can I follow progress?",
+          "answer": "Check the milestones and updates on this page for information about assessments, installations, testing and community training."
         }
       ]
     }

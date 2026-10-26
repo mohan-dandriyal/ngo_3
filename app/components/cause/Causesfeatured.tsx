@@ -57,9 +57,17 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     // Days left is worked out in the browser so server and client output always match
     const [daysLeft, setDaysLeft] = useState<number | null>(null);
     useEffect(() => {
-        if (!cause.endDate) return;
-        const diff = Math.ceil((new Date(cause.endDate).getTime() - Date.now()) / 86400000);
-        setDaysLeft(diff > 0 ? diff : null);
+        const timeout = window.setTimeout(() => {
+            if (!cause.endDate) {
+                setDaysLeft(null);
+                return;
+            }
+
+            const diff = Math.ceil((new Date(cause.endDate).getTime() - Date.now()) / 86400000);
+            setDaysLeft(diff > 0 ? diff : null);
+        }, 0);
+
+        return () => window.clearTimeout(timeout);
     }, [cause.endDate]);
 
     // The picture drifts slowly inside its frame while scrolling
@@ -72,7 +80,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     return (
         <section
             id="featured-cause"
-            className="w-full overflow-hidden bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+            className="w-full overflow-hidden bg-[#0A0B09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
         >
             <MainContainer>
                 <motion.div
@@ -112,52 +120,15 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
 
                     {/* Content */}
                     <div>
-                        {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} tone="light" />}
+                        {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} />}
 
-                        <SectionTitle titleStart={cause.title} tone="light" />
+                        <SectionTitle titleStart={cause.title} />
 
-                        <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#3d3830]">
+                        <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#c8c8c8]">
                             {cause.description}
                         </motion.p>
 
-                        {/* Progress */}
-                        {/* <motion.div variants={fadeUp} className="mt-9">
-                            <div className="mb-3 flex items-end justify-between gap-4">
-                                <p>
-                                    <span className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(32px,3.4vw,48px)] font-semibold leading-none">
-                                        <CountUp value={cause.raised} format={(n) => formatMoney(n, currency)} />
-                                    </span>
-                                    <span className="ml-2 text-sm text-[#5a544c]">{labels.raisedLabel}</span>
-                                </p>
-                                <p className="font-['Cormorant_Garamond',Georgia,serif] text-[28px] font-semibold text-[#3f6b57]">
-                                    <CountUp value={pct} format={(n) => `${n}%`} />
-                                </p>
-                            </div>
-
-                            <div
-                                role="progressbar"
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                                aria-valuenow={pct}
-                                aria-label={`${cause.title}: ${pct}%`}
-                                className="h-[7px] w-full overflow-hidden bg-[#14110c]/10"
-                            >
-                                <motion.div variants={bar} custom={pct} className="h-full w-full origin-left bg-[#e0503a]" />
-                            </div>
-
-                            <p className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[14px] text-[#5a544c]">
-                                <span>
-                                    {labels.goalLabel}: {formatMoney(cause.goal, currency)}
-                                </span>
-                                {cause.supporters !== undefined && (
-                                    <span>
-                                        {new Intl.NumberFormat("en-IN").format(cause.supporters)} {labels.supportersLabel}
-                                    </span>
-                                )}
-                            </p>
-                        </motion.div> */}
-
-                    
+                        
                         <motion.div variants={fadeUp} className="mt-8">
                             <Link
                                 href={cause.linkTo}

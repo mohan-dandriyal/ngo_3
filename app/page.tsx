@@ -21,7 +21,7 @@ export default function Home() {
         }}
       />
 
-      <div className='bg-[#e8e1d5] w-full'>
+      <div className='bg-[#0a0a09] w-full'>
         <HomeAbout data={home.homeAbout} />
       </div>
 
@@ -39,7 +39,7 @@ export default function Home() {
         />
       </div>
 
-      <div className='bg-[#e8e1d5] w-full'>
+      <div className='bg-[#0a0a09] w-full'>
         <HomeCauses
           data={{
             ...home.homeCause,
@@ -52,7 +52,7 @@ export default function Home() {
         />
       </div>
 
-      <div className='bg-[#17261e] w-full'>
+      <div className='bg-[#0a0a09] w-full'>
         <HomeTestimonials data={home.testimonials} />
       </div>
 

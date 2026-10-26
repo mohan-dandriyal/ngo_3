@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import data from "@/app/data/causes.json"; // <- adjust to wherever your JSON lives
+
+import data from "@/app/data/causes.json";
 import extra from "@/app/data/causeDetails.json";
 import CauseDetail from "@/app/components/cause/Causedetail";
 import type { Cause, CauseDetails } from "@/app/types/causeDetail";
@@ -10,19 +12,29 @@ type PageProps = {
 };
 
 const causes = data.causes as Cause[];
-const detailsBySlug = extra.details as unknown as Record<string, CauseDetails>;
+
+const detailsBySlug = extra.details as unknown as Record<
+  string,
+  CauseDetails
+>;
 
 export function generateStaticParams() {
-  return causes.map((cause) => ({ slug: cause.slug }));
+  return causes.map((cause) => ({
+    slug: cause.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const cause = causes.find((c) => c.slug === slug);
+  const cause = causes.find((item) => item.slug === slug);
 
-  if (!cause) return { title: `Cause not found | ${data.meta.siteName}` };
+  if (!cause) {
+    return {
+      title: `Cause not found | ${data.meta.siteName}`,
+    };
+  }
 
   return {
     title: `${cause.title} | ${data.meta.siteName}`,
@@ -35,17 +47,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function CauseDetailPage({ params }: PageProps) {
+export default async function CauseDetailPage({
+  params,
+}: PageProps) {
   const { slug } = await params;
-  const cause = causes.find((c) => c.slug === slug);
+  const cause = causes.find((item) => item.slug === slug);
 
-  if (!cause) notFound();
+  if (!cause) {
+    notFound();
+  }
 
-  console.log('slug --------', slug)
-
-  // Same-category causes first, then the rest
   const related = causes
-    .filter((c) => c.slug !== cause.slug)
+    .filter((item) => item.slug !== cause.slug)
     .sort(
       (a, b) =>
         Number(b.category === cause.category) -

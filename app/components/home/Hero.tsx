@@ -1,183 +1,303 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
+  AnimatePresence,
   motion,
   useReducedMotion,
   useScroll,
   useTransform,
   type Variants,
 } from "framer-motion";
+
 import { HeroContent } from "@/app/types/home";
 import { Description, Eyebrow } from "../ui/SectionContent";
 import MainContainer from "../ui/MainContainer";
 import PrimaryButton from "../ui/PrimaryButton";
-import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Copy column: children enter one after another */
 const copyContainer: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
+  show: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.1,
+    },
+  },
 };
 
-/* Generic fade and rise for eyebrow, description and buttons */
 const rise: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
-};
-
-/* Title: each line slides up out of its own mask */
-const titleContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
-};
-const titleLine: Variants = {
-  hidden: { y: "105%" },
-  show: { y: 0, transition: { duration: 1.1, ease } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease },
+  },
 };
 
 export default function Hero({ data }: HeroContent) {
-  const { eyebrow, titleLight, titleAccent, description, primaryBtn, secondaryBtn, image, badge } = data;
-  const [imgFailed, setImgFailed] = useState(!image?.src);
+  const {
+    eyebrow,
+    titleLight,
+    titleAccent,
+    description,
+    primaryBtn,
+    secondaryBtn,
+    images = [],
+    slider,
+  } = data;
 
   const reduce = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [failedImages, setFailedImages] = useState<string[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Gentle parallax: the image column drifts slower than the page
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
+  const activeImage = images[activeIndex];
+  const slideCount = images.length;
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduce ? 0 : 45]
+  );
+
+  const changeSlide = (direction: number) => {
+    if (slideCount < 2) return;
+
+    setActiveIndex((current) => {
+      return (current + direction + slideCount) % slideCount;
+    });
+  };
+
+  useEffect(() => {
+    if (
+      reduce ||
+      !slider?.autoplay ||
+      slideCount < 2
+    ) {
+      return;
+    }
+
+    const interval = Math.max(slider.interval ?? 5000, 1500);
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % slideCount);
+    }, interval);
+
+    return () => window.clearInterval(timer);
+  }, [reduce, slider?.autoplay, slider?.interval, slideCount]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#0a0a09] w-full
-                 bg-[radial-gradient(40%_30%_at_100%_0%,#1c2a22_0%,transparent_70%)]
-                 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]"
+      className="relative w-full overflow-hidden bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]"
     >
-      {/* Soft red glow behind the image, slowly breathing */}
-      <motion.div
+      {/* Background glow */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/3 h-[420px] w-[420px] rounded-full
-                   bg-[#e0503a]/20 blur-[120px]"
-        animate={reduce ? undefined : { opacity: [0.35, 0.75, 0.35] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -right-24 top-1/4 h-[400px] w-[400px] rounded-full bg-[#a8c686]/10 blur-[130px]"
       />
 
       <MainContainer>
-        <div
-          className="relative mx-auto grid items-center gap-12 px-5 py-12 sm:px-8
-                   lg:grid-cols-[1.45fr_1fr] lg:gap-16 lg:py-6 lg:pl-14 lg:pr-[74px]"
-        >
-          {/* Copy */}
+        <div className="relative mx-auto grid items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-14 lg:py-20">
+          {/* LEFT: Hero content */}
           <motion.div
-            className="py-6 lg:py-16"
             variants={copyContainer}
             initial={reduce ? false : "hidden"}
             animate="show"
+            className="relative z-10 order-2 lg:order-1"
           >
             {eyebrow && (
-              <motion.div variants={rise}>
+              <motion.div variants={rise} className="mb-6">
                 <Eyebrow eyebrow={eyebrow} />
               </motion.div>
             )}
 
-            <motion.h1
-              variants={titleContainer}
-              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(60px,9.4vw,100px)]
-                       font-medium leading-[0.98] mb-4 tracking-[-0.02em]"
-            >
+            <motion.h1 className="mb-6 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(48px,6.2vw,82px)] font-medium leading-[0.96] tracking-[-0.035em]">
               <span className="block overflow-hidden pb-[0.08em]">
-                <motion.span variants={titleLine} className="block text-[#ece6da]">
+                <motion.span
+                  initial={reduce ? false : { y: "105%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, ease }}
+                  className="block text-[#ece6da]"
+                >
                   {titleLight}
                 </motion.span>
               </span>
-              <span className="block overflow-hidden pb-[0.08em]">
-                <motion.span variants={titleLine} className="block text-[#e0503a]">
-                  {titleAccent}
-                </motion.span>
-              </span>
+
+              {titleAccent && (
+                <span className="block overflow-hidden pb-[0.08em]">
+                  <motion.span
+                    initial={reduce ? false : { y: "105%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, delay: 0.12, ease }}
+                    className="block text-[#a8c686]"
+                  >
+                    {titleAccent}
+                  </motion.span>
+                </span>
+              )}
             </motion.h1>
 
-            <motion.div variants={rise}>
+            <motion.div variants={rise} className="max-w-[490px]">
               <Description description={description} />
             </motion.div>
 
-            <motion.div variants={rise} className="mt-12 flex flex-wrap items-center gap-x-9 gap-y-5">
+            <motion.div
+              variants={rise}
+              className="mt-9 flex flex-wrap items-center gap-5"
+            >
               {primaryBtn?.text && (
-               <PrimaryButton href={primaryBtn.linkTo}>
+                <PrimaryButton href={primaryBtn.linkTo}>
                   {primaryBtn.text}
                 </PrimaryButton>
               )}
-          
+
+              {secondaryBtn?.text && (
+                <Link
+                  href={secondaryBtn.linkTo}
+                  className="group inline-flex items-center gap-3 text-sm text-[#ece6da] transition-colors hover:text-[#a8c686]"
+                >
+                  {secondaryBtn.text}
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              )}
             </motion.div>
+
+
           </motion.div>
 
-          {/* Image card */}
-          <motion.div className="relative" style={{ y: imageY }}>
-            <motion.figure
-              initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
-              animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-              transition={{ duration: 1.3, ease: [0.7, 0, 0.2, 1], delay: 0.25 }}
-              className="group relative m-0 aspect-[4/5] w-full overflow-hidden bg-[#161a17]
-                       ring-1 ring-[#e8c99a]/15 lg:aspect-[585/730]"
-            >
-              {!imgFailed && (
-                <motion.div
-                  className="absolute inset-0"
-                  initial={reduce ? false : { scale: 1.18 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 2.4, ease, delay: 0.25 }}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt || ""}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    onError={() => setImgFailed(true)}
-                    className="object-cover transition-transform duration-[1400ms] ease-out
-                             group-hover:scale-[1.05] motion-reduce:transition-none"
+          {/* RIGHT: Image slider */}
+          <motion.div
+            style={{ y: imageY }}
+            className="relative order-1 mx-auto w-full max-w-[560px] lg:order-2"
+          >
+            <div className="relative aspect-[4/4.7] w-full overflow-hidden bg-[#151915] ring-1 ring-white/10">
+              <AnimatePresence mode="sync" initial={false}>
+                {activeImage && !failedImages.includes(activeImage.src) ? (
+                  <motion.div
+                    key={activeImage.src}
+                    initial={reduce ? false : { opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduce ? 0 : 0.8, ease }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={activeImage.src}
+                      alt={activeImage.alt || titleLight}
+                      fill
+                      priority={activeIndex === 0}
+                      sizes="(min-width: 1024px) 45vw, 100vw"
+                      onError={() =>
+                        setFailedImages((current) =>
+                          current.includes(activeImage.src)
+                            ? current
+                            : [...current, activeImage.src]
+                        )
+                      }
+                      className="object-cover"
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="image-fallback"
+                    className="absolute inset-0 bg-gradient-to-br from-[#29382d] to-[#0a0a09]"
                   />
-                </motion.div>
-              )}
-              {imgFailed && (
-                <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
-              )}
-              <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/70 to-transparent" aria-hidden="true" />
+                )}
+              </AnimatePresence>
 
-          
-            </motion.figure>
+              {/* Image overlay */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"
+              />
 
-            {/* Badge sits outside the figure so the reveal mask does not clip it */}
-            {badge && (
-              <motion.div
-                className="absolute -left-9 bottom-14 z-10"
-                initial={reduce ? false : { opacity: 0, scale: 0.4, rotate: -30 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ type: "spring", stiffness: 180, damping: 14, delay: 1.3 }}
-              >
-                <motion.div
-                  animate={reduce ? undefined : { y: [0, -8, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2.4 }}
-                  whileHover={{ scale: 1.06 }}
-                  className="flex h-[150px] w-[150px] flex-col justify-center rounded-full bg-[#e0503a]
-                           pl-[62px] pr-4 text-[#14110c] shadow-[0_18px_40px_-14px_rgba(224,80,58,0.65)]"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"
-                    strokeLinejoin="round" aria-hidden="true" className="mb-3 h-6 w-6">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 17V8M8 11.5l4-4 4 4" />
-                  </svg>
-                  <span className="block max-w-[5.5rem] -rotate-[14deg] origin-left font-['Cormorant_Garamond',Georgia,serif]
-                                 text-[15px] font-semibold leading-[1.15]">
-                    {badge}
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
+              {/* Image label */}
+              {activeImage?.badge && (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeImage.badge}
+                    initial={reduce ? false : { opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.35 }}
+                    className="absolute bottom-6 left-6 z-10 border-l-2 border-[#a8c686] pl-4"
+                  >
+                    {/* Slide counter */}
+                    {slideCount > 1 && (
+                      <div className="mt-12 flex items-center gap-4">
+                        <span className="font-mono text-sm text-[#a8c686]">
+                          {String(activeIndex + 1).padStart(2, "0")}
+                        </span>
+
+                        <div className="flex gap-2">
+                          {images.map((item, index) => (
+                            <button
+                              key={`${item.src}-${index}`}
+                              type="button"
+                              aria-label={`Show slide ${index + 1}`}
+                              aria-pressed={activeIndex === index}
+                              onClick={() => setActiveIndex(index)}
+                              className={`h-[3px] transition-all duration-300 ${activeIndex === index
+                                  ? "w-10 bg-[#a8c686]"
+                                  : "w-5 bg-[#ece6da]/25 hover:bg-[#ece6da]/60"
+                                }`}
+                            />
+                          ))}
+                        </div>
+
+                        <span className="font-mono text-sm text-[#ece6da]/50">
+                          {String(slideCount).padStart(2, "0")}
+                        </span>
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              )}
+
+              {/* Previous / next controls */}
+              {slideCount > 1 && (
+                <div className="absolute right-5 top-5 z-20 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => changeSlide(-1)}
+                    aria-label="Previous image"
+                    className="flex h-10 w-10 items-center justify-center border border-white/35 bg-black/25 text-lg text-white backdrop-blur-sm transition-colors hover:bg-[#a8c686] hover:text-[#0a0a09]"
+                  >
+                    ←
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => changeSlide(1)}
+                    aria-label="Next image"
+                    className="flex h-10 w-10 items-center justify-center border border-white/35 bg-black/25 text-lg text-white backdrop-blur-sm transition-colors hover:bg-[#a8c686] hover:text-[#0a0a09]"
+                  >
+                    →
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Decorative corner */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-3 -right-3 -z-0 h-24 w-24 border-b border-r border-[#a8c686]/50"
+            />
           </motion.div>
         </div>
       </MainContainer>

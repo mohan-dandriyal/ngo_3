@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { HomeAboutContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
+import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -62,7 +63,7 @@ export default function HomeAbout({ data }: HomeAboutContent) {
   const reduce = useReducedMotion();
 
   return (
-    <section className=" w-full bg-[#e8e1d5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#14110c]">
+    <section className=" w-full bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#14110c]">
     <div>
       <MainContainer>
         
@@ -76,36 +77,17 @@ export default function HomeAbout({ data }: HomeAboutContent) {
         >
           {/* Headline */}
           <div>
-            {eyebrow && (
-              <motion.p
-                variants={fade}
-                className="mb-8 flex items-center gap-[14px] text-[11px] font-medium uppercase tracking-[0.2em] text-[#3f6b57]"
-              >
-                <motion.span
-                  variants={rule}
-                  className="h-px w-9 origin-left bg-[#3f6b57]"
-                  aria-hidden="true"
-                />
-                {eyebrow}
-              </motion.p>
-            )}
+            {eyebrow && (<Eyebrow eyebrow={eyebrow} />)}
 
-            <motion.h2
-              variants={headline}
-              aria-label={`${titleLight} ${titleAccent}`}
-              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(48px,6.8vw,104px)]
-                       font-medium leading-[0.98] tracking-[-0.02em] text-[#14110c]"
-            >
-              <Words text={titleLight} />
-              <em className="font-medium italic text-[#e0503a]">
-                <Words text={titleAccent} />
-              </em>
-            </motion.h2>
+           <SectionTitle titleStart={titleLight}
+           titleAccent={titleAccent} />
+
+           
           </div>
 
           {/* Supporting copy */}
           <div className="max-w-[26rem] lg:pb-3">
-            <motion.p variants={fade} className="text-base leading-[1.9] text-[#5a544c]">
+            <motion.p variants={fade} className="text-base leading-[1.9] text-[#edeae7]">
               {description}
             </motion.p>
 
@@ -114,7 +96,7 @@ export default function HomeAbout({ data }: HomeAboutContent) {
                 <motion.a
                   href={linkTo || "#"}
                   whileTap={{ scale: 0.97 }}
-                  className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#14110c]
+                  className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#d8d8d8]
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4
                            focus-visible:outline-[#e0503a]"
                 >
