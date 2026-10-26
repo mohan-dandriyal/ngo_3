@@ -26,7 +26,7 @@
         "titleAccent": "It’s a practice.",
         "description": "WKX is a people-powered foundation for the beautifully stubborn. We find local leaders with big ideas, then give them the trust, tools and time to make those ideas real.",
         "linkText": "See what we do",
-        "linkTo": "#programs"
+        "linkTo": "/about"
     },
     "homePrograms": {
         "eyebrow": "Where we focus",
@@ -40,31 +40,66 @@
                 "description": "Clean water, built to last by the people who need it most.",
                 "image": "/img-1.jpg",
                 "imageAlt": "Children washing their hands at a row of water taps",
-                "theme": "coral",
-                "linkText": "Explore",
-                "linkTo": "#water-table"
+                "theme": "coral"
             },
             {
                 "title": "Her Next Chapter",
                 "description": "Backing women turning brave ideas into shared livelihoods.",
                 "image": "/img-2.jpg",
                 "imageAlt": "A girl in a green shawl surrounded by smiling women",
-                "theme": "green",
-                "linkText": "Explore",
-                "linkTo": "#her-next-chapter"
+                "theme": "green"
             },
             {
                 "title": "Open Classroom",
                 "description": "Making learning feel possible, joyful and entirely theirs.",
                 "image": "/img-3.jpg",
                 "imageAlt": "Many hands joined together in the middle of a circle",
-                "theme": "sand",
+                "theme": "sand"
+            }
+        ],
+        "button": {
+            "label": "See all Programs",
+            "href": "/our-program"
+        }
+    },
+    "homeCause": {
+        "eyebrow": "Our causes",
+        "titleStart": "Where your gift",
+        "titleAccent": "goes",
+        "titleEnd": "first",
+        "description": "Every donation is matched to a specific project. Pick the cause closest to your heart and follow its progress here.",
+        "linkText": "See all causes",
+        "linkTo": "/our-cause",
+        "causes": [
+            {
+                "title": "School for every child",
+                "description": "Books, uniforms and meals so children in rural districts can stay in class.",
+                "category": "Education",
+                "image": "/img-4.jpg",
+                "imageAlt": "Children reading together in a classroom",
                 "linkText": "Explore",
-                "linkTo": "#open-classroom"
+                "linkTo": "/our-cause/school-for-every-child"
+            },
+            {
+                "title": "Clean water for villages",
+                "description": "Hand pumps and filtration units that bring safe drinking water within a short walk of home.",
+                "category": "Water",
+                "image": "/img-1.jpg",
+                "imageAlt": "Villagers collecting water from a new pump",
+                "linkText": "Explore",
+                "linkTo": "/our-cause/clean-water-for-villages"
+            },
+            {
+                "title": "Health camps on wheels",
+                "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
+                "category": "Health",
+                "image": "/img-5.jpg",
+                "imageAlt": "A nurse examining a patient at a mobile clinic",
+                "linkText": "Explore All",
+                "linkTo": "/our-cause/health-camps-on-wheels"
             }
         ]
     },
-    
     "testimonials": {
         "eyebrow": "Voices",
         "titleStart": "In their",

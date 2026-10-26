@@ -41,7 +41,19 @@ export type HomeProgramsContent = {
     titleAccent: string;
     titleEnd: string;
     meta: string;
-    programs: Program[];
+    programs: {
+      title: string;
+      description: string;
+      image: string;
+      imageAlt: string;
+      theme: string;
+      linkText: string;
+      linkTo: string;
+    }[];
+    button: {
+      label: string;
+      href: string;
+    };
   }
 };
 

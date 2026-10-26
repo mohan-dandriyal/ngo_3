@@ -25,7 +25,7 @@ export default function Home() {
       </div>
 
       <div className='bg-[#e8e1d5] w-full'>
-        <HomeCauses data={cause.causes}/>
+        <HomeCauses data={home.homeCause} />
       </div>
 
       <div className='bg-[#17261e] w-full'>

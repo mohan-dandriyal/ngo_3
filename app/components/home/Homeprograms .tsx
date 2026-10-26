@@ -5,6 +5,7 @@ import { ProgramCard } from "../ProgramCard";
 import { HomeProgramsContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
+import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -27,7 +28,7 @@ const grid: Variants = {
 };
 
 export default function HomePrograms({ data }: HomeProgramsContent) {
-  const { eyebrow, titleStart, titleAccent, titleEnd, meta, programs = [] } = data;
+  const { eyebrow, titleStart, titleAccent, titleEnd, meta, button, programs = [] } = data;
   const reduce = useReducedMotion();
 
   return (
@@ -46,12 +47,12 @@ export default function HomePrograms({ data }: HomeProgramsContent) {
                 <Eyebrow eyebrow={eyebrow} />
               )}
 
-                <SectionTitle
-                              titleStart={titleStart}
-                              titleAccent={titleAccent}
-                              titleEnd={titleEnd}
-                              tone={'dark'}
-                            />
+              <SectionTitle
+                titleStart={titleStart}
+                titleAccent={titleAccent}
+                titleEnd={titleEnd}
+                tone={'dark'}
+              />
             </div>
             {meta && (
               <motion.p variants={rise} className="font-mono text-xs tracking-wide text-[#8f8a80] lg:pb-3">
@@ -70,6 +71,27 @@ export default function HomePrograms({ data }: HomeProgramsContent) {
             {programs.map((p, i) => (
               <ProgramCard key={i} program={p} />
             ))}
+          </motion.div>
+
+          <motion.div variants={rise} className="mt-8 text-right">
+            <Link
+              href={button.href || "#"}
+              className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#FFFF]
+                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+            >
+              {button.label}
+              <svg
+                viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
+                strokeLinejoin="round" aria-hidden="true"
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              >
+                <path d="M3 11L11 3M4.5 3H11v6.5" />
+              </svg>
+              <span
+                aria-hidden="true"
+                className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
+              />
+            </Link>
           </motion.div>
         </div>
       </MainContainer>

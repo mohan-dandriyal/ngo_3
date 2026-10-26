@@ -5,6 +5,7 @@ import { CauseCard } from "@/app/components/ui/Causecard";
 import { HomeCausesContent } from "@/app/types/home";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import MainContainer from "../ui/MainContainer";
+import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -16,10 +17,8 @@ const rise: Variants = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
-const rule: Variants = {
-    hidden: { scaleX: 0 },
-    show: { scaleX: 1, transition: { duration: 0.9, ease } },
-};
+
+
 const grid: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
@@ -66,10 +65,10 @@ export default function HomeCauses({ data }: HomeCausesContent) {
 
                         {linkText && (
                             <motion.div variants={rise} className="mt-8">
-                                <a
+                                <Link
                                     href={linkTo || "#"}
                                     className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#14110c]
-                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+                             focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                                 >
                                     {linkText}
                                     <svg
@@ -83,7 +82,7 @@ export default function HomeCauses({ data }: HomeCausesContent) {
                                         aria-hidden="true"
                                         className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
                                     />
-                                </a>
+                                </Link>
                             </motion.div>
                         )}
                     </div>
