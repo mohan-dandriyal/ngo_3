@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "siteName": "WKX Foundation",
+    "title": "Our programs",
+    "description": "Clean water, education, healthcare and livelihoods. See how each of our programs works and what it has achieved."
+  },
+  "programsHero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Our Program"
+            }
+        ],
+    "eyebrow": "",
+    "titleStart": "Four ways we show up for",
+    "titleAccent": "every community.",
+    "description": "Every program starts with a conversation in the village and ends with something the community can run on its own. Explore what we do and the results so far.",
+    "indexLabel": "Jump to a program",
+    "image": {
+      "src": "/img-3.jpg",
+      "alt": "Volunteers and villagers working together on a community project"
+    }
+  },
+  "programsShowcase": {
+    "eyebrow": "What we do",
+    "titleStart": "Programs built with,",
+    "titleAccent": "not for, communities.",
+    "description": "Each program is led by local people and measured in public, so you can see exactly what your support makes possible."
+  },
+  "programs": [
+    {
+      "id": "education",
+      "number": "01",
+      "category": "Education",
+      "title": "School for every child",
+      "description": "We cover books, uniforms, meals and trained teachers so children in rural districts can stay in class and keep learning.",
+      "image": "/img-6.jpg",
+      "imageAlt": "Children reading together in a classroom",
+      "stats": [
+        { "value": 12400, "suffix": "+", "label": "Children enrolled" },
+        { "value": 86, "label": "Schools supported" }
+      ],
+      "highlights": [
+        "Free books, uniforms and daily meals",
+        "Teacher training in local languages",
+        "Libraries and after-school study rooms"
+      ]
+    },
+    {
+      "id": "clean-water",
+      "number": "02",
+      "category": "Water",
+      "title": "Clean water for villages",
+      "description": "Deep-bore hand pumps and filtration units bring safe drinking water within a short walk of home, maintained by trained village committees.",
+      "image": "/post-1.jpg",
+      "imageAlt": "Villagers collecting water from a new hand pump",
+      "stats": [
+        { "value": 310, "label": "Pumps installed" },
+        { "value": 94, "suffix": "%", "label": "Still working after 5 years" }
+      ],
+      "highlights": [
+        "Deep-bore pumps with protected platforms",
+        "Filtration units for schools and clinics",
+        "Village repair committees trained and equipped"
+      ]
+    },
+    {
+      "id": "healthcare",
+      "number": "03",
+      "category": "Health",
+      "title": "Health camps on wheels",
+      "description": "Mobile clinics bring check-ups, medicines and nurses to places without a hospital, and train local health workers to follow up.",
+      "image": "/img-5.jpg",
+      "imageAlt": "A nurse examining a patient at a mobile clinic",
+      "stats": [
+        { "value": 48000, "suffix": "+", "label": "Check-ups given" },
+        { "value": 11, "label": "Villages visited monthly" }
+      ],
+      "highlights": [
+        "Doctor, nurses and a small pharmacy on board",
+        "Maternal and child health screening",
+        "Community health worker training"
+      ]
+    },
+    {
+      "id": "livelihoods",
+      "number": "04",
+      "category": "Livelihoods",
+      "title": "Skills for steady incomes",
+      "description": "Training, tools and small grants help families start or grow a livelihood, so progress continues long after our team has left.",
+      "image": "/img-3.jpg",
+      "imageAlt": "A woman running a small tailoring business",
+      "stats": [
+        { "value": 2300, "suffix": "+", "label": "Families supported" },
+        { "value": 78, "suffix": "%", "label": "Grew their income within a year" }
+      ],
+      "highlights": [
+        "Vocational training with local partners",
+        "Starter tools and small grants",
+        "Mentoring from experienced neighbours"
+      ]
+    }
+  ]
+}

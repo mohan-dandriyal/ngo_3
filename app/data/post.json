@@ -1,0 +1,242 @@
+{
+    "meta": {
+        "siteName": "WKX Foundation",
+        "blogTitle": "Stories from the field",
+        "blogDescription": "News, stories and updates from the communities we serve."
+    },
+    "labels": {
+        "homeLabel": "Home",
+        "blogLabel": "Blog",
+        "backText": "All stories",
+        "readText": "Read story",
+        "tocTitle": "In this article",
+        "shareLabel": "Share this story",
+        "copyLinkText": "Copy link",
+        "copiedText": "Link copied",
+        "tagsLabel": "Topics",
+        "writtenBy": "Written by",
+        "relatedEyebrow": "Keep reading",
+        "relatedTitleStart": "More stories",
+        "relatedTitleAccent": "for you",
+        "relatedLinkText": "See all stories"
+    },
+    "blogHero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Blog"
+            }
+        ],
+        "eyebrow": "",
+        "titleStart": "Stories from",
+        "titleAccent": "the field.",
+        "description": "News, updates and honest reports from the villages we work in, written by the people doing the work.",
+        "latestLabel": "Latest story"
+    },
+    "blogList": {
+        "eyebrow": "All stories",
+        "titleStart": "Read, learn and",
+        "titleAccent": "get involved.",
+        "allLabel": "All",
+        "searchLabel": "Search stories",
+        "searchPlaceholder": "Search by title or topic",
+        "emptyText": "No stories match your search. Try a different word or category.",
+        "loadMoreText": "Load more stories",
+        "pageSize": 6
+    },  
+    "posts": [
+        {
+            "slug": "hand-pump-school-day",
+            "title": "How one hand pump changed the school day for 200 children",
+            "excerpt": "Before the pump, the morning walk for water took two hours. Now the classroom fills up before the first bell. Here is what changed, and what is next.",
+            "category": "Water",
+            "date": "2026-10-12",
+            "readTime": "6 min read",
+             "image": "/post-1.jpg",
+            "imageAlt": "Children filling bottles at a new hand pump",
+            "author": {
+                "name": "Priya Kapoor",
+                "role": "Communications",
+                "image": "/post-1.jpg"
+            },
+            "tags": [
+                "Clean water",
+                "Education",
+                "Rampur"
+            ],
+            "content": [
+                {
+                    "type": "paragraph",
+                    "text": "Every morning, before the sun cleared the ridge, the children of Rampur set out with empty containers. The nearest safe water was a two-hour round trip away, and school simply came second."
+                },
+                {
+                    "type": "heading",
+                    "text": "The walk that took the morning"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "Teachers told us attendance dropped every dry season. Children arrived late, tired, or not at all. Parents did not want it that way, but the household still needed water."
+                },
+                {
+                    "type": "quote",
+                    "text": "I used to carry water before I carried books. Now I carry only my books.",
+                    "cite": "Asha, age 11"
+                },
+                {
+                    "type": "heading",
+                    "text": "What we built"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "In March, our field team and local volunteers installed a deep-bore hand pump beside the school. The village council chose the site, and a committee of parents now looks after the maintenance."
+                },
+                {
+                    "type": "list",
+                    "items": [
+                        "One deep-bore pump with a protected platform",
+                        "Two filtration units for the school kitchen",
+                        "A five-person village committee trained for repairs"
+                    ]
+                },
+                {
+                    "type": "image",
+                    "src": "/images/blog/hand-pump-wide.jpg",
+                    "alt": "The new hand pump beside the school",
+                    "caption": "The pump sits at the edge of the school yard, where everyone can reach it."
+                },
+                {
+                    "type": "heading",
+                    "text": "What is next"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "Rampur is one of 48 villages we serve. Our next goal is to bring the same safe water to four neighbouring villages before the next dry season begins."
+                }
+            ]
+        },
+        {
+            "slug": "mobile-clinic-1000",
+            "title": "Our mobile clinic reaches its 1,000th patient",
+            "excerpt": "What began as one van and one nurse now visits eleven villages every month. A look back at the first thousand check-ups.",
+            "category": "Health",
+            "date": "2026-10-03",
+            "readTime": "4 min read",
+             "image": "/post-1.jpg",
+            "imageAlt": "A nurse greeting a patient outside the mobile clinic",
+            "author": {
+                "name": "Dr. Meera Nair",
+                "role": "Medical Lead",
+                  "image": "/post-2.jpg"
+            },
+            "tags": [
+                "Healthcare",
+                "Mobile clinic"
+            ],
+            "content": [
+                {
+                    "type": "paragraph",
+                    "text": "Last Thursday a retired farmer named Gopal stepped into our van for a blood pressure check. He became our one thousandth patient, and he had not seen a doctor in nine years."
+                },
+                {
+                    "type": "heading",
+                    "text": "Where we started"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "The clinic began with a single van, a borrowed scale and one nurse. Today it carries a doctor, two nurses, basic diagnostics and a small pharmacy."
+                },
+                {
+                    "type": "quote",
+                    "text": "People do not ignore their health. They ignore the journey to a hospital.",
+                    "cite": "Dr. Meera Nair"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "By bringing check-ups to the village square, we have found conditions early that would otherwise have gone unseen for years."
+                }
+            ]
+        },
+        {
+            "slug": "monthly-gift-breakdown",
+            "title": "What your monthly gift pays for, line by line",
+            "excerpt": "A plain-language breakdown of where each rupee goes, from the pump in the village to the receipt in your inbox.",
+            "category": "Transparency",
+            "date": "2026-09-24",
+            "readTime": "5 min read",
+            "image": "/post-3.jpg",
+            "imageAlt": "Volunteers sorting school supplies",
+            "author": {
+                "name": "Karan Verma",
+                "role": "Finance and Transparency",
+                "image": "/team/karan.jpg"
+            },
+            "tags": [
+                "Donations",
+                "Transparency"
+            ],
+            "content": [
+                {
+                    "type": "paragraph",
+                    "text": "Supporters often ask us a fair question: what exactly happens to my gift? This post answers it without jargon."
+                },
+                {
+                    "type": "heading",
+                    "text": "Where each rupee goes"
+                },
+                {
+                    "type": "list",
+                    "items": [
+                        "Most of every gift goes directly to field projects",
+                        "A small share covers fundraising and communications",
+                        "The remainder keeps our offices, audits and tools running"
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "text": "Every quarter we publish an itemised report. If a number looks wrong to you, write to us and we will explain it."
+                }
+            ]
+        },
+        {
+            "slug": "rampur-library",
+            "title": "Meet the volunteers rebuilding the Rampur library",
+            "excerpt": "Twelve volunteers, three weekends and a lot of paint. How a village library came back to life.",
+            "category": "Education",
+            "date": "2026-09-10",
+            "readTime": "3 min read",
+            "image": "/img-3.jpg",
+            "imageAlt": "Volunteers painting shelves in a village library",
+            "author": {
+                "name": "Imran Sheikh",
+                "role": "Volunteer Manager",
+                "image": "/team/imran.jpg"
+            },
+            "tags": [
+                "Volunteers",
+                "Education"
+            ],
+            "content": [
+                {
+                    "type": "paragraph",
+                    "text": "The Rampur library had been closed for six years. The roof leaked, the shelves had collapsed, and the books were stacked in a damp corner."
+                },
+                {
+                    "type": "heading",
+                    "text": "Twelve people, three weekends"
+                },
+                {
+                    "type": "paragraph",
+                    "text": "Volunteers from Delhi and the village itself repaired the roof, repainted the walls and built new shelves from reclaimed wood."
+                },
+                {
+                    "type": "quote",
+                    "text": "Nobody asked us to do it. We just saw it, and it felt wrong to walk past.",
+                    "cite": "Volunteer, Delhi chapter"
+                }
+            ]
+        }
+    ]
+}

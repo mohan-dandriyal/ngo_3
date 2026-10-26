@@ -1,0 +1,150 @@
+{
+    "galleryHero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Gallery"
+            }
+        ],
+        "eyebrow": "Stories from the ground",
+        "titleStart": "A closer look at",
+        "titleAccent": "change.",
+        "description": "Every photograph captures a moment of courage, community, and progress. Explore the people and places behind our work.",
+        "image": {
+            "src": "/img-3.jpg",
+            "alt": "Community members working together on a local development project"
+        },
+        "imageCaption": "Together, we build a stronger tomorrow.",
+        "scrollText": "Explore the gallery",
+        "scrollTarget": "#gallery-collection"
+    },
+    "gallerySection": {
+        "eyebrow": "Our impact in pictures",
+        "titleStart": "Moments that",
+        "titleAccent": "matter.",
+        "description": "From local initiatives to lasting change, these are the real stories shaping a better future.",
+        "allLabel": "All stories",
+        "emptyMessage": "No photographs found in this category yet.",
+        "categories": [
+            {
+                "id": "all",
+                "label": "All stories"
+            },
+            {
+                "id": "community",
+                "label": "Community"
+            },
+            {
+                "id": "education",
+                "label": "Education"
+            },
+            {
+                "id": "health",
+                "label": "Health"
+            },
+            {
+                "id": "environment",
+                "label": "Environment"
+            }
+        ],
+        "items": [
+            {
+                "id": 1,
+                "category": "community",
+                "categoryLabel": "Community",
+                "title": "Stronger, together",
+                "description": "Local people coming together to create lasting change.",
+                "image": {
+                    "src": "/img-1.jpg",
+                    "alt": "Community members collaborating outdoors"
+                },
+                "year": "2026",
+                "size": "large"
+            },
+            {
+                "id": 2,
+                "category": "education",
+                "categoryLabel": "Education",
+                "title": "A world of possibilities",
+                "description": "Helping young minds discover their potential.",
+                "image": {
+                    "src": "/img-2.jpg",
+                    "alt": "Children learning together in a classroom"
+                },
+                "year": "2026",
+                "size": "normal"
+            },
+            {
+                "id": 3,
+                "category": "health",
+                "categoryLabel": "Health",
+                "title": "Care that reaches everyone",
+                "description": "Building healthier communities through access and awareness.",
+                "image": {
+                    "src": "/img-3.jpg",
+                    "alt": "Community health outreach activity"
+                },
+                "year": "2026",
+                "size": "normal"
+            },
+            {
+                "id": 4,
+                "category": "environment",
+                "categoryLabel": "Environment",
+                "title": "Growing a greener future",
+                "description": "Small local actions with a lasting environmental impact.",
+                "image": {
+                    "src": "/img-4.jpg",
+                    "alt": "Volunteers planting trees in a green landscape"
+                },
+                "year": "2025",
+                "size": "large"
+            },
+            {
+                "id": 5,
+                "category": "community",
+                "categoryLabel": "Community",
+                "title": "The power of participation",
+                "description": "Real progress begins when every voice is heard.",
+                "image": {
+                    "src": "/img-5.jpg",
+                    "alt": "Community gathering during a local initiative"
+                },
+                "year": "2025",
+                "size": "normal"
+            },
+            {
+                "id": 6,
+                "category": "education",
+                "categoryLabel": "Education",
+                "title": "Learning without limits",
+                "description": "Creating opportunities for the next generation.",
+                "image": {
+                    "src": "/post-4.jpg",
+                    "alt": "Students participating in an educational activity"
+                },
+                "year": "2025",
+                "size": "normal"
+            },
+             {
+                "id": 7,
+                "category": "education",
+                "categoryLabel": "Education",
+                "title": "Learning without limits",
+                "description": "Creating opportunities for the next generation.",
+                "image": {
+                    "src": "/post-4.jpg",
+                    "alt": "Students participating in an educational activity"
+                },
+                "year": "2025",
+                "size": "normal"
+            }
+        ],
+        "bottomNote": "Every image represents a story still unfolding.",
+        "bottomLinkText": "Discover our programs",
+        "bottomLink": "/programs"
+    }
+}

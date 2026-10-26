@@ -1,0 +1,49 @@
+{
+  "causes": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Our Cause"
+            }
+        ],
+    "eyebrow": "Our causes",
+    "titleStart": "Where your gift",
+    "titleAccent": "goes",
+    "titleEnd": "first",
+    "description": "Every donation is matched to a specific project. Pick the cause closest to your heart and follow its progress here.",
+    "linkText": "See all causes",
+    "linkTo": "/causes",
+    "causes": [
+      {
+        "title": "School for every child",
+        "description": "Books, uniforms and meals so children in rural districts can stay in class.",
+        "category": "Education",
+        "image": "/img-4.jpg",
+        "imageAlt": "Children reading together in a classroom",
+        "linkText": "Explore",
+        "linkTo": "/our-cause/school-for-every-child"
+      },
+      {
+        "title": "Clean water for villages",
+        "description": "Hand pumps and filtration units that bring safe drinking water within a short walk of home.",
+        "category": "Water",
+        "image": "/img-1.jpg",
+        "imageAlt": "Villagers collecting water from a new pump",
+        "linkText": "Explore",
+        "linkTo": "/our-cause/clean-water-for-villages"
+      },
+      {
+        "title": "Health camps on wheels",
+        "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
+        "category": "Health",
+        "image": "/img-5.jpg",
+        "imageAlt": "A nurse examining a patient at a mobile clinic",
+        "linkText": "Explore All",
+        "linkTo": "/our-cause/health-camps-on-wheels"
+      }
+    ]
+  }
+}

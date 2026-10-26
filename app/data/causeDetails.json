@@ -1,0 +1,349 @@
+{
+  "labels": {
+    "storyTitle": "About this cause",
+    "highlightsTitle": "At a glance",
+    "fundsTitle": "Where your money goes",
+    "milestonesTitle": "Progress so far",
+    "updatesTitle": "Latest updates",
+    "teamTitle": "Who is running this",
+    "faqTitle": "Questions people ask",
+    "locationLabel": "Where",
+    "shareText": "Share this cause",
+    "milestoneStatus": {
+      "done": "Done",
+      "current": "In progress",
+      "upcoming": "Up next"
+    }
+  },
+  "details": {
+    "clean-water-villages": {
+      "location": "Barmer and Jaisalmer districts, Rajasthan",
+      "story": [
+        "In these villages, women and children walk up to three kilometres every day to fetch water, and often it is not safe to drink. Missed school days and repeat stomach illness are common.",
+        "We drill deep-bore hand pumps close to where families live and add a filtration unit at each site. A trained committee of villagers owns the pump, collects a small monthly fee and fixes faults, so the water keeps flowing long after we leave.",
+        "Each village is mapped, tested before and after, and tracked publicly on this page."
+      ],
+      "highlights": [
+        { "label": "Villages", "value": "20" },
+        { "label": "People reached", "value": "about 18,000" },
+        { "label": "Walk to water", "value": "under 500 m" },
+        { "label": "Repair committees", "value": "20 trained" }
+      ],
+      "fundsUse": [
+        { "label": "Pumps and filtration units", "percent": 62 },
+        { "label": "Committee training and spare parts", "percent": 18 },
+        { "label": "Water testing and monitoring", "percent": 10 },
+        { "label": "Field team and logistics", "percent": 10 }
+      ],
+      "milestones": [
+        {
+          "title": "Village survey and site selection",
+          "description": "All 20 villages surveyed and borewell sites confirmed with each panchayat.",
+          "date": "Jan 2026",
+          "status": "done"
+        },
+        {
+          "title": "First 8 pumps installed",
+          "description": "Eight hand pumps with filters are live and tested.",
+          "date": "Jun 2026",
+          "status": "done"
+        },
+        {
+          "title": "Pumps 9 to 15",
+          "description": "Drilling is under way in the next seven villages.",
+          "date": "Nov 2026",
+          "status": "current"
+        },
+        {
+          "title": "Final 5 villages and handover",
+          "description": "Last pumps installed and all committees certified.",
+          "date": "Mar 2027",
+          "status": "upcoming"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-12",
+          "title": "Pump 8 is running in Sodakor",
+          "body": "Water tests came back clean on the first try. The village committee collected its first monthly contribution this week."
+        },
+        {
+          "date": "2026-08-30",
+          "title": "Committee training completed for 6 villages",
+          "body": "Twenty-four villagers learned to service the pump, replace seals and keep a simple maintenance log."
+        }
+      ],
+      "team": [
+        { "name": "Project lead (add name)", "role": "Oversees drilling and installation" },
+        { "name": "Water engineer (add name)", "role": "Site checks and water quality testing" },
+        { "name": "Community organiser (add name)", "role": "Works with village committees" }
+      ],
+      "faqs": [
+        {
+          "question": "What if a pump breaks down?",
+          "answer": "Each village committee is trained and keeps a spare-parts fund. For larger faults, our field team visits within a week."
+        },
+        {
+          "question": "Can I follow my gift?",
+          "answer": "Yes. Milestones and updates on this page are refreshed as each village is completed."
+        },
+        {
+          "question": "What happens if we raise more than the goal?",
+          "answer": "Extra funds go to the next set of villages in the same district, or to maintenance, and we will say so in an update."
+        }
+      ]
+    },
+
+    "school-for-every-child": {
+      "location": "Rural districts of Bihar and Uttar Pradesh",
+      "story": [
+        "Many children drop out of school not because they don't want to learn, but because a uniform, a set of books or a midday meal is out of reach for their family.",
+        "This campaign covers those basics, so a child can stay in class. We work with local schools, who tell us which children are most at risk of leaving.",
+        "Attendance is tracked each term and shared here."
+      ],
+      "highlights": [
+        { "label": "Children supported", "value": "1,200" },
+        { "label": "Partner schools", "value": "18" },
+        { "label": "Meals per school day", "value": "1" },
+        { "label": "Target attendance", "value": "90%" }
+      ],
+      "fundsUse": [
+        { "label": "Books and learning kits", "percent": 35 },
+        { "label": "Midday meals", "percent": 35 },
+        { "label": "Uniforms and shoes", "percent": 20 },
+        { "label": "Tracking and field team", "percent": 10 }
+      ],
+      "milestones": [
+        {
+          "title": "Partner schools signed up",
+          "description": "18 schools agreed to share attendance data and identify children at risk.",
+          "date": "Feb 2026",
+          "status": "done"
+        },
+        {
+          "title": "First term kits delivered",
+          "description": "Books, uniforms and shoes reached 700 children.",
+          "date": "Jul 2026",
+          "status": "done"
+        },
+        {
+          "title": "Meal programme in all schools",
+          "description": "Daily meals are being rolled out school by school.",
+          "date": "Dec 2026",
+          "status": "current"
+        },
+        {
+          "title": "Year-end attendance review",
+          "description": "Results published for every partner school.",
+          "date": "Apr 2027",
+          "status": "upcoming"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-05",
+          "title": "Attendance up in the first 10 schools",
+          "body": "Teachers report fewer absences since meals started. We will publish the numbers once the term closes."
+        }
+      ],
+      "team": [
+        { "name": "Education lead (add name)", "role": "Works with schools and teachers" },
+        { "name": "Field coordinator (add name)", "role": "Delivers kits and checks meals" }
+      ],
+      "faqs": [
+        {
+          "question": "How are children chosen?",
+          "answer": "Schools identify children most at risk of leaving, using attendance and family circumstances."
+        },
+        {
+          "question": "Is the money used for anything else?",
+          "answer": "No. Gifts to this cause fund only the items in the breakdown above."
+        }
+      ]
+    },
+
+    "health-camps-on-wheels": {
+      "location": "Remote blocks of Odisha and Jharkhand",
+      "story": [
+        "For many families the nearest hospital is hours away, so check-ups are skipped and small problems become serious.",
+        "Our mobile clinics visit each village on a fixed schedule with a nurse, basic diagnostics and a stock of essential medicines. Patients who need more are referred to the nearest hospital, and we follow up.",
+        "You can see each clinic's route and the number of patients seen in the updates below."
+      ],
+      "highlights": [
+        { "label": "Mobile clinics", "value": "3" },
+        { "label": "Villages covered", "value": "60" },
+        { "label": "Visit frequency", "value": "every 2 weeks" },
+        { "label": "Patients seen so far", "value": "over 9,000" }
+      ],
+      "fundsUse": [
+        { "label": "Medicines and diagnostics", "percent": 40 },
+        { "label": "Nurses and drivers", "percent": 35 },
+        { "label": "Vehicle running costs", "percent": 15 },
+        { "label": "Referrals and follow-up", "percent": 10 }
+      ],
+      "milestones": [
+        {
+          "title": "Clinic 1 and 2 on the road",
+          "description": "Two vehicles fitted out and covering 40 villages.",
+          "date": "Mar 2026",
+          "status": "done"
+        },
+        {
+          "title": "Third clinic launched",
+          "description": "Vehicle fitted, staff hired and routes planned.",
+          "date": "Oct 2026",
+          "status": "current"
+        },
+        {
+          "title": "All 60 villages on schedule",
+          "description": "Every village gets a visit every two weeks.",
+          "date": "Jan 2027",
+          "status": "upcoming"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-18",
+          "title": "Third clinic begins test runs",
+          "body": "The new vehicle has started its first routes. Full service begins once the staff induction is complete."
+        }
+      ],
+      "team": [
+        { "name": "Medical officer (add name)", "role": "Oversees care and referrals" },
+        { "name": "Lead nurse (add name)", "role": "Runs the clinics day to day" }
+      ],
+      "faqs": [
+        {
+          "question": "Is care free for patients?",
+          "answer": "Yes. Check-ups and the medicines we carry are free at the clinic."
+        },
+        {
+          "question": "What about serious cases?",
+          "answer": "We refer the patient to the nearest hospital and follow up to check they received care."
+        }
+      ]
+    },
+
+    "skills-for-steady-incomes": {
+      "location": "Peri-urban areas around Lucknow and Kanpur",
+      "story": [
+        "A skill, a few tools and a small grant can change what a family earns. Many women and young people here have the ability to start a business but not the starting capital.",
+        "Participants complete a short training course, choose a trade such as tailoring, repairs or food preparation, and receive a starter kit and a small grant. A mentor checks in for six months."
+      ],
+      "highlights": [
+        { "label": "Participants", "value": "300" },
+        { "label": "Training length", "value": "8 weeks" },
+        { "label": "Mentoring", "value": "6 months" },
+        { "label": "Starter grant", "value": "up to ₹15,000" }
+      ],
+      "fundsUse": [
+        { "label": "Starter kits and grants", "percent": 50 },
+        { "label": "Training", "percent": 25 },
+        { "label": "Mentoring", "percent": 15 },
+        { "label": "Programme management", "percent": 10 }
+      ],
+      "milestones": [
+        {
+          "title": "First cohort of 60 enrolled",
+          "description": "Training has started in two centres.",
+          "date": "Sep 2026",
+          "status": "current"
+        },
+        {
+          "title": "Starter kits and grants issued",
+          "description": "Cohort one begins trading.",
+          "date": "Dec 2026",
+          "status": "upcoming"
+        },
+        {
+          "title": "Income review",
+          "description": "We measure income change six months after launch and publish the results.",
+          "date": "Jun 2027",
+          "status": "upcoming"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-09-20",
+          "title": "Training begins for the first cohort",
+          "body": "Sixty participants started classes this week, and tailoring is the most popular trade."
+        }
+      ],
+      "team": [
+        { "name": "Livelihoods lead (add name)", "role": "Designs training and selects trades" },
+        { "name": "Lead mentor (add name)", "role": "Supports each participant after launch" }
+      ],
+      "faqs": [
+        {
+          "question": "Is the grant a loan?",
+          "answer": "No. It is a one-time grant, and participants do not repay it."
+        },
+        {
+          "question": "How do you measure success?",
+          "answer": "We compare household income before the programme and six months after it."
+        }
+      ]
+    },
+    
+    "rebuild-village-libraries": {
+      "location": "Villages across Uttarakhand and Himachal Pradesh",
+      "story": [
+        "A quiet place with books can change how a child sees school. Many village libraries here have leaking roofs, empty shelves or have been closed for years.",
+        "Volunteers and local carpenters repair each building, build shelves and stock age-appropriate books in Hindi and English. Every library is run by a local reading group that keeps it open."
+      ],
+      "highlights": [
+        { "label": "Libraries", "value": "12" },
+        { "label": "Books per library", "value": "about 1,000" },
+        { "label": "Languages", "value": "Hindi and English" },
+        { "label": "Run by", "value": "local reading groups" }
+      ],
+      "fundsUse": [
+        { "label": "Repairs and shelving", "percent": 45 },
+        { "label": "Books", "percent": 40 },
+        { "label": "Reading group training", "percent": 10 },
+        { "label": "Coordination", "percent": 5 }
+      ],
+      "milestones": [
+        {
+          "title": "First 4 libraries reopened",
+          "description": "Repairs done, shelves built and books in place.",
+          "date": "Aug 2026",
+          "status": "done"
+        },
+        {
+          "title": "Libraries 5 to 8",
+          "description": "Roof repairs and shelving under way.",
+          "date": "Dec 2026",
+          "status": "current"
+        },
+        {
+          "title": "Final 4 libraries",
+          "description": "Repairs, books and reading group set-up.",
+          "date": "Apr 2027",
+          "status": "upcoming"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-09",
+          "title": "Volunteers painted the shelves in Dhanaulti",
+          "body": "Twenty volunteers from the village spent a weekend on the library, which opens next week."
+        }
+      ],
+      "team": [
+        { "name": "Programme lead (add name)", "role": "Coordinates repairs and book supply" },
+        { "name": "Volunteer coordinator (add name)", "role": "Organises village work days" }
+      ],
+      "faqs": [
+        {
+          "question": "Who looks after the library afterwards?",
+          "answer": "A local reading group, trained by us, manages opening hours and lending."
+        },
+        {
+          "question": "Can I donate books instead of money?",
+          "answer": "Book donations are welcome through our team, so we can match titles to what each library needs."
+        }
+      ]
+    }
+  }
+}

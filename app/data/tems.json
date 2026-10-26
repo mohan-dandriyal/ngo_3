@@ -1,0 +1,121 @@
+{
+    "teamHero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Team's"
+            }
+        ],
+        "eyebrow": "",
+        "titleStart": "The people behind",
+        "titleAccent": "the mission.",
+        "description": "Teachers, nurses, engineers and neighbours. A small team with one shared promise: to show up for the communities we serve.",
+        "scrollText": "Meet the team",
+        "scrollTarget": "#team",
+        "images": [
+            {
+                "src": "/img-2.jpg",
+                "alt": "Team members planning a project together"
+            },
+            {
+                "src": "/img-3.jpg",
+                "alt": "A nurse speaking with a family at a mobile clinic"
+            },
+            {
+                "src": "/post-3.jpg",
+                "alt": "Volunteers laughing during a school visit"
+            }
+        ]
+    },
+    "teamSection": {
+        "eyebrow": "Meet our team",
+        "titleStart": "Faces you can",
+        "titleAccent": "trust.",
+        "description": "Every person here has chosen this work. Hover over a portrait to learn more about them.",
+        "allLabel": "Everyone",
+        "members": [
+            {
+                "name": "Anita Rao",
+                "role": "Founder and Director",
+                "department": "Leadership",
+                "bio": "Started the foundation in 2012 with one hand pump and a promise to the village of Rampur.",
+                "image": "/profile-5.jpg",
+                "imageAlt": "Portrait of Anita Rao",
+                "linkedin": "https://linkedin.com",
+                "email": "anita@yourfoundation.org"
+            },
+            {
+                "name": "Rohan Mehta",
+                "role": "Head of Programs",
+                "department": "Programs",
+                "bio": "Leads our water, education and health projects across 48 villages.",
+                 "image": "/profile-2.jpg",
+                "imageAlt": "Portrait of Rohan Mehta",
+                "linkedin": "https://linkedin.com",
+                "twitter": "https://x.com"
+            },
+            {
+                "name": "Sunita Devi",
+                "role": "Community Coordinator",
+                "department": "Programs",
+                "bio": "Our first point of contact in the villages, and the person everyone trusts.",
+                 "image": "/profile-4.jpg",
+                "imageAlt": "Portrait of Sunita Devi",
+                "email": "sunita@yourfoundation.org"
+            },
+            {
+                "name": "Imran Sheikh",
+                "role": "Volunteer Manager",
+                "department": "Community",
+                "bio": "Matches volunteers with the projects where their skills help most.",
+                 "image": "/profile-3.jpg",
+                "imageAlt": "Portrait of Imran Sheikh",
+                "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Dr. Meera Nair",
+                "role": "Medical Lead",
+                "department": "Programs",
+                "bio": "Runs our mobile clinics and trains local health workers.",
+                "image": "/team/meera.jpg",
+                "imageAlt": "Portrait of Dr. Meera Nair",
+                "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Karan Verma",
+                "role": "Finance and Transparency",
+                "department": "Leadership",
+                "bio": "Makes sure every rupee is tracked and reported publicly.",
+                "image": "/team/karan.jpg",
+                "imageAlt": "Portrait of Karan Verma",
+                "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Priya Kapoor",
+                "role": "Communications",
+                "department": "Community",
+                "bio": "Tells the stories of the people we work with, with their permission.",
+                "image": "/team/priya.jpg",
+                "imageAlt": "Portrait of Priya Kapoor",
+                "twitter": "https://x.com",
+                "email": "priya@yourfoundation.org"
+            },
+            {
+                "name": "Arjun Das",
+                "role": "Field Engineer",
+                "department": "Programs",
+                "bio": "Designs and installs the water systems that villages keep for decades.",
+                "image": "/team/arjun.jpg",
+                "imageAlt": "Portrait of Arjun Das"
+            }
+        ],
+        "cta": {
+            "text": "Want to work with us? We are always looking for people who care.",
+            "linkText": "",
+            "linkTo": ""
+        }
+    }
+}

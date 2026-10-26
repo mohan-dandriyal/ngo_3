@@ -1,0 +1,91 @@
+{
+  "contactHero": {
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "linkTo": "/"
+      },
+      {
+        "label": "Contact us"
+      }
+    ],
+    "eyebrow": "",
+    "titleStart": "Good things begin with a",
+    "titleAccent": "conversation.",
+    "description": "Have a question, an idea, or a desire to make a difference? We'd love to hear from you.",
+    "image": {
+      "src": "/img-4.jpg",
+      "alt": "Community members and volunteers connecting"
+    },
+    "imageCaption": "PEOPLE FIRST. ALWAYS.",
+    "scrollText": "LET'S CONNECT"
+  },
+  "contactSection": {
+    "eyebrow": "01 / REACH OUT",
+    "titleStart": "Let's make something",
+    "titleAccent": "meaningful happen.",
+    "description": "Whether you want to volunteer, partner with us, or learn more about our work, there's a place for you.",
+    "contactMethods": [
+      {
+        "id": "email",
+        "icon": "mail",
+        "title": "Email us",
+        "description": "For questions, ideas, and collaboration.",
+        "value": "hello@yourfoundation.org",
+        "link": "mailto:hello@yourfoundation.org"
+      },
+      {
+        "id": "partner",
+        "icon": "handshake",
+        "title": "Partner with us",
+        "description": "Let's work together to create lasting change.",
+        "value": "Explore partnerships",
+        "link": "/partnerships"
+      },
+      {
+        "id": "volunteer",
+        "icon": "heart-handshake",
+        "title": "Volunteer",
+        "description": "Bring your time, skills, and passion to our mission.",
+        "value": "Join our team",
+        "link": "/volunteer"
+      }
+    ],
+    "form": {
+      "eyebrow": "CONTACT FORM",
+      "title": "Send us a message.",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Your name",
+          "placeholder": "Enter your full name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email address",
+          "placeholder": "you@example.com",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "label": "Subject",
+          "placeholder": "What would you like to discuss?",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "message",
+          "label": "Your message",
+          "placeholder": "Tell us a little about your message...",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "submitText": "Send your message",
+      "successMessage": "Thank you for reaching out. We'll be in touch soon."
+    }
+  }
+}

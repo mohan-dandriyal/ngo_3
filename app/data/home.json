@@ -1,0 +1,104 @@
+{
+    "hero": {
+        "eyebrow": "A different kind of progress",
+        "titleLight": "Change starts",
+        "titleAccent": "with showing up.",
+        "description": "We back the people building a fairer, greener, more possible everyday — one local idea at a time.",
+        "primaryBtn": {
+            "text": "Make a difference",
+            "linkTo": "#"
+        },
+        "secondaryBtn": {
+            "text": "Our story",
+            "linkTo": "/about"
+        },
+        "image": {
+            "src": "/img-3.jpg",
+            "alt": "Graffiti on a street utility box reading Be the Change",
+            "counter": "01 / 04",
+            "location": "Chittagong, Bangladesh"
+        },
+        "badge": ""
+    },
+    "homeAbout": {
+        "eyebrow": "About WKX",
+        "titleLight": "The future is not a place we arrive at.",
+        "titleAccent": "It’s a practice.",
+        "description": "WKX is a people-powered foundation for the beautifully stubborn. We find local leaders with big ideas, then give them the trust, tools and time to make those ideas real.",
+        "linkText": "See what we do",
+        "linkTo": "#programs"
+    },
+    "homePrograms": {
+        "eyebrow": "Where we focus",
+        "titleStart": "Our work is",
+        "titleAccent": "rooted",
+        "titleEnd": "locally.",
+        "meta": "03 programs / 2025",
+        "programs": [
+            {
+                "title": "The Water Table",
+                "description": "Clean water, built to last by the people who need it most.",
+                "image": "/img-1.jpg",
+                "imageAlt": "Children washing their hands at a row of water taps",
+                "theme": "coral",
+                "linkText": "Explore",
+                "linkTo": "#water-table"
+            },
+            {
+                "title": "Her Next Chapter",
+                "description": "Backing women turning brave ideas into shared livelihoods.",
+                "image": "/img-2.jpg",
+                "imageAlt": "A girl in a green shawl surrounded by smiling women",
+                "theme": "green",
+                "linkText": "Explore",
+                "linkTo": "#her-next-chapter"
+            },
+            {
+                "title": "Open Classroom",
+                "description": "Making learning feel possible, joyful and entirely theirs.",
+                "image": "/img-3.jpg",
+                "imageAlt": "Many hands joined together in the middle of a circle",
+                "theme": "sand",
+                "linkText": "Explore",
+                "linkTo": "#open-classroom"
+            }
+        ]
+    },
+    
+    "testimonials": {
+        "eyebrow": "Voices",
+        "titleStart": "In their",
+        "titleAccent": "own",
+        "titleEnd": "words",
+        "testimonials": [
+            {
+                "quote": "My daughter used to miss school to fetch water. Now she is first in her class and wants to become a teacher.",
+                "name": "Sunita Devi",
+                "role": "Parent, Rampur village",
+                "image": "/images/testimonials/sunita.jpg",
+                "imageAlt": "Portrait of Sunita Devi"
+            },
+            {
+                "quote": "I have given to many charities, but this is the first one that sends me photos and receipts showing exactly where my money went.",
+                "name": "Rohan Mehta",
+                "role": "Monthly donor",
+                "image": "/images/testimonials/rohan.jpg",
+                "imageAlt": "Portrait of Rohan Mehta"
+            },
+            {
+                "quote": "The mobile clinic comes every Thursday. For the first time, our elders get check-ups without travelling two hours to town.",
+                "name": "Dr. Anita Rao",
+                "role": "Volunteer physician",
+                "image": "/images/testimonials/anita.jpg",
+                "imageAlt": "Portrait of Dr. Anita Rao"
+            },
+            {
+                "quote": "Volunteering with the team showed me how much a small group can do when every rupee and every hour is used well.",
+                "name": "Imran Sheikh",
+                "role": "Volunteer, Delhi chapter",
+                "image": "/images/testimonials/imran.jpg",
+                "imageAlt": "Portrait of Imran Sheikh"
+            }
+        ]
+    }
+}

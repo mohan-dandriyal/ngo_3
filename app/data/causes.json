@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "siteName": "WKX Foundation",
+    "title": "Our causes",
+    "description": "Choose a cause, see exactly how much has been raised, and give to a project you can follow from start to finish."
+  },
+   "hero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "Our Cause"
+            }
+        ],
+    "eyebrow": "",
+    "titleStart": "Pick a cause.",
+    "titleAccent": "Watch it grow.",
+    "description": "Every campaign has a clear goal, a named team and public progress. Give to the one closest to your heart and follow where it goes.",
+    "currencySymbol": "₹",
+    "primaryButton": { "text": "See all causes", "link": "#causes" },
+    "statLabels": {
+      "raised": "Raised across all causes",
+      "supporters": "People giving",
+      "causes": "Active causes"
+    }
+  },
+  "featured": {
+    "eyebrow": "Featured cause",
+    "amountLabel": "Choose an amount",
+    "donateText": "Explore",
+    "daysLabel": "days left",
+    "raisedLabel": "raised",
+    "goalLabel": "Goal",
+    "supportersLabel": "supporters"
+  },
+  "grid": {
+    "eyebrow": "All causes",
+    "titleStart": "Every cause needs",
+    "titleAccent": "someone like you.",
+    "description": "Filter by the kind of change you want to see, and give in a few taps.",
+    "allLabel": "All",
+    "raisedLabel": "raised",
+    "goalLabel": "Goal",
+    "supportersLabel": "supporters",
+    "donateText": "Donate to this cause",
+    "emptyText": "No causes in this category yet."
+  },
+  "causes": [
+    {
+      "slug": "clean-water-villages",
+      "featured": true,
+      "category": "Water",
+      "title": "Clean water for 20 villages",
+      "description": "Deep-bore hand pumps and filtration units that bring safe drinking water within a short walk of home, looked after by trained village committees.",
+      "image": "/post-1.jpg",
+      "imageAlt": "Villagers collecting water from a new hand pump",
+      "raised": 1640000,
+      "goal": 2500000,
+      "supporters": 1284,
+      "currency": "INR",
+      "endDate": "2026-12-31",
+      "amounts": [
+        { "value": 500, "impact": "Pays for water filters for one classroom." },
+        { "value": 1000, "impact": "Gives one family safe drinking water for a year." },
+        { "value": 2500, "impact": "Covers training for one village repair committee." },
+        { "value": 5000, "impact": "Funds a full hand pump for a village." }
+      ],
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/clean-water-for-20-villages"
+    },
+    {
+      "slug": "school-for-every-child",
+      "category": "Education",
+      "title": "School for every child",
+      "description": "Books, uniforms and meals so children in rural districts can stay in class and keep learning.",
+      "image": "/img-4.jpg",
+      "imageAlt": "Children reading together in a classroom",
+      "raised": 640000,
+      "goal": 1000000,
+      "supporters": 702,
+      "currency": "INR",
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/school-for-every-child"
+    },
+    {
+      "slug": "health-camps-on-wheels",
+      "category": "Health",
+      "title": "Health camps on wheels",
+      "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
+      "image": "/img-5.jpg",
+      "imageAlt": "A nurse examining a patient at a mobile clinic",
+      "raised": 905000,
+      "goal": 1200000,
+      "supporters": 931,
+      "currency": "INR",
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/cause-health-camps-on-wheels"
+    },
+    {
+      "slug": "skills-for-steady-incomes",
+      "category": "Livelihoods",
+      "title": "Skills for steady incomes",
+      "description": "Training, tools and small grants that help families start a business and grow their income.",
+      "image": "/img-3.jpg",
+      "imageAlt": "A woman running a small tailoring business",
+      "raised": 310000,
+      "goal": 900000,
+      "supporters": 244,
+      "currency": "INR",
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/skills-for-steady-incomes"
+    },
+    {
+      "slug": "rebuild-village-libraries",
+      "category": "Education",
+      "title": "Rebuild village libraries",
+      "description": "Repair roofs, build shelves and stock books so every village has a place to read.",
+      "image": "/img-2.jpg",
+      "imageAlt": "Volunteers painting shelves in a village library",
+      "raised": 205000,
+      "goal": 400000,
+      "supporters": 318,
+      "currency": "INR",
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/rebuild-village-libraries"
+    }
+  ],
+  "cta": {
+    "eyebrow": "Can't choose?",
+    "titleStart": "Give where it is",
+    "titleAccent": "needed most.",
+    "description": "Your gift goes into a pool that our field team directs to the project with the most urgent need that month.",
+    "primaryButton": { "text": "Give to where it's needed", "link": "/donate" },
+    "secondaryButton": { "text": "Talk to our team", "link": "/contact" }
+  }
+}

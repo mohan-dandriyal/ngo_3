@@ -1,0 +1,128 @@
+{
+    "aboutHero": {
+        "breadcrumb": [
+            {
+                "label": "Home",
+                "linkTo": "/"
+            },
+            {
+                "label": "About us"
+            }
+        ],
+        "eyebrow": "",
+        "titleStart": "Built by neighbours,",
+        "titleAccent": "for neighbours",
+        "description": "We started in one village with a single hand pump. Today we bring clean water, schooling and healthcare to communities across the country, and we publish every rupee we spend.",
+        "linkText": "",
+        "linkTo": "",
+        "image": {
+            "src": "/img-3.jpg",
+            "alt": "Volunteers and villagers gathered around a new hand pump"
+        },
+        "stats": [
+            {
+                "value": 2012,
+                "plain": true,
+                "label": "Year we began"
+            },
+            {
+                "value": 48,
+                "suffix": "+",
+                "label": "Villages served"
+            },
+            {
+                "value": 125000,
+                "suffix": "+",
+                "label": "Lives reached"
+            },
+            {
+                "value": 92,
+                "suffix": "%",
+                "label": "Of every gift goes to projects"
+            }
+        ]
+    },
+    "mission": {
+        "eyebrow": "About",
+        "titleStart": "Our mission is to build a future that works for",
+        "titleAccent": "everyone.",
+        "description": "We partner with communities to improve access to clean water, education, and healthcare. Every action begins with listening and grows through collective effort",
+        "linkText": "",
+        "linkTo": "#",
+        "listLabel": "Our purpose, our promise",
+        "image": {
+            "src": "/img-3.jpg",
+            "alt": "Volunteers and villagers gathered around a new hand pump",
+            "captionLabel": "Our promise",
+            "caption": "Change begins when we work together."
+        },
+        "items": [
+            {
+                "number": "01",
+                "title": "Empower communities",
+                "description": "Create opportunities that help people build independence and shape their own futures."
+            },
+            {
+                "number": "02",
+                "title": "Create equal opportunities",
+                "description": "Help make clean water, education, and essential healthcare accessible to everyone."
+            },
+            {
+                "number": "03",
+                "title": "Build lasting change",
+                "description": "Support community-led solutions that make a meaningful difference for generations."
+            }
+        ]
+    },
+    "vision": {
+        "eyebrow": "OUR VISION",
+        "titleStart": "A world where",
+        "titleAccent": "everyone thrives.",
+        "description": "We envision a future where every community has access to clean water, quality education, and essential healthcare. A future built on dignity, opportunity, and collective progress.",
+        "image": {
+            "src": "/img-4.jpg",
+            "alt": "Community members working together toward a brighter future"
+        },
+        "tag": "THE FUTURE WE BELIEVE IN",
+        "highlights": [
+            {
+                "number": "01",
+                "title": "A healthier world",
+                "description": "Communities where clean water and essential healthcare are accessible to all."
+            },
+            {
+                "number": "02",
+                "title": "Equal opportunities",
+                "description": "A future where every child can learn, grow, and reach their potential."
+            },
+            {
+                "number": "03",
+                "title": "Sustainable communities",
+                "description": "Locally driven solutions that create lasting progress for generations."
+            }
+        ],
+        "linkText": "Explore our programs",
+        "linkTo": "/our-program"
+    },
+    "joinMission": {
+        "eyebrow": "08 / BE PART OF THE CHANGE",
+        "titleStart": "The future is",
+        "titleAccent": "ours to build.",
+        "description": "Every meaningful change starts with someone who cares. Bring your time, skills, or support to help communities build a healthier, more hopeful future.",
+        "image": {
+            "src": "/img-2.jpg",
+            "alt": "Volunteers working together to create positive change in their community"
+        },
+        "imageCaption": "Change begins when we come together.",
+        "primaryButton": {
+            "text": "",
+            "link": ""
+        },
+        "secondaryButton": {
+            "text": "Support our work",
+            "link": "#"
+        },
+        "bottomNote": "YOUR TIME. YOUR VOICE. YOUR IMPACT.",
+        "footerText": "Together, we can make a difference that lasts."
+    }
+}

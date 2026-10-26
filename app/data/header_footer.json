@@ -1,0 +1,124 @@
+{
+  "header": {
+    "logo": {
+      "src": "/logo-1.png",
+      "alt": "logo.png"
+    },
+    "navItems": [
+      {
+        "label": "About",
+        "linkTo": "/about"
+      },
+      {
+        "label": "Our Cause",
+        "linkTo": "/our-cause"
+      },
+      {
+        "label": "Programs",
+        "linkTo": "/our-program"
+      },
+      {
+        "label": "Blog",
+        "linkTo": "/blog"
+      },
+      {
+        "label": "Gallery",
+        "linkTo": "/our-gallery"
+      },
+      {
+        "label": "Team's",
+        "linkTo": "/our-team"
+      }
+    ],
+    "btnText": "Contact Now",
+    "linkToBtn": "/contact-us"
+  },
+  "footer": {
+    "logo": {
+      "src": "/logo-1.png",
+      "alt": "WKX Foundation"
+    },
+    "about": "WKX Foundation brings clean water, schooling and healthcare to communities that have been left waiting. Every rupee is tracked and reported.",
+    "cta": {
+      "title": "Your gift can change",
+      "titleAccent": "one life today",
+      "text": "Give once or every month. Every donation is matched to a project, and you can follow where it goes.",
+      "btnText": "Donate now",
+      "linkTo": "#"
+    },
+    "newsletter": {
+      "title": "Get field updates",
+      "placeholder": "Your email address",
+      "btnText": "Subscribe",
+      "successText": "Thanks for subscribing. Check your inbox to confirm."
+    },
+    "columns": [
+      {
+        "title": "Explore",
+        "links": [
+          {
+            "label": "About us",
+            "linkTo": "/about"
+          },
+          {
+            "label": "Programs",
+            "linkTo": "/our-program"
+          },
+          {
+            "label": "Causes",
+            "linkTo": "/our-cause"
+          },
+          {
+            "label": "Blog",
+            "linkTo": "/blog"
+          }
+        ]
+      }
+      
+    ],
+    "contact": {
+      "title": "Contact",
+      "address": "12 Foundation Road, New Delhi 110001",
+      "email": "hello@wkxfoundation.org",
+      "phone": "+91 00000 00000"
+    },
+    "socials": [
+      {
+        "label": "Facebook",
+        "linkTo": "https://facebook.com"
+      },
+      {
+        "label": "Instagram",
+        "linkTo": "https://instagram.com"
+      },
+      {
+        "label": "X",
+        "linkTo": "https://x.com"
+      },
+      {
+        "label": "YouTube",
+        "linkTo": "https://youtube.com"
+      },
+      {
+        "label": "LinkedIn",
+        "linkTo": "https://linkedin.com"
+      }
+    ],
+    "copyright": "© 2026 WKX Foundation. All rights reserved.",
+    "legalLinks": [
+      {
+        "label": "Privacy policy",
+        "linkTo": "/privacy"
+      },
+      {
+        "label": "Terms of use",
+        "linkTo": "/terms"
+      }
+    ],
+    "wordmark": ""
+  },
+  "donetionBtn": {
+    "btntext": "Donate",
+    "linkTo": "#"
+  }
+}
