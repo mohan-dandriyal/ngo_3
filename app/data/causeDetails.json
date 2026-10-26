@@ -23,9 +23,6 @@
         "We drill deep-bore hand pumps close to where families live and add a filtration unit at each site. A trained committee of villagers owns the pump, collects a small monthly fee and fixes faults, so the water keeps flowing long after we leave.",
         "Each village is mapped, tested before and after, and tracked publicly on this page."
       ],
-  
-    
-     
       "updates": [
         {
           "date": "2026-10-12",
@@ -39,9 +36,18 @@
         }
       ],
       "team": [
-        { "name": "Project lead (add name)", "role": "Oversees drilling and installation" },
-        { "name": "Water engineer (add name)", "role": "Site checks and water quality testing" },
-        { "name": "Community organiser (add name)", "role": "Works with village committees" }
+        {
+          "name": "Project lead (add name)",
+          "role": "Oversees drilling and installation"
+        },
+        {
+          "name": "Water engineer (add name)",
+          "role": "Site checks and water quality testing"
+        },
+        {
+          "name": "Community organiser (add name)",
+          "role": "Works with village committees"
+        }
       ],
       "faqs": [
         {
@@ -58,7 +64,6 @@
         }
       ]
     },
-
     "school-for-every-child": {
       "location": "Rural districts of Bihar and Uttar Pradesh",
       "story": [
@@ -66,8 +71,6 @@
         "This campaign covers those basics, so a child can stay in class. We work with local schools, who tell us which children are most at risk of leaving.",
         "Attendance is tracked each term and shared here."
       ],
-     
-     
       "milestones": [
         {
           "title": "Partner schools signed up",
@@ -94,7 +97,6 @@
           "status": "upcoming"
         }
       ],
-
       "updates": [
         {
           "date": "2026-10-05",
@@ -102,7 +104,6 @@
           "body": "Teachers report fewer absences since meals started. We will publish the numbers once the term closes."
         }
       ],
-     
       "faqs": [
         {
           "question": "How are children chosen?",
@@ -114,7 +115,6 @@
         }
       ]
     },
-
     "health-camps-on-wheels": {
       "location": "Remote blocks of Odisha and Jharkhand",
       "story": [
@@ -122,18 +122,7 @@
         "Our mobile clinics visit each village on a fixed schedule with a nurse, basic diagnostics and a stock of essential medicines. Patients who need more are referred to the nearest hospital, and we follow up.",
         "You can see each clinic's route and the number of patients seen in the updates below."
       ],
-      "highlights": [
-        { "label": "Mobile clinics", "value": "3" },
-        { "label": "Villages covered", "value": "60" },
-        { "label": "Visit frequency", "value": "every 2 weeks" },
-        { "label": "Patients seen so far", "value": "over 9,000" }
-      ],
-      "fundsUse": [
-        { "label": "Medicines and diagnostics", "percent": 40 },
-        { "label": "Nurses and drivers", "percent": 35 },
-        { "label": "Vehicle running costs", "percent": 15 },
-        { "label": "Referrals and follow-up", "percent": 10 }
-      ],
+   
       "milestones": [
         {
           "title": "Clinic 1 and 2 on the road",
@@ -154,17 +143,6 @@
           "status": "upcoming"
         }
       ],
-      "updates": [
-        {
-          "date": "2026-10-18",
-          "title": "Third clinic begins test runs",
-          "body": "The new vehicle has started its first routes. Full service begins once the staff induction is complete."
-        }
-      ],
-      "team": [
-        { "name": "Medical officer (add name)", "role": "Oversees care and referrals" },
-        { "name": "Lead nurse (add name)", "role": "Runs the clinics day to day" }
-      ],
       "faqs": [
         {
           "question": "Is care free for patients?",
@@ -176,25 +154,13 @@
         }
       ]
     },
-
     "skills-for-steady-incomes": {
       "location": "Peri-urban areas around Lucknow and Kanpur",
       "story": [
         "A skill, a few tools and a small grant can change what a family earns. Many women and young people here have the ability to start a business but not the starting capital.",
         "Participants complete a short training course, choose a trade such as tailoring, repairs or food preparation, and receive a starter kit and a small grant. A mentor checks in for six months."
       ],
-      "highlights": [
-        { "label": "Participants", "value": "300" },
-        { "label": "Training length", "value": "8 weeks" },
-        { "label": "Mentoring", "value": "6 months" },
-        { "label": "Starter grant", "value": "up to ₹15,000" }
-      ],
-      "fundsUse": [
-        { "label": "Starter kits and grants", "percent": 50 },
-        { "label": "Training", "percent": 25 },
-        { "label": "Mentoring", "percent": 15 },
-        { "label": "Programme management", "percent": 10 }
-      ],
+    
       "milestones": [
         {
           "title": "First cohort of 60 enrolled",
@@ -215,17 +181,6 @@
           "status": "upcoming"
         }
       ],
-      "updates": [
-        {
-          "date": "2026-09-20",
-          "title": "Training begins for the first cohort",
-          "body": "Sixty participants started classes this week, and tailoring is the most popular trade."
-        }
-      ],
-      "team": [
-        { "name": "Livelihoods lead (add name)", "role": "Designs training and selects trades" },
-        { "name": "Lead mentor (add name)", "role": "Supports each participant after launch" }
-      ],
       "faqs": [
         {
           "question": "Is the grant a loan?",
@@ -237,25 +192,13 @@
         }
       ]
     },
-    
     "rebuild-village-libraries": {
       "location": "Villages across Uttarakhand and Himachal Pradesh",
       "story": [
         "A quiet place with books can change how a child sees school. Many village libraries here have leaking roofs, empty shelves or have been closed for years.",
         "Volunteers and local carpenters repair each building, build shelves and stock age-appropriate books in Hindi and English. Every library is run by a local reading group that keeps it open."
       ],
-      "highlights": [
-        { "label": "Libraries", "value": "12" },
-        { "label": "Books per library", "value": "about 1,000" },
-        { "label": "Languages", "value": "Hindi and English" },
-        { "label": "Run by", "value": "local reading groups" }
-      ],
-      "fundsUse": [
-        { "label": "Repairs and shelving", "percent": 45 },
-        { "label": "Books", "percent": 40 },
-        { "label": "Reading group training", "percent": 10 },
-        { "label": "Coordination", "percent": 5 }
-      ],
+   
       "milestones": [
         {
           "title": "First 4 libraries reopened",
@@ -276,16 +219,44 @@
           "status": "upcoming"
         }
       ],
-      "updates": [
+      "faqs": [
         {
-          "date": "2026-10-09",
-          "title": "Volunteers painted the shelves in Dhanaulti",
-          "body": "Twenty volunteers from the village spent a weekend on the library, which opens next week."
+          "question": "Who looks after the library afterwards?",
+          "answer": "A local reading group, trained by us, manages opening hours and lending."
+        },
+        {
+          "question": "Can I donate books instead of money?",
+          "answer": "Book donations are welcome through our team, so we can match titles to what each library needs."
         }
+      ]
+    },
+    "clean-water-for-villages": {
+      "location": "Villages across Uttarakhand and Himachal Pradesh",
+      "story": [
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, nesciunt. Vel nesciunt fugit suscipit incidunt sit deserunt voluptates magnam ex autem nostrum molestias illo laboriosam eaque placeat quae repellat vero deleniti necessitatibus fuga maiores, ab delectus? Labore sint error dolor, dolorum eligendi odio officiis, iusto sunt ab voluptatum deserunt necessitatibus.",
+
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, nesciunt. Vel nesciunt fugit suscipit incidunt sit deserunt voluptates magnam ex autem nostrum molestias illo laboriosam eaque placeat quae repellat vero deleniti necessitatibus fuga maiores, ab delectus? Labore sint error dolor, dolorum eligendi odio officiis, iusto sunt ab voluptatum deserunt necessitatibus."
       ],
-      "team": [
-        { "name": "Programme lead (add name)", "role": "Coordinates repairs and book supply" },
-        { "name": "Volunteer coordinator (add name)", "role": "Organises village work days" }
+     
+      "milestones": [
+        {
+          "title": "First 4 libraries reopened",
+          "description": "Repairs done, shelves built and books in place.",
+          "date": "Aug 2026",
+          "status": "done"
+        },
+        {
+          "title": "Libraries 5 to 8",
+          "description": "Roof repairs and shelving under way.",
+          "date": "Dec 2026",
+          "status": "current"
+        },
+        {
+          "title": "Final 4 libraries",
+          "description": "Repairs, books and reading group set-up.",
+          "date": "Apr 2027",
+          "status": "upcoming"
+        }
       ],
       "faqs": [
         {

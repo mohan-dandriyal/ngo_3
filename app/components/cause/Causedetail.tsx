@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronRight, Plus } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import {  ChevronRight } from "lucide-react";
 import type {
   Cause,
   CauseAmount,
@@ -45,50 +44,24 @@ const DEFAULT_AMOUNTS: CauseAmount[] = [
   { value: 5000 },
 ];
 
-const formatNumber = (n: number) => new Intl.NumberFormat("en-IN").format(n);
-
-// Fixed locale + UTC so server and browser render the same text
-const formatDate = (iso: string) =>
-  new Intl.DateTimeFormat("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(iso));
-
 const percentOf = (raised: number, goal: number) =>
   goal > 0 ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
 
 export default function CauseDetail({
   cause,
   related,
-  details,
-  detailLabels,
-  currencySymbol,
   breadcrumbRoot,
-  labels,
   grid,
-  cta,
 }: CauseDetailProps) {
-  const reduceMotion = useReducedMotion();
   const amounts = cause.amounts?.length ? cause.amounts : DEFAULT_AMOUNTS;
 
-  const [selected, setSelected] = useState<number | null>(
+  const [selected] = useState<number | null>(
     amounts[1]?.value ?? amounts[0].value
   );
-  const [custom, setCustom] = useState("");
-  const [daysLeft, setDaysLeft] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!cause.endDate) return;
-
-    const msLeft = new Date(cause.endDate).getTime() - Date.now();
-    setDaysLeft(Math.max(0, Math.ceil(msLeft / 86_400_000)));
-  }, [cause.endDate]);
+  const [custom] = useState("");
 
   const customValue = Number(custom);
   const hasCustom = custom !== "" && customValue > 0;
-  const finalAmount = hasCustom ? customValue : selected;
 
 
   return (
@@ -144,93 +117,7 @@ export default function CauseDetail({
               {cause.description}
             </p>
 
-            {details && (
-              <div className="mt-14 space-y-12 md:mt-15 md:space-y-16">
-                {/* Story */}
-                <Section title={detailLabels.storyTitle}>
-                  <div className="max-w-2xl space-y-5 text-base leading-8 text-[#B9B5AC] md:text-lg">
-                    {details.story.map((paragraph, i) => (
-                      <p key={i}>{paragraph}</p>
-                    ))}
-                  </div>
-                  <p className="mt-6 text-sm text-[#B9B5AC]">
-                    {detailLabels.locationLabel}:{" "}
-                    <span className="text-[#EAE3D6]">{details.location}</span>
-                  </p>
-                </Section>
-
-             
-
-              
-
-                {/* Milestones */}
-                {details.milestones.length > 0 && (
-                  <Section title={detailLabels.milestonesTitle}>
-                    <ol className="relative ml-2 border-l border-white/15">
-                      {details.milestones.map((m) => (
-                        <li
-                          key={m.title}
-                          className="relative pb-9 pl-8 last:pb-0"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className={`absolute -left-[8px] top-1.5 h-4 w-4 rounded-full border-2 ${
-                              m.status === "done"
-                                ? "border-[#EE503B] bg-[#EE503B]"
-                                : m.status === "current"
-                                ? "border-[#EE503B] bg-[#0A0B09]"
-                                : "border-white/25 bg-[#0A0B09]"
-                            }`}
-                          />
-                          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                            <h3 className="font-serif text-xl">{m.title}</h3>
-                            <span className="text-xs text-[#B9B5AC]">
-                              {m.date}
-                            </span>
-                          </div>
-                          <p className="mt-2 max-w-xl text-sm leading-7 text-[#B9B5AC]">
-                            {m.description}
-                          </p>
-                          <p
-                            className={`mt-2 text-xs ${
-                              m.status === "current"
-                                ? "text-[#EE503B]"
-                                : "text-[#B9B5AC]"
-                            }`}
-                          >
-                            {detailLabels.milestoneStatus[m.status]}
-                          </p>
-                        </li>
-                      ))}
-                    </ol>
-                  </Section>
-                )}
-
-
-                {/* FAQ */}
-                {details.faqs.length > 0 && (
-                  <Section title={detailLabels.faqTitle}>
-                    <div className="divide-y divide-white/10 border-y border-white/10">
-                      {details.faqs.map((faq) => (
-                        <details key={faq.question} className="group py-5">
-                          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-serif text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EE503B] [&::-webkit-details-marker]:hidden">
-                            {faq.question}
-                            <Plus
-                              size={18}
-                              aria-hidden="true"
-                              className="shrink-0 text-[#B9B5AC] transition-transform duration-300 group-open:rotate-45"
-                            />
-                          </summary>
-                          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#B9B5AC]">
-                            {faq.answer}
-                          </p>
-                        </details>
-                      ))}
-                    </div>
-                  </Section>
-                )}
-              </div>
-            )}
+          
           </div>
         </div>
 

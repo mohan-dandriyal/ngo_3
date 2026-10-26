@@ -98,6 +98,20 @@
       "btnText" : "Explore",
       "linkTo": "/our-cause/cause-health-camps-on-wheels"
     },
+     {
+      "slug": "Clean-water-for-villages",
+      "category": "Water",
+      "title": "Clean water for villages",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+      "image": "/img-1.jpg",
+      "imageAlt": "A nurse examining a patient at a mobile clinic",
+      "raised": 905000,
+      "goal": 1200000,
+      "supporters": 931,
+      "currency": "INR",
+      "btnText" : "Explore",
+      "linkTo": "/our-cause/Clean-water-for-villages"
+    },
     {
       "slug": "skills-for-steady-incomes",
       "category": "Livelihoods",

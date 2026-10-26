@@ -111,25 +111,7 @@ export default function Hero({ data }: HeroContent) {
                   {primaryBtn.text}
                 </PrimaryButton>
               )}
-              {secondaryBtn?.text && (
-                <Link
-                  href={secondaryBtn.linkTo || "#"}
-                  className="group relative inline-flex items-center gap-2.5 pb-1.5 text-[15px] text-[#ece6da]
-                           transition-colors hover:text-white
-                           after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-[#bdb7aa]/50
-                           before:absolute before:bottom-0 before:left-0 before:z-10 before:h-px before:w-full before:origin-left
-                           before:scale-x-0 before:bg-[#e9a26b] before:transition-transform before:duration-500
-                           hover:before:scale-x-100
-                           focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-                >
-                  {secondaryBtn.text}
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-                    strokeLinejoin="round" aria-hidden="true"
-                    className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5">
-                    <path d="M3 3l6 6M9 3.5V9H3.5" />
-                  </svg>
-                </Link>
-              )}
+          
             </motion.div>
           </motion.div>
 
@@ -166,17 +148,7 @@ export default function Hero({ data }: HeroContent) {
               )}
               <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/70 to-transparent" aria-hidden="true" />
 
-              {/* Caption */}
-              <motion.figcaption
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 1.5 }}
-                className="absolute inset-x-6 bottom-5 flex items-center justify-between text-[11px] font-medium
-                         uppercase tracking-[0.12em] text-[#ece6da]"
-              >
-                <span>{image?.counter}</span>
-                <span>{image?.location}</span>
-              </motion.figcaption>
+          
             </motion.figure>
 
             {/* Badge sits outside the figure so the reveal mask does not clip it */}

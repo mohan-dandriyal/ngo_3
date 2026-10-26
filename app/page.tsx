@@ -13,7 +13,13 @@ import HomeTestimonials from './components/home/Hometestimonials';
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <Hero data={home.hero} />
+      <Hero
+        data={{
+          ...home.hero,
+          secondaryBtn: { text: 'Explore Programs', linkTo: '/programs' },
+          image: { ...home.hero.image, counter: '01', location: '' },
+        }}
+      />
 
       <div className='bg-[#e8e1d5] w-full'>
         <HomeAbout data={home.homeAbout} />
@@ -23,6 +29,7 @@ export default function Home() {
         <HomePrograms
           data={{
             ...home.homePrograms,
+            meta: '',
             programs: home.homePrograms.programs.map((program) => ({
               ...program,
               linkText: 'Learn more',
@@ -55,3 +62,5 @@ export default function Home() {
     </div>
   );
 }
+
+

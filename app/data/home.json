@@ -8,7 +8,6 @@
             "text": "Our story",
             "linkTo": "/about"
         },
-       
         "image": {
             "src": "/img-3.jpg",
             "alt": "Graffiti on a street utility box reading Be the Change"
@@ -81,7 +80,7 @@
                 "image": "/img-1.jpg",
                 "imageAlt": "Villagers collecting water from a new pump",
                 "linkText": "Explore",
-                "linkTo": "/our-cause/clean-water-for-villages"
+                "linkTo": "/our-cause/Clean-water-for-villages"
             },
             {
                 "title": "Health camps on wheels",

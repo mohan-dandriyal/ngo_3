@@ -73,24 +73,6 @@ export function ProgramCard({ program }: ProgramCardProps) {
         </h3>
         <p className={`mt-4 max-w-sm text-[15px] leading-relaxed ${t.desc}`}>{program.description}</p>
 
-        <a
-          href={program.linkTo || "#"}
-          className={`group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
-                      ${t.link} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current`}
-        >
-          {program.linkText || "Explore"}
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-            strokeLinejoin="round" aria-hidden="true"
-            className="h-3 w-3 transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">
-            <path d="M3 11L11 3M4.5 3H11v6.5" />
-          </svg>
-          {/* Underline draws in when the card is hovered */}
-          <span
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform
-                       duration-500 ease-out group-hover:scale-x-100"
-          />
-        </a>
       </div>
     </motion.article>
   );

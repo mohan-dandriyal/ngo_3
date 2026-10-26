@@ -10,7 +10,7 @@ type PageProps = {
 };
 
 const causes = data.causes as Cause[];
-const detailsBySlug = extra.details as Record<string, CauseDetails>;
+const detailsBySlug = extra.details as unknown as Record<string, CauseDetails>;
 
 export function generateStaticParams() {
   return causes.map((cause) => ({ slug: cause.slug }));
@@ -40,6 +40,8 @@ export default async function CauseDetailPage({ params }: PageProps) {
   const cause = causes.find((c) => c.slug === slug);
 
   if (!cause) notFound();
+
+  console.log('slug --------', slug)
 
   // Same-category causes first, then the rest
   const related = causes
