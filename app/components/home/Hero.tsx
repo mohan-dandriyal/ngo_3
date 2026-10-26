@@ -177,7 +177,7 @@ export default function Hero({ data }: HeroContent) {
               )}
             </motion.div>
 
-
+         
           </motion.div>
 
           {/* RIGHT: Image slider */}
@@ -237,34 +237,35 @@ export default function Hero({ data }: HeroContent) {
                     transition={{ duration: 0.35 }}
                     className="absolute bottom-6 left-6 z-10 border-l-2 border-[#a8c686] pl-4"
                   >
-                    {/* Slide counter */}
-                    {slideCount > 1 && (
-                      <div className="mt-12 flex items-center gap-4">
-                        <span className="font-mono text-sm text-[#a8c686]">
-                          {String(activeIndex + 1).padStart(2, "0")}
-                        </span>
+                     {/* Slide counter */}
+            {slideCount > 1 && (
+              <div className="mt-12 flex items-center gap-4">
+                <span className="font-mono text-sm text-[#a8c686]">
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
 
-                        <div className="flex gap-2">
-                          {images.map((item, index) => (
-                            <button
-                              key={`${item.src}-${index}`}
-                              type="button"
-                              aria-label={`Show slide ${index + 1}`}
-                              aria-pressed={activeIndex === index}
-                              onClick={() => setActiveIndex(index)}
-                              className={`h-[3px] transition-all duration-300 ${activeIndex === index
-                                  ? "w-10 bg-[#a8c686]"
-                                  : "w-5 bg-[#ece6da]/25 hover:bg-[#ece6da]/60"
-                                }`}
-                            />
-                          ))}
-                        </div>
+                <div className="flex gap-2">
+                  {images && images.map((item: { src: string }, index: number) => (
+                    <button
+                      key={`${item.src}-${index}`}
+                      type="button"
+                      aria-label={`Show slide ${index + 1}`}
+                      aria-pressed={activeIndex === index}
+                      onClick={() => setActiveIndex(index)}
+                      className={`h-[3px] transition-all duration-300 ${
+                        activeIndex === index
+                          ? "w-10 bg-[#a8c686]"
+                          : "w-5 bg-[#ece6da]/25 hover:bg-[#ece6da]/60"
+                      }`}
+                    />
+                  ))}
+                </div>
 
-                        <span className="font-mono text-sm text-[#ece6da]/50">
-                          {String(slideCount).padStart(2, "0")}
-                        </span>
-                      </div>
-                    )}
+                <span className="font-mono text-sm text-[#ece6da]/50">
+                  {String(slideCount).padStart(2, "0")}
+                </span>
+              </div>
+            )}
                   </motion.div>
                 </AnimatePresence>
               )}

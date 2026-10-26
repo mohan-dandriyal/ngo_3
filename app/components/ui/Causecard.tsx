@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { animate, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
-import { causeItem } from "@/app/types/home";
 import Link from "next/link";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
@@ -50,7 +49,20 @@ function CountUp({ value, format }: { value: number; format: (n: number) => stri
 
 
 
-export function CauseCard({ causeItem }: { causeItem: causeItem }) {
+type CauseItem = {
+  goal?: number;
+  raised?: number;
+  currency?: string;
+  image: string;
+  imageAlt?: string;
+  category?: string;
+  title: string;
+  description: string;
+  linkTo?: string;
+  linkText?: string;
+};
+
+export function CauseCard({ causeItem }: { causeItem: CauseItem }) {
   const [imgFailed, setImgFailed] = useState<boolean>(false);
 
   const goal = causeItem.goal || 0;
@@ -68,7 +80,7 @@ export function CauseCard({ causeItem }: { causeItem: causeItem }) {
       variants={cardVariants}
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className="group flex flex-col overflow-hidden border border-[#14110c]/10 bg-[#f3eee4]
+      className="group flex flex-col overflow-hidden border border-[#14110c]/10 bg-[#161a17]
                  transition-shadow duration-500 hover:shadow-[0_30px_50px_-28px_rgba(20,17,12,0.5)]"
     >
       {/* Image */}
@@ -98,10 +110,10 @@ export function CauseCard({ causeItem }: { causeItem: causeItem }) {
 
       {/* Body */}
       <div className="flex flex-1 flex-col px-7 pb-9 pt-8">
-        <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[32px] font-medium leading-[1.1] text-[#14110c]">
+        <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[32px] font-medium leading-[1.1] text-[#efefef]">
           {causeItem.title}
         </h3>
-        <p className="mt-4 text-[15px] leading-relaxed text-[#5a544c]">{causeItem.description}</p>
+        <p className="mt-4 text-[15px] leading-relaxed text-[#bdbdbd]">{causeItem.description}</p>
 
         {/* Progress */}
         {goal > 0 && (
@@ -139,30 +151,33 @@ export function CauseCard({ causeItem }: { causeItem: causeItem }) {
           </div>
         )}
 
-        <Link
-          href={causeItem.linkTo || "#"}
-          className="group/btn relative mt-8 inline-flex items-center justify-between gap-5 self-start overflow-hidden
+        {
+          causeItem.linkTo &&
+          <Link
+            href={causeItem.linkTo || "#"}
+            className="group/btn relative mt-8 inline-flex items-center justify-between gap-5 self-start overflow-hidden
                      bg-[#14110c] px-6 py-4 text-[15px] font-medium tracking-[0.01em] text-[#f1ece1]
                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-        >
-          {/* Red fill sweeps in on hover */}
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 -translate-x-full bg-[#e0503a] transition-transform duration-500 ease-out
-                       group-hover/btn:translate-x-0 motion-reduce:transition-none"
-          />
-          <span className="relative transition-colors duration-300 group-hover/btn:text-[#14110c]">
-            {causeItem.linkText || "Donate to this cause"}
-          </span>
-          <svg
-            viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-            strokeLinejoin="round" aria-hidden="true"
-            className="relative h-3.5 w-3.5 transition-all duration-300 group-hover/btn:-translate-y-0.5
-                       group-hover/btn:translate-x-0.5 group-hover/btn:text-[#14110c]"
           >
-            <path d="M3 11L11 3M4.5 3H11v6.5" />
-          </svg>
-        </Link>
+            {/* Red fill sweeps in on hover */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 -translate-x-full bg-[#e0503a] transition-transform duration-500 ease-out
+                       group-hover/btn:translate-x-0 motion-reduce:transition-none"
+            />
+            <span className="relative transition-colors duration-300 group-hover/btn:text-[#14110c]">
+              {causeItem.linkText || "Donate to this cause"}
+            </span>
+            <svg
+              viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
+              strokeLinejoin="round" aria-hidden="true"
+              className="relative h-3.5 w-3.5 transition-all duration-300 group-hover/btn:-translate-y-0.5
+                       group-hover/btn:translate-x-0.5 group-hover/btn:text-[#14110c]"
+            >
+              <path d="M3 11L11 3M4.5 3H11v6.5" />
+            </svg>
+          </Link>
+        }
       </div>
     </motion.article>
   );

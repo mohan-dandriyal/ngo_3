@@ -1,3 +1,8 @@
+export type HeroImage = {
+  src: string;
+  alt: string;
+  badge?: string;
+};
 
 export type HeroContent = {
   data: {
@@ -5,140 +10,23 @@ export type HeroContent = {
     titleLight: string;
     titleAccent: string;
     description: string;
+
     primaryBtn: {
       text: string;
       linkTo: string;
     };
-    secondaryBtn: {
+
+    secondaryBtn?: {
       text: string;
       linkTo: string;
     };
-    image: {
-      src: string;
-      alt: string;
-      counter: string;
-      location: string;
+
+    // Right-side image slider
+    images: HeroImage[];
+
+    slider?: {
+      autoplay?: boolean;
+      interval?: number;
     };
-    badge: string;
-  }
-};
-
-export type HomeAboutContent = {
-  data: {
-    eyebrow: string;
-    titleLight: string;
-    titleAccent: string;
-    description: string;
-    linkText: string;
-    linkTo: string;
-  }
-};
-
-export type HomeProgramsContent = {
-  data: {
-    eyebrow: string;
-    titleStart: string;
-    titleAccent: string;
-    titleEnd: string;
-    meta: string;
-    programs: {
-      title: string;
-      description: string;
-      image: string;
-      imageAlt: string;
-      theme: string;
-      linkText: string;
-      linkTo: string;
-    }[];
-    button: {
-      label: string;
-      href: string;
-    };
-  }
-};
-
-export type Program = {
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  theme: string;
-  linkText: string;
-  linkTo: string;
-};
-
-export type themes = {
-
-  card: string;
-  title: string;
-  desc: string;
-  link: string;
-}
-
-
-export type causeItem = {
-  title: string;
-  description: string;
-  category?: string;
-  image: string;
-  imageAlt?: string;
-  raised: number;
-  goal: number;
-  currency?: string;
-  linkText?: string;
-  linkTo?: string;
-};
-
-export type HomeCausesContent = {
-  data: {
-    eyebrow: string;
-    titleStart: string;
-    titleAccent: string;
-    titleEnd: string;
-    description: string;
-    linkText: string;
-    linkTo: string;
-    causeItem: causeItem[];
-  }
-};
-
-export type Post = {
-  title: string;
-  excerpt?: string;
-  category?: string;
-  date?: string;
-  readTime?: string;
-  image: string;
-  imageAlt?: string;
-  linkTo?: string;
-};
-
-export type HomeBlogContent = {
-  data: {
-    eyebrow?: string;
-    titleStart: string;
-    titleAccent: string;
-    titleEnd?: string;
-    linkText?: string;
-    linkTo?: string;
-    posts: Post[];
-  };
-};
-
-export type Testimonial = {
-  quote: string;
-  name: string;
-  role?: string;
-  image?: string;
-  imageAlt?: string;
-};
-
-export type HomeTestimonialsContent = {
-  data: {
-    eyebrow?: string;
-    titleStart: string;
-    titleAccent: string;
-    titleEnd?: string;
-    testimonials: Testimonial[];
   };
 };

@@ -2,10 +2,21 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { CauseCard } from "@/app/components/ui/Causecard";
-import { HomeCausesContent } from "@/app/types/home";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import MainContainer from "../ui/MainContainer";
 import Link from "next/link";
+import type { ComponentProps } from "react";
+
+type HomeCausesContent = {
+    data: Pick<ComponentProps<typeof Eyebrow>, "eyebrow">
+        & Pick<ComponentProps<typeof SectionTitle>, "titleStart" | "titleAccent" | "titleEnd">
+        & {
+            description?: string;
+            linkText?: string;
+            linkTo?: string;
+            causeItem?: NonNullable<ComponentProps<typeof CauseCard>["causeItem"]>[];
+        };
+};
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 

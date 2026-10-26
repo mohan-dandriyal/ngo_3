@@ -17,7 +17,7 @@ export default function Home() {
         data={{
           ...home.hero,
           secondaryBtn: { text: 'Explore Programs', linkTo: '/programs' },
-          image: { ...home.hero.image, counter: '01', location: '' },
+          images: home.hero.images.map((image) => ({ ...image, counter: '01', location: '' })),
         }}
       />
 
