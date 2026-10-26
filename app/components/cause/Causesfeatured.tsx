@@ -67,9 +67,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
     const y = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -36, reduce ? 0 : 36]);
 
-    const donateHref = chosen
-        ? `${cause.linkTo}${cause.linkTo.includes("?") ? "&" : "?"}amount=${chosen.value}`
-        : cause.linkTo;
+  
 
     return (
         <section
@@ -162,7 +160,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
                     
                         <motion.div variants={fadeUp} className="mt-8">
                             <Link
-                                href={donateHref}
+                                href={cause.linkTo}
                                 className="group relative inline-flex items-center gap-4 overflow-hidden bg-[#e0503a] px-7 py-[18px]
                            text-[15px] font-semibold text-[#14110c] outline-none transition-shadow duration-300
                            hover:shadow-[0_10px_34px_-8px_rgba(224,80,58,0.7)]
