@@ -1,4 +1,3 @@
-import React from 'react'
 import AboutHero from '../components/aboutCom/AboutHero'
 import about from '@/app/data/about.json'
 import OurMission from '../components/aboutCom/OurMission'
@@ -15,7 +14,7 @@ function About() {
       </div>
 
       <div>
-        <OurVision data={about.vision} />
+        <OurVision data={{ ...about.vision, imageCaption: about.vision.image.alt }} />
       </div>
 
       {/* <div>

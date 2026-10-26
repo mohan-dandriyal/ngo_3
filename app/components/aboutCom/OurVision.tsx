@@ -39,10 +39,7 @@ const picture: Variants = {
   hidden: { scale: 1.2 },
   show: { scale: 1, transition: { duration: 2, ease } },
 };
-const caption: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease, delay: 0.9 } },
-};
+
 
 export default function OurVision({ data }: OurVisionProps) {
   const {

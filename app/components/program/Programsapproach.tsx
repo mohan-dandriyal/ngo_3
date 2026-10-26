@@ -1,9 +1,21 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { ProgramsApproachData } from "@/app/types/program";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
+
+interface ProgramsApproachStep {
+  number?: string;
+  title: string;
+  description: string;
+}
+
+interface ProgramsApproachData {
+  eyebrow?: string;
+  titleStart: string;
+  titleAccent: string;
+  steps?: ProgramsApproachStep[];
+}
 
 interface ProgramsApproachProps {
   data: ProgramsApproachData;
