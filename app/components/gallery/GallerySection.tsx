@@ -87,7 +87,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
           </p>
         </div>
 
-        <div
+        {/* <div
           className="mb-10 flex flex-wrap gap-2 md:mb-12"
           role="group"
           aria-label="Filter gallery by category"
@@ -111,7 +111,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
               </button>
             );
           })}
-        </div>
+        </div> */}
 
         {filteredItems.length > 0 ? (
           <motion.div

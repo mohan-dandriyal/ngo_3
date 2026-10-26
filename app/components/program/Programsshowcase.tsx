@@ -101,7 +101,7 @@ function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boo
             <div className="absolute inset-0 bg-[linear-gradient(160deg,#3b7a68,#0a0a09)]" aria-hidden="true" />
           )}
           {program.category && (
-            <span className="absolute bottom-5 left-5 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#e8c99a]">
+            <span className="absolute bottom-5 left-5 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#f0f0f0]">
               {program.category}
             </span>
           )}
@@ -119,21 +119,21 @@ function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boo
 
           <motion.h3
             variants={fadeUp}
-            className="mt-4 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(36px,4vw,60px)] font-medium leading-[1.04] tracking-[-0.015em]"
+            className="mt-4 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-white text-[clamp(36px,4vw,60px)] font-medium leading-[1.04] tracking-[-0.015em]"
           >
             {program.title}
           </motion.h3>
 
-          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#3d3830]">
+          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#e7e7e5]">
             {program.description}
           </motion.p>
 
           {/* Results */}
           {program.stats && program.stats.length > 0 && (
-            <motion.dl variants={fadeUp} className="mt-9 grid grid-cols-2 gap-6 border-y border-[#14110c]/15 py-7">
+            <motion.dl variants={fadeUp} className="mt-9 grid grid-cols-2 text-white gap-6 border-y border-[#14110c]/15 py-7">
               {program.stats.map((s) => (
                 <div key={s.label} className="flex flex-col-reverse">
-                  <dt className="mt-2 text-[14px] leading-snug text-[#5a544c]">{s.label}</dt>
+                  <dt className="mt-2 text-[14px] leading-snug text-[#dddbd7]">{s.label}</dt>
                   <dd className="m-0 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(38px,4vw,58px)] font-medium leading-none tracking-[-0.02em]">
                     {s.prefix}
                     <CountUp value={s.value} plain={s.plain} />
@@ -148,7 +148,7 @@ function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boo
           {program.highlights && program.highlights.length > 0 && (
             <ul className="mt-8 space-y-3.5">
               {program.highlights.map((h) => (
-                <motion.li key={h} variants={fadeUp} className="flex gap-4 text-[16px] leading-[1.6] text-[#14110c]">
+                <motion.li key={h} variants={fadeUp} className="flex gap-4 text-[16px] leading-[1.6] text-[#e5e4e1]">
                   <span aria-hidden="true" className="mt-[0.6em] h-2 w-2 flex-none rounded-full bg-[#e0503a]" />
                   {h}
                 </motion.li>
@@ -189,7 +189,7 @@ export default function ProgramsShowcase({ data, programs = [] }: ProgramsShowca
   return (
     <section
       id="programs"
-      className="w-full overflow-hidden bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <div className="pb-10 pt-20 lg:pb-16 lg:pt-[120px]">
@@ -201,12 +201,12 @@ export default function ProgramsShowcase({ data, programs = [] }: ProgramsShowca
             className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-20"
           >
             <div>
-              {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
-              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
+              {eyebrow && <Eyebrow eyebrow={eyebrow} />}
+              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} />
             </div>
             {description && (
               <div className="lg:pb-3">
-                <Description description={description} variant="body" tone="light" />
+                <Description description={description} variant="body" />
               </div>
             )}
           </motion.div>

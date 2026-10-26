@@ -123,7 +123,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
           </motion.div>
 
           {/* Category filter */}
-          {categories.length > 1 && (
+          {/* {categories.length > 1 && (
             <motion.div
               variants={fadeUp}
               initial={reduce ? false : "hidden"}
@@ -158,7 +158,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
                 );
               })}
             </motion.div>
-          )}
+          )} */}
 
           <motion.div
             layout
