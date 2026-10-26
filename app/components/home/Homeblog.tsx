@@ -2,10 +2,10 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { FeaturedPost, PostRow } from "@/app/components/ui/Blogcard";
-import { HomeBlogContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import Link from "next/link";
+import type { ComponentProps } from "react";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -17,18 +17,27 @@ const rise: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
-const rule: Variants = {
-  hidden: { scaleX: 0 },
-  show: { scaleX: 1, transition: { duration: 0.9, ease } },
-};
+
 const grid: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.16, delayChildren: 0.15 } },
 };
 
+type HomeBlogContent = {
+  data?: {
+    eyebrow?: string;
+    titleStart: string;
+    titleAccent: string;
+    titleEnd: string;
+    linkText?: string;
+    linkTo?: string;
+    posts?: ComponentProps<typeof FeaturedPost>["post"][];
+  };
+};
+
 export default function HomeBlog({ data }: HomeBlogContent) {
   const { eyebrow, titleStart, titleAccent, titleEnd, linkText, linkTo, posts } =
-    data ?? ({} as HomeBlogContent["data"]);
+    data ?? ({} as NonNullable<HomeBlogContent["data"]>);
   const reduce = useReducedMotion();
 
   const [featured, ...rest] = Array.isArray(posts) ? posts : [];

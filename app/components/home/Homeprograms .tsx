@@ -1,8 +1,8 @@
 "use client"
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import type { ComponentProps } from "react";
 import { ProgramCard } from "../ProgramCard";
-import { HomeProgramsContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import Link from "next/link";
@@ -25,6 +25,18 @@ const rise: Variants = {
 const grid: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
+};
+
+type HomeProgramsContent = {
+  data: {
+    eyebrow?: string;
+    titleStart: string;
+    titleAccent?: string;
+    titleEnd?: string;
+    meta?: string;
+    button: { href?: string; label: string };
+    programs?: ComponentProps<typeof ProgramCard>["program"][];
+  };
 };
 
 export default function HomePrograms({ data }: HomeProgramsContent) {

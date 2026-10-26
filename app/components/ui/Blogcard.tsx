@@ -4,7 +4,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { Post } from "@/app/types/home";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -37,6 +36,17 @@ function formatDate(date?: string) {
   return new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(d);
 }
 
+type Post = {
+  title: string;
+  category?: string;
+  date?: string;
+  readTime?: string;
+  image?: string;
+  imageAlt?: string;
+  linkTo?: string;
+  excerpt?: string;
+};
+
 function Meta({ post }: { post: Post }) {
   return (
     <p className="flex flex-wrap items-center gap-y-1 text-[13px] text-[#8f8a80]">
@@ -57,7 +67,7 @@ function Picture({ post, sizes }: { post: Post; sizes: string }) {
     <div className="h-full w-full bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
   ) : (
     <Image
-      src={post.image}
+      src={post.image ?? ""}
       alt={post.imageAlt || ""}
       fill
       sizes={sizes}

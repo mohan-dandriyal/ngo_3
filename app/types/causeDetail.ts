@@ -33,7 +33,7 @@ export type MilestoneStatus = "done" | "current" | "upcoming";
 
 export type CauseDetails = {
   location: string;
-  story: [{title : string, dis : string}];
+  story: string|[{title : string | undefined, dis : string | undefined}];
   highlights: { label: string; value: string }[];
   fundsUse: { label: string; percent: number }[];
   milestones: {

@@ -185,23 +185,34 @@ export default function CauseDetail({
               {/* Story: story is an array of { title, dis } objects */}
               {details.story?.length > 0 && (
                 <div id="story" className="space-y-12">
-                  {details && details.story.map((story, index) => (
-                    <Section
-                      key={`${cause.slug}-story-${index}`}
-                      title={story?.title || detailLabels.storyTitle}
-                    >
-                      <div className="space-y-5">
-                        {story?.dis && (
-                          <p
-                            key={`${cause.slug}-story-${index}-paragraph`}
-                            className="text-base leading-8 text-[#B9B5AC] md:text-lg"
-                          >
-                            {story.dis}
-                          </p>
-                        )}
-                      </div>
-                    </Section>
-                  ))}
+                  {(Array.isArray(details.story)
+                    ? details.story
+                    : [{ title: undefined, dis: details.story }]
+                  ).map((story, index: number) => {
+                    const paragraphs = Array.isArray(story?.dis)
+                      ? story.dis
+                      : story?.dis
+                        ? [story.dis]
+                        : [];
+
+                    return (
+                      <Section
+                        key={`${cause.slug}-story-${index}`}
+                        title={story?.title || detailLabels.storyTitle}
+                      >
+                        <div className="space-y-5">
+                          {paragraphs.map((paragraph: string, paragraphIndex: number) => (
+                            <p
+                              key={`${cause.slug}-story-${index}-paragraph-${paragraphIndex}`}
+                              className="text-base leading-8 text-[#B9B5AC] md:text-lg"
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+                      </Section>
+                    );
+                  })}
                 </div>
               )}
 

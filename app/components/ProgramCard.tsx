@@ -3,9 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
-
 const themes = {
   coral: { card: "bg-[#e0503a] border-[#e0503a]", title: "text-[#14110c]", desc: "text-[#14110c]/70", link: "text-[#14110c]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(224,80,58,0.7)]", fallback: "bg-[linear-gradient(160deg,#ef6e58,#9c2f1f)]" },
   green: { card: "bg-[#3b7a68] border-[#3b7a68]", title: "text-[#f1ece1]", desc: "text-[#f1ece1]/75", link: "text-[#f1ece1]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(59,122,104,0.8)]", fallback: "bg-[linear-gradient(160deg,#4f9a84,#1c3a31)]" },

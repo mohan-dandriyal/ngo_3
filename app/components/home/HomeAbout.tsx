@@ -1,7 +1,6 @@
 "use client"
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { HomeAboutContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
@@ -40,23 +39,17 @@ const underline: Variants = {
   show: { scaleX: 1, transition: { duration: 0.8, ease } },
 };
 
-function Words({ text, className = "" }: { text: string; className?: string }) {
-  return (
-    <>
-      {text.split(" ").filter(Boolean).map((w, i) => (
-        <span
-          key={`${w}-${i}`}
-          aria-hidden="true"
-          className="mr-[0.22em] inline-block overflow-hidden pb-[0.12em] pr-[0.06em] align-bottom"
-        >
-          <motion.span variants={word} className={`inline-block ${className}`}>
-            {w}
-          </motion.span>
-        </span>
-      ))}
-    </>
-  );
-}
+type HomeAboutContent = {
+  data: {
+    eyebrow?: string;
+    titleLight: string;
+    titleAccent: string;
+    description: string;
+    linkText?: string;
+    linkTo?: string;
+  };
+};
+
 
 export default function HomeAbout({ data }: HomeAboutContent) {
   const { eyebrow, titleLight, titleAccent, description, linkText, linkTo } = data;

@@ -4,7 +4,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
-import { HomeTestimonialsContent, Testimonial } from "@/app/types/home";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import MainContainer from "../ui/MainContainer";
 
@@ -19,16 +18,30 @@ const rise: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
-const rule: Variants = {
-  hidden: { scaleX: 0 },
-  show: { scaleX: 1, transition: { duration: 0.9, ease } },
-};
 
 /* Quote slides in from the direction of travel, and out the opposite way */
 const slide: Variants = {
   enter: (d: number) => ({ opacity: 0, x: d * 56 }),
   center: { opacity: 1, x: 0, transition: { duration: 0.7, ease } },
   exit: (d: number) => ({ opacity: 0, x: d * -56, transition: { duration: 0.35, ease: "easeIn" } }),
+};
+
+type Testimonial = {
+  name: string;
+  quote: string;
+  image?: string | null;
+  imageAlt?: string | null;
+  role?: string | null;
+};
+
+type HomeTestimonialsContent = {
+  data?: {
+    eyebrow?: string | null;
+    titleStart?: string | null;
+    titleAccent?: string | null;
+    titleEnd?: string | null;
+    testimonials?: Testimonial[] | null;
+  } | null;
 };
 
 function Avatar({ person }: { person: Testimonial }) {
@@ -62,7 +75,7 @@ function Avatar({ person }: { person: Testimonial }) {
 
 export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
   const { eyebrow, titleStart, titleAccent, titleEnd, testimonials } =
-    data ?? ({} as HomeTestimonialsContent["data"]);
+    data ?? {};
   const items = Array.isArray(testimonials) ? testimonials : [];
   const total = items.length;
 
@@ -108,9 +121,9 @@ export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
               )}
 
               <SectionTitle
-                titleStart={titleStart}
-                titleAccent={titleAccent}
-                titleEnd={titleEnd}
+                titleStart={titleStart ?? undefined}
+                titleAccent={titleAccent ?? undefined}
+                titleEnd={titleEnd ?? undefined}
                 tone={'dark'}
               />
               
