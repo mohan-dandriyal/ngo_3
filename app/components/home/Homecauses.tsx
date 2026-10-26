@@ -45,7 +45,7 @@ export default function HomeCauses({ data }: HomeCausesContent) {
             className="overflow-hidden bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#14110c]"
         >
             <MainContainer>
-                <div className="mx-auto py-20  lg:py-[120px]">
+                <div className="mx-auto py-20 lg:py-30">
                     {/* Heading */}
                     <motion.div
                         variants={headingContainer}

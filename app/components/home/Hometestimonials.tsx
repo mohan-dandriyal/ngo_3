@@ -105,7 +105,7 @@ export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
       `}</style>
 
       <MainContainer>
-      <div className="mx-auto py-20 lg:py-[130px]">
+      <div className="mx-auto py-20 lg:py-[50px]">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.9fr] lg:gap-24">
           {/* Heading and controls */}
           <motion.div

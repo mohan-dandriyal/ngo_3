@@ -25,7 +25,7 @@ export default function Home() {
         <HomeAbout data={home.homeAbout} />
       </div>
 
-      <div className='bg-[#0a0a09] w-full py-20'>
+      <div className='bg-[#0a0a09] w-full pt-20'>
         <HomePrograms
           data={{
             ...home.homePrograms,

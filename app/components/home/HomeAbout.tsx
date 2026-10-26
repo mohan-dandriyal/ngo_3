@@ -45,7 +45,7 @@ type HomeAboutContent = {
     titleLight: string;
     titleAccent: string;
     description: string;
-    linkText?: string;
+    linkText?: string
     linkTo?: string;
   };
 };
