@@ -1,10 +1,12 @@
-
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 import data from "@/app/data/causes.json";
 import extra from "@/app/data/causeDetails.json";
 import CauseDetail from "@/app/components/cause/Causedetail";
+import LoadingScreen from "@/app/components/ui/LoadingScreen";
+
 import type { Cause, CauseDetails } from "@/app/types/causeDetail";
 
 type PageProps = {
@@ -47,10 +49,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function CauseDetailPage({
-  params,
-}: PageProps) {
+async function CauseDetailContent({ params }: PageProps) {
   const { slug } = await params;
+
   const cause = causes.find((item) => item.slug === slug);
 
   if (!cause) {
@@ -83,5 +84,13 @@ export default async function CauseDetailPage({
       }}
       cta={data.cta}
     />
+  );
+}
+
+export default function CauseDetailPage({ params }: PageProps) {
+  return (
+    <Suspense fallback={<LoadingScreen />}>
+      <CauseDetailContent params={params} />
+    </Suspense>
   );
 }

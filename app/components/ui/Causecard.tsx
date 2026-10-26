@@ -151,33 +151,37 @@ export function CauseCard({ causeItem }: { causeItem: CauseItem }) {
           </div>
         )}
 
-        {
-          causeItem.linkTo &&
-          <Link
-            href={causeItem.linkTo || "#"}
+        {causeItem.linkTo && (
+          <div
             className="group/btn relative mt-8 inline-flex items-center justify-between gap-5 self-start overflow-hidden
-                     bg-[#14110c] px-6 py-4 text-[15px] font-medium tracking-[0.01em] text-[#f1ece1]
-                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+               bg-[#14110c] px-6 py-4 text-[15px] font-medium tracking-[0.01em] text-[#f1ece1]"
           >
-            {/* Red fill sweeps in on hover */}
+            {/* Hover background */}
             <span
               aria-hidden="true"
               className="absolute inset-0 -translate-x-full bg-[#e0503a] transition-transform duration-500 ease-out
-                       group-hover/btn:translate-x-0 motion-reduce:transition-none"
+                 group-hover/btn:translate-x-0 motion-reduce:transition-none"
             />
+
             <span className="relative transition-colors duration-300 group-hover/btn:text-[#14110c]">
-              {causeItem.linkText || "Donate to this cause"}
+              {causeItem.linkText || "View cause"}
             </span>
+
             <svg
-              viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-              strokeLinejoin="round" aria-hidden="true"
+              viewBox="0 0 14 14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
               className="relative h-3.5 w-3.5 transition-all duration-300 group-hover/btn:-translate-y-0.5
-                       group-hover/btn:translate-x-0.5 group-hover/btn:text-[#14110c]"
+                 group-hover/btn:translate-x-0.5 group-hover/btn:text-[#14110c]"
             >
               <path d="M3 11L11 3M4.5 3H11v6.5" />
             </svg>
-          </Link>
-        }
+          </div>
+        )}
       </div>
     </motion.article>
   );

@@ -76,12 +76,12 @@ function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabe
         <div>
           {
             cause.linkTo &&
-            <Link href={cause.linkTo || ""} className="group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
+            <span className="group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
                       text-[#f1ece1] hover:text-[#dc4d32] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" >
               {cause?.btnText}
 
               <ArrowUpRight />
-            </Link>
+            </span>
           }
         </div>
       </div>

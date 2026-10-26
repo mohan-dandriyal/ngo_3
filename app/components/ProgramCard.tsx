@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { Program } from "../types/home";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -13,9 +12,6 @@ const themes = {
   sand:  { card: "bg-[#e2c392] border-[#e2c392]", title: "text-[#14110c]", desc: "text-[#14110c]/70", link: "text-[#14110c]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(226,195,146,0.7)]", fallback: "bg-[linear-gradient(160deg,#f0d8b0,#a8864f)]" },
 };
 
-type ProgramCardProps = {
-  program: Program;
-};
 
 /* These names match the parent grid, so the grid's stagger drives each card */
 const cardVariants: Variants = {
@@ -31,6 +27,16 @@ const frameVariants: Variants = {
 const pictureVariants: Variants = {
   hidden: { scale: 1.25 },
   show: { scale: 1, transition: { duration: 1.6, ease, delay: 0.15 } },
+};
+
+type ProgramCardProps = {
+  program: {
+    image: string;
+    imageAlt?: string;
+    theme: string;
+    title: string;
+    description: string;
+  };
 };
 
 export function ProgramCard({ program }: ProgramCardProps) {

@@ -191,14 +191,14 @@ export default function CauseDetail({
                       title={story?.title || detailLabels.storyTitle}
                     >
                       <div className="space-y-5">
-                        {story?.dis.map((paragraph: string, paragraphIndex: number) => (
+                        {story?.dis && (
                           <p
-                            key={`${cause.slug}-story-${index}-paragraph-${paragraphIndex}`}
+                            key={`${cause.slug}-story-${index}-paragraph`}
                             className="text-base leading-8 text-[#B9B5AC] md:text-lg"
                           >
-                            {paragraph}
+                            {story.dis}
                           </p>
-                        ))}
+                        )}
                       </div>
                     </Section>
                   ))}
