@@ -76,7 +76,7 @@ export type themes = {
 }
 
 
-export type Cause = {
+export type causeItem = {
   title: string;
   description: string;
   category?: string;
@@ -98,15 +98,7 @@ export type HomeCausesContent = {
     description: string;
     linkText: string;
     linkTo: string;
-    causes: {
-      title: string;
-      description: string;
-      category: string;
-      image: string;
-      imageAlt: string;
-      linkText: string;
-      linkTo: string;
-    }[];
+    causeItem: causeItem[];
   }
 };
 

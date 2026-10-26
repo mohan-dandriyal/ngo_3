@@ -15,11 +15,11 @@ export type CauseItem = {
   endDate?: string; // YYYY-MM-DD, shown as days left on the featured cause
   amounts?: GiveAmount[];
   linkTo: string;
-  btnText : string
+  btnText: string
 };
 
 export type CausesHeroData = {
-            breadcrumb?: { label: string; linkTo?: string }[];
+  breadcrumb: { label: string; linkTo?: string }[];
   eyebrow?: string;
   titleStart: string;
   titleAccent: string;

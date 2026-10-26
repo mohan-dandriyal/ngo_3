@@ -54,7 +54,7 @@ export default function OurVision({ data }: OurVisionProps) {
     linkTo,
     image,
     tag,
-    caption: imageCaption,
+    imageCaption,
     highlights = [],
   } = data ?? ({} as Vision);
 
@@ -93,7 +93,7 @@ export default function OurVision({ data }: OurVisionProps) {
                   href={linkTo || "#"}
                   className="group relative inline-flex items-center gap-3 pb-2 text-sm text-[#ece6da]
                              transition-colors hover:text-white
-                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+                             focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                 >
                   {linkText}
                   <ArrowUpRight

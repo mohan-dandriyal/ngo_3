@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { animate, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
-import { Cause } from "@/app/types/home";
+import { causeItem } from "@/app/types/home";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
@@ -45,16 +45,16 @@ function CountUp({ value, format }: { value: number; format: (n: number) => stri
   return <span ref={ref}>{format(display)}</span>;
 }
 
-export function CauseCard({ cause }: { cause: Cause }) {
-  const [imgFailed, setImgFailed] = useState(!cause.image);
+export function CauseCard({ causeItem }: causeItem) {
+  const [imgFailed, setImgFailed] = useState(!causeItem.image);
 
-  const goal = cause.goal || 0;
-  const raised = cause.raised || 0;
+  const goal = causeItem.goal || 0;
+  const raised = causeItem.raised || 0;
   const pct = goal > 0 ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
 
   const money = new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: cause.currency || "INR",
+    currency: causeItem.currency || "INR",
     maximumFractionDigits: 0,
   });
 
@@ -71,8 +71,8 @@ export function CauseCard({ cause }: { cause: Cause }) {
         <motion.div variants={pictureVariants} className="absolute inset-0">
           {!imgFailed ? (
             <Image
-              src={cause.image}
-              alt={cause.imageAlt || ""}
+              src={causeItem.image}
+              alt={causeItem.imageAlt || ""}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               onError={() => setImgFailed(true)}
@@ -84,9 +84,9 @@ export function CauseCard({ cause }: { cause: Cause }) {
           )}
         </motion.div>
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent" aria-hidden="true" />
-        {cause.category && (
+        {causeItem.category && (
           <span className="absolute bottom-4 left-4 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium tracking-[0.02em] text-[#e8c99a]">
-            {cause.category}
+            {causeItem.category}
           </span>
         )}
       </motion.div>
@@ -94,9 +94,9 @@ export function CauseCard({ cause }: { cause: Cause }) {
       {/* Body */}
       <div className="flex flex-1 flex-col px-7 pb-9 pt-8">
         <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[32px] font-medium leading-[1.1] text-[#14110c]">
-          {cause.title}
+          {causeItem.title}
         </h3>
-        <p className="mt-4 text-[15px] leading-relaxed text-[#5a544c]">{cause.description}</p>
+        <p className="mt-4 text-[15px] leading-relaxed text-[#5a544c]">{causeItem.description}</p>
 
         {/* Progress */}
         {goal > 0 && (
@@ -118,7 +118,7 @@ export function CauseCard({ cause }: { cause: Cause }) {
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={pct}
-              aria-label={`${cause.title} funding progress`}
+              aria-label={`${causeItem.title} funding progress`}
               className="h-[6px] w-full overflow-hidden bg-[#14110c]/10"
             >
               <motion.div
@@ -135,7 +135,7 @@ export function CauseCard({ cause }: { cause: Cause }) {
         )}
 
         <a
-          href={cause.linkTo || "#"}
+          href={causeItem.linkTo || "#"}
           className="group/btn relative mt-8 inline-flex items-center justify-between gap-5 self-start overflow-hidden
                      bg-[#14110c] px-6 py-4 text-[15px] font-medium tracking-[0.01em] text-[#f1ece1]
                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
@@ -147,7 +147,7 @@ export function CauseCard({ cause }: { cause: Cause }) {
                        group-hover/btn:translate-x-0 motion-reduce:transition-none"
           />
           <span className="relative transition-colors duration-300 group-hover/btn:text-[#14110c]">
-            {cause.linkText || "Donate to this cause"}
+            {causeItem.linkText || "Donate to this cause"}
           </span>
           <svg
             viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"

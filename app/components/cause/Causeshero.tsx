@@ -42,26 +42,6 @@ const line: Variants = {
     show: { scaleX: 1, transition: { duration: 1, ease } },
 };
 
-function Words({ text }: { text: string }) {
-    return (
-        <>
-            {text
-                .split(" ")
-                .filter(Boolean)
-                .map((w, i) => (
-                    <span
-                        key={`${w}-${i}`}
-                        aria-hidden="true"
-                        className="mr-[0.22em] inline-block overflow-hidden pb-[0.12em] pr-[0.06em] align-bottom"
-                    >
-                        <motion.span variants={word} className="inline-block">
-                            {w}
-                        </motion.span>
-                    </span>
-                ))}
-        </>
-    );
-}
 
 export default function CausesHero({ data, stats }: CausesHeroProps) {
     const { eyebrow, breadcrumb, titleStart, titleAccent, description, primaryButton } = data ?? ({} as CausesHeroData);
@@ -89,7 +69,8 @@ export default function CausesHero({ data, stats }: CausesHeroProps) {
                     className="relative grid items-center gap-14 py-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20 lg:py-28"
                 >
                     <div>
-                        <BreadCrumb  breadcrumb={breadcrumb}/>
+                        <BreadCrumb  
+                        breadcrumb={breadcrumb}/>
                         {eyebrow && <Eyebrow eyebrow={eyebrow} />}
 
                         <HeroTitle titleStart={titleStart}

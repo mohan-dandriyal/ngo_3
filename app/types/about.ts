@@ -62,6 +62,7 @@ export interface Vision {
   highlights: VisionHighlight[];
   linkText: string;
   linkTo: string;
+  imageCaption : string
 }
 
 export interface JoinMissionImage {
