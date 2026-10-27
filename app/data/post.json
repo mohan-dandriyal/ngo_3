@@ -54,12 +54,13 @@
             "excerpt": "Before the pump, the morning walk for water took two hours. Now the classroom fills up before the first bell. Here is what changed, and what is next.",
             "category": "Water",
             "date": "2026-10-12",
-             "image": "/post-1.jpg",
+             "image": "/cause-2.webp",
             "imageAlt": "Children filling bottles at a new hand pump",
+            "blogDetailImage" : "post-1-1.png",
             "author": {
                 "name": "Priya Kapoor",
                 "role": "Communications",
-                "image": "/post-1.jpg"
+                "image": "/post-1-1.png"
             },
             "tags": [
                 "Clean water",
@@ -122,7 +123,8 @@
             "excerpt": "What began as one van and one nurse now visits eleven villages every month. A look back at the first thousand check-ups.",
             "category": "Health",
             "date": "2026-10-03",
-             "image": "/post-1.jpg",
+             "image": "/cause-5.webp",
+             "blogDetailImage" : "/cause-5.webp",
             "imageAlt": "A nurse greeting a patient outside the mobile clinic",
             "author": {
                 "name": "Dr. Meera Nair",
@@ -164,6 +166,7 @@
             "category": "Transparency",
             "date": "2026-09-24",
             "image": "/post-3.jpg",
+            "blogDetailImage" : "post-3.jpg",
             "imageAlt": "Volunteers sorting school supplies",
             "author": {
                 "name": "Karan Verma",
@@ -197,13 +200,14 @@
                 }
             ]
         },
-        {
+        {   
             "slug": "rampur-library",
             "title": "Meet the volunteers rebuilding the Rampur library",
             "excerpt": "Twelve volunteers, three weekends and a lot of paint. How a village library came back to life.",
             "category": "Education",
             "date": "2026-09-10",
             "image": "/img-3.jpg",
+            "blogDetailImage" : "/post-4-4.webp",
             "imageAlt": "Volunteers painting shelves in a village library",
             "author": {
                 "name": "Imran Sheikh",

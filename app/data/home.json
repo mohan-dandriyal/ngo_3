@@ -16,12 +16,12 @@
                     "badge": "People powered change"
                 },
                 {
-                    "src": "/img-4.jpg",
+                    "src": "/home-1.jpg",
                     "alt": "Volunteers supporting a local community",
                     "badge": "Stronger together"
                 },
                 {
-                    "src": "/img-6.jpg",
+                    "src": "/home-2.webp",
                     "alt": "Children learning in a community classroom",
                     "badge": "A brighter future"
                 }
@@ -48,7 +48,7 @@
             {
                 "title": "The Water Table",
                 "description": "Clean water, built to last by the people who need it most.",
-                "image": "/img-1.jpg",
+                "image": "/cause-4.webp",
                 "imageAlt": "Children washing their hands at a row of water taps",
                 "theme": "coral"
             },
@@ -85,7 +85,7 @@
                 "title": "School for every child",
                 "description": "Books, uniforms and meals so children in rural districts can stay in class.",
                 "category": "Education",
-                "image": "/img-4.jpg",
+                "image": "/home-1.jpg",
                 "imageAlt": "Children reading together in a classroom",
                 "linkText": "Explore",
                 "linkTo": "/our-cause/school-for-every-child"
@@ -94,7 +94,7 @@
                 "title": "Clean water for villages",
                 "description": "Hand pumps and filtration units that bring safe drinking water within a short walk of home.",
                 "category": "Water",
-                "image": "/img-1.jpg",
+                "image": "/cause-4.webp",
                 "imageAlt": "Villagers collecting water from a new pump",
                 "linkText": "Explore",
                 "linkTo": "/our-cause/Clean-water-for-villages"
@@ -103,7 +103,7 @@
                 "title": "Health camps on wheels",
                 "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
                 "category": "Health",
-                "image": "/img-5.jpg",
+                "image": "/cause-5.webp",
                 "imageAlt": "A nurse examining a patient at a mobile clinic",
                 "linkText": "Explore",
                 "linkTo": "/our-cause/health-camps-on-wheels"

@@ -39,18 +39,41 @@ const word: Variants = {
   show: { y: 0, transition: { duration: 1, ease } },
 };
 
+/**
+ * next/image throws if a local src does not start with "/".
+ * "post-1-1.png" -> "/post-1-1.png". Absolute URLs and data URIs pass through.
+ */
+function normalizeSrc(src?: string): string | undefined {
+  const value = src?.trim();
+  if (!value) return undefined;
+  if (/^(https?:)?\/\//i.test(value) || value.startsWith("data:")) return value;
+  return value.startsWith("/") ? value : `/${value}`;
+}
+
 export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
   const reduce = useReducedMotion();
-  const [imgFailed, setImgFailed] = useState(!post.image);
-  const [avatarFailed, setAvatarFailed] = useState(!post.author?.image);
+
+  const coverSrc = normalizeSrc(post.blogDetailImage);
+  const avatarSrc = normalizeSrc(post.author?.image);
+
+  const [imgFailed, setImgFailed] = useState(!coverSrc);
+  const [avatarFailed, setAvatarFailed] = useState(!avatarSrc);
 
   // The cover picture drifts slowly inside its frame while scrolling
   const frameRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -40, reduce ? 0 : 40]);
+  const { scrollYProgress } = useScroll({
+    target: frameRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [reduce ? 0 : -40, reduce ? 0 : 40]
+  );
 
   const initials = (post.author?.name ?? "")
     .split(" ")
+    .filter(Boolean)
     .map((w) => w[0])
     .slice(0, 2)
     .join("")
@@ -98,13 +121,20 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
               className="group inline-flex items-center gap-2 text-sm text-[#ece6da] outline-none transition-colors hover:text-[#e8c99a]
                          focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a09]"
             >
-              <ArrowLeft size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:-translate-x-1" />
+              <ArrowLeft
+                size={16}
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:-translate-x-1"
+              />
               {labels.backText}
             </Link>
           </motion.nav>
 
           <div className="mx-auto max-w-5xl text-center">
-            <motion.p variants={fadeUp} className="mb-7 flex items-center justify-center gap-4 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]">
+            <motion.p
+              variants={fadeUp}
+              className="mb-7 flex items-center justify-center gap-4 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]"
+            >
               <span className="h-px w-8 bg-[#e9a26b]" aria-hidden="true" />
               {post.category}
               <span className="h-px w-8 bg-[#e9a26b]" aria-hidden="true" />
@@ -130,13 +160,16 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
             </motion.h1>
 
             {/* Author and meta */}
-            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
+            <motion.div
+              variants={fadeUp}
+              className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5"
+            >
               {post.author && (
                 <div className="flex items-center gap-3.5 text-left">
                   <div className="relative h-12 w-12 flex-none overflow-hidden rounded-full bg-[#27382e] ring-2 ring-[#e8c99a]/40">
-                    {!avatarFailed && post.author.image ? (
+                    {!avatarFailed && avatarSrc ? (
                       <Image
-                        src={post.author.image}
+                        src={avatarSrc}
                         alt={post.author.name}
                         fill
                         sizes="48px"
@@ -144,18 +177,30 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
                         className="object-cover"
                       />
                     ) : (
-                      <span className="grid h-full w-full place-items-center text-sm font-semibold text-[#e8c99a]">{initials}</span>
+                      <span className="grid h-full w-full place-items-center text-sm font-semibold text-[#e8c99a]">
+                        {initials}
+                      </span>
                     )}
                   </div>
                   <div>
-                    <p className="text-[15px] font-semibold text-[#ece6da]">{post.author.name}</p>
-                    {post.author.role && <p className="text-[13px] text-[#8f8a80]">{post.author.role}</p>}
+                    <p className="text-[15px] font-semibold text-[#ece6da]">
+                      {post.author.name}
+                    </p>
+                    {post.author.role && (
+                      <p className="text-[13px] text-[#8f8a80]">{post.author.role}</p>
+                    )}
                   </div>
                 </div>
               )}
 
               <p className="flex items-center text-[14px] text-[#bdb7aa]">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
+                {post.readTime && (
+                  <>
+                    <span aria-hidden="true" className="mx-3 text-[#8f8a80]">/</span>
+                    <span>{post.readTime}</span>
+                  </>
+                )}
               </p>
             </motion.div>
           </div>
@@ -168,7 +213,7 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
             transition={{ duration: 1.4, ease: [0.7, 0, 0.2, 1], delay: 0.5 }}
             className="relative m-0 mt-14 aspect-[4/3] w-full overflow-hidden bg-[#161a17] ring-1 ring-[#e8c99a]/15 sm:aspect-[16/9] lg:mt-20 lg:aspect-[21/9]"
           >
-            {!imgFailed && post.image ? (
+            {!imgFailed && coverSrc ? (
               <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y: imageY }}>
                 <motion.div
                   className="absolute inset-0"
@@ -177,8 +222,8 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
                   transition={{ duration: 2.2, ease, delay: 0.5 }}
                 >
                   <Image
-                    src={post.image}
-                    alt={post.imageAlt || ""}
+                    src={coverSrc}
+                    alt={post.imageAlt || post.title}
                     fill
                     priority
                     sizes="(min-width: 1600px) 1600px, 100vw"
@@ -188,7 +233,10 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
                 </motion.div>
               </motion.div>
             ) : (
-              <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
+              <div
+                className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]"
+                aria-hidden="true"
+              />
             )}
           </motion.figure>
         </motion.div>

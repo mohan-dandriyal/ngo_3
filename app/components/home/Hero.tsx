@@ -45,7 +45,6 @@ export default function Hero({ data }: HeroContent) {
     titleAccent,
     description,
     primaryBtn,
-    secondaryBtn,
     images = [],
     slider,
   } = data;

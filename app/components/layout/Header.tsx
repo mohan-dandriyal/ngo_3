@@ -106,10 +106,10 @@ export default function Header() {
                                 aria-current={active ? "page" : undefined}
                                 onClick={() => setOpen(false)}
                                 className={`relative border-b border-[#e8c99a]/15 py-4
-                           font-['Poppins','Helvetica_Neue',Arial,sans-serif] text-[20px] font-medium leading-none
+                           header_font text-[20px] font-medium leading-none
                            tracking-[0.005em] outline-none
                            transition-colors duration-200 hover:text-[#f1ece1] focus-visible:text-[#f1ece1]
-                           min-[860px]:border-b-0 min-[860px]:py-2 min-[860px]:text-[15px] min-[860px]:tracking-[0.01em]
+                           min-[860px]:border-b-0 min-[860px]:py-2 min-[860px]:text-[14px] min-[860px]:tracking-[0.01em]
                            after:absolute after:-bottom-px after:left-0 after:h-px after:w-full after:origin-left
                            after:bg-[#e8c99a] after:transition-transform after:duration-300 after:ease-out
                            min-[860px]:after:-bottom-0.5 min-[860px]:after:h-[2px]

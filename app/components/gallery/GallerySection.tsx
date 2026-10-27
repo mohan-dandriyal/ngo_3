@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowDownRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { GallerySectionData } from "@/app/types/gallery";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
@@ -12,6 +11,9 @@ type GallerySectionProps = {
   data: GallerySectionData;
 };
 
+// Set to true to show the category filter buttons
+const SHOW_FILTERS = false;
+
 export default function GallerySection({ data }: GallerySectionProps) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -19,12 +21,11 @@ export default function GallerySection({ data }: GallerySectionProps) {
 
   const filteredItems = useMemo(() => {
     if (activeCategory === "all") return data.items;
-
     return data.items.filter((item) => item.category === activeCategory);
   }, [activeCategory, data.items]);
 
   const selectedItem =
-    selectedIndex !== null ? filteredItems[selectedIndex] : null;
+    selectedIndex !== null ? filteredItems[selectedIndex] ?? null : null;
 
   const closeLightbox = useCallback(() => setSelectedIndex(null), []);
 
@@ -40,7 +41,12 @@ export default function GallerySection({ data }: GallerySectionProps) {
     );
   }, [filteredItems.length]);
 
-  // Keyboard controls + lock page scroll while the popup is open
+  const handleCategoryChange = useCallback((id: string) => {
+    setSelectedIndex(null); // avoid a stale index when the list changes
+    setActiveCategory(id);
+  }, []);
+
+  // Keyboard controls + lock page scroll while the lightbox is open
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -87,111 +93,106 @@ export default function GallerySection({ data }: GallerySectionProps) {
           </p>
         </div>
 
-        {/* <div
-          className="mb-10 flex flex-wrap gap-2 md:mb-12"
-          role="group"
-          aria-label="Filter gallery by category"
-        >
-          {data.categories.map((category) => {
-            const isActive = activeCategory === category.id;
-
-            return (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => setActiveCategory(category.id)}
-                aria-pressed={isActive}
-                className={`rounded-full border px-5 py-3 text-xs transition-all duration-300 ${
-                  isActive
-                    ? "border-[#EE503B] bg-[#EE503B] text-white"
-                    : "border-white/15 text-[#B9B5AC] hover:border-[#EE503B] hover:text-[#EAE3D6]"
-                }`}
-              >
-                {category.label}
-              </button>
-            );
-          })}
-        </div> */}
-
-        {filteredItems.length > 0 ? (
-          <motion.div
-            layout
-            className="grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-6"
+        {SHOW_FILTERS && (
+          <div
+            className="mb-10 flex flex-wrap gap-2 md:mb-12"
+            role="group"
+            aria-label="Filter gallery by category"
           >
-            {filteredItems.map((item, index) => (
-              <motion.article
-                layout
-                key={item.id}
-                initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.45,
-                  delay: reduceMotion ? 0 : Math.min(index * 0.07, 0.28),
-                }}
-                className={`group ${
-                  item.size === "large" && activeCategory === "all"
-                    ? "lg:col-span-2"
-                    : ""
-                }`}
-              >
-                <div
-                  className={`relative overflow-hidden bg-[#20211C] ${
-                    item.size === "large" && activeCategory === "all"
-                      ? "aspect-5/3"
-                      : "aspect-4/5"
+            {data.categories.map((category) => {
+              const isActive = activeCategory === category.id;
+
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  onClick={() => handleCategoryChange(category.id)}
+                  aria-pressed={isActive}
+                  className={`rounded-full border px-5 py-3 text-xs transition-all duration-300 ${
+                    isActive
+                      ? "border-[#EE503B] bg-[#EE503B] text-white"
+                      : "border-white/15 text-[#B9B5AC] hover:border-[#EE503B] hover:text-[#EAE3D6]"
                   }`}
                 >
-                  <Image
-                    src={item.image.src}
-                    alt={item.image.alt}
-                    fill
-                    sizes={
-                      item.size === "large" && activeCategory === "all"
-                        ? "(max-width: 1024px) 100vw, 66vw"
-                        : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    }
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
-                  />
+                  {category.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+        {filteredItems.length > 0 ? (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {filteredItems.map((item, index) => {
+              const isLarge = item.size === "large" && activeCategory === "all";
 
-                  <span className="absolute left-5 top-5 border border-white/30 bg-black/20 px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-                    {item.categoryLabel}
-                  </span>
+              return (
+                <motion.article
+                  key={item.id}
+                  initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.45,
+                    delay: reduceMotion ? 0 : Math.min(index * 0.07, 0.28),
+                  }}
+                  className={`group ${isLarge ? "lg:col-span-2" : ""}`}
+                >
+                  {/* Bracket syntax works on both Tailwind v3 and v4 */}
+                  <div
+                    className={`relative w-full overflow-hidden bg-[#20211C] ${
+                      isLarge ? "aspect-[5/3]" : "aspect-[4/5]"
+                    }`}
+                  >
+                    <Image
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      fill
+                      sizes={
+                        isLarge
+                          ? "(max-width: 1024px) 100vw, 66vw"
+                          : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      }
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
+                    />
 
-                  <span className="absolute right-5 top-5 text-xs text-white/80">
-                    {item.year}
-                  </span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
 
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-                    <div>
-                      <p className="mb-2 text-xs text-white/75">
-                        {String(item.id).padStart(2, "0")} / WKX
-                      </p>
-                      <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl">
-                        {item.title}
-                      </h3>
+                    <span className="absolute left-5 top-5 border border-white/30 bg-black/20 px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+                      {item.categoryLabel}
+                    </span>
+
+                    <span className="absolute right-5 top-5 text-xs text-white/80">
+                      {item.year}
+                    </span>
+
+                    <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+                      <div>
+                        <p className="mb-2 text-xs text-white/75">
+                          {String(item.id).padStart(2, "0")} / WKX
+                        </p>
+                        <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl">
+                          {item.title}
+                        </h3>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Click target covering the whole card */}
-                  <button
-                    type="button"
-                    onClick={() => setSelectedIndex(index)}
-                    aria-label={`View ${item.title} full size`}
-                    className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#EE503B]"
-                  />
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+                    {/* Click target covering the whole card */}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedIndex(index)}
+                      aria-label={`View ${item.title} full size`}
+                      className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#EE503B]"
+                    />
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         ) : (
           <div className="border border-white/10 px-6 py-16 text-center text-sm text-[#B9B5AC]">
             {data.emptyMessage}
           </div>
         )}
-
-        
       </div>
 
       {/* Lightbox popup */}
@@ -207,7 +208,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={closeLightbox}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4 backdrop-blur-sm sm:p-8"
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black/90 p-4 backdrop-blur-sm sm:p-8"
           >
             <button
               type="button"
@@ -227,7 +228,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                     showPrev();
                   }}
                   aria-label="Previous photograph"
-                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:left-8"
+                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:left-8"
                 >
                   <ChevronLeft size={20} aria-hidden="true" />
                 </button>
@@ -239,7 +240,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                     showNext();
                   }}
                   aria-label="Next photograph"
-                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:right-8"
+                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:right-8"
                 >
                   <ChevronRight size={20} aria-hidden="true" />
                 </button>
@@ -254,7 +255,12 @@ export default function GallerySection({ data }: GallerySectionProps) {
               onClick={(e) => e.stopPropagation()}
               className="flex w-full max-w-5xl flex-col items-center"
             >
-              <div className="relative h-[70vh] w-full">
+              {/*
+                Explicit height is required for `fill` images.
+                dvh = real visible viewport on mobile; the subtracted rem
+                reserves room for padding + caption so nothing overflows.
+              */}
+              <div className="relative h-[calc(100dvh-10rem)] w-full sm:h-[calc(100dvh-13rem)]">
                 <Image
                   src={selectedItem.image.src}
                   alt={selectedItem.image.alt}
@@ -275,7 +281,10 @@ export default function GallerySection({ data }: GallerySectionProps) {
                   </h3>
                 </div>
 
-               
+                <p className="shrink-0 text-xs text-white/60">
+                  {String((selectedIndex ?? 0) + 1).padStart(2, "0")} /{" "}
+                  {String(filteredItems.length).padStart(2, "0")}
+                </p>
               </figcaption>
             </motion.figure>
           </motion.div>

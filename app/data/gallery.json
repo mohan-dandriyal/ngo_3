@@ -58,7 +58,7 @@
                 "title": "Stronger, together",
                 "description": "Local people coming together to create lasting change.",
                 "image": {
-                    "src": "/img-1.jpg",
+                    "src": "/post-1-1.jpg",
                     "alt": "Community members collaborating outdoors"
                 },
                 "year": "2026",
@@ -71,7 +71,7 @@
                 "title": "A world of possibilities",
                 "description": "Helping young minds discover their potential.",
                 "image": {
-                    "src": "/img-2.jpg",
+                    "src": "/cause-1.webp",
                     "alt": "Children learning together in a classroom"
                 },
                 "year": "2026",
@@ -97,7 +97,7 @@
                 "title": "Growing a greener future",
                 "description": "Small local actions with a lasting environmental impact.",
                 "image": {
-                    "src": "/img-4.jpg",
+                    "src": "/gallery-4.webp",
                     "alt": "Volunteers planting trees in a green landscape"
                 },
                 "year": "2025",
@@ -110,7 +110,7 @@
                 "title": "The power of participation",
                 "description": "Real progress begins when every voice is heard.",
                 "image": {
-                    "src": "/img-5.jpg",
+                    "src": "/cause-2.webp",
                     "alt": "Community gathering during a local initiative"
                 },
                 "year": "2025",
@@ -123,25 +123,13 @@
                 "title": "Learning without limits",
                 "description": "Creating opportunities for the next generation.",
                 "image": {
-                    "src": "/post-4.jpg",
-                    "alt": "Students participating in an educational activity"
-                },
-                "year": "2025",
-                "size": "normal"
-            },
-             {
-                "id": 7,
-                "category": "education",
-                "categoryLabel": "Education",
-                "title": "Learning without limits",
-                "description": "Creating opportunities for the next generation.",
-                "image": {
-                    "src": "/post-4.jpg",
+                    "src": "/gallery-6.webp",
                     "alt": "Students participating in an educational activity"
                 },
                 "year": "2025",
                 "size": "normal"
             }
+            
         ],
         "bottomNote": "Every image represents a story still unfolding.",
         "bottomLinkText": "Discover our programs",

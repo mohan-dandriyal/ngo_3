@@ -20,6 +20,7 @@ export type BlogPost = {
     date: string; // YYYY-MM-DD
     readTime?: string;
     image: string;
+    blogDetailImage: string;
     imageAlt?: string;
     author: BlogAuthor;
     tags?: string[];
