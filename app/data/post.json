@@ -124,7 +124,7 @@
             "category": "Health",
             "date": "2026-10-03",
              "image": "/blog/blog-2.jpg",
-             "blogDetailImage" : "/blog/blog-2-2.jpg",
+             "blogDetailImage" : "/blog/blog-2.jpg",
             "imageAlt": "A nurse greeting a patient outside the mobile clinic",
             "author": {
                 "name": "Dr. Meera Nair",
