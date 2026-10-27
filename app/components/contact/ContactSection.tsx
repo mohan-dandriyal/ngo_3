@@ -48,7 +48,7 @@ function MethodCard({ method }: { method: ContactMethod }) {
   const Icon = ICONS[method.icon] ?? Mail;
   const plainLink = /^(mailto:|tel:|https?:)/.test(method.link);
 
-  const className = `group relative block overflow-hidden border border-[#14110c]/15 outline-none
+  const className = `group relative block overflow-hidden border border-[#ffff]/15 outline-none
     focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#e8e1d5]`;
 
   const body = (
@@ -56,25 +56,25 @@ function MethodCard({ method }: { method: ContactMethod }) {
       {/* Dark fill sweeps across on hover */}
       <span
         aria-hidden="true"
-        className="absolute inset-0 origin-left scale-x-0 bg-[#14110c] transition-transform duration-500 ease-out
+        className="absolute inset-0 origin-left scale-x-0 bg-[#403f3f] transition-transform duration-500 ease-out
                    group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
       />
       <span className="relative grid grid-cols-[52px_1fr_auto] items-start gap-5 p-6 sm:p-7">
         <span
-          className="grid h-[52px] w-[52px] place-items-center rounded-full border border-[#14110c]/25 text-[#3f6b57]
+          className="grid h-[52px] w-[52px] place-items-center rounded-full border border-[#ffff]/25 text-[#e0503a]
                      transition-colors duration-300 group-hover:border-[#e8c99a]/50 group-hover:text-[#e8c99a]"
         >
           <Icon size={22} aria-hidden="true" />
         </span>
 
         <span className="block">
-          <span className="block font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#14110c] transition-colors duration-300 group-hover:text-[#f1ece1]">
+          <span className="block font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#b6b5b5] transition-colors duration-300 group-hover:text-[#f1ece1]">
             {method.title}
           </span>
-          <span className="mt-1.5 block text-[15px] leading-relaxed text-[#5a544c] transition-colors duration-300 group-hover:text-[#bdb7aa]">
+          <span className="mt-1.5 block text-[15px] leading-relaxed text-[#9b9a97] transition-colors duration-300 group-hover:text-[#bdb7aa]">
             {method.description}
           </span>
-          <span className="mt-4 block text-[15px] font-semibold text-[#14110c] transition-colors duration-300 group-hover:text-[#e0503a]">
+          <span className="mt-4 block text-[15px] font-semibold text-[#a2a2a2] transition-colors duration-300 group-hover:text-[#e0503a]">
             {method.value}
           </span>
         </span>
@@ -82,7 +82,7 @@ function MethodCard({ method }: { method: ContactMethod }) {
         <ArrowUpRight
           size={20}
           aria-hidden="true"
-          className="mt-1 text-[#14110c] transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#e0503a]"
+          className="mt-1 text-[#878787] transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#e0503a]"
         />
       </span>
     </>
@@ -140,7 +140,7 @@ export default function ContactSection({ data, onSubmit }: ContactSectionProps) 
   return (
     <section
       id="contact"
-      className="w-full overflow-hidden bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-[#0a0a09] text-[#fff] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <div className="grid items-start gap-14 py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:py-[130px]">
@@ -151,12 +151,12 @@ export default function ContactSection({ data, onSubmit }: ContactSectionProps) 
             whileInView="show"
             viewport={{ once: true, amount: 0.12 }}
           >
-            {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
-            <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
+            {eyebrow && <Eyebrow eyebrow={eyebrow}  />}
+            <SectionTitle titleStart={titleStart} titleAccent={titleAccent}  />
 
             {description && (
               <div className="mt-7">
-                <Description description={description} variant="body" tone="light" />
+                <Description description={description} variant="body"  />
               </div>
             )}
 

@@ -133,10 +133,10 @@ function MemberCard({ member }: { member: TeamMember }) {
       </div>
 
       <div className="mt-5">
-        <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#14110c]">
+        <h3 className="text-white/80 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#14110c]">
           {member.name}
         </h3>
-        <p className="mt-1 text-sm font-medium text-[#3f6b57]">{member.role}</p>
+        <p className="mt-1 text-sm font-medium text-[#e0503a]">{member.role}</p>
 
         {/* Touch screens have no hover, so the bio and links show here instead */}
         {member.bio && <p className="mt-3 text-[15px] leading-relaxed text-[#5a544c] lg:hidden">{member.bio}</p>}
@@ -185,7 +185,7 @@ export default function TeamSection({ data }: TeamSectionProps) {
   return (
     <section
       id="team"
-      className="w-full overflow-hidden bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <div className="py-20 lg:py-[130px]">
@@ -198,12 +198,12 @@ export default function TeamSection({ data }: TeamSectionProps) {
             className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-20"
           >
             <div>
-              {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
-              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
+              {eyebrow && <Eyebrow eyebrow={eyebrow} />}
+              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} />
             </div>
             {description && (
               <div className="lg:pb-3">
-                <Description description={description} variant="body" tone="light" />
+                <Description description={description} variant="body" />
               </div>
             )}
           </motion.div>
@@ -229,14 +229,14 @@ export default function TeamSection({ data }: TeamSectionProps) {
                     onClick={() => setActive(d)}
                     className={`relative px-5 py-2.5 text-sm font-medium outline-none transition-colors duration-300
                                 focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#e8e1d5]
-                                ${isActive ? "text-[#f1ece1]" : "border border-[#14110c]/20 text-[#14110c] hover:border-[#14110c]"}`}
+                                ${isActive ? "text-[#f1ece1]" : "border border-[#ffff]/20 text-[#fff] hover:border-[#fffff]"}`}
                   >
                     {/* One dark pill slides between the chips */}
                     {isActive && (
                       <motion.span
                         layoutId="team-filter-pill"
                         aria-hidden="true"
-                        className="absolute inset-0 bg-[#14110c]"
+                        className="absolute inset-0 bg-[#404040]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
@@ -275,7 +275,7 @@ export default function TeamSection({ data }: TeamSectionProps) {
               className="mt-20 flex flex-col gap-5 border-t border-[#14110c]/20 pt-10 sm:flex-row sm:items-center sm:justify-between"
             >
               {cta.text && (
-                <p className="max-w-xl font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(26px,2.8vw,38px)] font-medium italic leading-tight">
+                <p className="max-w-xl text-white font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(26px,2.8vw,38px)] font-medium italic leading-tight">
                   {cta.text}
                 </p>
               )}

@@ -34,7 +34,7 @@ function Block({ block, reduce }: { block: ContentBlock; reduce: boolean | null 
     case "paragraph":
       return (
         <Reveal reduce={reduce}>
-          <p className="text-[18px] leading-[1.95] text-[#3d3830]">{block.text}</p>
+          <p className="text-[18px] leading-[1.95] text-[#bdbdbd]">{block.text}</p>
         </Reveal>
       );
 
@@ -43,7 +43,7 @@ function Block({ block, reduce }: { block: ContentBlock; reduce: boolean | null 
         <Reveal reduce={reduce}>
           <h2
             id={slugify(block.text)}
-            className="scroll-mt-32 pt-6 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(32px,3.4vw,46px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#14110c]"
+            className="scroll-mt-32 pt-6 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(32px,3.4vw,46px)] font-medium leading-[1.1] tracking-[-0.01em] text-[#ebe9e9]"
           >
             {block.text}
           </h2>
@@ -54,10 +54,10 @@ function Block({ block, reduce }: { block: ContentBlock; reduce: boolean | null 
       return (
         <Reveal reduce={reduce}>
           <blockquote className="relative my-4 border-l-[3px] border-[#e0503a] py-2 pl-7 sm:pl-10">
-            <p className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(28px,3vw,40px)] font-medium italic leading-[1.2] text-[#14110c]">
+            <p className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(28px,3vw,40px)] font-medium italic leading-[1.2] text-[#eeeeee]">
               {block.text}
             </p>
-            {block.cite && <footer className="mt-4 text-sm font-medium text-[#3f6b57]">{block.cite}</footer>}
+            {block.cite && <footer className="mt-4 text-sm font-medium text-[#dc4d32]">{block.cite}</footer>}
           </blockquote>
         </Reveal>
       );
@@ -67,7 +67,7 @@ function Block({ block, reduce }: { block: ContentBlock; reduce: boolean | null 
         <Reveal reduce={reduce}>
           <ul className="space-y-3.5">
             {block.items.map((item) => (
-              <li key={item} className="flex gap-4 text-[18px] leading-[1.7] text-[#3d3830]">
+              <li key={item} className="flex gap-4 text-[18px] leading-[1.7] text-[#c7c7c7]">
                 <span aria-hidden="true" className="mt-[0.7em] h-2 w-2 flex-none rounded-full bg-[#e0503a]" />
                 {item}
               </li>
@@ -150,7 +150,7 @@ export default function BlogArticle({ post, labels }: BlogArticleProps) {
 
   return (
     <section
-      className="w-full bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       {/* Reading progress */}
       {!reduce && (
@@ -171,7 +171,7 @@ export default function BlogArticle({ post, labels }: BlogArticleProps) {
             <div className="lg:sticky lg:top-32">
               {headings.length > 0 && (
                 <nav aria-label={labels.tocTitle} className="hidden lg:block">
-                  <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#3f6b57]">{labels.tocTitle}</p>
+                  <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#dc4d32]">{labels.tocTitle}</p>
                   <ol className="space-y-1 border-l border-[#14110c]/15">
                     {headings.map((h) => {
                       const id = slugify(h.text);
@@ -190,7 +190,7 @@ export default function BlogArticle({ post, labels }: BlogArticleProps) {
                             href={`#${id}`}
                             aria-current={active ? "location" : undefined}
                             className={`block py-2 pl-5 text-[15px] leading-snug outline-none transition-colors duration-200
-                              focus-visible:text-[#e0503a] ${active ? "font-semibold text-[#14110c]" : "text-[#5a544c] hover:text-[#14110c]"}`}
+                              focus-visible:text-[#e0503a] ${active ? "font-semibold text-[#e8e8e8]" : "text-[#e6e6e6] hover:text-[#14110c]"}`}
                           >
                             {h.text}
                           </a>
@@ -211,32 +211,7 @@ export default function BlogArticle({ post, labels }: BlogArticleProps) {
 
    
 
-            {/* Author */}
-            {post.author && (
-              <div className="flex items-center gap-5 bg-[#14110c] p-6 text-[#ece6da] sm:p-8">
-                <div className="relative h-16 w-16 flex-none overflow-hidden rounded-full bg-[#27382e] ring-2 ring-[#e8c99a]/40">
-                  {!avatarFailed && post.author.image ? (
-                    <Image
-                      src={post.author.image}
-                      alt={post.author.name}
-                      fill
-                      sizes="64px"
-                      onError={() => setAvatarFailed(true)}
-                      className="object-cover"
-                    />
-                  ) : (
-                    <span className="grid h-full w-full place-items-center font-semibold text-[#e8c99a]">{initials}</span>
-                  )}
-                </div>
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]">{labels.writtenBy}</p>
-                  <p className="mt-1.5 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[26px] font-medium leading-tight">
-                    {post.author.name}
-                  </p>
-                  {post.author.role && <p className="text-sm text-[#bdb7aa]">{post.author.role}</p>}
-                </div>
-              </div>
-            )}
+        
           </div>
         </article>
       </MainContainer>

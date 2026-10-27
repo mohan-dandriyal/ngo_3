@@ -17,15 +17,15 @@
         "scrollTarget": "#team",
         "images": [
             {
-                "src": "/cause-1.webp",
+                "src": "/team-h-1.jpg",
                 "alt": "Team members planning a project together"
             },
             {
-                "src": "/home.webp",
+                "src": "/team-h-2.jpg",
                 "alt": "A nurse speaking with a family at a mobile clinic"
             },
             {
-                "src": "/post-3.jpg",
+                "src": "/team-h-3.jpg",
                 "alt": "Volunteers laughing during a school visit"
             }
         ]

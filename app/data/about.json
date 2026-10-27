@@ -16,7 +16,7 @@
         "linkText": "",
         "linkTo": "",
         "image": {
-            "src": "/post-4-4.webp",
+            "src": "/about-1.jpg",
             "alt": "Volunteers and villagers gathered around a new hand pump"
         },
         "stats": [
@@ -51,7 +51,7 @@
         "linkTo": "#",
         "listLabel": "Our purpose, our promise",
         "image": {
-            "src": "/img-3.jpg",
+            "src": "/about-2.jpg",
             "alt": "Volunteers and villagers gathered around a new hand pump",
             "captionLabel": "Our promise",
             "caption": "Change begins when we work together."
@@ -80,7 +80,7 @@
         "titleAccent": "everyone thrives.",
         "description": "We envision a future where every community has access to clean water, quality education, and essential healthcare. A future built on dignity, opportunity, and collective progress.",
         "image": {
-            "src": "/home-1.jpg",
+            "src": "/about-3.jpg",
             "alt": "Community members working together toward a brighter future"
         },
         "tag": "THE FUTURE WE BELIEVE IN",
@@ -110,7 +110,7 @@
         "titleAccent": "ours to build.",
         "description": "Every meaningful change starts with someone who cares. Bring your time, skills, or support to help communities build a healthier, more hopeful future.",
         "image": {
-            "src": "/img-2.webp",
+            "src": "/about-3.jpg",
             "alt": "Volunteers working together to create positive change in their community"
         },
         "imageCaption": "Change begins when we come together.",

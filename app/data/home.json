@@ -48,7 +48,7 @@
             {
                 "title": "The Water Table",
                 "description": "Clean water, built to last by the people who need it most.",
-                "image": "/cause-4.webp",
+                "image": "/pro-1.jpg",
                 "imageAlt": "Children washing their hands at a row of water taps",
                 "theme": "coral"
             },
@@ -62,7 +62,7 @@
             {
                 "title": "Open Classroom",
                 "description": "Making learning feel possible, joyful and entirely theirs.",
-                "image": "/img-3.jpg",
+                "image": "/pro-2.jpg",
                 "imageAlt": "Many hands joined together in the middle of a circle",
                 "theme": "sand"
             }
@@ -94,7 +94,7 @@
                 "title": "Clean water for villages",
                 "description": "Hand pumps and filtration units that bring safe drinking water within a short walk of home.",
                 "category": "Water",
-                "image": "/cause-4.webp",
+                "image": "/image/cause-1.jpg",
                 "imageAlt": "Villagers collecting water from a new pump",
                 "linkText": "Explore",
                 "linkTo": "/our-cause/Clean-water-for-villages"
@@ -103,7 +103,7 @@
                 "title": "Health camps on wheels",
                 "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
                 "category": "Health",
-                "image": "/cause-5.webp",
+                "image": "/image/cause-3.jpg",
                 "imageAlt": "A nurse examining a patient at a mobile clinic",
                 "linkText": "Explore",
                 "linkTo": "/our-cause/health-camps-on-wheels"

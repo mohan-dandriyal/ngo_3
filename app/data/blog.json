@@ -12,7 +12,7 @@
                 "excerpt": "Before the pump, the morning walk for water took two hours. Now the classroom fills up before the first bell. Here is what changed, and what is next.",
                 "category": "Water",
                 "date": "2026-10-12",
-                "image": "/post-1-1.jpg",
+                "image": "/blog/blog-1.jpg",
                 "imageAlt": "Children filling bottles at a new hand pump",
                 "linkTo": "/blog/hand-pump-school-day"
             },
@@ -20,7 +20,7 @@
                 "title": "Our mobile clinic reaches its 1,000th patient",
                 "category": "Health",
                 "date": "2026-10-03",
-               "image": "/post-2.jpg",
+               "image": "/post/post-2.webp",
                 "imageAlt": "A nurse greeting a patient outside the mobile clinic",
                 "linkTo": "/blog/mobile-clinic-1000"
             },
@@ -28,7 +28,7 @@
                 "title": "What your monthly gift pays for, line by line",
                 "category": "Transparency",
                 "date": "2026-09-24",
-                "image": "/post-3.jpg",
+                "image": "/post/post-3.jpg",
                 "imageAlt": "Volunteers sorting school supplies",
                 "linkTo": "/blog/monthly-gift-breakdown"
             },
@@ -36,7 +36,7 @@
                 "title": "Meet the volunteers rebuilding the Rampur library",
                 "category": "Education",
                 "date": "2026-09-10",
-                "image": "/post-4.jpg",
+                "image": "/post/post-4.webp",
                 "imageAlt": "Volunteers painting shelves in a village library",
                 "linkTo": "/blog/rampur-library"
             }

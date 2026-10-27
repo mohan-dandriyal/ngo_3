@@ -38,7 +38,7 @@ export default function BlogPostCard({ post, tone = "light", readText }: BlogPos
       className={`group relative flex flex-col overflow-hidden border transition-shadow duration-500
         ${dark
           ? "border-[#e8c99a]/15 bg-[#121411] hover:shadow-[0_28px_50px_-26px_rgba(232,201,154,0.35)]"
-          : "border-[#14110c]/10 bg-[#f3eee4] hover:shadow-[0_28px_50px_-28px_rgba(20,17,12,0.5)]"}`}
+          : "border-[#14110c]/10 bg-[#2b2b2b] hover:shadow-[0_28px_50px_-28px_rgba(20,17,12,0.5)]"}`}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-[#161a17]">
         {!failed ? (
@@ -53,13 +53,13 @@ export default function BlogPostCard({ post, tone = "light", readText }: BlogPos
         ) : (
           <div className="h-full w-full bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
         )}
-        <span className="absolute bottom-4 left-4 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#e8c99a]">
+        <span className="absolute bottom-4 left-4 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#f4dab2]">
           {post.category}
         </span>
       </div>
 
       <div className="flex flex-1 flex-col px-7 pb-8 pt-7">
-        <p className={`flex flex-wrap items-center text-[13px] ${dark ? "text-[#8f8a80]" : "text-[#5a544c]"}`}>
+        <p className={`flex flex-wrap items-center text-[13px] ${dark ? "text-[#8f8a80]" : "text-[#bdbdbd]"}`}>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           {post.readTime && (
             <span className={`ml-3 border-l pl-3 ${dark ? "border-[#e8c99a]/25" : "border-[#14110c]/20"}`}>{post.readTime}</span>
@@ -68,7 +68,7 @@ export default function BlogPostCard({ post, tone = "light", readText }: BlogPos
 
         <h3
           className={`mt-3 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-[1.12]
-            ${dark ? "text-[#ece6da]" : "text-[#14110c]"}`}
+            ${dark ? "text-[#ece6da]" : "text-[#ffff]"}`}
         >
           {/* The link stretches over the whole card */}
           <Link
@@ -80,13 +80,13 @@ export default function BlogPostCard({ post, tone = "light", readText }: BlogPos
           </Link>
         </h3>
 
-        <p className={`mt-4 line-clamp-3 text-[15px] leading-relaxed ${dark ? "text-[#bdb7aa]" : "text-[#5a544c]"}`}>
+        <p className={`mt-4 line-clamp-3 text-[15px] leading-relaxed ${dark ? "text-[#bdb7aa]" : "text-[#bdbdbd]"}`}>
           {post.excerpt}
         </p>
 
         {readText && (
           <span
-            className={`mt-6 inline-flex items-center gap-2 text-sm font-medium ${dark ? "text-[#ece6da]" : "text-[#14110c]"}`}
+            className={`mt-6 inline-flex items-center gap-2 text-sm font-medium ${dark ? "text-[#ece6da]" : "text-[#bdbdbd]"}`}
           >
             {readText}
             <ArrowUpRight

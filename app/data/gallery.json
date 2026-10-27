@@ -14,7 +14,7 @@
         "titleAccent": "change.",
         "description": "Every photograph captures a moment of courage, community, and progress. Explore the people and places behind our work.",
         "image": {
-            "src": "/img-3.jpg",
+            "src": "/gallery/gal-hero.jpg",
             "alt": "Community members working together on a local development project"
         },
         "imageCaption": "Together, we build a stronger tomorrow.",
@@ -58,7 +58,7 @@
                 "title": "Stronger, together",
                 "description": "Local people coming together to create lasting change.",
                 "image": {
-                    "src": "/post-1-1.jpg",
+                    "src": "/gallery/gal-6.jpg",
                     "alt": "Community members collaborating outdoors"
                 },
                 "year": "2026",
@@ -71,7 +71,7 @@
                 "title": "A world of possibilities",
                 "description": "Helping young minds discover their potential.",
                 "image": {
-                    "src": "/cause-1.webp",
+                    "src": "/gallery/gal-1.jpg",
                     "alt": "Children learning together in a classroom"
                 },
                 "year": "2026",
@@ -84,7 +84,7 @@
                 "title": "Care that reaches everyone",
                 "description": "Building healthier communities through access and awareness.",
                 "image": {
-                    "src": "/img-3.jpg",
+                    "src": "/gallery/gal-2.jpg",
                     "alt": "Community health outreach activity"
                 },
                 "year": "2026",
@@ -97,7 +97,7 @@
                 "title": "Growing a greener future",
                 "description": "Small local actions with a lasting environmental impact.",
                 "image": {
-                    "src": "/gallery-4.webp",
+                    "src": "/gallery/gal-3.jpg",
                     "alt": "Volunteers planting trees in a green landscape"
                 },
                 "year": "2025",
@@ -110,7 +110,7 @@
                 "title": "The power of participation",
                 "description": "Real progress begins when every voice is heard.",
                 "image": {
-                    "src": "/cause-2.webp",
+                    "src": "/gallery/gal-4.jpg",
                     "alt": "Community gathering during a local initiative"
                 },
                 "year": "2025",
@@ -123,7 +123,7 @@
                 "title": "Learning without limits",
                 "description": "Creating opportunities for the next generation.",
                 "image": {
-                    "src": "/gallery-6.webp",
+                    "src": "/gallery/gal-5.jpg",
                     "alt": "Students participating in an educational activity"
                 },
                 "year": "2025",

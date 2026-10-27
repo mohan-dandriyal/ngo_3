@@ -20,7 +20,7 @@
     "description": "Every program starts with a conversation in the village and ends with something the community can run on its own. Explore what we do and the results so far.",
     "indexLabel": "Jump to a program",
     "image": {
-      "src": "/home.webp",
+      "src": "/program/pro-hero.jpg",
       "alt": "Volunteers and villagers working together on a community project"
     }
   },
@@ -37,7 +37,7 @@
       "category": "Education",
       "title": "School for every child",
       "description": "We cover books, uniforms, meals and trained teachers so children in rural districts can stay in class and keep learning.",
-      "image": "/home-1.jpg",
+      "image": "/program/pro.jpg",
       "imageAlt": "Children reading together in a classroom",
       "stats": [
         { "value": 12400, "suffix": "+", "label": "Children enrolled" },
@@ -55,7 +55,7 @@
       "category": "Water",
       "title": "Clean water for villages",
       "description": "Deep-bore hand pumps and filtration units bring safe drinking water within a short walk of home, maintained by trained village committees.",
-      "image": "/cause-2.webp",
+      "image": "/program/pro-1.jpg",
       "imageAlt": "Villagers collecting water from a new hand pump",
       "stats": [
         { "value": 310, "label": "Pumps installed" },
@@ -73,7 +73,7 @@
       "category": "Health",
       "title": "Health camps on wheels",
       "description": "Mobile clinics bring check-ups, medicines and nurses to places without a hospital, and train local health workers to follow up.",
-      "image": "/cause-3.webp",
+      "image": "/program/pro-2.jpg",
       "imageAlt": "A nurse examining a patient at a mobile clinic",
       "stats": [
         { "value": 48000, "suffix": "+", "label": "Check-ups given" },
@@ -91,7 +91,7 @@
       "category": "Livelihoods",
       "title": "Skills for steady incomes",
       "description": "Training, tools and small grants help families start or grow a livelihood, so progress continues long after our team has left.",
-      "image": "/img-3.jpg",
+      "image": "/program/pro-3.jpg",
       "imageAlt": "A woman running a small tailoring business",
       "stats": [
         { "value": 2300, "suffix": "+", "label": "Families supported" },

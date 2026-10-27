@@ -57,7 +57,7 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
   return (
     <section
       id="stories"
-      className="w-full overflow-hidden bg-[#e8e1d5] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <div className="py-20 lg:py-[120px]">
@@ -70,9 +70,9 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
               viewport={{ once: true, amount: 0.3 }}
               className="mb-12"
             >
-              {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} tone="light" />}
+              {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow}  />}
               {labels.titleStart && (
-                <SectionTitle titleStart={labels.titleStart} titleAccent={labels.titleAccent} tone="light" />
+                <SectionTitle titleStart={labels.titleStart} titleAccent={labels.titleAccent}  />
               )}
             </motion.div>
           )}
@@ -96,17 +96,17 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
                     onClick={() => pickCategory(c)}
                     className={`relative px-5 py-2.5 text-sm font-medium outline-none transition-colors duration-300
                       focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#e8e1d5]
-                      ${active ? "text-[#f1ece1]" : "border border-[#14110c]/20 hover:border-[#14110c]"}`}
+                      ${active ? "text-[#252525]" : "border border-[#ffff]/40 hover:border-[#ffff] text-white/70"}`}
                   >
                     {active && (
                       <motion.span
                         layoutId="blog-filter-pill"
                         aria-hidden="true"
-                        className="absolute inset-0 bg-[#14110c]"
+                        className="absolute inset-0 bg-[#f2f2f2]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className="relative">{c === "all" ? labels.allLabel : c}</span>
+                    <span className="relative ">{c === "all" ? labels.allLabel : c}</span>
                   </button>
                 );
               })}
@@ -116,7 +116,7 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
               <label htmlFor="blog-search" className="sr-only">
                 {labels.searchLabel}
               </label>
-              <Search size={18} aria-hidden="true" className="absolute left-0 top-1/2 -translate-y-1/2 text-[#5a544c]" />
+              <Search size={18} aria-hidden="true" className="absolute left-0 top-1/2 -translate-y-1/2 text-[#ababab]" />
               <input
                 id="blog-search"
                 type="search"
@@ -126,7 +126,7 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
                   setCount(pageSize);
                 }}
                 placeholder={labels.searchPlaceholder}
-                className="w-full bg-transparent py-3 pl-8 text-base text-[#14110c] outline-none placeholder:text-[#5a544c]"
+                className="w-full bg-transparent py-3 pl-8 text-base text-[#ffff]/70 outline-none placeholder:text-[#5a544c]"
               />
               <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-[#14110c]/25" />
               <span
