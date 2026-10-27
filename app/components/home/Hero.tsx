@@ -160,21 +160,6 @@ export default function Hero({ data }: HeroContent) {
                   {primaryBtn.text}
                 </PrimaryButton>
               )}
-
-              {secondaryBtn?.text && (
-                <Link
-                  href={secondaryBtn.linkTo}
-                  className="group inline-flex items-center gap-3 text-sm text-[#ece6da] transition-colors hover:text-[#a8c686]"
-                >
-                  {secondaryBtn.text}
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </Link>
-              )}
             </motion.div>
 
          

@@ -9,10 +9,6 @@
                 "text": "Our story",
                 "linkTo": "/about"
             },
-            "secondaryBtn": {
-                "text": "Explore our work",
-                "linkTo": "/our-programs"
-            },
             "images": [
                 {
                     "src": "/img-3.jpg",
