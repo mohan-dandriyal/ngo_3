@@ -69,7 +69,7 @@ export default function HomeCauses({ data }: HomeCausesContent) {
 
                         <div className="max-w-[26rem] lg:pb-3">
                             {description && (
-                                <motion.p variants={rise} className="text-base leading-[1.9] text-[#5a544c]">
+                                <motion.p variants={rise} className="text-base leading-[1.9] text-white/70">
                                     {description}
                                 </motion.p>
                             )}
