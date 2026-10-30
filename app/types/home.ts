@@ -21,6 +21,8 @@ export type HeroContent = {
       linkTo: string;
     };
 
+    
+
     // Right-side image slider
     images: HeroImage[];
 

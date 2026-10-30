@@ -1,49 +1,51 @@
 {
-    "aboutHero": {
-        "breadcrumb": [
-            {
-                "label": "Home",
-                "linkTo": "/"
-            },
-            {
-                "label": "About us"
-            }
-        ],
-        "eyebrow": "",
-        "titleStart": "Built by neighbours,",
-        "titleAccent": "for neighbours",
-        "description": "We started in one village with a single hand pump. Today we bring clean water, schooling and healthcare to communities across the country, and we publish every rupee we spend.",
-        "linkText": "",
-        "linkTo": "",
-        "image": {
-            "src": "/about-1.jpg",
-            "alt": "Volunteers and villagers gathered around a new hand pump"
-        },
-        "stats": [
-            {
-                "value": 2012,
-                "plain": true,
-                "label": "Year we began"
-            },
-            {
-                "value": 48,
-                "suffix": "+",
-                "label": "Villages served"
-            },
-            {
-                "value": 125000,
-                "suffix": "+",
-                "label": "Lives reached"
-            },
-            {
-                "value": 92,
-                "suffix": "%",
-                "label": "Of every gift goes to projects"
-            }
-        ]
+    
+  "aboutHero": {
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "linkTo": "/"
+      },
+      {
+        "label": "About us"
+      }
+    ],
+    "eyebrow": "Who we are · What we believe",
+    "titleStart": "Built by neighbours,",
+    "titleAccent": "for neighbours.",
+    "description": "We started with a simple belief: every community deserves the opportunity to thrive. Today, our work focuses on creating access to education, clean water and better opportunities for everyone.",
+    "linkText": "Discover our mission",
+    "linkTo": "#our-mission",
+    "image": {
+      "src": "/about-1.jpg",
+      "alt": "Volunteers and community members gathered around a water project"
     },
+    "stats": [
+      {
+        "value": 2012,
+        "plain": true,
+        "label": "Year we began"
+      },
+      {
+        "value": 48,
+        "suffix": "+",
+        "label": "Villages served"
+      },
+      {
+        "value": 125000,
+        "suffix": "+",
+        "label": "Lives reached"
+      },
+      {
+        "value": 92,
+        "suffix": "%",
+        "label": "Of every gift goes to projects"
+      }
+    ]
+  }
+,
     "mission": {
-        "eyebrow": "About",
+        "eyebrow": "Our Mission",
         "titleStart": "Our mission is to build a future that works for",
         "titleAccent": "everyone.",
         "description": "We partner with communities to improve access to clean water, education, and healthcare. Every action begins with listening and grows through collective effort",

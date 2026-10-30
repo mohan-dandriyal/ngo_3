@@ -4,28 +4,38 @@
     "title": "Our causes",
     "description": "Choose a cause, see exactly how much has been raised, and give to a project you can follow from start to finish."
   },
-   "hero": {
-        "breadcrumb": [
-            {
-                "label": "Home",
-                "linkTo": "/"
-            },
-            {
-                "label": "Our Cause"
-            }
-        ],
-    "eyebrow": "",
+  
+
+  "hero": {
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "linkTo": "/"
+      },
+      {
+        "label": "Our Causes"
+      }
+    ],
+    "eyebrow": "Together, we can make a difference",
     "titleStart": "Pick a cause.",
     "titleAccent": "Watch it grow.",
-    "description": "Every campaign has a clear goal, a named team and public progress. Give to the one closest to your heart and follow where it goes.",
+    "description": "Every campaign has a clear goal, a dedicated team and transparent progress. Support the cause closest to your heart and follow the difference your contribution makes.",
+    "image": {
+      "src": "/banner/cause-banner.png",
+      "alt": "Community volunteers working together to support a local cause"
+    },
     "currencySymbol": "₹",
-    "primaryButton": { "text": "See all causes", "link": "#causes" },
+    "primaryButton": {
+      "text": "See all causes",
+      "link": "#causes"
+    },
     "statLabels": {
       "raised": "Raised across all causes",
       "supporters": "People giving",
       "causes": "Active causes"
     }
   },
+
   "featured": {
     "eyebrow": "Featured cause",
     "amountLabel": "Choose an amount",

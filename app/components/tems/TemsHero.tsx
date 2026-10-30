@@ -1,219 +1,297 @@
+
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
-    motion,
-    useReducedMotion,
-    useScroll,
-    useTransform,
-    type Variants,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type Variants,
 } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+
 import type { TeamHero as TeamHeroType } from "@/app/types/team";
 import MainContainer from "../ui/MainContainer";
-import { Description, Eyebrow } from "../ui/SectionContent";
+import {  Eyebrow } from "../ui/SectionContent";
 import BreadCrumb from "../ui/BreadCrumb";
 
 interface TeamHeroProps {
-    data: TeamHeroType;
+  data: TeamHeroType;
 }
 
-const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
+const ease: [number, number, number, number] = [
+  0.2, 0.8, 0.15, 1,
+];
 
-/* Names are "hidden" and "show" so Eyebrow and Description join the same stagger */
 const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
 };
+
 const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease,
+    },
+  },
 };
-const headline: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+
+const words: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.065,
+    },
+  },
 };
+
 const word: Variants = {
-    hidden: { y: "110%" },
-    show: { y: 0, transition: { duration: 1.1, ease } },
+  hidden: {
+    opacity: 0,
+    y: "110%",
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.85,
+      ease,
+    },
+  },
 };
 
-function Words({ text, className = "" }: { text: string; className?: string }) {
-    return (
-        <>
-            {text
-                .split(" ")
-                .filter(Boolean)
-                .map((w, i) => (
-                    <span
-                        key={`${w}-${i}`}
-                        aria-hidden="true"
-                        className="mr-[0.22em] inline-block overflow-hidden pb-[0.12em] pr-[0.06em] align-bottom"
-                    >
-                        <motion.span variants={word} className={`inline-block ${className}`}>
-                            {w}
-                        </motion.span>
-                    </span>
-                ))}
-        </>
-    );
+function AnimatedWords({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(" ").filter(Boolean).map((item, index) => (
+        <span
+          key={`${item}-${index}`}
+          aria-hidden="true"
+          className="mr-[0.22em] inline-block overflow-hidden pb-[0.12em] align-bottom"
+        >
+          <motion.span
+            variants={word}
+            className="inline-block"
+          >
+            {item}
+          </motion.span>
+        </span>
+      ))}
+    </>
+  );
 }
 
-/* One photo: reveals on load, then drifts at its own speed while scrolling */
-function TeamPhoto({
-    image,
-    aspect,
-    drift,
-    delay,
-    priority,
-    reduce,
+function ScrollIndicator({
+  text,
+  target,
 }: {
-    image: { src: string; alt?: string };
-    aspect: string;
-    drift: [number, number];
-    delay: number;
-    priority?: boolean;
-    reduce: boolean | null;
+  text: string;
+  target: string;
 }) {
-    const ref = useRef<HTMLElement>(null);
-    const [failed, setFailed] = useState(!image?.src);
-    const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-    const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : drift);
+  return (
+    <a
+      href={target}
+      aria-label={text}
+      className="group relative flex h-28 w-28 shrink-0 items-center justify-center sm:h-32 sm:w-32"
+    >
+      {/* Rotating circular text */}
+      <motion.svg
+        viewBox="0 0 120 120"
+        className="absolute inset-0 h-full w-full"
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <defs>
+          <path
+            id="team-circle-path"
+            d="M 60,60 m -43,0 a 43,43 0 1,1 86,0 a 43,43 0 1,1 -86,0"
+          />
+        </defs>
 
-    return (
-        <motion.figure
-            ref={ref}
-            initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            transition={{ duration: 1.3, ease: [0.7, 0, 0.2, 1], delay }}
-            className={`relative m-0 w-full overflow-hidden bg-[#161a17] ring-1 ring-[#e8c99a]/15 ${aspect}`}
+        <text
+          fill="currentColor"
+          fontSize="9"
+          letterSpacing="3"
+          className="fill-[#ece6da]/80 uppercase"
         >
-            {!failed ? (
-                <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y }}>
-                    <motion.div
-                        className="absolute inset-0"
-                        initial={reduce ? false : { scale: 1.2 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 2, ease, delay }}
-                    >
-                        <Image
-                            src={image.src}
-                            alt={image.alt || ""}
-                            fill
-                            priority={priority}
-                            sizes="(min-width: 1024px) 30vw, 40vw"
-                            onError={() => setFailed(true)}
-                            className="object-cover"
-                        />
-                    </motion.div>
-                </motion.div>
-            ) : (
-                <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
-            )}
-        </motion.figure>
-    );
+          <textPath href="#team-circle-path">
+            {`${text}  ·  ${text}  ·  `}
+          </textPath>
+        </text>
+      </motion.svg>
+
+      {/* Center circle */}
+      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-white/5 text-white backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:border-[#e0503a] group-hover:bg-[#e0503a] sm:h-14 sm:w-14">
+        <ArrowDown
+          size={20}
+          className="transition-transform duration-300 group-hover:translate-y-1"
+        />
+      </span>
+    </a>
+  );
 }
 
-export default function TeamHero({ data }: TeamHeroProps) {
-    const {
-        breadcrumb,
-        eyebrow,
-        titleStart,
-        titleAccent,
-        description,
-        scrollText,
-        scrollTarget = "#team",
-        images = [],
-    } = data ?? ({} as TeamHeroType);
+function TeamBackground({
+  src,
+  alt,
+  reduce,
+}: {
+  src: string;
+  alt?: string;
+  reduce: boolean;
+}) {
+  const imageRef = useRef<HTMLDivElement>(null);
 
-    const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start start", "end start"],
+  });
 
-    // Each photo has its own shape and scroll speed so the row feels layered
-    const layout = [
-        { aspect: "aspect-[4/5]", drift: [30, -30] as [number, number], delay: 0.35 },
-        { aspect: "aspect-[3/4]", drift: [-25, 45] as [number, number], delay: 0.5 },
-        { aspect: "aspect-square", drift: [20, -20] as [number, number], delay: 0.65 },
-    ];
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [0, 0] : [-45, 45]
+  );
 
-    return (
-        <section
-            id="team-hero"
-            className="relative w-full overflow-hidden bg-[#0a0a09] bg-[radial-gradient(45%_45%_at_100%_0%,#1c2a22_0%,transparent_70%)]
-                 text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
-        >
-            <MainContainer>
-                <div className="py-14 lg:py-24">
-                    <motion.div
-                        variants={container}
-                        initial={reduce ? false : "hidden"}
-                        animate="show"
-                        className="grid items-end gap-10 lg:grid-cols-[1.7fr_1fr] lg:gap-20"
-                    >
-                        <div>
+  return (
+    <div
+      ref={imageRef}
+      className="absolute inset-0 overflow-hidden bg-[#171c17]"
+    >
+      <motion.div
+        className="absolute inset-0"
+        style={{ y }}
+      >
+        <Image
+          src={src}
+          alt={alt || "WKX Foundation team working together"}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </motion.div>
 
-                            <BreadCrumb breadcrumb={breadcrumb} />
+      {/* Main overlay */}
+      <div className="absolute inset-0 bg-black/35" />
 
+      {/* Left dark gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
 
-                            {eyebrow && <Eyebrow eyebrow={eyebrow} />}
+      {/* Right dark gradient */}
+      {/* <div className="absolute inset-0 bg-gradient-to-l from-black/25 via-transparent to-transparent" /> */}
 
-                            <motion.h1
-                                variants={headline}
-                                aria-label={`${titleStart} ${titleAccent}`}
-                                className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(56px,8.6vw,100px)]
-                           font-medium leading-[0.98] tracking-[-0.02em] text-[#ece6da]"
-                            >
-                                <Words text={titleStart} />
-                                <em className="font-medium italic text-[#e0503a]">
-                                    <Words text={titleAccent} />
-                                </em>
-                            </motion.h1>
-                        </div>
+      {/* Bottom gradient */}
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a09] via-black/10 to-black/20" /> */}
+    </div>
+  );
+}
 
-                        <div className="max-w-[26rem] lg:pb-4">
-                            {description && <Description description={description} variant="body" />}
+export default function TeamHero({
+  data,
+}: TeamHeroProps) {
+  const {
+    breadcrumb,
+    eyebrow,
+    titleStart,
+    titleAccent,
+    bannerImage,
+  } = data;
 
-                            {scrollText && (
-                                <motion.div variants={fadeUp} className="mt-8">
-                                    <a
-                                        href={scrollTarget}
-                                        className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#ece6da]
-                               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-                                    >
-                                        {scrollText}
-                                        <ArrowDown
-                                            size={16}
-                                            aria-hidden="true"
-                                            className="transition-transform duration-300 group-hover:translate-y-1"
-                                        />
-                                        <span
-                                            aria-hidden="true"
-                                            className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
-                                        />
-                                    </a>
-                                </motion.div>
-                            )}
-                        </div>
-                    </motion.div>
+  const shouldReduceMotion = useReducedMotion();
+  const reduce = shouldReduceMotion ?? false;
 
-                    {/* Photo row */}
-                    {images.length > 0 && (
-                        <div className="mt-14 grid grid-cols-[1.2fr_1fr_0.8fr] items-end gap-3 sm:gap-6 lg:mt-20">
-                            {images.slice(0, 3).map((img, i) => (
-                                <TeamPhoto
-                                    key={img.src ?? i}
-                                    image={img}
-                                    aspect={layout[i].aspect}
-                                    drift={layout[i].drift}
-                                    delay={layout[i].delay}
-                                    priority={i === 0}
-                                    reduce={reduce}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </MainContainer>
-        </section>
-    );
+  return (
+    <section
+      id="team-hero"
+      className="relative isolate min-h-[680px] w-full overflow-hidden bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#ece6da] sm:min-h-[720px] lg:min-h-[760px]"
+    >
+      {/* Full background image */}
+      {bannerImage?.src && (
+        <TeamBackground
+          src={bannerImage.src}
+          alt={bannerImage.alt}
+          reduce={reduce}
+        />
+      )}
+
+      {/* Ambient accent */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 top-20 z-[1] h-[450px] w-[450px] rounded-full bg-[#e0503a]/10 blur-[140px]"
+      />
+
+      <MainContainer>
+        <div className="relative z-10 flex min-h-[680px] flex-col sm:min-h-[500px] lg:min-h-[550px]">
+
+          {/* Top breadcrumb */}
+          <motion.div
+            variants={fadeUp}
+            initial={reduce ? false : "hidden"}
+            animate="show"
+            className="pt-10 sm:pt-12 lg:pt-14"
+          >
+            <BreadCrumb breadcrumb={breadcrumb} />
+          </motion.div>
+
+          {/* Main content */}
+          <motion.div
+            variants={container}
+            initial={reduce ? false : "hidden"}
+            animate="show"
+            className="flex flex-1 flex-col justify-center "
+          >
+            <div className="max-w-5xl">
+
+              {/* Eyebrow */}
+              {eyebrow && (
+                <motion.div
+                  variants={fadeUp}
+                  className="mb-7 flex items-center gap-4"
+                >
+
+                  <Eyebrow eyebrow={eyebrow} />
+                </motion.div>
+              )}
+
+              {/* Heading */}
+              <motion.h1
+                variants={words}
+                aria-label={`${titleStart} ${titleAccent}`}
+                className="max-w-5xl font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(58px,8.5vw,90px)] font-medium leading-[0.91] tracking-[-0.045em] text-white"
+              >
+                <AnimatedWords text={titleStart} />
+
+                <br />
+
+                <em className="font-medium italic text-[#e0503a]">
+                  <AnimatedWords text={titleAccent} />
+                </em>
+              </motion.h1>
+
+             
+            </div>
+          </motion.div>
+
+        </div>
+      </MainContainer>
+    </section>
+  );
 }

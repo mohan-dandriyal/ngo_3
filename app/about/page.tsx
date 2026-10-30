@@ -17,10 +17,6 @@ function About() {
         <OurVision data={{ ...about.vision, imageCaption: about.vision.image.alt }} />
       </div>
 
-      {/* <div>
-        <OurImpact data={about.impact} />
-      </div> */}
-
       <div>
         <JoinMission data={about.joinMission} />
       </div>

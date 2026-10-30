@@ -103,7 +103,7 @@ export default function JoinMission({ data }: JoinMissionProps) {
   return (
     <section
       id="join-our-mission"
-      className="relative w-full overflow-hidden bg-[#0a0a09] py-20 text-[#ece6da] sm:py-24 md:py-28
+      className="relative w-full overflow-hidden bg-[#0a0a09] py-18 text-[#ece6da] sm:py-18 md:py-20
                  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       {/* Soft red glow behind the headline, slowly breathing */}
@@ -138,7 +138,7 @@ export default function JoinMission({ data }: JoinMissionProps) {
           <SectionTitle
             titleStart={titleStart}
             titleAccent={titleAccent}
-            className="text-center !text-[clamp(52px,8vw,120px)] !leading-[0.98]"
+            className="text-center !text-[clamp(52px,8vw,80px)] !leading-[0.98]"
           />
 
           {description && (
@@ -147,43 +147,6 @@ export default function JoinMission({ data }: JoinMissionProps) {
             </div>
           )}
 
-          {(primaryButton?.text || secondaryButton?.text) && (
-            <motion.div
-              variants={fadeUp}
-              className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center"
-            >
-              {primaryButton?.text && (
-                <PrimaryButton href={primaryButton.link || "#"} className="justify-center" >
-                  {primaryButton.text}
-                </PrimaryButton>
-              )}
-
-              {secondaryButton?.text && (
-                <Link
-                  href={secondaryButton.link || "#"}
-                  className="group relative inline-flex items-center justify-center gap-5 overflow-hidden border border-[#ece6da]/30
-                             px-6 py-[18px] text-[15px] font-semibold tracking-[0.01em] text-[#ece6da] transition-colors duration-300
-                             hover:border-[#e0503a]
-                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-                >
-                  {/* Red fill sweeps up from the bottom on hover */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 origin-bottom scale-y-0 bg-[#e0503a] transition-transform duration-500
-                               ease-out group-hover:scale-y-100 motion-reduce:transition-none"
-                  />
-                  <span className="relative transition-colors duration-300 group-hover:text-[#14110c]">
-                    {secondaryButton.text}
-                  </span>
-                  <ArrowUpRight
-                    size={16}
-                    aria-hidden="true"
-                    className="relative transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#14110c]"
-                  />
-                </Link>
-              )}
-            </motion.div>
-          )}
         </motion.div>
 
         {/* Scrolling closing line */}

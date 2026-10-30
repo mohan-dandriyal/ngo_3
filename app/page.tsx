@@ -13,11 +13,11 @@ import HomeTestimonials from './components/home/Hometestimonials';
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <Hero
+       <Hero
         data={{
-          ...home.hero,
-          secondaryBtn: { text: 'Explore Programs', linkTo: '/programs' },
-          images: home.hero.images.map((image) => ({ ...image, counter: '01', location: '' })),
+          ...home.hero.slides[0],
+          images: home.hero.slides,
+          slider: home.hero.slider,
         }}
       />
 
@@ -25,13 +25,14 @@ export default function Home() {
         <HomeAbout data={home.homeAbout} />
       </div>
 
-      <div className='bg-[#0a0a09] w-full pt-20'>
+      <div className='bg-[#0a0a09] w-full'>
         <HomePrograms
           data={{
             ...home.homePrograms,
             meta: '',
             programs: home.homePrograms.programs.map((program) => ({
               ...program,
+              theme: 'sand',
               linkText: 'Learn more',
               linkTo: '/programs',
             })),
@@ -39,11 +40,11 @@ export default function Home() {
         />
       </div>
 
-      <div className='bg-[#0a0a09] w-full'>
+      <div className='bg-[#0a0a09] w-full '>
         <HomeCauses
           data={{
             ...home.homeCause,
-            causeItem: home.homeCause.causes.map((cause) => ({
+            causes: home.homeCause.causes.map((cause) => ({
               ...cause,
               raised: 0,
               goal: 0,

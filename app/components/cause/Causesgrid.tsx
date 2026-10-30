@@ -103,7 +103,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
                  text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
-        <div className="py-20 lg:py-[120px]">
+        <div className="pt-16 pb-20">
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}

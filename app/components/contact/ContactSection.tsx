@@ -1,9 +1,16 @@
+
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+import {
+  ArrowDownRight,
   ArrowUpRight,
   Handshake,
   HeartHandshake,
@@ -11,31 +18,45 @@ import {
   MapPin,
   Phone,
   Send,
+  Check,
   type LucideIcon,
 } from "lucide-react";
-import type { ContactSection as ContactSectionType, ContactMethod } from "@/app/types/contact";
+
+import type {
+  ContactSection as ContactSectionType,
+  ContactMethod,
+} from "@/app/types/contact";
+
 import MainContainer from "../ui/MainContainer";
-import { Description, Eyebrow, SectionTitle } from "../ui/SectionContent";
+import {
+  Description,
+  Eyebrow,
+  SectionTitle,
+} from "../ui/SectionContent";
 
 interface ContactSectionProps {
   data: ContactSectionType;
-  /** Send the form values to your API here. Throw to show the error message. */
   onSubmit?: (values: Record<string, string>) => Promise<void>;
 }
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so Eyebrow, SectionTitle and Description join the stagger */
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+  show: {
+    transition: { staggerChildren: 0.12 },
+  },
 };
 
-/* The "icon" value in your JSON picks one of these */
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease },
+  },
+};
+
 const ICONS: Record<string, LucideIcon> = {
   mail: Mail,
   handshake: Handshake,
@@ -44,92 +65,102 @@ const ICONS: Record<string, LucideIcon> = {
   "map-pin": MapPin,
 };
 
-function MethodCard({ method }: { method: ContactMethod }) {
+function ContactCard({ method }: { method: ContactMethod }) {
   const Icon = ICONS[method.icon] ?? Mail;
   const plainLink = /^(mailto:|tel:|https?:)/.test(method.link);
 
-  const className = `group relative block overflow-hidden border border-[#ffff]/15 outline-none
-    focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#e8e1d5]`;
+  const content = (
+    <div className="group relative flex h-full items-start gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#a8c686]/40 hover:bg-white/[0.07] sm:p-6">
+      <div className="absolute inset-y-0 left-0 w-1 origin-bottom scale-y-0 bg-[#a8c686] transition-transform duration-500 group-hover:scale-y-100" />
 
-  const body = (
-    <>
-      {/* Dark fill sweeps across on hover */}
-      <span
+      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#a8c686]/10 text-[#a8c686] transition-all duration-500 group-hover:bg-[#a8c686] group-hover:text-[#0a0a09]">
+        <Icon size={21} aria-hidden="true" />
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-[27px] leading-tight text-[#ece6da]">
+          {method.title}
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-[#a7a398]">
+          {method.description}
+        </p>
+
+        <p className="mt-4 break-words text-sm font-semibold text-[#e0503a]">
+          {method.value}
+        </p>
+      </div>
+
+      <ArrowUpRight
+        size={19}
+        className="mt-1 shrink-0 text-white/40 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#a8c686]"
         aria-hidden="true"
-        className="absolute inset-0 origin-left scale-x-0 bg-[#403f3f] transition-transform duration-500 ease-out
-                   group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
       />
-      <span className="relative grid grid-cols-[52px_1fr_auto] items-start gap-5 p-6 sm:p-7">
-        <span
-          className="grid h-[52px] w-[52px] place-items-center rounded-full border border-[#ffff]/25 text-[#e0503a]
-                     transition-colors duration-300 group-hover:border-[#e8c99a]/50 group-hover:text-[#e8c99a]"
-        >
-          <Icon size={22} aria-hidden="true" />
-        </span>
-
-        <span className="block">
-          <span className="block font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#b6b5b5] transition-colors duration-300 group-hover:text-[#f1ece1]">
-            {method.title}
-          </span>
-          <span className="mt-1.5 block text-[15px] leading-relaxed text-[#9b9a97] transition-colors duration-300 group-hover:text-[#bdb7aa]">
-            {method.description}
-          </span>
-          <span className="mt-4 block text-[15px] font-semibold text-[#a2a2a2] transition-colors duration-300 group-hover:text-[#e0503a]">
-            {method.value}
-          </span>
-        </span>
-
-        <ArrowUpRight
-          size={20}
-          aria-hidden="true"
-          className="mt-1 text-[#878787] transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#e0503a]"
-        />
-      </span>
-    </>
+    </div>
   );
 
   return plainLink ? (
-    <a href={method.link} className={className}>
-      {body}
+    <a
+      href={method.link}
+      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
+    >
+      {content}
     </a>
   ) : (
-    <Link href={method.link} className={className}>
-      {body}
+    <Link
+      href={method.link}
+      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
+    >
+      {content}
     </Link>
   );
 }
 
-export default function ContactSection({ data, onSubmit }: ContactSectionProps) {
-  const { eyebrow, titleStart, titleAccent, description, contactMethods = [], form } =
-    data ?? ({} as ContactSectionType);
+export default function ContactSection({
+  data,
+  onSubmit,
+}: ContactSectionProps) {
+  const {
+    contactMethods = [],
+    form,
+  } = data;
 
   const reduce = useReducedMotion();
+
   const fields = form?.fields ?? [];
 
   const [values, setValues] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
-  const setValue = (name: string, value: string) => setValues((v) => ({ ...v, [name]: value }));
+  const setValue = (name: string, value: string) => {
+    setValues((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
 
-    // Honeypot: real visitors never see or fill this field, bots often do
+    // Honeypot spam protection
     if (formData.get("company")) {
       setStatus("success");
       return;
     }
 
     setStatus("sending");
+
     try {
       if (onSubmit) {
         await onSubmit(values);
       } else {
-        // No handler passed in yet: wait briefly so the sending state is visible.
-        // Replace with a fetch("/api/contact", { method: "POST", ... }) call.
-        await new Promise((resolve) => setTimeout(resolve, 900));
+        throw new Error("Contact form handler is not configured.");
       }
+
       setStatus("success");
       setValues({});
     } catch {
@@ -140,46 +171,93 @@ export default function ContactSection({ data, onSubmit }: ContactSectionProps) 
   return (
     <section
       id="contact"
-      className="w-full overflow-hidden bg-[#0a0a09] text-[#fff] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="relative isolate overflow-hidden bg-[#0a0a09] py-16 text-[#ece6da] sm:py-18 lg:py-20"
     >
+      {/* Background decoration */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 top-20 h-[450px] w-[450px] rounded-full bg-[#a8c686]/[0.07] blur-[120px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-[#e0503a]/[0.06] blur-[120px]"
+      />
+
       <MainContainer>
-        <div className="grid items-start gap-14 py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:py-[130px]">
-          {/* Heading and contact methods */}
+       
+
+        {/* Main content */}
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+          {/* Contact methods */}
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.12 }}
           >
-            {eyebrow && <Eyebrow eyebrow={eyebrow}  />}
-            <SectionTitle titleStart={titleStart} titleAccent={titleAccent}  />
+            <div className="mb-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#a8c686]">
+                Get in touch
+              </span>
 
-            {description && (
-              <div className="mt-7">
-                <Description description={description} variant="body"  />
-              </div>
-            )}
+              <h3 className="mt-3 font-['Cormorant_Garamond',Georgia,serif] text-4xl leading-tight text-[#ece6da] sm:text-5xl">
+                Let&apos;s make
+                <br />
+                <span className="italic text-[#e0503a]">
+                  something meaningful.
+                </span>
+              </h3>
 
-            {contactMethods.length > 0 && (
-              <ul className="mt-12 space-y-4">
-                {contactMethods.map((m) => (
-                  <motion.li key={m.id} variants={fadeUp}>
-                    <MethodCard method={m} />
-                  </motion.li>
-                ))}
-              </ul>
-            )}
-          </motion.div>
+              <p className="mt-5 max-w-md text-sm leading-7 text-[#a7a398]">
+                Every meaningful change begins with a conversation. Reach out
+                and let&apos;s explore how we can make a difference together.
+              </p>
+            </div>
 
-          {/* Form */}
-          {form && (
+            <div className="space-y-4">
+              {contactMethods.map((method) => (
+                <motion.div key={method.id} variants={fadeUp}>
+                  <ContactCard method={method} />
+                </motion.div>
+              ))}
+            </div>
+
             <motion.div
               variants={fadeUp}
-              initial={reduce ? false : "hidden"}
-              whileInView="show"
-              viewport={{ once: true, amount: 0.12 }}
-              className="bg-[#14110c] p-8 text-[#ece6da] sm:p-10 lg:sticky lg:top-24 lg:p-12"
+              className="mt-8 flex items-center gap-3 border-t border-white/10 pt-7"
             >
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-[#e0503a]/10 text-[#e0503a]">
+                <HeartHandshake size={19} />
+              </div>
+
+              <p className="text-sm text-[#a7a398]">
+                Have an idea for change?{" "}
+                <span className="text-[#ece6da]">
+                  We&apos;d love to hear it.
+                </span>
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Contact form */}
+          {form && (
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ duration: 0.8, ease }}
+              className="relative overflow-hidden rounded-3xl bg-[#ece6da] p-6 text-[#171713] sm:p-9 lg:p-11"
+            >
+              {/* Form decoration */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-[#252d4a]/10"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-[#252d4a]/10"
+              />
+
               <AnimatePresence mode="wait" initial={false}>
                 {status === "success" ? (
                   <motion.div
@@ -187,37 +265,26 @@ export default function ContactSection({ data, onSubmit }: ContactSectionProps) 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease }}
+                    transition={{ duration: 0.5, ease }}
                     role="status"
-                    className="flex min-h-[420px] flex-col items-start justify-center"
+                    className="relative flex min-h-[480px] flex-col items-start justify-center"
                   >
-                    {/* Check mark draws itself */}
-                    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" className="h-16 w-16 text-[#e0503a]">
-                      <motion.circle
-                        cx="32" cy="32" r="29" stroke="currentColor" strokeWidth="2.5"
-                        initial={reduce ? false : { pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.9, ease: "easeInOut" }}
-                      />
-                      <motion.path
-                        d="M19 33l9 9 17-19" stroke="currentColor" strokeWidth="3"
-                        strokeLinecap="round" strokeLinejoin="round"
-                        initial={reduce ? false : { pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.7 }}
-                      />
-                    </svg>
-                    <p className="mt-8 max-w-[22ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(30px,3vw,42px)] font-medium leading-[1.15]">
+                    <div className="grid h-16 w-16 place-items-center rounded-full bg-[#a8c686]/25 text-[#526b3c]">
+                      <Check size={32} />
+                    </div>
+
+                    <p className="mt-8 max-w-sm font-['Cormorant_Garamond',Georgia,serif] text-5xl leading-tight">
                       {form.successMessage}
                     </p>
+
                     {form.resetText && (
                       <button
                         type="button"
                         onClick={() => setStatus("idle")}
-                        className="mt-8 border-b border-[#e0503a] pb-1.5 text-sm text-[#ece6da] outline-none transition-colors
-                                   hover:text-[#e0503a] focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#14110c]"
+                        className="mt-8 inline-flex items-center gap-3 border-b border-[#e0503a] pb-2 text-sm font-semibold transition-colors hover:text-[#e0503a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
                       >
                         {form.resetText}
+                        <ArrowUpRight size={16} />
                       </button>
                     )}
                   </motion.div>
@@ -227,115 +294,139 @@ export default function ContactSection({ data, onSubmit }: ContactSectionProps) 
                     onSubmit={handleSubmit}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: -12 }}
+                    exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.4 }}
                     aria-busy={status === "sending"}
+                    className="relative"
                   >
-                    {form.eyebrow && (
-                      <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]">{form.eyebrow}</p>
-                    )}
-                    {form.title && (
-                      <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(34px,3.6vw,52px)] font-medium leading-none tracking-[-0.01em]">
+                    <div className="mb-9">
+                      {form.eyebrow && (
+                        <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#a34b37]">
+                          {form.eyebrow}
+                        </p>
+                      )}
+
+                      <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-4xl leading-tight sm:text-5xl">
                         {form.title}
                       </h3>
-                    )}
 
-                    <div className="mt-10 space-y-8">
-                      {fields.map((f) => {
-                        const id = `contact-${f.name}`;
-                        const common = {
-                          id,
-                          name: f.name,
-                          required: f.required,
-                          placeholder: f.placeholder,
-                          value: values[f.name] ?? "",
-                          disabled: status === "sending",
-                          "aria-required": f.required || undefined,
-                          className:
-                            "w-full bg-transparent py-3 text-base text-[#f1ece1] outline-none placeholder:text-[#8f8a80] disabled:opacity-60",
-                        };
+                      <p className="mt-3 text-sm leading-6 text-[#6d6a60]">
+                        Tell us a little about what brings you here.
+                      </p>
+                    </div>
+
+                    <div className="space-y-7">
+                      {fields.map((field) => {
+                        const id = `contact-${field.name}`;
+
+                        const inputClass =
+                          "mt-2 w-full border-b border-[#252d4a]/20 bg-transparent px-0 py-3 text-[15px] text-[#171713] outline-none transition-colors placeholder:text-[#969187] focus:border-[#e0503a] disabled:opacity-50";
 
                         return (
-                          <div key={f.name} className="group/field relative">
-                            <label htmlFor={id} className="block text-sm text-[#bdb7aa]">
-                              {f.label}
-                              {f.required && (
-                                <span aria-hidden="true" className="ml-1 text-[#e0503a]">
+                          <div key={field.name}>
+                            <label
+                              htmlFor={id}
+                              className="text-sm font-semibold text-[#45443e]"
+                            >
+                              {field.label}
+                              {field.required && (
+                                <span className="ml-1 text-[#e0503a]">
                                   *
                                 </span>
                               )}
                             </label>
 
-                            {f.type === "textarea" ? (
+                            {field.type === "textarea" ? (
                               <textarea
-                                {...common}
-                                rows={5}
-                                onChange={(e) => setValue(f.name, e.target.value)}
-                                className={`${common.className} resize-none`}
+                                id={id}
+                                name={field.name}
+                                rows={4}
+                                required={field.required}
+                                placeholder={field.placeholder}
+                                value={values[field.name] ?? ""}
+                                disabled={status === "sending"}
+                                onChange={(e) =>
+                                  setValue(field.name, e.target.value)
+                                }
+                                className={`${inputClass} resize-none`}
                               />
                             ) : (
                               <input
-                                {...common}
-                                type={f.type || "text"}
-                                onChange={(e) => setValue(f.name, e.target.value)}
+                                id={id}
+                                name={field.name}
+                                type={field.type || "text"}
+                                required={field.required}
+                                placeholder={field.placeholder}
+                                value={values[field.name] ?? ""}
+                                disabled={status === "sending"}
+                                onChange={(e) =>
+                                  setValue(field.name, e.target.value)
+                                }
+                                className={inputClass}
                               />
                             )}
-
-                            {/* Base line, with a red line that draws in on focus */}
-                            <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-[#ece6da]/25" />
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-[#e0503a] transition-transform
-                                         duration-500 ease-out group-focus-within/field:scale-x-100"
-                            />
                           </div>
                         );
                       })}
 
-                      {/* Honeypot field for spam bots; hidden from people and screen readers */}
-                      <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+                      {/* Honeypot */}
+                      <div
+                        aria-hidden="true"
+                        className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+                      >
                         <label>
                           Company
-                          <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+                          <input
+                            type="text"
+                            name="company"
+                            tabIndex={-1}
+                            autoComplete="off"
+                          />
                         </label>
                       </div>
                     </div>
 
                     {status === "error" && (
-                      <p role="alert" className="mt-6 text-sm text-[#ef6e58]">
-                        {form.errorMessage || "Something went wrong. Please try again."}
+                      <p role="alert" className="mt-5 text-sm text-[#c33e2d]">
+                        {form.errorMessage ||
+                          "Something went wrong. Please try again."}
                       </p>
                     )}
 
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="group relative mt-10 inline-flex items-center gap-4 overflow-hidden bg-[#e0503a] px-7 py-[18px]
-                                 text-[15px] font-semibold tracking-[0.01em] text-[#14110c] outline-none transition-shadow duration-300
-                                 hover:shadow-[0_10px_34px_-8px_rgba(224,80,58,0.7)] disabled:cursor-wait disabled:opacity-80
-                                 focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#14110c]"
+                      className="group relative mt-9 inline-flex w-full items-center justify-between overflow-hidden rounded-full bg-[#e0503a] px-7 py-5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#c94230] hover:shadow-lg hover:shadow-[#e0503a]/20 disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171713] focus-visible:ring-offset-2"
                     >
-                      {/* Lighter fill sweeps across on hover */}
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 -translate-x-full bg-[#ef6e58] transition-transform duration-500 ease-out
-                                   group-hover:translate-x-0 motion-reduce:transition-none"
-                      />
-                      <span className="relative">{form.submitText}</span>
+                      <span>
+                        {status === "sending"
+                          ? "Sending your message..."
+                          : form.submitText}
+                      </span>
+
                       <motion.span
-                        className="relative"
-                        animate={status === "sending" && !reduce ? { x: [0, 6, 0], opacity: [1, 0.4, 1] } : { x: 0, opacity: 1 }}
-                        transition={{ duration: 0.9, repeat: status === "sending" ? Infinity : 0 }}
+                        animate={
+                          status === "sending" && !reduce
+                            ? { rotate: 360 }
+                            : { rotate: 0 }
+                        }
+                        transition={{
+                          duration: 1.2,
+                          repeat: status === "sending" ? Infinity : 0,
+                          ease: "linear",
+                        }}
                       >
-                        <Send size={17} aria-hidden="true" />
+                        <Send size={18} />
                       </motion.span>
                     </button>
+
                   </motion.form>
                 )}
               </AnimatePresence>
             </motion.div>
           )}
         </div>
+
       </MainContainer>
     </section>
   );

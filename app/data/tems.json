@@ -6,29 +6,20 @@
                 "linkTo": "/"
             },
             {
-                "label": "Team's"
+                "label": "Team"
             }
         ],
-        "eyebrow": "",
+        "eyebrow": "The people behind the purpose",
         "titleStart": "The people behind",
         "titleAccent": "the mission.",
         "description": "Teachers, nurses, engineers and neighbours. A small team with one shared promise: to show up for the communities we serve.",
         "scrollText": "Meet the team",
         "scrollTarget": "#team",
-        "images": [
-            {
-                "src": "/team-h-1.jpg",
-                "alt": "Team members planning a project together"
-            },
-            {
-                "src": "/team-h-2.jpg",
-                "alt": "A nurse speaking with a family at a mobile clinic"
-            },
-            {
-                "src": "/team-h-3.jpg",
-                "alt": "Volunteers laughing during a school visit"
-            }
-        ]
+        "bannerImage": {
+            "src": "/banner/cause-banner.png",
+            "alt": "WKX Foundation team working together with local communities"
+        },
+        "bannerCaption": "OUR PEOPLE. OUR PURPOSE."
     },
     "teamSection": {
         "eyebrow": "Meet our team",
@@ -52,7 +43,7 @@
                 "role": "Head of Programs",
                 "department": "Programs",
                 "bio": "Leads our water, education and health projects across 48 villages.",
-                 "image": "/profile-2.jpg",
+                "image": "/profile-2.jpg",
                 "imageAlt": "Portrait of Rohan Mehta",
                 "linkedin": "https://linkedin.com",
                 "twitter": "https://x.com"
@@ -62,7 +53,7 @@
                 "role": "Community Coordinator",
                 "department": "Programs",
                 "bio": "Our first point of contact in the villages, and the person everyone trusts.",
-                 "image": "/profile-4.jpg",
+                "image": "/profile-4.jpg",
                 "imageAlt": "Portrait of Sunita Devi",
                 "email": "sunita@yourfoundation.org"
             },
@@ -71,7 +62,7 @@
                 "role": "Volunteer Manager",
                 "department": "Community",
                 "bio": "Matches volunteers with the projects where their skills help most.",
-                 "image": "/profile-3.jpg",
+                "image": "/profile-3.jpg",
                 "imageAlt": "Portrait of Imran Sheikh",
                 "linkedin": "https://linkedin.com"
             },

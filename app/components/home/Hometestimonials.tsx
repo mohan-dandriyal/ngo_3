@@ -1,63 +1,131 @@
 
-"use client"
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
-import { Eyebrow, SectionTitle } from "../ui/SectionContent";
-import MainContainer from "../ui/MainContainer";
 
-const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
-const INTERVAL = 8000; // ms each quote stays on screen
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+
+import {
+  ArrowLeft,
+  ArrowRight,
+  Quote,
+} from "lucide-react";
+
+import MainContainer from "../ui/MainContainer";
+import { Eyebrow, SectionTitle } from "../ui/SectionContent";
+
+
+
+const ease: [number, number, number, number] = [
+  0.2, 0.8, 0.15, 1,
+];
 
 const headingContainer: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
 };
+
 const rise: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease,
+    },
+  },
 };
 
-/* Quote slides in from the direction of travel, and out the opposite way */
 const slide: Variants = {
-  enter: (d: number) => ({ opacity: 0, x: d * 56 }),
-  center: { opacity: 1, x: 0, transition: { duration: 0.7, ease } },
-  exit: (d: number) => ({ opacity: 0, x: d * -56, transition: { duration: 0.35, ease: "easeIn" } }),
+  enter: (direction: number) => ({
+    opacity: 0,
+    x: direction * 45,
+  }),
+
+  center: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.65,
+      ease,
+    },
+  },
+
+  exit: (direction: number) => ({
+    opacity: 0,
+    x: direction * -35,
+    transition: {
+      duration: 0.35,
+      ease,
+    },
+  }),
 };
 
-type Testimonial = {
+type TestimonialItem = {
+  id?: string;
   name: string;
   quote: string;
-  image?: string | null;
-  imageAlt?: string | null;
-  role?: string | null;
+  image?: string;
+  imageAlt?: string;
+  role?: string;
 };
 
 type HomeTestimonialsContent = {
-  data?: {
-    eyebrow?: string | null;
-    titleStart?: string | null;
-    titleAccent?: string | null;
-    titleEnd?: string | null;
-    testimonials?: Testimonial[] | null;
-  } | null;
+  data: {
+    eyebrow?: string;
+    titleStart: string;
+    titleAccent: string;
+    titleEnd: string;
+    slider: {
+      autoplay: boolean;
+      interval?: number;
+      previousLabel: string;
+      nextLabel: string;
+      imageFallbackLabel: string;
+      paginationLabel: string;
+      slideLabel: string;
+    };
+    testimonials?: TestimonialItem[];
+  };
 };
 
-function Avatar({ person }: { person: Testimonial }) {
+// Avatar with automatic initials fallback
+function Avatar({
+  person,
+  fallbackLabel,
+}: {
+  person: TestimonialItem;
+  fallbackLabel: string;
+}) {
   const [failed, setFailed] = useState(!person.image);
+
   const initials = person.name
-    .split(" ")
-    .map((w) => w[0])
+    .trim()
+    .split(/\s+/)
+    .map((word: string) => word.charAt(0))
     .slice(0, 2)
     .join("")
     .toUpperCase();
 
   return (
-    <div className="relative h-16 w-16 flex-none overflow-hidden rounded-full bg-[#27382e] ring-2 ring-[#e8c99a]/40">
-      {!failed ? (
+    <div className="relative h-14 w-14 flex-none overflow-hidden rounded-full border border-[#a8c686]/40 bg-[#1d2921] sm:h-16 sm:w-16">
+      {person.image && !failed ? (
         <Image
-          src={person.image as string}
+          src={person.image}
           alt={person.imageAlt || person.name}
           fill
           sizes="64px"
@@ -65,104 +133,142 @@ function Avatar({ person }: { person: Testimonial }) {
           className="object-cover"
         />
       ) : (
-        <span className="grid h-full w-full place-items-center font-['Cormorant_Garamond',Georgia,serif] text-xl font-semibold text-[#e8c99a]">
+        <div
+          role="img"
+          aria-label={`${fallbackLabel}: ${person.name}`}
+          className="grid h-full w-full place-items-center font-['Cormorant_Garamond',Georgia,serif] text-xl font-semibold text-[#a8c686]"
+        >
           {initials}
-        </span>
+        </div>
       )}
     </div>
   );
 }
 
-export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
-  const { eyebrow, titleStart, titleAccent, titleEnd, testimonials } =
-    data ?? {};
-  const items = Array.isArray(testimonials) ? testimonials : [];
-  const total = items.length;
+export default function HomeTestimonials({
+  data,
+}: HomeTestimonialsContent) {
+  const {
+    eyebrow,
+    titleStart,
+    titleAccent,
+    titleEnd,
+    slider,
+    testimonials = [],
+  } = data;
 
   const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const [dir, setDir] = useState(1);
+
+  const [storedIndex, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
 
-  if (total === 0) return null;
+  const total = testimonials.length;
+  const index = total === 0 ? 0 : Math.min(storedIndex, total - 1);
 
-  const autoplay = total > 1 && !reduce;
-  const goNext = () => { setDir(1); setIndex((i) => (i + 1) % total); };
-  const goPrev = () => { setDir(-1); setIndex((i) => (i - 1 + total) % total); };
-  const goTo = (n: number) => { setDir(n > index ? 1 : -1); setIndex(n); };
+  const current = testimonials[index];
 
-  const current = items[index];
+  const autoplay =
+    slider.autoplay &&
+    !reduce &&
+    total > 1;
+
+  const interval = Math.max(slider.interval || 8000, 6000);
+
+  const goNext = () => {
+    setDirection(1);
+    setIndex((previous) => (previous + 1) % total);
+  };
+
+  const goPrev = () => {
+    setDirection(-1);
+    setIndex((previous) => (previous - 1 + total) % total);
+  };
+
+  const goTo = (nextIndex: number) => {
+    if (nextIndex === index) return;
+
+    setDirection(nextIndex > index ? 1 : -1);
+    setIndex(nextIndex);
+  };
+
+  if (!current) return null;
 
   return (
     <section
       id="testimonials"
-      className="overflow-hidden  bg-[radial-gradient(50%_60%_at_100%_0%,#27382e_0%,transparent_70%)]
-                 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]"
+      className="relative overflow-hidden bg-[#0a0a09] py-5 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#ece6da] "
     >
-      {/* Progress bar fills over each quote's time on screen; hovering pauses it */}
-      <style>{`
-        @keyframes testi-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-      `}</style>
+      {/* Background atmosphere */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-0 h-[450px] w-[450px] rounded-full bg-[#27382e]/40 blur-[130px]"
+      />
 
       <MainContainer>
-      <div className="mx-auto py-20 lg:py-[50px]">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.9fr] lg:gap-24">
-          {/* Heading and controls */}
+        <div className="relative grid gap-12 lg:grid-cols-[0.8fr_1.5fr] lg:gap-20">
+
+          {/* Left: Heading and navigation */}
           <motion.div
             variants={headingContainer}
             initial={reduce ? false : "hidden"}
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            className="flex flex-col justify-between gap-12"
+            viewport={{
+              once: true,
+              amount: 0.3,
+            }}
+            className="flex flex-col justify-between gap-10"
           >
             <div>
               {eyebrow && (
-                <Eyebrow eyebrow={eyebrow}  />
+                <motion.div variants={rise}>
+                  <Eyebrow eyebrow={eyebrow} />
+                </motion.div>
               )}
 
-              <SectionTitle
-                titleStart={titleStart ?? undefined}
-                titleAccent={titleAccent ?? undefined}
-                titleEnd={titleEnd ?? undefined}
-                tone={'dark'}
-              />
-              
+              <motion.div variants={rise} className="mt-5">
+                <SectionTitle
+                  titleStart={titleStart}
+                  titleAccent={titleAccent}
+                  titleEnd={titleEnd}
+                  tone="dark"
+                />
+              </motion.div>
             </div>
 
+            {/* Navigation controls */}
             {total > 1 && (
-              <motion.div variants={rise} className="flex items-center gap-6">
-                <div className="flex gap-3">
+              <motion.div
+                variants={rise}
+                className="flex items-center gap-5"
+              >
+                <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={goPrev}
-                    aria-label="Previous testimonial"
-                    className="group grid h-12 w-12 place-items-center border border-[#e8c99a]/30 text-[#ece6da] outline-none
-                               transition-colors hover:border-[#e8c99a] hover:bg-[#e8c99a] hover:text-[#14110c]
-                               focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+                    aria-label={slider.previousLabel}
+                    className="grid h-11 w-11 place-items-center border border-white/20 text-[#ece6da] transition-all duration-300 hover:border-[#a8c686] hover:bg-[#a8c686] hover:text-[#0a0a09] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
                   >
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"
-                      strokeLinejoin="round" aria-hidden="true"
-                      className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5">
-                      <path d="M13 8H3M7.5 3.5L3 8l4.5 4.5" />
-                    </svg>
+                    <ArrowLeft size={17} />
                   </button>
+
                   <button
                     type="button"
                     onClick={goNext}
-                    aria-label="Next testimonial"
-                    className="group grid h-12 w-12 place-items-center border border-[#e8c99a]/30 text-[#ece6da] outline-none
-                               transition-colors hover:border-[#e8c99a] hover:bg-[#e8c99a] hover:text-[#14110c]
-                               focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+                    aria-label={slider.nextLabel}
+                    className="grid h-11 w-11 place-items-center border border-white/20 text-[#ece6da] transition-all duration-300 hover:border-[#a8c686] hover:bg-[#a8c686] hover:text-[#0a0a09] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
                   >
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"
-                      strokeLinejoin="round" aria-hidden="true"
-                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5">
-                      <path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" />
-                    </svg>
+                    <ArrowRight size={17} />
                   </button>
                 </div>
-                <p className="font-['Cormorant_Garamond',Georgia,serif] text-lg text-[#8f8a80]" aria-hidden="true">
-                  <span className="text-[#ece6da]">{String(index + 1).padStart(2, "0")}</span>
+
+                <p
+                  className="font-mono text-xs tracking-widest text-[#8f8a80]"
+                  aria-hidden="true"
+                >
+                  <span className="text-[#a8c686]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   {" / "}
                   {String(total).padStart(2, "0")}
                 </p>
@@ -170,80 +276,134 @@ export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
             )}
           </motion.div>
 
-          {/* Quote */}
+          {/* Right: Testimonial content */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 40 }}
+            initial={reduce ? false : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, ease, delay: 0.15 }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.9,
+              ease,
+            }}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            onFocus={() => setPaused(true)}
-            onBlur={() => setPaused(false)}
-            className="relative"
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={(event) => {
+              if (
+                !event.currentTarget.contains(
+                  event.relatedTarget as Node | null
+                )
+              ) {
+                setPaused(false);
+              }
+            }}
+            className="relative min-w-0"
           >
-            <svg
-              viewBox="0 0 48 40"
-              fill="currentColor"
+            {/* Quote icon */}
+            <Quote
               aria-hidden="true"
-              className="mb-8 h-10 w-12 text-[#e0503a] lg:h-12 lg:w-14"
-            >
-              <path d="M0 40V22.4C0 9.6 6.4 2.1 19.2 0l2 5.6C14.2 7.4 10.8 11.5 10.4 17.6H20V40H0zm26.8 0V22.4C26.8 9.6 33.2 2.1 46 0l2 5.6c-7 1.8-10.4 5.9-10.8 12H46.8V40H26.8z" />
-            </svg>
+              className="mb-6 h-11 w-11 fill-[#e0503a] text-[#e0503a]"
+              strokeWidth={1}
+            />
 
-            <div className="relative min-h-[360px] sm:min-h-[320px] lg:min-h-[340px]" aria-live="polite" aria-roledescription="carousel">
-              <AnimatePresence mode="wait" custom={dir} initial={false}>
+            {/* Animated quote */}
+            <div
+              className="relative min-h-[290px] sm:min-h-[260px] lg:min-h-[310px]"
+              aria-live="polite"
+              aria-atomic="true"
+              aria-roledescription="testimonial"
+            >
+              <AnimatePresence
+                mode="wait"
+                custom={direction}
+                initial={false}
+              >
                 <motion.figure
-                  key={index}
-                  custom={dir}
+                  key={current.id || index}
+                  custom={direction}
                   variants={slide}
-                  initial="enter"
+                  initial={reduce ? false : "enter"}
                   animate="center"
-                  exit="exit"
-                  className="m-0"
+                  exit={reduce ? undefined : "exit"}
+                  className="m-0 flex h-full flex-col"
                 >
+                  {/* Quote text */}
                   <blockquote className="m-0">
-                    <p className="max-w-[28ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(28px,3.2vw,46px)] font-medium leading-[1.2] tracking-[-0.01em] text-[#ece6da] sm:max-w-[34ch]">
+                    <p className="max-w-[36ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(16px,3.5vw,30px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#ece6da]">
                       {current.quote}
                     </p>
                   </blockquote>
 
-                  <figcaption className="mt-10 flex items-center gap-5">
-                    <Avatar key={index} person={current} />
-                    <div>
-                      <p className="text-base font-semibold text-[#ece6da]">{current.name}</p>
-                      {current.role && <p className="mt-0.5 text-sm text-[#8f8a80]">{current.role}</p>}
+                  {/* Author */}
+                  <figcaption className="mt-9 flex items-center gap-4 border-t border-white/10 pt-6 sm:mt-10">
+                    <Avatar
+                      key={current.id || index}
+                      person={current}
+                      fallbackLabel={slider.imageFallbackLabel}
+                    />
+
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-[#ece6da] sm:text-base">
+                        {current.name}
+                      </p>
+
+                      {current.role && (
+                        <p className="mt-1 text-xs leading-relaxed text-[#92958c] sm:text-sm">
+                          {current.role}
+                        </p>
+                      )}
                     </div>
                   </figcaption>
                 </motion.figure>
               </AnimatePresence>
             </div>
 
-            {/* Progress segments: past filled, current fills over the interval */}
+            {/* Pagination */}
             {total > 1 && (
-              <div className="mt-6 flex gap-3" role="tablist" aria-label="Choose testimonial">
-                {items.map((t, i) => {
-                  const active = i === index;
+              <div
+                className="mt-7 flex items-center gap-2 sm:mt-9"
+                role="group"
+                aria-label={slider.paginationLabel}
+              >
+                {testimonials.map((item, i) => {
+                  const active = index === i;
                   const past = i < index;
+
                   return (
                     <button
-                      key={i}
+                      key={item.id || i}
                       type="button"
-                      role="tab"
-                      aria-selected={active}
-                      aria-label={`Show testimonial from ${t.name}`}
                       onClick={() => goTo(i)}
-                      className="group relative h-5 flex-1 outline-none focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+                      aria-label={`${slider.slideLabel} ${item.name}`}
+                      aria-current={active ? "step" : undefined}
+                      className="group relative flex h-8 flex-1 items-center outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
                     >
-                      <span className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 overflow-hidden bg-[#e8c99a]/20 transition-[height] duration-300 group-hover:h-[5px]">
+                      <span className="relative block h-[3px] w-full overflow-hidden bg-white/15 transition-all duration-300 group-hover:h-[5px]">
                         <span
-                          key={active ? `active-${index}` : `static-${i}`}
-                          onAnimationEnd={() => active && goNext()}
-                          className="block h-full w-full origin-left bg-[#e0503a]"
+                          key={`${item.id || i}-${active ? index : "inactive"}`}
+                          onAnimationEnd={() => {
+                            if (active && autoplay && !paused) {
+                              goNext();
+                            }
+                          }}
+                          className="block h-full origin-left bg-[#e0503a]"
                           style={{
-                            transform: past || (active && !autoplay) ? "scaleX(1)" : "scaleX(0)",
-                            animation: active && autoplay ? `testi-fill ${INTERVAL}ms linear forwards` : undefined,
-                            animationPlayState: paused ? "paused" : "running",
+                            transform:
+                              past || (active && !autoplay)
+                                ? "scaleX(1)"
+                                : "scaleX(0)",
+
+                            animation:
+                              active && autoplay
+                                ? `testimonial-progress ${interval}ms linear forwards`
+                                : undefined,
+
+                            animationPlayState: paused
+                              ? "paused"
+                              : "running",
                           }}
                         />
                       </span>
@@ -252,11 +412,22 @@ export default function HomeTestimonials({ data }: HomeTestimonialsContent) {
                 })}
               </div>
             )}
+
           </motion.div>
         </div>
-      </div>
       </MainContainer>
 
+      {/* Slider progress animation */}
+      <style jsx global>{`
+        @keyframes testimonial-progress {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+      `}</style>
     </section>
   );
 }

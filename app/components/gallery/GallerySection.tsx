@@ -72,7 +72,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
       className="scroll-mt-10 bg-[#0A0B09] px-5 pb-20 text-[#EAE3D6] sm:px-8 md:pb-28 lg:px-16"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col gap-8 border-t border-white/10 py-10 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col pt-20 gap-8 border-t border-white/10 py-10 md:flex-row md:items-end md:justify-between">
           <div>
             {data.eyebrow && <Eyebrow eyebrow={data.eyebrow} />}
 

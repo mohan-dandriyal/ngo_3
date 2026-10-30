@@ -68,7 +68,7 @@ function ProgramRow({ program, flip, reduce }: { program: ProgramItem; flip: boo
       initial={reduce ? false : "hidden"}
       whileInView="show"
       viewport={{ once: true, amount: 0.25 }}
-      className="relative scroll-mt-28 py-14 lg:py-20"
+      className="relative scroll-mt-28 py-10"
     >
       {/* Divider draws across above each program */}
       <motion.span
@@ -192,13 +192,13 @@ export default function ProgramsShowcase({ data, programs = [] }: ProgramsShowca
       className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
-        <div className="pb-10 pt-20 lg:pb-16 lg:pt-[120px]">
+        <div className="pb-10 pt-16 lg:pb-10 lg:pt-20">
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-20"
+            className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-16"
           >
             <div>
               {eyebrow && <Eyebrow eyebrow={eyebrow} />}

@@ -60,7 +60,7 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
       className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
-        <div className="py-20 lg:py-[120px]">
+        <div className="py-20 lg:py-20">
           {/* Heading */}
           {(labels.eyebrow || labels.titleStart) && (
             <motion.div

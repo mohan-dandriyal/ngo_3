@@ -5,22 +5,23 @@
     "description": "Clean water, education, healthcare and livelihoods. See how each of our programs works and what it has achieved."
   },
   "programsHero": {
-        "breadcrumb": [
-            {
-                "label": "Home",
-                "linkTo": "/"
-            },
-            {
-                "label": "Our Program"
-            }
-        ],
-    "eyebrow": "",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "linkTo": "/"
+      },
+      {
+        "label": "Our Programs"
+      }
+    ],
+    "eyebrow": "Our work in action",
     "titleStart": "Four ways we show up for",
     "titleAccent": "every community.",
     "description": "Every program starts with a conversation in the village and ends with something the community can run on its own. Explore what we do and the results so far.",
-    "indexLabel": "Jump to a program",
+    "indexLabel": "Explore our programs",
+    "imageCaption": "Community · Opportunity · Lasting change",
     "image": {
-      "src": "/program/pro-hero.jpg",
+      "src": "/banner/program.webp",
       "alt": "Volunteers and villagers working together on a community project"
     }
   },

@@ -1,159 +1,188 @@
 
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
-    motion,
-    useReducedMotion,
-    useScroll,
-    useTransform,
-    type Variants,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type Variants,
 } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
-import type { ProgramItem, ProgramsHeroData } from "@/app/types/program";
+import { ArrowDown, ArrowDownRight } from "lucide-react";
+
+import type {
+  ProgramItem,
+  ProgramsHeroData,
+} from "@/app/types/program";
+
 import MainContainer from "../ui/MainContainer";
-import { Description, Eyebrow, HeroTitle } from "../ui/SectionContent";
+import {
+  Description,
+  Eyebrow,
+  HeroTitle,
+} from "../ui/SectionContent";
 import BreadCrumb from "../ui/BreadCrumb";
 
 interface ProgramsHeroProps {
-    data: ProgramsHeroData;
-    programs: ProgramItem[];
+  data: ProgramsHeroData;
+  programs: ProgramItem[];
 }
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so Eyebrow and Description join the same stagger */
 const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
+    },
+  },
 };
+
 const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease },
+  },
 };
 
 const line: Variants = {
-    hidden: { scaleX: 0 },
-    show: { scaleX: 1, transition: { duration: 1, ease } },
+  hidden: { scaleX: 0 },
+  show: {
+    scaleX: 1,
+    transition: { duration: 1, ease },
+  },
 };
 
+export default function ProgramsHero({
+  data,
+  programs = [],
+}: ProgramsHeroProps) {
+  const reduce = useReducedMotion();
 
-export default function ProgramsHero({ data, programs = [] }: ProgramsHeroProps) {
-    const { eyebrow, breadcrumb, titleStart, titleAccent, description, indexLabel, image } = data ?? ({} as ProgramsHeroData);
-    const reduce = useReducedMotion();
-    const [imgFailed, setImgFailed] = useState(!image?.src);
+  const {
+    eyebrow,
+    breadcrumb,
+    titleStart,
+    titleAccent,
+    description,
+    indexLabel,
+    image,
+  } = data;
 
-    // The picture drifts slowly inside its frame while scrolling
-    const frameRef = useRef<HTMLElement>(null);
-    const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
-    const imageY = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -40, reduce ? 0 : 40]);
+  const bannerRef = useRef<HTMLElement>(null);
 
-    return (
-        <section
-            id="programs-hero"
-            className="relative w-full overflow-hidden bg-[#0a0a09] bg-[radial-gradient(45%_45%_at_0%_0%,#1c2a22_0%,transparent_70%)]
-                 text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
-        >
-            <MainContainer>
-                <motion.div
-                    variants={container}
-                    initial={reduce ? false : "hidden"}
-                    animate="show"
-                    className="py-14 lg:py-24"
-                >
-                    <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
-                        <div>
-                            {<BreadCrumb breadcrumb={breadcrumb} />}
-                            {eyebrow && <Eyebrow eyebrow={eyebrow} />}
+  const { scrollYProgress } = useScroll({
+    target: bannerRef,
+    offset: ["start end", "end start"],
+  });
 
-                            <HeroTitle titleStart={titleStart}
-                                titleAccent={titleAccent} />
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [0, 0] : [-45, 45]
+  );
 
+  return (
+    <section
+      ref={bannerRef}
+      id="programs-hero"
+      className="relative w-full overflow-hidden bg-[#0a0a09] text-[#ece6da]"
+    >
+      {/* Full image banner */}
+      <div className="relative min-h-[680px] overflow-hidden lg:min-h-[760px]">
 
-                            {description && (
-                                <div className="mt-8">
-                                    <Description description={description} variant="body" />
-                                </div>
-                            )}
-                        </div>
+        {/* Background image */}
+        {image?.src && (
+          <motion.div
+            className="absolute inset-0"
+            style={{ y: imageY }}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt || ""}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </motion.div>
+        )}
 
-                        <motion.figure
-                            ref={frameRef}
-                            initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
-                            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                            transition={{ duration: 1.4, ease: [0.7, 0, 0.2, 1], delay: 0.35 }}
-                            className="relative m-0 aspect-[4/5] w-full overflow-hidden bg-[#161a17] ring-1 ring-[#e8c99a]/15"
-                        >
-                            {!imgFailed && image?.src ? (
-                                <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y: imageY }}>
-                                    <motion.div
-                                        className="absolute inset-0"
-                                        initial={reduce ? false : { scale: 1.2 }}
-                                        animate={{ scale: 1 }}
-                                        transition={{ duration: 2.2, ease, delay: 0.35 }}
-                                    >
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt || ""}
-                                            fill
-                                            priority
-                                            sizes="(min-width: 1024px) 38vw, 100vw"
-                                            onError={() => setImgFailed(true)}
-                                            className="object-cover"
-                                        />
-                                    </motion.div>
-                                </motion.div>
-                            ) : (
-                                <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
-                            )}
-                        </motion.figure>
-                    </div>
+        {/* Image overlays */}
+        <div className="absolute inset-0 bg-black/35" />
 
-                    {/* Program index: jump straight to a program below */}
-                    {programs.length > 0 && (
-                        <nav aria-label={indexLabel || "Programs"} className="mt-16 lg:mt-24">
-                            {indexLabel && (
-                                <motion.p variants={fadeUp} className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]">
-                                    {indexLabel}
-                                </motion.p>
-                            )}
-                            <ol className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
-                                {programs.map((p) => (
-                                    <motion.li key={p.id} variants={fadeUp} className="relative">
-                                        <motion.span
-                                            variants={line}
-                                            aria-hidden="true"
-                                            className="absolute left-0 top-0 h-px w-full origin-left bg-[#e8c99a]/25"
-                                        />
-                                        <a
-                                            href={`#${p.id}`}
-                                            className="group flex items-start justify-between gap-4 py-6 outline-none
-                                 focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a09]"
-                                        >
-                                            <span>
-                                                {p.number && (
-                                                    <span className="block font-['Cormorant_Garamond',Georgia,serif] text-lg italic text-[#e0503a]">
-                                                        {p.number}
-                                                    </span>
-                                                )}
-                                                <span className="mt-1 block font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[26px] font-medium leading-tight text-[#ece6da] transition-colors duration-300 group-hover:text-[#e8c99a]">
-                                                    {p.title}
-                                                </span>
-                                            </span>
-                                            <ArrowDownRight
-                                                size={20}
-                                                aria-hidden="true"
-                                                className="mt-1 flex-none text-[#8f8a80] transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-[#e0503a]"
-                                            />
-                                        </a>
-                                    </motion.li>
-                                ))}
-                            </ol>
-                        </nav>
-                    )}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080b09]/85 via-[#080b09]/70 to-[#080b09]/15" />
+
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a09] via-transparent to-black/20" /> */}
+
+        {/* Decorative glow */}
+        <div
+          aria-hidden="true"
+          className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#a8c686]/10 blur-[120px]"
+        />
+
+        {/* Banner content */}
+        <MainContainer>
+          <div className="relative z-10 flex min-h-[680px] flex-col justify-between py-10 lg:min-h-[760px] lg:py-14">
+
+            <motion.div
+              variants={container}
+              initial={reduce ? false : "hidden"}
+              animate="show"
+              className="max-w-4xl pt-8 lg:pt-14"
+            >
+              <motion.div variants={fadeUp}>
+                <BreadCrumb breadcrumb={breadcrumb} />
+              </motion.div>
+
+              {eyebrow && (
+                <motion.div variants={fadeUp} className="mt-10">
+                  <Eyebrow eyebrow={eyebrow} />
                 </motion.div>
-            </MainContainer>
-        </section>
-    );
+              )}
+
+              <motion.div variants={fadeUp} className="mt-8">
+                <HeroTitle
+                  titleStart={titleStart}
+                  titleAccent={titleAccent}
+                />
+              </motion.div>
+
+              {description && (
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-7 max-w-2xl"
+                >
+                  <Description
+                    description={description}
+                    variant="body"
+                  />
+                </motion.div>
+              )}
+
+              <motion.a
+                variants={fadeUp}
+                href="#programs"
+                className="group mt-10 inline-flex items-center gap-4 border border-[#e8c99a]/50 px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#ece6da] transition-all duration-300 hover:border-[#e8c99a] hover:bg-[#e8c99a] hover:text-[#0a0a09]"
+              >
+                <span>Explore our programs</span>
+                <ArrowDown
+                  size={17}
+                  className="transition-transform duration-300 group-hover:translate-y-1"
+                />
+              </motion.a>
+            </motion.div>
+
+          </div>
+        </MainContainer>
+      </div>
+
+    </section>
+  );
 }

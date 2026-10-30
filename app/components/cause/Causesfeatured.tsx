@@ -88,7 +88,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
                     initial={reduce ? false : "hidden"}
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
-                    className="grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-20 lg:py-[120px]"
+                    className="grid items-center gap-12 py-8 lg:grid-cols-2 lg:gap-20 "
                 >
                     {/* Image */}
                     <motion.div

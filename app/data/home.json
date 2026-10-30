@@ -1,149 +1,209 @@
 {
-    
-        "hero": {
-            "eyebrow": "A different kind of progress",
-            "titleLight": "Change starts",
-            "titleAccent": "with showing up.",
-            "description": "We back the people building a fairer, greener, more possible everyday — one local idea at a time.",
-            "primaryBtn": {
-                "text": "Our story",
-                "linkTo": "/about"
-            },
-            "images": [
-                {
-                    "src": "/home.webp",
-                    "alt": "Community members working together to create change",
-                    "badge": "People powered change"
-                },
-                {
-                    "src": "/home-1.jpg",
-                    "alt": "Volunteers supporting a local community",
-                    "badge": "Stronger together"
-                },
-                {
-                    "src": "/home-2.webp",
-                    "alt": "Children learning in a community classroom",
-                    "badge": "A brighter future"
-                }
-            ],
-            "slider": {
-                "autoplay": true,
-                "interval": 5000
-            }
-        },
-    "homeAbout": {
-        "eyebrow": "About WKX",
-        "titleLight": "The future is not a place we arrive at.",
-        "titleAccent": "It’s a practice.",
-        "description": "WKX is a people-powered foundation for the beautifully stubborn. We find local leaders with big ideas, then give them the trust, tools and time to make those ideas real.",
-        "linkText": "See what we do",
-        "linkTo": "/about"
+  "hero": {
+    "slider": {
+      "autoplay": true,
+      "interval": 7000,
+      "previousLabel": "Previous slide",
+      "nextLabel": "Next slide",
+      "slideLabel": "Show slide",
+      "pauseLabel": "Pause slideshow",
+      "resumeLabel": "Resume slideshow"
     },
-    "homePrograms": {
-        "eyebrow": "Where we focus",
-        "titleStart": "Our work is",
-        "titleAccent": "rooted",
-        "titleEnd": "locally.",
-        "programs": [
-            {
-                "title": "The Water Table",
-                "description": "Clean water, built to last by the people who need it most.",
-                "image": "/pro-1.jpg",
-                "imageAlt": "Children washing their hands at a row of water taps",
-                "theme": "coral"
-            },
-            {
-                "title": "Her Next Chapter",
-                "description": "Backing women turning brave ideas into shared livelihoods.",
-                "image": "/img-2.jpg",
-                "imageAlt": "A girl in a green shawl surrounded by smiling women",
-                "theme": "green"
-            },
-            {
-                "title": "Open Classroom",
-                "description": "Making learning feel possible, joyful and entirely theirs.",
-                "image": "/pro-2.jpg",
-                "imageAlt": "Many hands joined together in the middle of a circle",
-                "theme": "sand"
-            }
-        ],
-        "button": {
-            "label": "See all Programs",
-            "href": "/our-program"
+    "slides": [
+      {
+        "id": "community-education",
+        "src": "/banner/slide-1.webp",
+        "alt": "A student standing outside a community school",
+        "eyebrow": "Education for every child",
+        "titleLight": "Every child",
+        "titleAccent": "deserves a chance.",
+        "description": "We help children access learning opportunities, build confidence and create a brighter future for their communities.",
+        "badge": "Education creates opportunity",
+        "primaryBtn": {
+          "text": "Explore our programs",
+          "linkTo": "/our-program"
         }
+      },
+      {
+        "id": "community-development",
+        "src": "/banner/slide-2.webp",
+        "alt": "Community members working together on a local development project",
+        "eyebrow": "Stronger together",
+        "titleLight": "Change begins",
+        "titleAccent": "with community.",
+        "description": "We stand alongside local people, supporting ideas and solutions that make everyday life fairer, safer and more sustainable.",
+        "badge": "People powered change",
+        "primaryBtn": {
+          "text": "Our approach",
+          "linkTo": "/about"
+        }
+      },
+      {
+        "id": "future-generation",
+       "src": "/banner/slide-3.webp",
+        "alt": "Children participating in a community learning activity",
+        "eyebrow": "Building a better tomorrow",
+        "titleLight": "Small actions",
+        "titleAccent": "create big change.",
+        "description": "From clean water to better healthcare, we work toward a future where every person has the opportunity to thrive.",
+        "badge": "A future for everyone",
+        "primaryBtn": {
+          "text": "Discover our story",
+          "linkTo": "/about"
+        }
+      }
+    ]
+  },
+  "homeAbout": {
+    "eyebrow": "Who we are",
+    "titleLight": "The future is not a place we arrive at.",
+    "titleAccent": "It's a practice.",
+    "description": "WKX is a people-powered foundation for the beautifully stubborn. We find local leaders with big ideas, then give them the trust, tools and time to make those ideas real. Together, we work towards stronger communities, better opportunities and lasting change.",
+    "image": {
+      "src": "/about.jfif",
+      "alt": "WKX Foundation community members participating in a local development initiative",
+      "caption": "Real change begins when communities lead their own future."
     },
-    "homeCause": {
-        "eyebrow": "Our causes",
-        "titleStart": "Where your gift",
-        "titleAccent": "goes",
-        "titleEnd": "first",
-        "description": "Every donation is matched to a specific project. Pick the cause closest to your heart and follow its progress here.",
-        "linkText": "See all causes",
-        "linkTo": "/our-cause",
-        "causes": [
-            {
-                "title": "School for every child",
-                "description": "Books, uniforms and meals so children in rural districts can stay in class.",
-                "category": "Education",
-                "image": "/image/cause-2.jpg",
-                "imageAlt": "Children reading together in a classroom",
-                "linkText": "Explore",
-                "linkTo": "/our-cause/school-for-every-child"
-            },
-            {
-                "title": "Clean water for villages",
-                "description": "Hand pumps and filtration units that bring safe drinking water within a short walk of home.",
-                "category": "Water",
-                "image": "/post/clean-water.jpg",
-                "imageAlt": "Villagers collecting water from a new pump",
-                "linkText": "Explore",
-                "linkTo": "/our-cause/Clean-water-for-villages"
-            },
-            {
-                "title": "Health camps on wheels",
-                "description": "Mobile clinics that bring check-ups, medicines and nurses to places without a hospital.",
-                "category": "Health",
-                "image": "/image/cause-3.jpg",
-                "imageAlt": "A nurse examining a patient at a mobile clinic",
-                "linkText": "Explore",
-                "linkTo": "/our-cause/health-camps-on-wheels"
-            }
-        ]
-    },
-    "testimonials": {
-        "eyebrow": "Voices",
-        "titleStart": "In their",
-        "titleAccent": "own",
-        "titleEnd": "words",
-        "testimonials": [
-            {
-                "quote": "My daughter used to miss school to fetch water. Now she is first in her class and wants to become a teacher.",
-                "name": "Sunita Devi",
-                "role": "Parent, Rampur village",
-                "image": "/images/testimonials/sunita.jpg",
-                "imageAlt": "Portrait of Sunita Devi"
-            },
-            {
-                "quote": "I have given to many charities, but this is the first one that sends me photos and receipts showing exactly where my money went.",
-                "name": "Rohan Mehta",
-                "role": "Monthly donor",
-                "image": "/images/testimonials/rohan.jpg",
-                "imageAlt": "Portrait of Rohan Mehta"
-            },
-            {
-                "quote": "The mobile clinic comes every Thursday. For the first time, our elders get check-ups without travelling two hours to town.",
-                "name": "Dr. Anita Rao",
-                "role": "Volunteer physician",
-                "image": "/images/testimonials/anita.jpg",
-                "imageAlt": "Portrait of Dr. Anita Rao"
-            },
-            {
-                "quote": "Volunteering with the team showed me how much a small group can do when every rupee and every hour is used well.",
-                "name": "Imran Sheikh",
-                "role": "Volunteer, Delhi chapter",
-                "image": "/images/testimonials/imran.jpg",
-                "imageAlt": "Portrait of Imran Sheikh"
-            }
-        ]
+    "imageLabel": "People powered change",
+    "linkText": "Discover our story",
+    "linkTo": "/about",
+    "secondaryLinkText": "Explore our programs",
+    "secondaryLinkTo": "/our-program",
+    "stats": []
+  },
+  "homePrograms": {
+    "eyebrow": "Our Programs",
+    "titleStart": "Our work is",
+    "titleAccent": "rooted",
+    "titleEnd": "locally.",
+    "description": "We work alongside communities to create lasting opportunities through clean water, women's empowerment and accessible education.",
+    "meta": "03 focus areas / Community-led change",
+    "programs": [
+      {
+        "id": "water-table",
+        "title": "The Water Table",
+        "description": "Building access to clean, safe water through community-led solutions that support healthier everyday lives.",
+        "image": "/program/pro-1.jpg",
+        "imageAlt": "Community members accessing clean drinking water from a shared water point.",
+        "href": "/our-program"
+      },
+      {
+        "id": "her-next-chapter",
+        "title": "Her Next Chapter",
+        "description": "Supporting women with opportunities, practical skills and resources to build independent and sustainable livelihoods.",
+        "image": "/cause-1.webp",
+        "imageAlt": "Women participating together in a community empowerment initiative.",
+        "href": "/our-program"
+      },
+      {
+        "id": "open-classroom",
+        "title": "Open Classroom",
+        "description": "Creating welcoming learning opportunities where children can discover their potential and build brighter futures.",
+        "image": "/image/cause-2.jpg",
+        "imageAlt": "Children participating in a community education activity.",
+        "href": "/our-program"
+      }
+    ],
+    "button": {
+      "label": "Explore all programs",
+      "href": "/our-program"
     }
+  },
+  "homeCause": {
+    "eyebrow": "Our causes",
+    "titleStart": "Where your gift",
+    "titleAccent": "goes",
+    "titleEnd": "first",
+    "description": "Every donation supports a specific project. Choose a cause close to your heart and discover how your contribution can make a difference.",
+    "linkText": "See all causes",
+    "linkTo": "/our-cause",
+    "donateButtonText": "Donate Now",
+    "causes": [
+      {
+        "id": "school-for-every-child",
+        "title": "School for every child",
+        "description": "Books, uniforms and nutritious meals help children in rural communities stay in school and build brighter futures.",
+        "category": "Education",
+        "image": "/image/cause-2.jpg",
+        "imageAlt": "Children reading and learning together in a classroom",
+        "fundsUse": "Your donation helps provide school supplies, learning materials, uniforms and nutritious meals.",
+        "linkText": "Explore cause",
+        "linkTo": "/our-cause/school-for-every-child",
+        "donateTo": "#"
+      },
+      {
+        "id": "clean-water-for-villages",
+        "title": "Clean water for villages",
+        "description": "Community water pumps and filtration systems bring safe drinking water closer to families who need it.",
+        "category": "Water",
+        "image": "/post/clean-water.jpg",
+        "imageAlt": "Community members collecting clean water from a water pump",
+        "fundsUse": "Your donation supports water infrastructure, filtration systems and community-led maintenance.",
+        "linkText": "Explore cause",
+        "linkTo": "/our-cause/clean-water-for-villages",
+        "donateTo": "#"
+      },
+      {
+        "id": "health-camps-on-wheels",
+        "title": "Health camps on wheels",
+        "description": "Mobile health services bring medical check-ups, essential medicines and healthcare professionals to underserved communities.",
+        "category": "Health",
+        "image": "/image/cause-3.jpg",
+        "imageAlt": "A healthcare worker providing medical assistance to a community member",
+        "fundsUse": "Your donation helps support medical supplies, essential medicines and mobile healthcare visits.",
+        "linkText": "Explore cause",
+        "linkTo": "/our-cause/health-camps-on-wheels",
+        "donateTo": "#"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "titleStart": "In their",
+    "titleAccent": "own",
+    "titleEnd": "words",
+    "slider": {
+      "autoplay": true,
+      "interval": 8000,
+      "previousLabel": "Previous testimonial",
+      "nextLabel": "Next testimonial",
+      "paginationLabel": "Choose testimonial",
+      "slideLabel": "Show testimonial from",
+      "imageFallbackLabel": "Testimonial author"
+    },
+    "testimonials": [
+      {
+        "id": "sunita-devi",
+        "quote": "My daughter used to miss school to fetch water. Now she is first in her class and wants to become a teacher.",
+        "name": "Sunita Devi",
+        "role": "Parent, Rampur village",
+        "image": "/images/testimonials/sunita.jpg",
+        "imageAlt": "Portrait of Sunita Devi"
+      },
+      {
+        "id": "rohan-mehta",
+        "quote": "I have given to many charities, but this is the first one that sends me photos and receipts showing exactly where my money went.",
+        "name": "Rohan Mehta",
+        "role": "Monthly donor",
+        "image": "/images/testimonials/rohan.jpg",
+        "imageAlt": "Portrait of Rohan Mehta"
+      },
+      {
+        "id": "anita-rao",
+        "quote": "The mobile clinic comes every Thursday. For the first time, our elders get check-ups without travelling two hours to town.",
+        "name": "Dr. Anita Rao",
+        "role": "Volunteer physician",
+        "image": "/images/testimonials/anita.jpg",
+        "imageAlt": "Portrait of Dr. Anita Rao"
+      },
+      {
+        "id": "imran-sheikh",
+        "quote": "Volunteering with the team showed me how much a small group can do when every rupee and every hour is used well.",
+        "name": "Imran Sheikh",
+        "role": "Volunteer, Delhi chapter",
+        "image": "/images/testimonials/imran.jpg",
+        "imageAlt": "Portrait of Imran Sheikh"
+      }
+    ]
+  }
 }

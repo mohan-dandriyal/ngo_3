@@ -34,6 +34,10 @@ export type BlogHeroData = {
     titleAccent: string;
     description?: string;
     latestLabel?: string;
+    image : {
+        src : string,
+        alt : string
+    }
 };
 
 export type BlogListLabels = {

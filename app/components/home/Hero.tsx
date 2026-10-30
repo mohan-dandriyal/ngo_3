@@ -1,289 +1,412 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
   type Variants,
 } from "framer-motion";
 
-import { HeroContent } from "@/app/types/home";
-import { Description, Eyebrow } from "../ui/SectionContent";
+import type { HeroContent } from "@/app/types/home";
 import MainContainer from "../ui/MainContainer";
-import PrimaryButton from "../ui/PrimaryButton";
 
-const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
+const ease: [number, number, number, number] = [
+  0.2, 0.8, 0.15, 1,
+];
 
-const copyContainer: Variants = {
-  hidden: {},
+const contentVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+  },
   show: {
+    opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.14,
-      delayChildren: 0.1,
+      duration: 0.8,
+      ease,
+      staggerChildren: 0.12,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease,
     },
   },
 };
 
-const rise: Variants = {
-  hidden: { opacity: 0, y: 20 },
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease },
+    transition: {
+      duration: 0.7,
+      ease,
+    },
   },
 };
 
 export default function Hero({ data }: HeroContent) {
-  const {
-    eyebrow,
-    titleLight,
-    titleAccent,
-    description,
-    primaryBtn,
-    images = [],
-    slider,
-  } = data;
+  const { slider } = data;
+  const slides = data.images.map((image, index) => ({
+    ...image,
+    id: `hero-${index}`,
+    eyebrow: data.eyebrow,
+    titleLight: data.titleLight,
+    titleAccent: data.titleAccent,
+    description: data.description,
+    primaryBtn: data.primaryBtn,
+    donateBtn: data.secondaryBtn,
+    badge: undefined,
+  }));
 
   const reduce = useReducedMotion();
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [failedImages, setFailedImages] = useState<string[]>([]);
+
   const sectionRef = useRef<HTMLElement>(null);
 
-  const activeImage = images[activeIndex];
-  const slideCount = images.length;
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, reduce ? 0 : 45]
-  );
+  const slideCount = slides.length;
+  const currentIndex = slideCount > 0 ? activeIndex % slideCount : 0;
+  const activeSlide = slides[currentIndex];
 
   const changeSlide = (direction: number) => {
     if (slideCount < 2) return;
 
     setActiveIndex((current) => {
-      return (current + direction + slideCount) % slideCount;
+      return (current % slideCount + direction + slideCount) % slideCount;
     });
   };
 
+  // Autoplay
   useEffect(() => {
     if (
       reduce ||
       !slider?.autoplay ||
-      slideCount < 2
+      slideCount < 2 ||
+      isPaused
     ) {
       return;
     }
 
-    const interval = Math.max(slider.interval ?? 5000, 1500);
+    const interval = Math.max(slider.interval || 7000, 3000);
 
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % slideCount);
+      setActiveIndex((current) => (current % slideCount + 1) % slideCount);
     }, interval);
 
     return () => window.clearInterval(timer);
-  }, [reduce, slider?.autoplay, slider?.interval, slideCount]);
+  }, [
+    reduce,
+    slider?.autoplay,
+    slider?.interval,
+    slideCount,
+    isPaused,
+  ]);
+
+  if (!activeSlide) return null;
+
+  const imageFailed = failedImages.includes(activeSlide.src);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]"
+      aria-roledescription="carousel"
+      aria-label="WKX Foundation highlights"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={(event) => {
+        if (
+          !event.currentTarget.contains(
+            event.relatedTarget as Node | null
+          )
+        ) {
+          setIsPaused(false);
+        }
+      }}
+      className="relative isolate min-h-[680px] w-full overflow-hidden
+      bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
+      text-[#ece6da] sm:min-h-[740px] lg:min-h-[600px]"
     >
-      {/* Background glow */}
+      {/* BACKGROUND IMAGE */}
+      <AnimatePresence initial={false}>
+        {!imageFailed && (
+          <motion.div
+            key={activeSlide.id}
+            initial={reduce ? false : { opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: reduce ? 0 : 1.2,
+              ease,
+            }}
+            className="absolute inset-0 -z-20"
+          >
+            <Image
+              src={activeSlide.src}
+              alt={activeSlide.alt}
+              fill
+              priority={currentIndex === 0}
+              sizes="100vw"
+              onError={() => {
+                setFailedImages((current) =>
+                  current.includes(activeSlide.src)
+                    ? current
+                    : [...current, activeSlide.src]
+                );
+              }}
+              className="object-cover object-center"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+
+      {/* GRADIENT OVERLAYS */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/4 h-[400px] w-[400px] rounded-full bg-[#a8c686]/10 blur-[130px]"
+        className="absolute inset-0 -z-10
+        bg-gradient-to-r from-black/85 via-black/55 to-black/10"
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10
+        bg-gradient-to-t from-[#0a0a09]/80 via-transparent to-black/20"
+      />
+
+      {/* DECORATIVE LIGHT */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 top-0 -z-10
+        h-[500px] w-[500px] rounded-full bg-[#a8c686]/10 blur-[150px]"
       />
 
       <MainContainer>
-        <div className="relative mx-auto grid items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-14 lg:py-20">
-          {/* LEFT: Hero content */}
-          <motion.div
-            variants={copyContainer}
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            className="relative z-10 order-2 lg:order-1"
-          >
-            {eyebrow && (
-              <motion.div variants={rise} className="mb-6">
-                <Eyebrow eyebrow={eyebrow} />
-              </motion.div>
-            )}
+        <div className="relative flex min-h-[680px] flex-col justify-center
+        px-5 pb-36 pt-28 sm:min-h-[740px] sm:px-8 sm:pb-40
+        lg:min-h-[800px] lg:px-14 lg:pb-44 lg:pt-32">
 
-            <motion.h1 className="mb-6 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(48px,6.2vw,82px)] font-medium leading-[0.96] tracking-[-0.035em]">
-              <span className="block overflow-hidden pb-[0.08em]">
-                <motion.span
-                  initial={reduce ? false : { y: "105%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease }}
-                  className="block text-[#ece6da]"
-                >
-                  {titleLight}
-                </motion.span>
-              </span>
-
-              {titleAccent && (
-                <span className="block overflow-hidden pb-[0.08em]">
-                  <motion.span
-                    initial={reduce ? false : { y: "105%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1, delay: 0.12, ease }}
-                    className="block text-[#a8c686]"
-                  >
-                    {titleAccent}
-                  </motion.span>
-                </span>
-              )}
-            </motion.h1>
-
-            <motion.div variants={rise} className="max-w-[490px]">
-              <Description description={description} />
-            </motion.div>
-
-            <motion.div
-              variants={rise}
-              className="mt-9 flex flex-wrap items-center gap-5"
-            >
-              {primaryBtn?.text && (
-                <PrimaryButton href={primaryBtn.linkTo}>
-                  {primaryBtn.text}
-                </PrimaryButton>
-              )}
-            </motion.div>
-
-         
-          </motion.div>
-
-          {/* RIGHT: Image slider */}
-          <motion.div
-            style={{ y: imageY }}
-            className="relative order-1 mx-auto w-full max-w-[560px] lg:order-2"
-          >
-            <div className="relative aspect-[4/4.7] w-full overflow-hidden bg-[#151915] ring-1 ring-white/10">
-              <AnimatePresence mode="sync" initial={false}>
-                {activeImage && !failedImages.includes(activeImage.src) ? (
+          {/* SLIDE CONTENT */}
+          <div className="relative z-10 max-w-[850px]">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeSlide.id}
+                variants={contentVariants}
+                initial={reduce ? false : "hidden"}
+                animate="show"
+                exit={reduce ? undefined : "exit"}
+              >
+                {/* EYEBROW */}
+                {activeSlide.eyebrow && (
                   <motion.div
-                    key={activeImage.src}
-                    initial={reduce ? false : { opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: reduce ? 0 : 0.8, ease }}
-                    className="absolute inset-0"
+                    variants={itemVariants}
+                    className="mb-7 flex items-center gap-4"
                   >
-                    <Image
-                      src={activeImage.src}
-                      alt={activeImage.alt || titleLight}
-                      fill
-                      priority={activeIndex === 0}
-                      sizes="(min-width: 1024px) 45vw, 100vw"
-                      onError={() =>
-                        setFailedImages((current) =>
-                          current.includes(activeImage.src)
-                            ? current
-                            : [...current, activeImage.src]
-                        )
-                      }
-                      className="object-cover"
-                    />
+                    <span className="h-px w-10 bg-[#a8c686]" />
+
+                    <p className="text-[10px] font-medium uppercase
+                    tracking-[0.24em] text-[#d6d9c9] sm:text-xs">
+                      {activeSlide.eyebrow}
+                    </p>
                   </motion.div>
-                ) : (
-                  <motion.div
-                    key="image-fallback"
-                    className="absolute inset-0 bg-gradient-to-br from-[#29382d] to-[#0a0a09]"
-                  />
                 )}
-              </AnimatePresence>
 
-              {/* Image overlay */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"
-              />
+                {/* HEADING */}
+                <motion.h1
+                  variants={itemVariants}
+                  className="max-w-[850px]
+                  font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
+                  text-[clamp(58px,8vw,80px)] font-medium
+                  leading-[0.91] tracking-[-0.045em]"
+                >
+                  <span className="block text-[#f0eadf]">
+                    {activeSlide.titleLight}
+                  </span>
 
-              {/* Image label */}
-              {activeImage?.badge && (
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeImage.badge}
-                    initial={reduce ? false : { opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.35 }}
-                    className="absolute bottom-6 left-6 z-10 border-l-2 border-[#a8c686] pl-4"
+                  <span className="mt-1 block italic text-[#e0503a]">
+                    {activeSlide.titleAccent}
+                  </span>
+                </motion.h1>
+
+                {/* DESCRIPTION */}
+                {activeSlide.description && (
+                  <motion.p
+                    variants={itemVariants}
+                    className="mt-7 max-w-[570px] text-sm
+                    leading-[1.9] text-[#e1ded5] sm:text-base
+                    sm:leading-[2]"
                   >
-                     {/* Slide counter */}
-            {slideCount > 1 && (
-              <div className="mt-12 flex items-center gap-4">
-                <span className="font-mono text-sm text-[#a8c686]">
-                  {String(activeIndex + 1).padStart(2, "0")}
-                </span>
+                    {activeSlide.description}
+                  </motion.p>
+                )}
 
-                <div className="flex gap-2">
-                  {images && images.map((item: { src: string }, index: number) => (
+                {/* BUTTONS */}
+                <motion.div
+                  variants={itemVariants}
+                  className="mt-9 flex flex-wrap items-center gap-4"
+                >
+                  {activeSlide.donateBtn && (
+                    <Link
+                      href={activeSlide.donateBtn.linkTo}
+                      className="group inline-flex min-h-[54px] items-center
+                      justify-center gap-5 bg-[#e0503a] px-7 py-4
+                      text-sm font-semibold text-white
+                      transition-colors duration-300 hover:bg-[#f06450]
+                      focus-visible:outline focus-visible:outline-2
+                      focus-visible:outline-offset-4
+                      focus-visible:outline-[#e0503a]"
+                    >
+                      {activeSlide.donateBtn.text}
+
+                      <span className="transition-transform duration-300
+                      group-hover:translate-x-1">
+                        ↗
+                      </span>
+                    </Link>
+                  )}
+
+                  {activeSlide.primaryBtn && (
+                    <Link
+                      href={activeSlide.primaryBtn.linkTo}
+                      className="group inline-flex min-h-[54px] items-center
+                      justify-center gap-4 border border-white/40
+                      bg-white/[0.04] px-7 py-4 text-sm font-medium
+                      text-white backdrop-blur-sm transition-all
+                      duration-300 hover:border-[#a8c686]
+                      hover:bg-[#a8c686]/15 hover:text-[#c6dda9]
+                      focus-visible:outline focus-visible:outline-2
+                      focus-visible:outline-offset-4
+                      focus-visible:outline-[#a8c686]"
+                    >
+                      {activeSlide.primaryBtn.text}
+
+                      <span className="transition-transform duration-300
+                      group-hover:translate-x-1">
+                        →
+                      </span>
+                    </Link>
+                  )}
+                </motion.div>
+
+                {/* SLIDE BADGE */}
+                {activeSlide.badge && (
+                  <motion.div
+                    variants={itemVariants}
+                    className="mt-12 flex items-center gap-3"
+                  >
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full
+                      animate-ping rounded-full bg-[#a8c686]/60 motion-reduce:animate-none" />
+
+                      <span className="relative inline-flex h-2.5 w-2.5
+                      rounded-full bg-[#a8c686]" />
+                    </span>
+
+                    <span className="text-[10px] font-medium uppercase
+                    tracking-[0.19em] text-[#dedbd0]">
+                      {activeSlide.badge}
+                    </span>
+                  </motion.div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* SLIDER CONTROLS */}
+          {slideCount > 1 && (
+            <div className="absolute bottom-9 left-5 right-5 z-20
+            flex items-end justify-between gap-5 sm:left-8 sm:right-8
+            lg:bottom-12 lg:left-14 lg:right-14">
+
+              {/* SLIDE NUMBER AND PROGRESS */}
+              <div className="flex min-w-0 flex-1 items-center gap-5">
+                <div className="flex shrink-0 items-center gap-2 font-mono">
+                  <span className="text-xl text-[#a8c686]">
+                    {String(currentIndex + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="text-sm text-white/50">
+                    / {String(slideCount).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* PAGINATION */}
+                <div className="flex max-w-[240px] flex-1 items-center gap-2">
+                  {slides.map((slide, index) => (
                     <button
-                      key={`${item.src}-${index}`}
+                      key={slide.id}
                       type="button"
-                      aria-label={`Show slide ${index + 1}`}
-                      aria-pressed={activeIndex === index}
                       onClick={() => setActiveIndex(index)}
-                      className={`h-[3px] transition-all duration-300 ${
-                        activeIndex === index
-                          ? "w-10 bg-[#a8c686]"
-                          : "w-5 bg-[#ece6da]/25 hover:bg-[#ece6da]/60"
-                      }`}
-                    />
+                      aria-label={`Slide ${index + 1}`}
+                      aria-current={currentIndex === index ? "true" : undefined}
+                      className="group flex h-8 flex-1 items-center
+                      outline-none focus-visible:ring-2
+                      focus-visible:ring-[#a8c686]"
+                    >
+                      <span
+                        className={`h-[3px] w-full rounded-full
+                        transition-all duration-500 ${
+                          currentIndex === index
+                            ? "bg-[#a8c686]"
+                            : "bg-white/40 group-hover:bg-white/80"
+                        }`}
+                      />
+                    </button>
                   ))}
                 </div>
-
-                <span className="font-mono text-sm text-[#ece6da]/50">
-                  {String(slideCount).padStart(2, "0")}
-                </span>
               </div>
-            )}
-                  </motion.div>
-                </AnimatePresence>
-              )}
 
-              {/* Previous / next controls */}
-              {slideCount > 1 && (
-                <div className="absolute right-5 top-5 z-20 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => changeSlide(-1)}
-                    aria-label="Previous image"
-                    className="flex h-10 w-10 items-center justify-center border border-white/35 bg-black/25 text-lg text-white backdrop-blur-sm transition-colors hover:bg-[#a8c686] hover:text-[#0a0a09]"
-                  >
-                    ←
-                  </button>
+              {/* PREVIOUS / NEXT */}
+              <div className="flex shrink-0 gap-2">
+                <button
+                  type="button"
+                  onClick={() => changeSlide(-1)}
+                  aria-label="Previous slide"
+                  className="grid h-11 w-11 place-items-center
+                  border border-white/35 bg-black/20 text-xl text-white
+                  backdrop-blur-sm transition-all duration-300
+                  hover:border-[#a8c686] hover:bg-[#a8c686]
+                  hover:text-[#0a0a09] focus-visible:outline
+                  focus-visible:outline-2 focus-visible:outline-offset-2
+                  focus-visible:outline-[#a8c686]"
+                >
+                  ←
+                </button>
 
-                  <button
-                    type="button"
-                    onClick={() => changeSlide(1)}
-                    aria-label="Next image"
-                    className="flex h-10 w-10 items-center justify-center border border-white/35 bg-black/25 text-lg text-white backdrop-blur-sm transition-colors hover:bg-[#a8c686] hover:text-[#0a0a09]"
-                  >
-                    →
-                  </button>
-                </div>
-              )}
+                <button
+                  type="button"
+                  onClick={() => changeSlide(1)}
+                  aria-label="Next slide"
+                  className="grid h-11 w-11 place-items-center
+                  border border-white/35 bg-black/20 text-xl text-white
+                  backdrop-blur-sm transition-all duration-300
+                  hover:border-[#a8c686] hover:bg-[#a8c686]
+                  hover:text-[#0a0a09] focus-visible:outline
+                  focus-visible:outline-2 focus-visible:outline-offset-2
+                  focus-visible:outline-[#a8c686]"
+                >
+                  →
+                </button>
+              </div>
             </div>
-
-            {/* Decorative corner */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-3 -right-3 -z-0 h-24 w-24 border-b border-r border-[#a8c686]/50"
-            />
-          </motion.div>
+          )}
         </div>
       </MainContainer>
     </section>

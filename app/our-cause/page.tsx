@@ -4,7 +4,6 @@ import type { CauseItem, HeroStat } from "@/app/types/cause";
 import CausesHero from "@/app/components/cause/Causeshero";
 import CausesFeatured from "@/app/components/cause/Causesfeatured";
 import CausesGrid from "@/app/components/cause/Causesgrid";
-import CausesCta from "@/app/components/cause/Causescta";
 
 const causes = data.causes as CauseItem[];
 

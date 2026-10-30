@@ -1,83 +1,65 @@
-"use client"
 
-import { useState } from "react";
+"use client";
+
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
-const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
-const themes = {
-  coral: { card: "bg-[#e0503a] border-[#e0503a]", title: "text-[#14110c]", desc: "text-[#14110c]/70", link: "text-[#14110c]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(224,80,58,0.7)]", fallback: "bg-[linear-gradient(160deg,#ef6e58,#9c2f1f)]" },
-  green: { card: "bg-[#3b7a68] border-[#3b7a68]", title: "text-[#f1ece1]", desc: "text-[#f1ece1]/75", link: "text-[#f1ece1]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(59,122,104,0.8)]", fallback: "bg-[linear-gradient(160deg,#4f9a84,#1c3a31)]" },
-  sand:  { card: "bg-[#e2c392] border-[#e2c392]", title: "text-[#14110c]", desc: "text-[#14110c]/70", link: "text-[#14110c]", shadow: "hover:shadow-[0_28px_50px_-24px_rgba(226,195,146,0.7)]", fallback: "bg-[linear-gradient(160deg,#f0d8b0,#a8864f)]" },
-};
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 
-
-/* These names match the parent grid, so the grid's stagger drives each card */
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
-};
-
-/* Image frame opens from the bottom, picture settles inside it */
-const frameVariants: Variants = {
-  hidden: { clipPath: "inset(100% 0% 0% 0%)" },
-  show: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 1.1, ease: [0.7, 0, 0.2, 1], delay: 0.15 } },
-};
-const pictureVariants: Variants = {
-  hidden: { scale: 1.25 },
-  show: { scale: 1, transition: { duration: 1.6, ease, delay: 0.15 } },
+type Program = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  href: string;
 };
 
 type ProgramCardProps = {
-  program: {
-    image: string;
-    imageAlt?: string;
-    theme: string;
-    title: string;
-    description: string;
-  };
+  program: Program;
 };
 
-export function ProgramCard({ program }: ProgramCardProps) {
-  const [imgFailed, setImgFailed] = useState(!program.image);
-  const t = themes[program.theme as keyof typeof themes] || themes.coral;
+export default function ProgramCard({ program }: ProgramCardProps) {
+  const reduce = useReducedMotion();
 
   return (
     <motion.article
-      variants={cardVariants}
-      whileHover={{ y: -8 }}
-      transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className={`group flex flex-col overflow-hidden border transition-shadow duration-500 ${t.card} ${t.shadow}`}
+      whileHover={reduce ? undefined : { y: -6 }}
+      transition={{ duration: 0.35 }}
+      className="group flex h-full flex-col overflow-hidden border border-white/[0.07] bg-[#171b16]"
     >
-      {/* Program image */}
-      <motion.div variants={frameVariants} className="relative aspect-[3/2] overflow-hidden bg-[#161a17]">
-        <motion.div variants={pictureVariants} className="absolute inset-0">
-          {!imgFailed ? (
-            <Image
-              src={program.image}
-              alt={program.imageAlt || ""}
-              fill
-              sizes="(min-width: 768px) 33vw, 100vw"
-              onError={() => setImgFailed(true)}
-              className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]
-                         motion-reduce:transition-none"
-            />
-          ) : (
-            <div className={`h-full w-full ${t.fallback}`} aria-hidden="true" />
-          )}
-        </motion.div>
-        <div
-          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent"
-          aria-hidden="true"
-        />
-      </motion.div>
+      <Link
+        href={program.href}
+        aria-label={`Read more about ${program.title}`}
+        className="flex h-full flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+      >
+        {/* Image */}
+        <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-[#20251f]">
+          <Image
+            src={program.image}
+            alt={program.imageAlt}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
 
-      <div className="flex flex-1 flex-col px-8 pb-12 pt-9">
-        <h3 className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[34px] font-medium leading-[1.1] ${t.title}`}>
-          {program.title}
-        </h3>
-        <p className={`mt-4 max-w-sm text-[15px] leading-relaxed ${t.desc}`}>{program.description}</p>
+          <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent" />
 
-      </div>
+          {/* Small coral accent */}
+          <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-[#e0503a] transition-all duration-500 group-hover:w-full" />
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-1 flex-col bg-[#171b16] p-5 sm:p-6">
+          <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-2xl font-semibold leading-tight text-[#ece6da] sm:text-[28px]">
+            {program.title}
+          </h3>
+
+          <p className="mt-3 min-h-[4.5rem] text-[13px] leading-[1.9] text-[#bdb7aa] sm:text-sm">
+            {program.description}
+          </p>
+
+        </div>
+      </Link>
     </motion.article>
   );
 }

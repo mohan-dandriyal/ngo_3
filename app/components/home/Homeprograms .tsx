@@ -1,30 +1,29 @@
-"use client"
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { ComponentProps } from "react";
-import { ProgramCard } from "../ProgramCard";
+"use client";
+
+import Link from "next/link";
+import {
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
-import Link from "next/link";
+import ProgramCard from "@/app/components/ProgramCard";
 
-const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
+const ease: [number, number, number, number] = [
+  0.2, 0.8, 0.15, 1,
+];
 
-/* Heading block plays first */
-const headingContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-const rise: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
-};
-
-
-
-/* Cards follow, one after another */
-const grid: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
+type Program = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  theme: "coral" | "green" | "sand";
+  href: string;
 };
 
 type HomeProgramsContent = {
@@ -33,78 +32,177 @@ type HomeProgramsContent = {
     titleStart: string;
     titleAccent?: string;
     titleEnd?: string;
+    description?: string;
     meta?: string;
-    button: { href?: string; label: string };
-    programs?: ComponentProps<typeof ProgramCard>["program"][];
+    button?: {
+      href: string;
+      label: string;
+    };
+    programs?: Program[];
   };
 };
 
-export default function HomePrograms({ data }: HomeProgramsContent) {
-  const { eyebrow, titleStart, titleAccent, titleEnd, meta, button, programs = [] } = data;
+const headingContainer: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const rise: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease,
+    },
+  },
+};
+
+const grid: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export default function HomePrograms({
+  data,
+}: HomeProgramsContent) {
+  const {
+    eyebrow,
+    titleStart,
+    titleAccent,
+    titleEnd,
+    description,
+    meta,
+    button,
+    programs = [],
+  } = data;
+
   const reduce = useReducedMotion();
 
   return (
-    <section className="overflow-hidden f-wull  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]">
+    <section
+      id="programs"
+      className="relative w-full overflow-hidden bg-[#0a0a09] text-[#ece6da]"
+    >
+      {/* Background glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-48 top-1/3 h-[400px] w-[400px] rounded-full bg-[#a8c686]/[0.05] blur-[130px]"
+      />
+
       <MainContainer>
-        <div className="">
+        <div className="relative">
+
+          {/* Section heading */}
           <motion.div
             variants={headingContainer}
             initial={reduce ? false : "hidden"}
             whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+            viewport={{
+              once: true,
+              amount: 0.25,
+            }}
+            className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end lg:gap-12"
           >
-            <div>
+            <div className="max-w-[750px]">
               {eyebrow && (
-                <Eyebrow eyebrow={eyebrow} />
+                <motion.div variants={rise} className="mb-6">
+                  <Eyebrow eyebrow={eyebrow} />
+                </motion.div>
               )}
 
-              <SectionTitle
-                titleStart={titleStart}
-                titleAccent={titleAccent}
-                titleEnd={titleEnd}
-                tone={'dark'}
-              />
+              <motion.div variants={rise}>
+                <SectionTitle
+                  titleStart={titleStart}
+                  titleAccent={titleAccent}
+                  titleEnd={titleEnd}
+                  tone="dark"
+                />
+              </motion.div>
             </div>
-            {meta && (
-              <motion.p variants={rise} className="font-mono text-xs tracking-wide text-[#8f8a80] lg:pb-3">
-                {meta}
-              </motion.p>
-            )}
-          </motion.div>
 
-          <motion.div
-            variants={grid}
-            initial={reduce ? false : "hidden"}
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="mt-14 grid gap-8 md:grid-cols-3"
-          >
-            {programs.map((p, i) => (
-              <ProgramCard key={i} program={p} />
-            ))}
-          </motion.div>
+            <div className="max-w-[390px] lg:pb-3">
+              {description && (
+                <motion.p
+                  variants={rise}
+                  className="text-sm leading-7 text-[#a6a399] sm:text-base sm:leading-8"
+                >
+                  {description}
+                </motion.p>
+              )}
 
-          <motion.div variants={rise} className="mt-8 text-right">
-            <Link
-              href={button.href || "#"}
-              className="group relative inline-flex items-center gap-3 pb-2 text-sm tracking-[0.02em] text-[#FFFF]
-                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
+              {meta && (
+                <motion.p
+                  variants={rise}
+                  className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#a8c686]"
+                >
+                  {meta}
+                </motion.p>
+              )}
+
+                {/* All programs CTA */}
+          {button?.label && (
+            <motion.div
+              variants={rise}
+              initial={reduce ? false : "hidden"}
+              whileInView="show"
+              viewport={{ once: true }}
+              className="mt-9 "
             >
-              {button.label}
-              <svg
-                viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-                strokeLinejoin="round" aria-hidden="true"
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              <Link
+                href={button.href || "/our-program"}
+                className="group inline-flex gap-3 border-b border-[#e0503a] pb-2 text-sm text-[#ece6da] transition-colors duration-300 hover:text-[#a8c686] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
               >
-                <path d="M3 11L11 3M4.5 3H11v6.5" />
-              </svg>
-              <span
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
-              />
-            </Link>
+                {button.label}
+
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </motion.div>
+          )}
+            </div>
+
+            
           </motion.div>
+
+          {/* Program cards */}
+          {programs.length > 0 && (
+            <motion.div
+              variants={grid}
+              initial={reduce ? false : "hidden"}
+              whileInView="show"
+              viewport={{
+                once: true,
+                amount: 0.15,
+              }}
+              className="mt-12 grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6"
+            >
+              {programs.map((program) => (
+                <ProgramCard
+                  key={program.id}
+                  program={program}
+                />
+              ))}
+            </motion.div>
+          )}
+
+          
+
+        
         </div>
       </MainContainer>
     </section>

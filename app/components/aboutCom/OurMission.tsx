@@ -44,7 +44,7 @@ export default function OurMission({ missionPoints }: Mission) {
     return (
         <section
             id="our-mission"
-            className="relative w-full overflow-hidden bg-[#0a0a09] py-20 text-[#ece6da] md:py-28
+            className="relative w-full overflow-hidden bg-[#0a0a09] sm:pt-8 pt-12 pb-20 text-[#ece6da] md:pb-28
                        font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
         >
             <MainContainer>

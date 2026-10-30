@@ -14,7 +14,7 @@
         "titleAccent": "change.",
         "description": "Every photograph captures a moment of courage, community, and progress. Explore the people and places behind our work.",
         "image": {
-            "src": "/gallery/gal-hero.jpg",
+            "src": "/banner/gallery.png",
             "alt": "Community members working together on a local development project"
         },
         "imageCaption": "Together, we build a stronger tomorrow.",
@@ -129,7 +129,6 @@
                 "year": "2025",
                 "size": "normal"
             }
-            
         ],
         "bottomNote": "Every image represents a story still unfolding.",
         "bottomLinkText": "Discover our programs",

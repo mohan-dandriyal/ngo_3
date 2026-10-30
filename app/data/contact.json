@@ -9,16 +9,17 @@
         "label": "Contact us"
       }
     ],
-    "eyebrow": "",
+    "eyebrow": "Let's make something meaningful",
     "titleStart": "Good things begin with a",
     "titleAccent": "conversation.",
     "description": "Have a question, an idea, or a desire to make a difference? We'd love to hear from you.",
     "image": {
-      "src": "/contact-banner.jpg",
+      "src": "/banner/contact.webp",
       "alt": "Community members and volunteers connecting"
     },
     "imageCaption": "PEOPLE FIRST. ALWAYS.",
-    "scrollText": "LET'S CONNECT"
+    "scrollText": "LET'S CONNECT",
+    "scrollTarget": "#contact"
   },
   "contactSection": {
     "eyebrow": "01 / REACH OUT",

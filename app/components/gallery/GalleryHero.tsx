@@ -1,78 +1,128 @@
 
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight, ChevronRight } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { ArrowDownRight } from "lucide-react";
+
 import type { GalleryHeroData } from "@/app/types/gallery";
+
 import BreadCrumb from "../ui/BreadCrumb";
 import MainContainer from "../ui/MainContainer";
-import { Description, Eyebrow, HeroTitle } from "../ui/SectionContent";
+import {
+  Description,
+  Eyebrow,
+  HeroTitle,
+} from "../ui/SectionContent";
 
 type GalleryHeroProps = {
-    data: GalleryHeroData;
+  data: GalleryHeroData;
 };
 
 export default function GalleryHero({ data }: GalleryHeroProps) {
-    const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotion();
+  const bannerRef = useRef<HTMLElement>(null);
 
-    return (
-        <section className="overflow-hidden bg-[#0A0B09] px-5 pb-16 pt-8 text-[#EAE3D6] sm:px-8 md:pb-24 lg:px-16 lg:pt-12">
-            <MainContainer>
+  const { scrollYProgress } = useScroll({
+    target: bannerRef,
+    offset: ["start end", "end start"],
+  });
 
-                <BreadCrumb breadcrumb={data.breadcrumb} />
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduceMotion ? [0, 0] : [-45, 45]
+  );
 
-                <div className="grid items-end gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-                    <motion.div
-                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                    >
-                        <Eyebrow eyebrow={data.eyebrow} />
+  return (
+    <section
+      ref={bannerRef}
+      id="gallery-hero"
+      className="relative w-full overflow-hidden bg-[#0a0a09] text-[#ece6da]"
+    >
+      {/* Full-width banner */}
+      <div className="relative min-h-[680px] overflow-hidden lg:min-h-[760px]">
 
-                        <HeroTitle
-                            titleStart={data.titleStart}
-                            titleAccent={data.titleAccent}
-                            titleEnd=""
-                            tone="dark"
-                        />
+        {/* Background image */}
+        {data.image?.src && (
+          <motion.div
+            className="absolute inset-0"
+            style={{ y: imageY }}
+          >
+            <Image
+              src={data.image.src}
+              alt={data.image.alt || ""}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </motion.div>
+        )}
 
-                        <div className="mt-6">
-                            <Description description={data.description} />
-                        </div>
-                          
+        {/* Image overlays */}
+        <div className="absolute inset-0 bg-black/70" />
 
-                        <Link
-                            href={data.scrollTarget}
-                            className="mt-10 inline-flex items-center gap-3 border-b border-[#55564F] pb-3 text-sm transition-colors hover:border-[#EE503B] hover:text-[#EE503B]"
-                        >
-                            {data.scrollText}
-                            <ArrowDownRight size={18} aria-hidden="true" />
-                        </Link>
-                    </motion.div>
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-[#080b09]/95 via-[#080b09]/70 to-[#080b09]/25" /> */}
 
-                    <motion.figure
-                        initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.15 }}
-                        className="relative"
-                    >
-                        <div className="relative aspect-[4/3] overflow-hidden bg-[#20211C] md:aspect-[5/4]">
-                            <Image
-                                src={data.image.src}
-                                alt={data.image.alt}
-                                fill
-                                priority
-                                sizes="(max-width: 1024px) 100vw, 45vw"
-                                className="object-cover transition-transform duration-700 hover:scale-[1.03]"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                        </div>
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a09] via-transparent to-black/20" /> */}
 
-                    </motion.figure>
+        {/* Decorative glow */}
+        <div
+          aria-hidden="true"
+          className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#a8c686]/10 blur-[120px]"
+        />
+
+        <MainContainer>
+          <div className="relative z-10 flex min-h-[680px] flex-col justify-between py-10 lg:min-h-[760px] lg:py-14">
+
+            {/* Main content */}
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.2, 0.8, 0.15, 1] }}
+              className="max-w-4xl pt-8 lg:pt-14"
+            >
+              <BreadCrumb breadcrumb={data.breadcrumb} />
+
+              {data.eyebrow && (
+                <div className="mt-10">
+                  <Eyebrow eyebrow={data.eyebrow} />
                 </div>
-            </MainContainer>
-        </section>
-    );
+              )}
+
+              <div className="mt-8">
+                <HeroTitle
+                  titleStart={data.titleStart}
+                  titleAccent={data.titleAccent}
+                  titleEnd=""
+                  tone="dark"
+                />
+              </div>
+
+              {data.description && (
+                <div className="mt-7 max-w-2xl">
+                  <Description
+                    description={data.description}
+                    variant="body"
+                  />
+                </div>
+              )}
+
+             
+            </motion.div>
+
+           
+          </div>
+        </MainContainer>
+      </div>
+    </section>
+  );
 }

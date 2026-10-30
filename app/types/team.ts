@@ -8,6 +8,10 @@ export type TeamHero = {
     scrollText?: string;
     scrollTarget?: string;
     images?: { src: string; alt?: string }[];
+    bannerImage : {
+        src : string,
+        alt : string
+    }
 };
 
 export type TeamMember = {

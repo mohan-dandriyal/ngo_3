@@ -1,11 +1,15 @@
 {
   "header": {
     "logo": {
-      "src": "/logo-1.png",
+      "src": "/logo-3.png",
       "alt": "logo.png"
     },
     "navItems": [
       {
+        "label": "home",
+        "linkTo": "/"
+      },
+       {
         "label": "About",
         "linkTo": "/about"
       },
@@ -28,14 +32,19 @@
       {
         "label": "Team",
         "linkTo": "/our-team"
+      },
+       {
+        "label": "Contact Us",
+        "linkTo": "/contact-us"
       }
     ],
-    "btnText": "Contact Now",
-    "linkToBtn": "/contact-us"
+    "btnText": "Donate",
+    "linkToBtn": "#"
   },
+  
   "footer": {
     "logo": {
-      "src": "/logo-1.png",
+      "src": "/logo-3.png",
       "alt": "WKX Foundation"
     },
     "about": "WKX Foundation brings clean water, schooling and healthcare to communities that have been left waiting. Every rupee is tracked and reported.",
@@ -44,13 +53,18 @@
       "titleAccent": "one life today",
       "text": "Give once or every month. Every donation is matched to a project, and you can follow where it goes.",
       "btnText": "Donate now",
-      "linkTo": "#"
+      "linkTo": "/donate"
     },
     "newsletter": {
       "title": "Get field updates",
+      "description": "Stories, progress and updates from the communities we work with.",
       "placeholder": "Your email address",
       "btnText": "Subscribe",
-      "successText": "Thanks for subscribing. Check your inbox to confirm."
+      "loadingText": "Subscribing...",
+      "successText": "Thanks for subscribing. Check your inbox to confirm.",
+      "errorText": "Something went wrong. Please try again.",
+      "invalidEmailText": "Please enter a valid email address.",
+      "apiEndpoint": "/api/newsletter/subscribe"
     },
     "columns": [
       {
@@ -61,52 +75,102 @@
             "linkTo": "/about"
           },
           {
-            "label": "Programs",
+            "label": "Our programs",
             "linkTo": "/our-program"
           },
           {
-            "label": "Causes",
+            "label": "Our causes",
             "linkTo": "/our-cause"
           },
           {
-            "label": "Blog",
+            "label": "Stories",
             "linkTo": "/blog"
+          },
+          {
+            "label": "Gallery",
+            "linkTo": "/gallery"
+          }
+        ]
+      },
+      {
+        "title": "Get involved",
+        "links": [
+          {
+            "label": "Donate",
+            "linkTo": "/donate"
+          },
+          {
+            "label": "Volunteer",
+            "linkTo": "/volunteer"
+          },
+          {
+            "label": "Partner with us",
+            "linkTo": "/contact"
+          },
+          {
+            "label": "Contact us",
+            "linkTo": "/contact"
           }
         ]
       }
-      
     ],
     "contact": {
       "title": "Contact",
-      "address": "12 Foundation Road, New Delhi 110001",
+      "address": "Replace with the client's verified address",
+      "mapLink": "https://maps.google.com/?q=New+Delhi",
       "email": "hello@wkxfoundation.org",
       "phone": "+91 00000 00000"
     },
     "socials": [
       {
         "label": "Facebook",
+        "icon": "facebook",
         "linkTo": "https://facebook.com"
       },
       {
         "label": "Instagram",
+        "icon": "instagram",
         "linkTo": "https://instagram.com"
       },
       {
         "label": "X",
+        "icon": "x",
         "linkTo": "https://x.com"
       },
       {
         "label": "YouTube",
+        "icon": "youtube",
         "linkTo": "https://youtube.com"
       },
       {
         "label": "LinkedIn",
+        "icon": "linkedin",
         "linkTo": "https://linkedin.com"
       }
     ],
+    "legalLinks": [
+      {
+        "label": "Privacy Policy",
+        "linkTo": "/privacy-policy"
+      },
+      {
+        "label": "Terms & Conditions",
+        "linkTo": "/terms-and-conditions"
+      }
+    ],
     "copyright": "© 2026 WKX Foundation. All rights reserved.",
-    "wordmark": ""
-  },
+    "wordmark": "",
+    "labels": {
+      "homeLink": "WKX Foundation home",
+      "socialNavigation": "Follow us",
+      "legalNavigation": "Legal information",
+      "backToTop": "Back to top",
+      "newsletterEmailLabel": "Email address",
+      "newsletterSuccessRole": "status",
+      "newsletterErrorRole": "alert"
+    }
+  }
+,
   "donetionBtn": {
     "btntext": "Donate",
     "linkTo": "#"

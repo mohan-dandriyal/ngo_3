@@ -122,7 +122,7 @@ export function HeroTitle({
       variants={headline}
       {...motionProps}
       aria-label={[titleStart, titleAccent, titleEnd].filter(Boolean).join(" ")}
-      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(56px,8.6vw,100px)] font-medium leading-[0.98] tracking-[-0.02em]  ${color} ${className}`}
+      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(56px,8.6vw,90px)] font-medium leading-[0.98] tracking-[-0.02em]  ${color} ${className}`}
     >
       <Words text={titleStart} />
       {titleAccent && (
@@ -151,7 +151,7 @@ export function SectionTitle({
       variants={headline}
       {...motionProps}
       aria-label={[titleStart, titleAccent, titleEnd].filter(Boolean).join(" ")}
-      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(44px,6.4vw,96px)]
+      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(44px,6.4vw,70px)]
                   font-medium leading-none tracking-[-0.02em] ${color} ${className}`}
     >
       <Words text={titleStart} />
@@ -196,7 +196,6 @@ export function Description({ description, variant = "label", tone = "dark", sta
   }
 
   const color = tone === "dark" ? "text-[#e9a26b]" : "text-[#3f6b57]";
-  const line = tone === "dark" ? "bg-[#e9a26b]" : "bg-[#3f6b57]";
 
   return (
     <motion.p

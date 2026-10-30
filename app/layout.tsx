@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
-import FixedButton from "./components/ui/FixedButton";
 import Footer from "./components/layout/Footer";
 
 const geistSans = Geist({
@@ -31,11 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <LoadingScreen />
         {children}
         <Footer />
         
-        <FixedButton href={data.donetionBtn.linkTo} />
         </body>
 
     </html>
