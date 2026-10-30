@@ -123,12 +123,7 @@ function CountUp({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
-
-    if (!inView) return;
+    if (reduce || !inView) return;
 
     const controls = animate(0, value, {
       duration: 2,
@@ -139,7 +134,7 @@ function CountUp({
     return () => controls.stop();
   }, [inView, value, reduce]);
 
-  const rounded = Math.round(display);
+  const rounded = Math.round(reduce ? value : display);
 
   return (
     <span ref={ref}>
@@ -166,7 +161,7 @@ export default function AboutHero({ data }: AboutHeroContent) {
   const reduce = useReducedMotion();
   const [imgFailed, setImgFailed] = useState(!image?.src);
 
-  const bannerRef = useRef<HTMLElement>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   // Image parallax
   const { scrollYProgress } = useScroll({

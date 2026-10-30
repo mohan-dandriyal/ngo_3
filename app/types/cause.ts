@@ -27,6 +27,7 @@ export type CausesHeroData = {
   currencySymbol?: string;
   primaryButton?: { text: string; link: string };
   statLabels: { raised: string; supporters: string; causes: string };
+  image : {src : string, alt : string}
 };
 
 export type CausesFeaturedLabels = {

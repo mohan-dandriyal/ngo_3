@@ -19,9 +19,26 @@ import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
 import type {
-  HomeBlogContent,
   BlogPost,
 } from "@/app/types/blog";
+
+type HomeBlogProps = {
+  data: BlogSectionData;
+};
+
+type BlogSectionData = {
+  eyebrow?: string;
+  titleStart: string;
+  titleAccent: string;
+  titleEnd?: string;
+  description?: string;
+  linkText?: string;
+  linkTo?: string;
+  readMoreText: string;
+  dateLocale?: string;
+  featuredLabel?: string;
+  posts?: BlogPost[];
+};
 
 const ease: [number, number, number, number] = [
   0.2, 0.8, 0.15, 1,
@@ -66,6 +83,7 @@ const cardVariants: Variants = {
   },
 };
 
+// Date formatter
 function formatDate(date: string, locale: string) {
   const parsedDate = new Date(`${date}T00:00:00`);
 
@@ -83,26 +101,16 @@ function formatDate(date: string, locale: string) {
 // Shared image component
 function BlogImage({
   post,
-  featured = false,
 }: {
   post: BlogPost;
-  featured?: boolean;
 }) {
   return (
-    <div
-      className={`relative overflow-hidden bg-[#20251f] ${
-        featured ? "aspect-[16/10]" : "aspect-[16/10]"
-      }`}
-    >
+    <div className="relative aspect-[16/10] overflow-hidden bg-[#20251f]">
       <Image
         src={post.image}
-        alt={post.imageAlt}
+        alt={post.imageAlt ?? post.title}
         fill
-        sizes={
-          featured
-            ? "(max-width: 1023px) 100vw, 55vw"
-            : "(max-width: 1023px) 40vw, 18vw"
-        }
+        sizes="(max-width: 1023px) 100vw, 50vw"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
 
@@ -135,7 +143,7 @@ function FeaturedBlog({
         className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
         aria-label={`${readMoreText}: ${post.title}`}
       >
-        <BlogImage post={post} featured />
+        <BlogImage post={post} />
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <span className="border border-[#a8c686]/40 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#a8c686]">
@@ -152,14 +160,15 @@ function FeaturedBlog({
         </h3>
 
         {post.excerpt && (
-          <p className="mt-4 max-w-[55ch] text-sm leading-[1.9] text-[#aaa99f]">
-            {post.excerpt?.slice(0,90)}
+          <p className="mt-4 line-clamp-3 max-w-[55ch] text-sm leading-[1.9] text-[#aaa99f]">
+            {post.excerpt}
           </p>
         )}
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-5">
           <div className="flex items-center gap-2 text-xs text-[#8f9489]">
             <CalendarDays size={14} />
+
             <time dateTime={post.date}>
               {formatDate(post.date, locale)}
             </time>
@@ -167,6 +176,7 @@ function FeaturedBlog({
 
           <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#ece6da] transition-colors group-hover:text-[#a8c686]">
             {readMoreText}
+
             <ArrowUpRight
               size={15}
               className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -197,11 +207,13 @@ function RecentBlog({
     >
       <Link
         href={post.linkTo}
-        className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-4 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
+        className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686] sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6"
         aria-label={`${readMoreText}: ${post.title}`}
       >
         {/* Thumbnail */}
-        <BlogImage post={post} />
+        <div className="overflow-hidden rounded-sm">
+          <BlogImage post={post} />
+        </div>
 
         {/* Text */}
         <div className="flex min-h-full flex-col">
@@ -232,6 +244,7 @@ function RecentBlog({
 
           <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-medium text-[#c6c2b8] transition-colors group-hover:text-[#a8c686]">
             {readMoreText}
+
             <ArrowUpRight
               size={13}
               className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -243,22 +256,22 @@ function RecentBlog({
   );
 }
 
-export default function HomeBlog({ data }: HomeBlogContent) {
+export default function HomeBlog({ data }: HomeBlogProps) {
+  const reduce = useReducedMotion();
+
   const {
     eyebrow,
     titleStart,
     titleAccent,
-    titleEnd,
+    titleEnd = "",
     description,
     linkText,
     linkTo,
     readMoreText,
     dateLocale = "en-IN",
-    featuredLabel,
+    featuredLabel = "Featured story",
     posts = [],
   } = data;
-
-  const reduce = useReducedMotion();
 
   const [featured, ...remainingPosts] = posts;
   const recentPosts = remainingPosts.slice(0, 3);
@@ -323,6 +336,7 @@ export default function HomeBlog({ data }: HomeBlogContent) {
                   className="group inline-flex items-center gap-3 border-b border-[#e0503a]/60 pb-2 text-sm text-[#ece6da] transition-colors hover:border-[#a8c686] hover:text-[#a8c686] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
                 >
                   {linkText}
+
                   <ArrowUpRight
                     size={15}
                     className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -361,9 +375,9 @@ export default function HomeBlog({ data }: HomeBlogContent) {
 
             {recentPosts.length > 0 && (
               <div className="flex flex-col border-t border-white/10 lg:border-t-0">
-                {recentPosts.map((post) => (
+                {recentPosts && recentPosts.map((post: BlogPost, index:number) => (
                   <RecentBlog
-                    key={post.id}
+                    key={index +1}
                     post={post}
                     readMoreText={readMoreText}
                     locale={dateLocale}

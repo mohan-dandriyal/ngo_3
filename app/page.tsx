@@ -58,7 +58,18 @@ export default function Home() {
       </div>
 
       <div className='bg-[#0a0a09] w-full'>
-        <HomeBlog data={blog.blog} />
+        <HomeBlog
+          data={{
+            ...blog.blog,
+            posts: blog.blog.posts.map((post) => ({
+              ...post,
+              slug: post.id,
+              blogDetailImage: post.image,
+              author: { name: 'Admin' },
+              content: [{ type: 'paragraph', text: post.excerpt }],
+            })),
+          }}
+        />
       </div>
     </div>
   );

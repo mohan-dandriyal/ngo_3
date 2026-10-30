@@ -78,7 +78,6 @@ const statItem: Variants = {
 
 export default function CausesHero({
   data,
-  stats,
 }: CausesHeroProps) {
   const {
     eyebrow,
@@ -93,7 +92,7 @@ export default function CausesHero({
   const reduce = useReducedMotion();
   const [imgFailed, setImgFailed] = useState(!image?.src);
 
-  const bannerRef = useRef<HTMLElement>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   // Background image parallax
   const { scrollYProgress } = useScroll({

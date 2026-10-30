@@ -25,6 +25,7 @@ export type BlogPost = {
     author: BlogAuthor;
     tags?: string[];
     content: ContentBlock[];
+    linkTo : string
 };
 
 export type BlogHeroData = {

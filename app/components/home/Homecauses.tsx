@@ -275,13 +275,13 @@ function CauseCard({
             />
           </Link>
 
-          <Link
+          {/* <Link
             href={cause.donateTo}
             className="inline-flex min-h-10 items-center justify-center gap-2 bg-[#e0503a] px-4 py-2 text-xs font-semibold text-white transition-all duration-300 hover:bg-[#f06450] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
           >
             <Heart size={14} />
             {donateButtonText}
-          </Link>
+          </Link> */}
 
         </div>
       </div>
