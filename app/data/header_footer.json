@@ -88,7 +88,7 @@
           },
           {
             "label": "Gallery",
-            "linkTo": "/gallery"
+            "linkTo": "/our-gallery"
           }
         ]
       },
@@ -96,20 +96,12 @@
         "title": "Get involved",
         "links": [
           {
-            "label": "Donate",
-            "linkTo": "/donate"
-          },
-          {
-            "label": "Volunteer",
-            "linkTo": "/volunteer"
-          },
-          {
-            "label": "Partner with us",
-            "linkTo": "/contact"
+            "label": "Team",
+            "linkTo": "/our-team"
           },
           {
             "label": "Contact us",
-            "linkTo": "/contact"
+            "linkTo": "/contact-us"
           }
         ]
       }
