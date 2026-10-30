@@ -482,20 +482,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center md:justify-end">
 
-            {legalLinks.length > 0 && (
-              <nav
-                aria-label={labels.legalNavigation}
-                className="flex flex-wrap justify-center gap-x-6 gap-y-2"
-              >
-                {legalLinks.map((link) => (
-                  <FooterLink key={link.label} href={link.linkTo}>
-                    <span className="text-[13px]">
-                      {link.label}
-                    </span>
-                  </FooterLink>
-                ))}
-              </nav>
-            )}
+           
 
             <button
               type="button"

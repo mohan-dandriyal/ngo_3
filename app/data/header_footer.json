@@ -148,16 +148,6 @@
         "linkTo": "https://linkedin.com"
       }
     ],
-    "legalLinks": [
-      {
-        "label": "Privacy Policy",
-        "linkTo": "/privacy-policy"
-      },
-      {
-        "label": "Terms & Conditions",
-        "linkTo": "/terms-and-conditions"
-      }
-    ],
     "copyright": "© 2026 WKX Foundation. All rights reserved.",
     "wordmark": "",
     "labels": {
