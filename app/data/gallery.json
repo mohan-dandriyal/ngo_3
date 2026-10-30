@@ -27,6 +27,7 @@
         "titleAccent": "matter.",
         "description": "From local initiatives to lasting change, these are the real stories shaping a better future.",
         "allLabel": "All stories",
+        "countSuffix": "photographs",
         "emptyMessage": "No photographs found in this category yet.",
         "categories": [
             {

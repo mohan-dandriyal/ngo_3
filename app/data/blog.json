@@ -1,4 +1,3 @@
-
 {
   "blog": {
     "eyebrow": "From the blog",
@@ -11,46 +10,84 @@
     "readMoreText": "Read story",
     "dateLocale": "en-IN",
     "featuredLabel": "Featured story",
+    "recentUpdatesLabel": "Recent Updates",
+    "articlesLabel": "articles",
     "posts": [
       {
         "id": "hand-pump-school-day",
+        "slug": "hand-pump-school-day",
         "title": "How one hand pump changed the school day for 200 children",
         "excerpt": "Before the pump, the morning walk for water took two hours. Now the classroom fills up before the first bell. Here is what changed, and what is next.",
         "category": "Water",
         "date": "2026-10-12",
         "image": "/blog/blog-1.jpg",
+        "blogDetailImage": "/blog/blog-1.jpg",
         "imageAlt": "Children filling bottles at a new hand pump",
-        "linkTo": "/blog/hand-pump-school-day"
+        "linkTo": "/blog/hand-pump-school-day",
+        "author": { "name": "Priya Sharma" },
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Before the pump, the morning walk for water took two hours. Now the classroom fills up before the first bell. Here is what changed, and what is next."
+          }
+        ]
       },
       {
         "id": "mobile-clinic-1000",
+        "slug": "mobile-clinic-1000",
         "title": "Our mobile clinic reaches its 1,000th patient",
         "excerpt": "A milestone made possible by healthcare professionals, volunteers and the communities who welcome our mobile clinic.",
         "category": "Health",
         "date": "2026-10-03",
         "image": "/blog/blog-2.jpg",
+        "blogDetailImage": "/blog/blog-2.jpg",
         "imageAlt": "A nurse greeting a patient outside the mobile clinic",
-        "linkTo": "/blog/mobile-clinic-1000"
+        "linkTo": "/blog/mobile-clinic-1000",
+        "author": { "name": "Dr. Anita Rao" },
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "A milestone made possible by healthcare professionals, volunteers and the communities who welcome our mobile clinic."
+          }
+        ]
       },
       {
         "id": "monthly-gift-breakdown",
+        "slug": "monthly-gift-breakdown",
         "title": "What your monthly gift pays for, line by line",
         "excerpt": "A closer look at how recurring contributions support essential supplies, local projects and community-led initiatives.",
         "category": "Transparency",
         "date": "2026-09-24",
         "image": "/post/post-3.jpg",
+        "blogDetailImage": "/post/post-3.jpg",
         "imageAlt": "Volunteers sorting school supplies",
-        "linkTo": "/blog/monthly-gift-breakdown"
+        "linkTo": "/blog/monthly-gift-breakdown",
+        "author": { "name": "Rohan Mehta" },
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "A closer look at how recurring contributions support essential supplies, local projects and community-led initiatives."
+          }
+        ]
       },
       {
         "id": "rampur-library",
+        "slug": "rampur-library",
         "title": "Meet the volunteers rebuilding the Rampur library",
         "excerpt": "Meet the people bringing a shared learning space back to life through teamwork, dedication and local support.",
         "category": "Education",
         "date": "2026-09-10",
         "image": "/post/post-4.webp",
+        "blogDetailImage": "/post/post-4.webp",
         "imageAlt": "Volunteers painting shelves in a village library",
-        "linkTo": "/blog/rampur-library"
+        "linkTo": "/blog/rampur-library",
+        "author": { "name": "Imran Sheikh" },
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Meet the people bringing a shared learning space back to life through teamwork, dedication and local support."
+          }
+        ]
       }
     ]
   }

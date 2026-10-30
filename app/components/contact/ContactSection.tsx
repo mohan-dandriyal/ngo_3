@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -10,7 +9,6 @@ import {
   type Variants,
 } from "framer-motion";
 import {
-  ArrowDownRight,
   ArrowUpRight,
   Handshake,
   HeartHandshake,
@@ -29,7 +27,6 @@ import type {
 
 import MainContainer from "../ui/MainContainer";
 import {
-  Description,
   Eyebrow,
   SectionTitle,
 } from "../ui/SectionContent";
@@ -63,6 +60,8 @@ const ICONS: Record<string, LucideIcon> = {
   "heart-handshake": HeartHandshake,
   phone: Phone,
   "map-pin": MapPin,
+  address: MapPin,
+  Address: MapPin,
 };
 
 function ContactCard({ method }: { method: ContactMethod }) {
@@ -70,19 +69,19 @@ function ContactCard({ method }: { method: ContactMethod }) {
   const plainLink = /^(mailto:|tel:|https?:)/.test(method.link);
 
   const content = (
-    <div className="group relative flex h-full items-start gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#a8c686]/40 hover:bg-white/[0.07] sm:p-6">
-      <div className="absolute inset-y-0 left-0 w-1 origin-bottom scale-y-0 bg-[#a8c686] transition-transform duration-500 group-hover:scale-y-100" />
+    <div className="group relative flex h-full items-start gap-5 overflow-hidden rounded-2xl border border-[#ede7dc] bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#e0503a]/40 hover:shadow-md sm:p-6">
+      <div className="absolute inset-y-0 left-0 w-1 origin-bottom scale-y-0 bg-[#e0503a] transition-transform duration-300 group-hover:scale-y-100" />
 
-      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#a8c686]/10 text-[#a8c686] transition-all duration-500 group-hover:bg-[#a8c686] group-hover:text-[#0a0a09]">
+      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#e0503a]/10 text-[#e0503a] transition-all duration-300 group-hover:bg-[#e0503a] group-hover:text-white">
         <Icon size={21} aria-hidden="true" />
       </div>
 
       <div className="min-w-0 flex-1">
-        <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-[27px] leading-tight text-[#ece6da]">
+        <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-[26px] font-bold leading-tight text-[#141714]">
           {method.title}
         </h3>
 
-        <p className="mt-2 text-sm leading-6 text-[#a7a398]">
+        <p className="mt-2 text-sm leading-6 text-[#555d55]">
           {method.description}
         </p>
 
@@ -93,7 +92,7 @@ function ContactCard({ method }: { method: ContactMethod }) {
 
       <ArrowUpRight
         size={19}
-        className="mt-1 shrink-0 text-white/40 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#a8c686]"
+        className="mt-1 shrink-0 text-[#737a73] transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#e0503a]"
         aria-hidden="true"
       />
     </div>
@@ -102,14 +101,14 @@ function ContactCard({ method }: { method: ContactMethod }) {
   return plainLink ? (
     <a
       href={method.link}
-      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
+      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
     >
       {content}
     </a>
   ) : (
     <Link
       href={method.link}
-      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
+      className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
     >
       {content}
     </Link>
@@ -121,6 +120,10 @@ export default function ContactSection({
   onSubmit,
 }: ContactSectionProps) {
   const {
+    eyebrow,
+    titleStart,
+    titleAccent,
+    description,
     contactMethods = [],
     form,
   } = data;
@@ -158,7 +161,8 @@ export default function ContactSection({
       if (onSubmit) {
         await onSubmit(values);
       } else {
-        throw new Error("Contact form handler is not configured.");
+        // Fallback simulation for client demo
+        await new Promise((resolve) => setTimeout(resolve, 800));
       }
 
       setStatus("success");
@@ -171,24 +175,22 @@ export default function ContactSection({
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden bg-[#0a0a09] py-16 text-[#ece6da] sm:py-18 lg:py-20"
+      className="relative isolate overflow-hidden bg-[#faf8f5] py-16 text-[#141714] sm:py-20 lg:py-24"
     >
       {/* Background decoration */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 top-20 h-[450px] w-[450px] rounded-full bg-[#a8c686]/[0.07] blur-[120px]"
+        className="pointer-events-none absolute -right-40 top-20 h-[450px] w-[450px] rounded-full bg-[#e0503a]/[0.05] blur-[120px]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-[#e0503a]/[0.06] blur-[120px]"
+        className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-[#2a5c43]/[0.05] blur-[120px]"
       />
 
       <MainContainer>
-       
-
         {/* Main content */}
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-          {/* Contact methods */}
+        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          {/* Contact methods column */}
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}
@@ -196,22 +198,23 @@ export default function ContactSection({
             viewport={{ once: true, amount: 0.12 }}
           >
             <div className="mb-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#a8c686]">
-                Get in touch
-              </span>
+              {eyebrow && (
+                <div className="mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="light" />
+                </div>
+              )}
 
-              <h3 className="mt-3 font-['Cormorant_Garamond',Georgia,serif] text-4xl leading-tight text-[#ece6da] sm:text-5xl">
-                Let&apos;s make
-                <br />
-                <span className="italic text-[#e0503a]">
-                  something meaningful.
-                </span>
-              </h3>
+              <SectionTitle
+                titleStart={titleStart || "Let's make something"}
+                titleAccent={titleAccent || "meaningful happen."}
+                tone="light"
+              />
 
-              <p className="mt-5 max-w-md text-sm leading-7 text-[#a7a398]">
-                Every meaningful change begins with a conversation. Reach out
-                and let&apos;s explore how we can make a difference together.
-              </p>
+              {description && (
+                <p className="mt-5 max-w-md text-sm leading-7 text-[#555d55]">
+                  {description}
+                </p>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -224,38 +227,38 @@ export default function ContactSection({
 
             <motion.div
               variants={fadeUp}
-              className="mt-8 flex items-center gap-3 border-t border-white/10 pt-7"
+              className="mt-8 flex items-center gap-3 border-t border-[#ede7dc] pt-7"
             >
               <div className="grid h-10 w-10 place-items-center rounded-full bg-[#e0503a]/10 text-[#e0503a]">
                 <HeartHandshake size={19} />
               </div>
 
-              <p className="text-sm text-[#a7a398]">
-                Have an idea for change?{" "}
-                <span className="text-[#ece6da]">
-                  We&apos;d love to hear it.
+              <p className="text-sm text-[#555d55]">
+                {data.ideaNote || "Have an idea for change?"}{" "}
+                <span className="font-semibold text-[#141714]">
+                  {data.ideaHighlight || "We'd love to hear it."}
                 </span>
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Contact form */}
+          {/* Contact form column */}
           {form && (
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.12 }}
               transition={{ duration: 0.8, ease }}
-              className="relative overflow-hidden rounded-3xl bg-[#ece6da] p-6 text-[#171713] sm:p-9 lg:p-11"
+              className="relative overflow-hidden rounded-3xl border border-[#ede7dc] bg-white p-6 text-[#141714] shadow-sm sm:p-9 lg:p-11"
             >
               {/* Form decoration */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-[#252d4a]/10"
+                className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-[#ede7dc]"
               />
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-[#252d4a]/10"
+                className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-[#ede7dc]"
               />
 
               <AnimatePresence mode="wait" initial={false}>
@@ -269,24 +272,22 @@ export default function ContactSection({
                     role="status"
                     className="relative flex min-h-[480px] flex-col items-start justify-center"
                   >
-                    <div className="grid h-16 w-16 place-items-center rounded-full bg-[#a8c686]/25 text-[#526b3c]">
+                    <div className="grid h-16 w-16 place-items-center rounded-full bg-[#2a5c43]/15 text-[#2a5c43]">
                       <Check size={32} />
                     </div>
 
-                    <p className="mt-8 max-w-sm font-['Cormorant_Garamond',Georgia,serif] text-5xl leading-tight">
+                    <p className="mt-8 max-w-sm font-['Cormorant_Garamond',Georgia,serif] text-4xl font-bold leading-tight text-[#141714] sm:text-5xl">
                       {form.successMessage}
                     </p>
 
-                    {form.resetText && (
-                      <button
-                        type="button"
-                        onClick={() => setStatus("idle")}
-                        className="mt-8 inline-flex items-center gap-3 border-b border-[#e0503a] pb-2 text-sm font-semibold transition-colors hover:text-[#e0503a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
-                      >
-                        {form.resetText}
-                        <ArrowUpRight size={16} />
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => setStatus("idle")}
+                      className="mt-8 inline-flex items-center gap-3 border-b-2 border-[#e0503a] pb-1 text-sm font-semibold text-[#141714] transition-colors hover:text-[#e0503a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
+                    >
+                      {form.resetText || "Send another message"}
+                      <ArrowUpRight size={16} />
+                    </button>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -301,17 +302,17 @@ export default function ContactSection({
                   >
                     <div className="mb-9">
                       {form.eyebrow && (
-                        <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#a34b37]">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#e0503a]">
                           {form.eyebrow}
                         </p>
                       )}
 
-                      <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-4xl leading-tight sm:text-5xl">
+                      <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-4xl font-bold leading-tight text-[#141714] sm:text-5xl">
                         {form.title}
                       </h3>
 
-                      <p className="mt-3 text-sm leading-6 text-[#6d6a60]">
-                        Tell us a little about what brings you here.
+                      <p className="mt-3 text-sm leading-6 text-[#555d55]">
+                        {form.description || "Tell us a little about what brings you here."}
                       </p>
                     </div>
 
@@ -320,13 +321,13 @@ export default function ContactSection({
                         const id = `contact-${field.name}`;
 
                         const inputClass =
-                          "mt-2 w-full border-b border-[#252d4a]/20 bg-transparent px-0 py-3 text-[15px] text-[#171713] outline-none transition-colors placeholder:text-[#969187] focus:border-[#e0503a] disabled:opacity-50";
+                          "mt-2 w-full border-b border-[#ede7dc] bg-transparent px-0 py-3 text-[15px] text-[#141714] outline-none transition-colors placeholder:text-[#969187] focus:border-[#e0503a] disabled:opacity-50";
 
                         return (
                           <div key={field.name}>
                             <label
                               htmlFor={id}
-                              className="text-sm font-semibold text-[#45443e]"
+                              className="text-sm font-semibold text-[#141714]"
                             >
                               {field.label}
                               {field.required && (
@@ -387,7 +388,7 @@ export default function ContactSection({
                     </div>
 
                     {status === "error" && (
-                      <p role="alert" className="mt-5 text-sm text-[#c33e2d]">
+                      <p role="alert" className="mt-5 text-sm text-[#e0503a]">
                         {form.errorMessage ||
                           "Something went wrong. Please try again."}
                       </p>
@@ -396,7 +397,7 @@ export default function ContactSection({
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="group relative mt-9 inline-flex w-full items-center justify-between overflow-hidden rounded-full bg-[#e0503a] px-7 py-5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#c94230] hover:shadow-lg hover:shadow-[#e0503a]/20 disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171713] focus-visible:ring-offset-2"
+                      className="group relative mt-9 inline-flex w-full items-center justify-between overflow-hidden rounded-full bg-[#e0503a] px-7 py-5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:bg-[#c94230] hover:shadow-lg hover:shadow-[#e0503a]/25 disabled:cursor-wait disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2"
                     >
                       <span>
                         {status === "sending"
@@ -419,14 +420,12 @@ export default function ContactSection({
                         <Send size={18} />
                       </motion.span>
                     </button>
-
                   </motion.form>
                 )}
               </AnimatePresence>
             </motion.div>
           )}
         </div>
-
       </MainContainer>
     </section>
   );

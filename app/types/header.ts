@@ -10,7 +10,14 @@ export type headerContent = {
 export type footerContent = {
   logo?: { src: string; alt?: string };
   about?: string;
-  cta?: { title: string; titleAccent?: string; text?: string; btnText?: string; linkTo?: string };
+  cta?: {
+    title: string;
+    titleAccent?: string;
+    text?: string;
+    btnText?: string;
+    linkTo?: string;
+    backgroundImage?: { src: string; alt?: string };
+  };
   newsletter?: { title: string; placeholder?: string; btnText?: string; successText?: string };
   columns?: { title: string; links: { label: string; linkTo: string }[] }[];
   contact?: { title?: string; address?: string; email?: string; phone?: string };

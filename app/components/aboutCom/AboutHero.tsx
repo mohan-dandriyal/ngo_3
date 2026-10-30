@@ -1,9 +1,7 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import {
   animate,
@@ -16,20 +14,18 @@ import {
 } from "framer-motion";
 
 import type { AboutHeroContent } from "@/app/types/about";
-import { Description } from "../ui/SectionContent";
+import { Description, Eyebrow, HeroTitle } from "../ui/SectionContent";
 import MainContainer from "../ui/MainContainer";
 import BreadCrumb from "../ui/BreadCrumb";
 
-const ease: [number, number, number, number] = [
-  0.2, 0.8, 0.15, 1,
-];
+const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
 const container: Variants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.13,
-      delayChildren: 0.15,
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
     },
   },
 };
@@ -37,26 +33,13 @@ const container: Variants = {
 const fadeUp: Variants = {
   hidden: {
     opacity: 0,
-    y: 28,
+    y: 22,
   },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.85,
-      ease,
-    },
-  },
-};
-
-const word: Variants = {
-  hidden: {
-    y: "110%",
-  },
-  show: {
-    y: 0,
-    transition: {
-      duration: 1,
+      duration: 0.75,
       ease,
     },
   },
@@ -65,46 +48,18 @@ const word: Variants = {
 const statsVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 30,
+    y: 24,
   },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
+      duration: 0.75,
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
     },
   },
 };
-
-function Words({
-  text,
-  className = "",
-}: {
-  text: string;
-  className?: string;
-}) {
-  return (
-    <>
-      {text.split(" ").filter(Boolean).map((item, index) => (
-        <span
-          key={`${item}-${index}`}
-          aria-hidden="true"
-          className="mr-[0.22em] inline-block overflow-hidden
-          pb-[0.12em] pr-[0.04em] align-bottom"
-        >
-          <motion.span
-            variants={word}
-            className={`inline-block ${className}`}
-          >
-            {item}
-          </motion.span>
-        </span>
-      ))}
-    </>
-  );
-}
 
 function CountUp({
   value,
@@ -172,24 +127,18 @@ export default function AboutHero({ data }: AboutHeroContent) {
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    reduce ? [0, 0] : [0, 90]
+    reduce ? [0, 0] : [0, 60]
   );
 
   return (
-    <section
-      className="relative isolate w-full overflow-hidden
-      bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-      text-[#ece6da]"
-    >
-      {/* FULL WIDTH BANNER */}
+    <section className="relative isolate w-full overflow-hidden bg-[#faf8f5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#ece6da]">
+      {/* FULL WIDTH BANNER - STANDARDIZED HEIGHT */}
       <motion.div
         ref={bannerRef}
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.1 }}
-        className="relative flex min-h-[620px] items-center
-        overflow-hidden sm:min-h-[700px]
-        lg:min-h-[780px]"
+        transition={{ duration: 0.9 }}
+        className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px]"
       >
         {/* BACKGROUND IMAGE */}
         {!imgFailed && image?.src ? (
@@ -209,135 +158,84 @@ export default function AboutHero({ data }: AboutHeroContent) {
           </motion.div>
         ) : (
           <div
-            className="absolute inset-0 -z-20
-            bg-gradient-to-br from-[#29382d] via-[#17221b] to-[#0a0a09]"
+            className="absolute inset-0 -z-20 bg-gradient-to-br from-[#29382d] via-[#17221b] to-[#0a0a09]"
           />
         )}
 
         {/* IMAGE OVERLAYS */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-black/35"
+          className="absolute inset-0 -z-10 bg-black/45"
         />
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10
-          bg-gradient-to-r from-black/85 via-black/55 to-black/15"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/25"
         />
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10
-          bg-gradient-to-t from-[#0a0a09]/90 via-transparent to-black/30"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-black/25"
         />
 
         {/* DECORATIVE LIGHT */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-40
-          top-0 -z-10 h-[450px] w-[450px] rounded-full
-          bg-[#a8c686]/10 blur-[150px]"
+          className="pointer-events-none absolute -right-40 top-0 -z-10 h-[450px] w-[450px] rounded-full bg-[#a8c686]/10 blur-[150px]"
         />
 
         <MainContainer>
-          <div className="relative z-10 flex min-h-[620px]
-          flex-col justify-between px-5 pb-24 pt-8
-          sm:min-h-[700px] sm:px-8 sm:pb-28
-          lg:min-h-[700px] lg:px-14 lg:pb-32 lg:pt-10">
-
-            {/* BREADCRUMB */}
+          <div className="relative z-10 flex w-full flex-col items-start justify-center py-10 text-left sm:py-12 lg:py-14">
+            {/* BREADCRUMB - LEFT ALIGNED */}
             {breadcrumb.length > 0 && (
               <motion.div
-                initial={reduce ? false : { opacity: 0, y: -12 }}
+                initial={reduce ? false : { opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="w-fit rounded-sm
-                 px-4 py-2"
+                transition={{ duration: 0.6 }}
+                className="w-full text-left"
               >
-                <BreadCrumb breadcrumb={breadcrumb} />
+                <BreadCrumb breadcrumb={breadcrumb} className="mb-3 sm:mb-4 text-left" />
               </motion.div>
             )}
 
-            {/* HERO CONTENT */}
+            {/* HERO CONTENT - LEFT ALIGNED */}
             <motion.div
               variants={container}
               initial={reduce ? false : "hidden"}
               animate="show"
-              className="max-w-[950px] "
+              className="max-w-[850px] text-left"
             >
               {/* EYEBROW */}
               {eyebrow && (
-                <motion.div
-                  variants={fadeUp}
-                  className="mb-7 flex items-center gap-4"
-                >
-                  <span className="h-px w-10 bg-[#a8c686]" />
-
-                  <span className="text-[10px] font-medium
-                  uppercase tracking-[0.24em] text-[#d6d9c9]
-                  sm:text-xs">
-                    {eyebrow}
-                  </span>
+                <motion.div variants={fadeUp} className="mb-3 sm:mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="dark" />
                 </motion.div>
               )}
 
               {/* TITLE */}
-              <motion.h1
-                variants={container}
-                aria-label={`${titleStart} ${titleAccent}`}
-                className="max-w-[1000px]
-                font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-                text-[clamp(54px,8.5vw,90px)] font-medium
-                leading-[0.92] tracking-[-0.04em] text-[#f0eadf]"
-              >
-                <span className="block">
-                  <Words text={titleStart} />
-                </span>
-
-                <span className="mt-1 block italic text-[#e0503a]">
-                  <Words text={titleAccent} />
-                </span>
-              </motion.h1>
+              <motion.div variants={fadeUp}>
+                <HeroTitle
+                  titleStart={titleStart}
+                  titleAccent={titleAccent}
+                  tone="dark"
+                />
+              </motion.div>
 
               {/* DESCRIPTION */}
               {description && (
                 <motion.div
                   variants={fadeUp}
-                  className="mt-7 max-w-[590px]"
+                  className="mt-4 max-w-[620px] text-left"
                 >
                   <Description
                     description={description}
                     variant="body"
+                    tone="dark"
                   />
                 </motion.div>
               )}
 
-              {/* CTA */}
-              {linkText && linkTo && (
-                <motion.div
-                  variants={fadeUp}
-                  className="mt-9"
-                >
-                  <Link
-                    href={linkTo}
-                    className="group inline-flex min-h-[54px]
-                    items-center gap-5 bg-[#e0503a] px-7 py-4
-                    text-sm font-semibold text-white
-                    transition-all duration-300 hover:bg-[#f06450]
-                    focus-visible:outline focus-visible:outline-2
-                    focus-visible:outline-offset-4
-                    focus-visible:outline-[#e0503a]"
-                  >
-                    {linkText}
-
-                    <span className="transition-transform
-                    duration-300 group-hover:translate-x-1">
-                      ↗
-                    </span>
-                  </Link>
-                </motion.div>
-              )}
+         
             </motion.div>
           </div>
         </MainContainer>
@@ -351,39 +249,22 @@ export default function AboutHero({ data }: AboutHeroContent) {
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="relative z-20 mx-4 -mt-12 grid
-            grid-cols-2 overflow-hidden bg-[#e8e1d5]
-            text-[#14110c] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]
-            sm:mx-8 lg:mx-16 lg:-mt-16
-            lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]"
+            className="relative z-20 -mt-10 grid grid-cols-2 overflow-hidden rounded-xs border border-[#ede7dc] bg-white text-[#141714] shadow-[0_12px_30px_-10px_rgba(20,24,20,0.08)] sm:-mt-12 lg:-mt-14 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]"
           >
-            {stats.map((stat, index) => (
+            {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 variants={fadeUp}
-                className={`flex flex-col justify-center px-5 py-7
-                sm:px-7 sm:py-8 lg:px-8 lg:py-10
-                ${index % 2 === 1 ? "border-l border-[#14110c]/15" : ""}
-                ${index >= 2 ? "border-t border-[#14110c]/15 lg:border-t-0" : ""}
-                lg:border-l lg:first:border-l-0`}
+                className={`relative p-5 sm:p-7 ${
+                  i !== 0 ? "border-l border-[#ede7dc]" : ""
+                }`}
               >
-                <dd className="m-0 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-                text-[clamp(36px,4.5vw,64px)] font-medium
-                leading-none tracking-[-0.03em]">
+                <dd className="font-['Cormorant_Garamond',Georgia,serif] text-3xl font-bold text-[#141714] sm:text-4xl">
                   {stat.prefix}
-                  <CountUp
-                    value={stat.value}
-                    plain={stat.plain}
-                  />
-                  {stat.suffix && (
-                    <span className="text-[#e0503a]">
-                      {stat.suffix}
-                    </span>
-                  )}
+                  <CountUp value={stat.value} plain={Boolean(stat.prefix)} />
+                  {stat.suffix}
                 </dd>
-
-                <dt className="mt-3 text-xs leading-snug
-                text-[#5a544c] sm:text-sm">
+                <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-[#737a73]">
                   {stat.label}
                 </dt>
               </motion.div>
@@ -391,8 +272,6 @@ export default function AboutHero({ data }: AboutHeroContent) {
           </motion.dl>
         </MainContainer>
       )}
-
-      <div className="h-16 sm:h-20" />
     </section>
   );
 }

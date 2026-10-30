@@ -23,7 +23,6 @@ interface ProgramsApproachProps {
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so Eyebrow and SectionTitle join the stagger */
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.16 } },
@@ -44,8 +43,7 @@ export default function ProgramsApproach({ data }: ProgramsApproachProps) {
   return (
     <section
       id="approach"
-      className="w-full overflow-hidden bg-[#0a0a09] bg-[radial-gradient(50%_50%_at_100%_100%,#1c2a22_0%,transparent_70%)]
-                 text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-white py-20 lg:py-28 text-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <motion.div
@@ -53,29 +51,28 @@ export default function ProgramsApproach({ data }: ProgramsApproachProps) {
           initial={reduce ? false : "hidden"}
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="py-20 lg:py-[120px]"
         >
-          {eyebrow && <Eyebrow eyebrow={eyebrow} />}
-          <SectionTitle titleStart={titleStart} titleAccent={titleAccent} />
+          {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
+          <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
 
-          <ol className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+          <ol className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-18 lg:grid-cols-4">
             {steps.map((s, i) => (
               <motion.li key={s.title} variants={fadeUp} className="group relative pt-8">
-                {/* Line draws across and turns red on hover */}
+                {/* Line draws across */}
                 <motion.span
                   variants={line}
                   aria-hidden="true"
-                  className="absolute left-0 top-0 h-px w-full origin-left bg-[#e8c99a]/30 transition-colors duration-300 group-hover:bg-[#e0503a]"
+                  className="absolute left-0 top-0 h-px w-full origin-left bg-[#141714]/15 transition-colors duration-300 group-hover:bg-[#e0503a]"
                 />
-                <span aria-hidden="true" className="absolute -top-[5px] left-0 h-[9px] w-[9px] rounded-full bg-[#e0503a]" />
+                <span aria-hidden="true" className="absolute -top-[5px] left-0 h-[10px] w-[10px] rounded-full bg-[#e0503a]" />
 
-                <span className="font-['Cormorant_Garamond',Georgia,serif] text-[clamp(48px,5vw,76px)] font-medium italic leading-none text-[#e0503a]">
+                <span className="font-['Cormorant_Garamond',Georgia,serif] text-[clamp(48px,5vw,72px)] font-bold italic leading-none text-[#e0503a]">
                   {s.number ?? String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-5 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[30px] font-medium leading-tight text-[#ece6da] transition-transform duration-300 group-hover:translate-x-1.5">
+                <h3 className="mt-4 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[26px] font-bold leading-tight text-[#141714] transition-transform duration-300 group-hover:translate-x-1.5">
                   {s.title}
                 </h3>
-                <p className="mt-3 max-w-[30ch] text-[15px] leading-[1.8]">{s.description}</p>
+                <p className="mt-2.5 max-w-[30ch] text-[14px] leading-[1.8] text-[#505750]">{s.description}</p>
               </motion.li>
             ))}
           </ol>

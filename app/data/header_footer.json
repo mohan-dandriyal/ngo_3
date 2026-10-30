@@ -1,7 +1,7 @@
 {
   "header": {
     "logo": {
-      "src": "/logo-3.png",
+      "src": "/logo-2.png",
       "alt": "logo.png"
     },
     "navItems": [
@@ -9,7 +9,7 @@
         "label": "home",
         "linkTo": "/"
       },
-       {
+      {
         "label": "About",
         "linkTo": "/about"
       },
@@ -33,18 +33,17 @@
         "label": "Team",
         "linkTo": "/our-team"
       },
-       {
+      {
         "label": "Contact Us",
         "linkTo": "/contact-us"
       }
     ],
-    "btnText": "Donate",
+    "btnText": "Donate Now",
     "linkToBtn": "#"
   },
-  
   "footer": {
     "logo": {
-      "src": "/logo-3.png",
+      "src": "/logo-2.png",
       "alt": "WKX Foundation"
     },
     "about": "WKX Foundation brings clean water, schooling and healthcare to communities that have been left waiting. Every rupee is tracked and reported.",
@@ -53,108 +52,100 @@
       "titleAccent": "one life today",
       "text": "Give once or every month. Every donation is matched to a project, and you can follow where it goes.",
       "btnText": "Donate now",
-      "linkTo": "/donate"
-    },
-    "newsletter": {
-      "title": "Get field updates",
-      "description": "Stories, progress and updates from the communities we work with.",
-      "placeholder": "Your email address",
-      "btnText": "Subscribe",
-      "loadingText": "Subscribing...",
-      "successText": "Thanks for subscribing. Check your inbox to confirm.",
-      "errorText": "Something went wrong. Please try again.",
-      "invalidEmailText": "Please enter a valid email address.",
-      "apiEndpoint": "/api/newsletter/subscribe"
-    },
-    "columns": [
-      {
-        "title": "Explore",
-        "links": [
-          {
-            "label": "About us",
-            "linkTo": "/about"
-          },
-          {
-            "label": "Our programs",
-            "linkTo": "/our-program"
-          },
-          {
-            "label": "Our causes",
-            "linkTo": "/our-cause"
-          },
-          {
-            "label": "Stories",
-            "linkTo": "/blog"
-          },
-          {
-            "label": "Gallery",
-            "linkTo": "/our-gallery"
-          }
-        ]
-      },
-      {
-        "title": "Get involved",
-        "links": [
-          {
-            "label": "Team",
-            "linkTo": "/our-team"
-          },
-          {
-            "label": "Contact us",
-            "linkTo": "/contact-us"
-          }
-        ]
+      "linkTo": "/donate",
+      "backgroundImage": {
+        "src": "/footer/cta-background.jpg",
+        "alt": "WKX Foundation community volunteers working together"
       }
-    ],
-    "contact": {
-      "title": "Contact",
-      "address": "Replace with the client's verified address",
-      "mapLink": "https://maps.google.com/?q=New+Delhi",
-      "email": "hello@wkxfoundation.org",
-      "phone": "+91 00000 00000"
     },
-    "socials": [
-      {
-        "label": "Facebook",
-        "icon": "facebook",
-        "linkTo": "https://facebook.com"
+      "columns": [
+        {
+          "title": "Explore",
+          "links": [
+            {
+              "label": "About us",
+              "linkTo": "/about"
+            },
+            {
+              "label": "Our programs",
+              "linkTo": "/our-program"
+            },
+            {
+              "label": "Our causes",
+              "linkTo": "/our-cause"
+            },
+            {
+              "label": "Stories",
+              "linkTo": "/blog"
+            },
+            {
+              "label": "Gallery",
+              "linkTo": "/our-gallery"
+            }
+          ]
+        },
+        {
+          "title": "Get involved",
+          "links": [
+            {
+              "label": "Team",
+              "linkTo": "/our-team"
+            },
+            {
+              "label": "Contact us",
+              "linkTo": "/contact-us"
+            }
+          ]
+        }
+      ],
+      "contact": {
+        "title": "Contact",
+        "address": "2309 Mayflower Dr, Lynchburg, VA 24501, United States",
+        "mapLink": "https://maps.google.com/?q=New+Delhi",
+        "email": "hello@wkxfoundation.org",
+        "phone": "+1 213 555 1234"
       },
-      {
-        "label": "Instagram",
-        "icon": "instagram",
-        "linkTo": "https://instagram.com"
-      },
-      {
-        "label": "X",
-        "icon": "x",
-        "linkTo": "https://x.com"
-      },
-      {
-        "label": "YouTube",
-        "icon": "youtube",
-        "linkTo": "https://youtube.com"
-      },
-      {
-        "label": "LinkedIn",
-        "icon": "linkedin",
-        "linkTo": "https://linkedin.com"
+      "socials": [
+        {
+          "label": "Facebook",
+          "icon": "facebook",
+          "linkTo": "https://facebook.com"
+        },
+        {
+          "label": "Instagram",
+          "icon": "instagram",
+          "linkTo": "https://instagram.com"
+        },
+        {
+          "label": "X",
+          "icon": "x",
+          "linkTo": "https://x.com"
+        },
+        {
+          "label": "YouTube",
+          "icon": "youtube",
+          "linkTo": "https://youtube.com"
+        },
+        {
+          "label": "LinkedIn",
+          "icon": "linkedin",
+          "linkTo": "https://linkedin.com"
+        }
+      ],
+      "copyright": "© 2026 Change starts with showing up. All rights reserved.",
+      "wordmark": "",
+      "labels": {
+        "homeLink": "WKX Foundation home",
+        "socialNavigation": "Follow us",
+        "legalNavigation": "Legal information",
+        "backToTop": "Back to top",
+        "newsletterEmailLabel": "Email address",
+        "newsletterSuccessRole": "status",
+        "newsletterErrorRole": "alert"
       }
-    ],
-    "copyright": "© 2026 WKX Foundation. All rights reserved.",
-    "wordmark": "",
-    "labels": {
-      "homeLink": "WKX Foundation home",
-      "socialNavigation": "Follow us",
-      "legalNavigation": "Legal information",
-      "backToTop": "Back to top",
-      "newsletterEmailLabel": "Email address",
-      "newsletterSuccessRole": "status",
-      "newsletterErrorRole": "alert"
+    },
+    "donetionBtn": {
+      "btntext": "Donate",
+      "linkTo": "#"
     }
   }
-,
-  "donetionBtn": {
-    "btntext": "Donate",
-    "linkTo": "#"
-  }
-}

@@ -56,5 +56,6 @@ export type DetailSectionLabels = {
   teamTitle: string;
   faqTitle: string;
   locationLabel: string;
+  emptyText?: string;
   milestoneStatus: Record<MilestoneStatus, string>;
 };

@@ -14,7 +14,7 @@ function About() {
       </div>
 
       <div>
-        <OurVision data={{ ...about.vision, imageCaption: about.vision.image.alt }} />
+        <OurVision data={about.vision} />
       </div>
 
       <div>

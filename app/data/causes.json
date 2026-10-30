@@ -55,6 +55,9 @@
     "goalLabel": "Goal",
     "supportersLabel": "supporters",
     "donateText": "Donate to this cause",
+    "learnMoreLabel": "View Details",
+    "relatedTitleStart": "Other ways to",
+    "relatedTitleAccent": "make a difference.",
     "emptyText": "No causes in this category yet."
   },
   "causes": [

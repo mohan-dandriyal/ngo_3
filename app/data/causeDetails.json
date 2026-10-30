@@ -9,6 +9,7 @@
     "faqTitle": "Questions people ask",
     "locationLabel": "Where",
     "shareText": "Share this cause",
+    "emptyText": "More project details will be available soon.",
     "milestoneStatus": {
       "done": "Done",
       "current": "In progress",

@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react";
@@ -7,7 +6,6 @@ import { motion, type Variants } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Variant names match the parent grid, so its stagger drives each item */
 const featuredVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
@@ -49,14 +47,14 @@ type Post = {
 
 function Meta({ post }: { post: Post }) {
   return (
-    <p className="flex flex-wrap items-center gap-y-1 text-[13px] text-[#8f8a80]">
-      {post.category && <span className="pr-3 font-medium text-[#e9a26b]">{post.category}</span>}
+    <p className="flex flex-wrap items-center gap-y-1 text-xs text-[#737a73]">
+      {post.category && <span className="pr-3 font-bold uppercase tracking-wider text-[#e0503a]">{post.category}</span>}
       {post.date && (
-        <time dateTime={post.date} className="border-l border-[#e8c99a]/25 px-3 first:border-l-0 first:pl-0">
+        <time dateTime={post.date} className="border-l border-[#141714]/15 px-3 first:border-l-0 first:pl-0">
           {formatDate(post.date)}
         </time>
       )}
-      {post.readTime && <span className="border-l border-[#e8c99a]/25 pl-3">{post.readTime}</span>}
+      {post.readTime && <span className="border-l border-[#141714]/15 pl-3">{post.readTime}</span>}
     </p>
   );
 }
@@ -64,7 +62,7 @@ function Meta({ post }: { post: Post }) {
 function Picture({ post, sizes }: { post: Post; sizes: string }) {
   const [failed, setFailed] = useState(!post.image);
   return failed ? (
-    <div className="h-full w-full bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
+    <div className="h-full w-full bg-[linear-gradient(160deg,#2a5c43,#141714)]" aria-hidden="true" />
   ) : (
     <Image
       src={post.image ?? ""}
@@ -81,29 +79,26 @@ function Picture({ post, sizes }: { post: Post; sizes: string }) {
 /* Large lead story */
 export function FeaturedPost({ post }: { post: Post }) {
   return (
-    <motion.article variants={featuredVariants} className="group relative">
-      <motion.div variants={frameVariants} className="relative aspect-[16/11] overflow-hidden bg-[#161a17] ring-1 ring-[#e8c99a]/15">
+    <motion.article variants={featuredVariants} className="group relative rounded-xs border border-[#e5dfd5] bg-white p-6 shadow-[0_4px_20px_-4px_rgba(20,24,20,0.06)] hover:shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)] transition-all duration-300">
+      <motion.div variants={frameVariants} className="relative aspect-[16/11] overflow-hidden rounded-xs bg-[#ede7dc]">
         <motion.div variants={pictureVariants} className="absolute inset-0">
           <Picture post={post} sizes="(min-width: 1024px) 55vw, 100vw" />
         </motion.div>
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" aria-hidden="true" />
       </motion.div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <Meta post={post} />
-        <h3 className="mt-4 max-w-[34ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(32px,3.6vw,52px)] font-medium leading-[1.05] tracking-[-0.01em] text-[#ece6da]">
-          {/* The link stretches over the whole card */}
+        <h3 className="mt-3.5 max-w-[34ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.1] tracking-[-0.015em] text-[#141714]">
           <a
             href={post.linkTo || "#"}
-            className="transition-colors duration-300 after:absolute after:inset-0 group-hover:text-[#e8c99a]
+            className="transition-colors duration-300 after:absolute after:inset-0 group-hover:text-[#e0503a]
                        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
           >
             {post.title}
           </a>
         </h3>
-        {post.excerpt && <p className="mt-5 max-w-[56ch] text-[15px] leading-[1.85] text-[#bdb7aa]">{post.excerpt}</p>}
-
-       
+        {post.excerpt && <p className="mt-4 max-w-[56ch] text-[15px] leading-[1.85] text-[#505750]">{post.excerpt}</p>}
       </div>
     </motion.article>
   );
@@ -112,25 +107,24 @@ export function FeaturedPost({ post }: { post: Post }) {
 /* Compact story with a thumbnail */
 export function PostRow({ post }: { post: Post }) {
   return (
-    <motion.article variants={rowVariants} className="group relative py-7 first:pt-0 lg:first:pt-0">
-      {/* Divider draws across above each row */}
+    <motion.article variants={rowVariants} className="group relative py-6 first:pt-0 lg:first:pt-0">
       <motion.span
         variants={lineVariants}
         aria-hidden="true"
-        className="absolute left-0 top-0 h-px w-full origin-left bg-[#e8c99a]/20 group-first:hidden"
+        className="absolute left-0 top-0 h-px w-full origin-left bg-[#ede7dc] group-first:hidden"
       />
 
-      <div className="grid grid-cols-[112px_1fr] items-center gap-5 sm:grid-cols-[168px_1fr] sm:gap-7">
-        <div className="relative aspect-[4/3] overflow-hidden bg-[#161a17]">
-          <Picture post={post} sizes="(min-width: 640px) 168px, 112px" />
+      <div className="grid grid-cols-[100px_1fr] items-center gap-4 sm:grid-cols-[140px_1fr] sm:gap-6">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xs bg-[#ede7dc]">
+          <Picture post={post} sizes="(min-width: 640px) 140px, 100px" />
         </div>
 
         <div>
           <Meta post={post} />
-          <h3 className="mt-2.5 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[22px] font-medium leading-[1.15] text-[#ece6da] sm:text-[28px]">
+          <h3 className="mt-2 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[20px] font-bold leading-[1.2] text-[#141714] transition-colors group-hover:text-[#e0503a] sm:text-[24px]">
             <a
               href={post.linkTo || "#"}
-              className="transition-colors duration-300 after:absolute after:inset-0 group-hover:text-[#e8c99a]
+              className="transition-colors duration-300 after:absolute after:inset-0
                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
             >
               {post.title}

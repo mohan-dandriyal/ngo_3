@@ -34,6 +34,7 @@ export type CausesFeaturedLabels = {
   eyebrow?: string;
   amountLabel: string;
   donateText: string;
+  learnMoreLabel?: string;
   daysLabel: string;
   raisedLabel: string;
   goalLabel: string;
@@ -50,6 +51,7 @@ export type CausesGridLabels = {
   goalLabel: string;
   supportersLabel: string;
   donateText: string;
+  learnMoreLabel?: string;
   emptyText: string;
 };
 

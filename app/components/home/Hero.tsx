@@ -60,16 +60,16 @@ const itemVariants: Variants = {
 
 export default function Hero({ data }: HeroContent) {
   const { slider } = data;
-  const slides = data.images.map((image, index) => ({
+  const slides = (data.images && data.images.length > 0 ? data.images : []).map((image: any, index: number) => ({
     ...image,
-    id: `hero-${index}`,
-    eyebrow: data.eyebrow,
-    titleLight: data.titleLight,
-    titleAccent: data.titleAccent,
-    description: data.description,
-    primaryBtn: data.primaryBtn,
-    donateBtn: data.secondaryBtn,
-    badge: undefined,
+    id: (image as any).id || `hero-${index}`,
+    eyebrow: (image as any).eyebrow || data.eyebrow,
+    titleLight: (image as any).titleLight || data.titleLight,
+    titleAccent: (image as any).titleAccent || data.titleAccent,
+    description: (image as any).description || data.description,
+    primaryBtn: (image as any).primaryBtn || data.primaryBtn,
+    donateBtn: (image as any).donateBtn || data.secondaryBtn,
+    badge: (image as any).badge || (data as any).badge,
   }));
 
   const reduce = useReducedMotion();
@@ -139,9 +139,9 @@ export default function Hero({ data }: HeroContent) {
           setIsPaused(false);
         }
       }}
-      className="relative isolate min-h-[680px] w-full overflow-hidden
-      bg-[#0a0a09] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-      text-[#ece6da] sm:min-h-[740px] lg:min-h-[600px]"
+      className="relative isolate min-h-[540px] w-full overflow-hidden
+      bg-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
+      text-[#ece6da] sm:min-h-[580px] lg:min-h-[640px]"
     >
       {/* BACKGROUND IMAGE */}
       <AnimatePresence initial={false}>
@@ -188,7 +188,7 @@ export default function Hero({ data }: HeroContent) {
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10
-        bg-gradient-to-t from-[#0a0a09]/80 via-transparent to-black/20"
+        bg-gradient-to-t from-black/60 via-transparent to-black/20"
       />
 
       {/* DECORATIVE LIGHT */}
@@ -199,12 +199,12 @@ export default function Hero({ data }: HeroContent) {
       />
 
       <MainContainer>
-        <div className="relative flex min-h-[680px] flex-col justify-center
-        px-5 pb-36 pt-28 sm:min-h-[740px] sm:px-8 sm:pb-40
-        lg:min-h-[800px] lg:px-14 lg:pb-44 lg:pt-32">
+        <div className="relative flex min-h-[540px] w-full flex-col justify-center text-left py-20 pb-32 sm:min-h-[580px] sm:py-24 sm:pb-36 lg:min-h-[640px] lg:py-28 lg:pb-40">
+
+
 
           {/* SLIDE CONTENT */}
-          <div className="relative z-10 max-w-[850px]">
+          <div className="relative pt-10 z-10 max-w-[850px]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={activeSlide.id}
@@ -233,7 +233,7 @@ export default function Hero({ data }: HeroContent) {
                   variants={itemVariants}
                   className="max-w-[850px]
                   font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-                  text-[clamp(58px,8vw,80px)] font-medium
+                  text-[clamp(44px,6.2vw,74px)] font-medium
                   leading-[0.91] tracking-[-0.045em]"
                 >
                   <span className="block text-[#f0eadf]">
@@ -331,9 +331,9 @@ export default function Hero({ data }: HeroContent) {
 
           {/* SLIDER CONTROLS */}
           {slideCount > 1 && (
-            <div className="absolute bottom-9 left-5 right-5 z-20
-            flex items-end justify-between gap-5 sm:left-8 sm:right-8
-            lg:bottom-12 lg:left-14 lg:right-14">
+            <div className="absolute bottom-6 left-0 right-0 z-20 flex items-end justify-between gap-5 sm:bottom-8 lg:bottom-10">
+
+
 
               {/* SLIDE NUMBER AND PROGRESS */}
               <div className="flex min-w-0 flex-1 items-center gap-5">

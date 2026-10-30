@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -12,9 +11,7 @@ import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 import ProgramCard from "@/app/components/ProgramCard";
 
-const ease: [number, number, number, number] = [
-  0.2, 0.8, 0.15, 1,
-];
+const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
 type Program = {
   id: string;
@@ -22,7 +19,7 @@ type Program = {
   description: string;
   image: string;
   imageAlt: string;
-  theme: "coral" | "green" | "sand";
+  theme?: "coral" | "green" | "sand" | string;
   href: string;
 };
 
@@ -76,9 +73,7 @@ const grid: Variants = {
   },
 };
 
-export default function HomePrograms({
-  data,
-}: HomeProgramsContent) {
+export default function HomePrograms({ data }: HomeProgramsContent) {
   const {
     eyebrow,
     titleStart,
@@ -95,17 +90,16 @@ export default function HomePrograms({
   return (
     <section
       id="programs"
-      className="relative w-full overflow-hidden bg-[#0a0a09] text-[#ece6da]"
+      className="relative w-full overflow-hidden bg-white py-20 text-[#141714] sm:py-24 lg:py-28"
     >
       {/* Background glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-48 top-1/3 h-[400px] w-[400px] rounded-full bg-[#a8c686]/[0.05] blur-[130px]"
+        className="pointer-events-none absolute -right-48 top-1/3 h-[420px] w-[420px] rounded-full bg-[#2a5c43]/[0.03] blur-[130px]"
       />
 
       <MainContainer>
         <div className="relative">
-
           {/* Section heading */}
           <motion.div
             variants={headingContainer}
@@ -119,8 +113,8 @@ export default function HomePrograms({
           >
             <div className="max-w-[750px]">
               {eyebrow && (
-                <motion.div variants={rise} className="mb-6">
-                  <Eyebrow eyebrow={eyebrow} />
+                <motion.div variants={rise} className="mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="light" />
                 </motion.div>
               )}
 
@@ -129,7 +123,7 @@ export default function HomePrograms({
                   titleStart={titleStart}
                   titleAccent={titleAccent}
                   titleEnd={titleEnd}
-                  tone="dark"
+                  tone="light"
                 />
               </motion.div>
             </div>
@@ -138,7 +132,7 @@ export default function HomePrograms({
               {description && (
                 <motion.p
                   variants={rise}
-                  className="text-sm leading-7 text-[#a6a399] sm:text-base sm:leading-8"
+                  className="text-sm leading-7 text-[#555d55] sm:text-base sm:leading-8"
                 >
                   {description}
                 </motion.p>
@@ -147,36 +141,33 @@ export default function HomePrograms({
               {meta && (
                 <motion.p
                   variants={rise}
-                  className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#a8c686]"
+                  className="mt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#2a5c43]"
                 >
                   {meta}
                 </motion.p>
               )}
 
-                {/* All programs CTA */}
-          {button?.label && (
-            <motion.div
-              variants={rise}
-              initial={reduce ? false : "hidden"}
-              whileInView="show"
-              viewport={{ once: true }}
-              className="mt-9 "
-            >
-              <Link
-                href={button.href || "/our-program"}
-                className="group inline-flex gap-3 border-b border-[#e0503a] pb-2 text-sm text-[#ece6da] transition-colors duration-300 hover:text-[#a8c686] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-              >
-                {button.label}
-
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </motion.div>
-          )}
+              {/* All programs CTA */}
+              {button?.label && (
+                <motion.div
+                  variants={rise}
+                  initial={reduce ? false : "hidden"}
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="mt-7"
+                >
+                  <Link
+                    href={button.href || "/our-program"}
+                    className="group inline-flex items-center gap-3 border-b-2 border-[#e0503a] pb-1.5 text-sm font-semibold text-[#141714] transition-colors duration-300 hover:text-[#e0503a]"
+                  >
+                    {button.label}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </motion.div>
+              )}
             </div>
-
-            
           </motion.div>
 
           {/* Program cards */}
@@ -189,7 +180,7 @@ export default function HomePrograms({
                 once: true,
                 amount: 0.15,
               }}
-              className="mt-12 grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6"
+              className="mt-12 grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-8"
             >
               {programs.map((program) => (
                 <ProgramCard
@@ -199,10 +190,6 @@ export default function HomePrograms({
               ))}
             </motion.div>
           )}
-
-          
-
-        
         </div>
       </MainContainer>
     </section>

@@ -1,12 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
-import { ArrowRightSquare, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { CauseItem, CausesGridLabels } from "@/app/types/cause";
-import { formatMoney, percentOf } from "@/app/lib/causes-utils";
 import MainContainer from "../ui/MainContainer";
 import { Description, Eyebrow, SectionTitle } from "../ui/SectionContent";
 
@@ -17,23 +16,14 @@ interface CausesGridProps {
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so Eyebrow, SectionTitle and Description join the stagger */
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1 } },
-};
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
 };
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
   exit: { opacity: 0, scale: 0.94, transition: { duration: 0.25 } },
-};
-const bar: Variants = {
-  hidden: { scaleX: 0 },
-  show: (pct: number) => ({ scaleX: pct / 100, transition: { duration: 1.6, ease, delay: 0.3 } }),
 };
 
 function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabels }) {
@@ -46,10 +36,9 @@ function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabe
       exit="exit"
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className="group relative flex flex-col overflow-hidden border border-[#e8c99a]/15 bg-[#121411]
-                 transition-shadow duration-500 hover:shadow-[0_28px_50px_-26px_rgba(232,201,154,0.35)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-xs border border-[#e5dfd5] bg-white shadow-[0_4px_20px_-4px_rgba(20,24,20,0.06)] transition-all duration-500 hover:border-[#e0503a]/40 hover:shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)]"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#161a17]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#ede7dc]">
         {!failed && cause.image ? (
           <Image
             src={cause.image}
@@ -60,29 +49,24 @@ function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabe
             className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
           />
         ) : (
-          <div className="h-full w-full bg-[linear-gradient(160deg,#3b7a68,#0a0a09)]" aria-hidden="true" />
+          <div className="h-full w-full bg-[linear-gradient(160deg,#2a5c43,#141714)]" aria-hidden="true" />
         )}
-        <span className="absolute bottom-4 left-4 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#e8c99a]">
+        <span className="absolute bottom-4 left-4 border border-black/10 bg-white/95 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#141714] shadow-xs backdrop-blur-md">
           {cause.category}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col px-7 pb-8 pt-7">
-        <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[30px] font-medium leading-[1.1] text-[#ece6da]">
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-bold leading-[1.15] text-[#141714] transition-colors group-hover:text-[#e0503a]">
           {cause.title}
         </h3>
-        <p className="mt-4 line-clamp-3 text-[15px] leading-relaxed text-[#bdb7aa]">{cause.description}</p>
+        <p className="mt-3 line-clamp-3 text-[14px] leading-relaxed text-[#505750]">{cause.description}</p>
 
-        <div>
-          {
-            cause.linkTo &&
-            <span className="group/link relative mt-9 inline-flex items-center gap-3 self-start pb-1.5 text-[13px] font-medium uppercase tracking-[0.14em]
-                      text-[#f1ece1] hover:text-[#dc4d32] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current" >
-              {cause?.btnText}
-
-              <ArrowUpRight />
-            </span>
-          }
+        <div className="mt-auto pt-6">
+          <span className="group/link relative inline-flex items-center gap-2 pb-1 text-xs font-bold uppercase tracking-wider text-[#141714] transition-colors group-hover:text-[#e0503a]">
+            <span>{labels.learnMoreLabel || "View Details"}</span>
+            <ArrowUpRight size={14} className="text-[#e0503a] transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+          </span>
         </div>
       </div>
     </motion.article>
@@ -91,74 +75,34 @@ function CauseCard({ cause, labels }: { cause: CauseItem; labels: CausesGridLabe
 
 export default function CausesGrid({ causes, labels }: CausesGridProps) {
   const reduce = useReducedMotion();
-  const [category, setCategory] = useState("all");
-
-  const categories = useMemo(() => Array.from(new Set(causes.map((c) => c.category))), [causes]);
-  const visible = category === "all" ? causes : causes.filter((c) => c.category === category);
+  const visible = causes;
 
   return (
     <section
-      id="causes"
-      className="w-full overflow-hidden bg-[#0a0a09] bg-[radial-gradient(40%_30%_at_0%_100%,#1c2a22_0%,transparent_70%)]
-                 text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      id="causes-grid"
+      className="w-full overflow-hidden bg-[#faf8f5] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714]"
     >
       <MainContainer>
-        <div className="pt-16 pb-20">
+        <div>
+          {/* Section Heading */}
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}
             whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-20"
+            viewport={{ once: true, amount: 0.2 }}
+            className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end lg:gap-12"
           >
-            <div>
-              {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} />}
-              <SectionTitle titleStart={labels.titleStart} titleAccent={labels.titleAccent} />
+            <div className="max-w-[700px]">
+              {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} tone="light" />}
+              <SectionTitle titleStart={labels.titleStart} titleAccent={labels.titleAccent} tone="light" />
             </div>
+
             {labels.description && (
-              <div className="lg:pb-3">
-                <Description description={labels.description} variant="body" />
+              <div className="max-w-[420px] lg:pb-3">
+                <Description description={labels.description} variant="body" tone="light" />
               </div>
             )}
           </motion.div>
-
-          {/* Category filter */}
-          {/* {categories.length > 1 && (
-            <motion.div
-              variants={fadeUp}
-              initial={reduce ? false : "hidden"}
-              whileInView="show"
-              viewport={{ once: true }}
-              role="group"
-              aria-label="Filter causes by category"
-              className="mt-12 flex flex-wrap gap-2.5"
-            >
-              {["all", ...categories].map((c) => {
-                const active = category === c;
-                return (
-                  <button
-                    key={c}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setCategory(c)}
-                    className={`relative px-5 py-2.5 text-sm font-medium outline-none transition-colors duration-300
-                      focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a09]
-                      ${active ? "text-[#14110c]" : "border border-[#e8c99a]/25 text-[#ece6da] hover:border-[#e8c99a]"}`}
-                  >
-                    {active && (
-                      <motion.span
-                        layoutId="causes-filter-pill"
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-[#e8c99a]"
-                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      />
-                    )}
-                    <span className="relative">{c === "all" ? labels.allLabel : c}</span>
-                  </button>
-                );
-              })}
-            </motion.div>
-          )} */}
 
           <motion.div
             layout
@@ -171,7 +115,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
             <AnimatePresence mode="popLayout">
               {visible.map((c) => (
                 <div key={c.slug}>
-                  <Link href={c.linkTo || ""} >
+                  <Link href={c.linkTo || `/our-cause/${c.slug}`}>
                     <CauseCard cause={c} labels={labels} />
                   </Link>
                 </div>
@@ -180,7 +124,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
           </motion.div>
 
           {visible.length === 0 && (
-            <p role="status" className="mt-12 text-lg text-[#8f8a80]">
+            <p role="status" className="mt-12 text-lg text-[#737a73]">
               {labels.emptyText}
             </p>
           )}

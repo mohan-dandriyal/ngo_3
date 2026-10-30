@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -17,33 +16,33 @@ const fade: Variants = {
   },
 };
 
-function BreadCrumb({ breadcrumb }: breadcrumb) {
+function BreadCrumb({ breadcrumb, className }: breadcrumb) {
   return (
     <motion.nav
       variants={fade}
       aria-label="Breadcrumb"
-      className="mb-12 lg:mb-16"
+      className={className || "mb-4 sm:mb-5"}
     >
-      <ol className="flex flex-wrap items-center gap-2.5 text-[13px]">
+      <ol className="flex flex-wrap items-center gap-2 text-[13px]">
         {breadcrumb.map((item, index) => {
           const last = index === breadcrumb.length - 1;
 
           return (
             <li
               key={`${item.label}-${index}`}
-              className="flex items-center gap-2.5"
+              className="flex items-center gap-2"
             >
               {last || !item.linkTo ? (
                 <span
                   aria-current={last ? "page" : undefined}
-                  className="text-[#ece6da]"
+                  className="font-medium text-[#f0eadf]"
                 >
                   {item.label}
                 </span>
               ) : (
                 <Link
                   href={item.linkTo}
-                  className="text-[#8f8a80] outline-none transition-colors hover:text-[#e8c99a] focus-visible:text-[#e8c99a] focus-visible:underline"
+                  className="text-[#d6d9c9]/80 outline-none transition-colors hover:text-[#e0503a] focus-visible:text-[#e0503a]"
                 >
                   {item.label}
                 </Link>
@@ -53,12 +52,12 @@ function BreadCrumb({ breadcrumb }: breadcrumb) {
                 <svg
                   viewBox="0 0 8 12"
                   fill="none"
-                  stroke="#8f8a80"
-                  strokeWidth="1.4"
+                  stroke="#a8c686"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  className="h-3 w-2"
+                  className="h-2.5 w-2 opacity-70"
                 >
                   <path d="M1.5 1.5L6 6l-4.5 4.5" />
                 </svg>

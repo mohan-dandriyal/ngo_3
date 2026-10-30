@@ -58,12 +58,12 @@ export default function ProgramsCta({ data }: ProgramsCtaProps) {
   return (
     <section
       id="get-involved"
-      className="relative w-full overflow-hidden bg-[#e0503a] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="relative w-full overflow-hidden bg-[#e0503a] text-white font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
-      {/* Large lighter circle that slowly drifts behind the text */}
+      {/* Background circle */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full bg-[#ef6e58]/70"
+        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full bg-[#ef6e58]/50"
         animate={reduce ? undefined : { x: [0, -24, 0], y: [0, 18, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -74,12 +74,12 @@ export default function ProgramsCta({ data }: ProgramsCtaProps) {
           initial={reduce ? false : "hidden"}
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="relative grid items-end gap-10 py-20 lg:grid-cols-[1.6fr_1fr] lg:gap-20 lg:py-[120px]"
+          className="relative grid items-end gap-10 py-20 lg:grid-cols-[1.6fr_1fr] lg:gap-20 lg:py-[100px]"
         >
           <div>
             {eyebrow && (
-              <motion.p variants={fadeUp} className="mb-8 flex items-center gap-4 text-xs font-medium uppercase tracking-[0.2em]">
-                <span className="h-px w-9 bg-[#14110c]" aria-hidden="true" />
+              <motion.p variants={fadeUp} className="mb-6 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-white/90">
+                <span className="h-px w-9 bg-white/70" aria-hidden="true" />
                 {eyebrow}
               </motion.p>
             )}
@@ -87,11 +87,12 @@ export default function ProgramsCta({ data }: ProgramsCtaProps) {
             <motion.h2
               variants={headline}
               aria-label={`${titleStart} ${titleAccent}`}
-              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(46px,6.6vw,100px)]
-                         font-medium leading-[0.98] tracking-[-0.02em]"
+              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(44px,6.2vw,92px)]
+                         font-medium leading-[0.98] tracking-[-0.02em] text-white"
             >
               <Words text={titleStart} />
-              <em className="font-medium italic">
+              <em className="font-medium italic text-[#fed7d2]">
+                {" "}
                 <Words text={titleAccent} />
               </em>
             </motion.h2>
@@ -99,19 +100,19 @@ export default function ProgramsCta({ data }: ProgramsCtaProps) {
 
           <div className="max-w-[26rem] lg:pb-3">
             {description && (
-              <motion.p variants={fadeUp} className="text-base leading-[1.9] text-[#14110c]/80">
+              <motion.p variants={fadeUp} className="text-base leading-[1.9] text-white/90">
                 {description}
               </motion.p>
             )}
 
-            <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               {primaryButton?.text && (
                 <Link
                   href={primaryButton.link || "#"}
-                  className="group relative inline-flex items-center justify-center gap-4 overflow-hidden bg-[#14110c] px-6 py-[18px]
-                             text-[15px] font-semibold text-[#f1ece1] outline-none transition-shadow duration-300
-                             hover:shadow-[0_12px_34px_-10px_rgba(20,17,12,0.7)]
-                             focus-visible:ring-2 focus-visible:ring-[#14110c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#e0503a]"
+                  className="group relative inline-flex items-center justify-center gap-4 overflow-hidden bg-[#141714] px-7 py-4
+                             text-sm font-semibold text-white outline-none transition-shadow duration-300
+                             hover:shadow-[0_12px_34px_-10px_rgba(20,17,12,0.6)]
+                             focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4"
                 >
                   <span
                     aria-hidden="true"
@@ -130,23 +131,12 @@ export default function ProgramsCta({ data }: ProgramsCtaProps) {
               {secondaryButton?.text && (
                 <Link
                   href={secondaryButton.link || "#"}
-                  className="group relative inline-flex items-center justify-center gap-4 overflow-hidden border border-[#14110c]/60 px-6 py-[18px]
-                             text-[15px] font-semibold text-[#14110c] outline-none transition-colors duration-300 hover:border-[#14110c]
-                             focus-visible:ring-2 focus-visible:ring-[#14110c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#e0503a]"
+                  className="inline-flex items-center justify-center gap-3 border border-white/50 bg-white/10 px-6 py-4
+                             text-sm font-medium text-white transition-colors duration-300
+                             hover:border-white hover:bg-white/20"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 origin-bottom scale-y-0 bg-[#14110c] transition-transform duration-500 ease-out
-                               group-hover:scale-y-100 motion-reduce:transition-none"
-                  />
-                  <span className="relative transition-colors duration-300 group-hover:text-[#f1ece1]">
-                    {secondaryButton.text}
-                  </span>
-                  <ArrowUpRight
-                    size={16}
-                    aria-hidden="true"
-                    className="relative transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#f1ece1]"
-                  />
+                  <span>{secondaryButton.text}</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
               )}
             </motion.div>

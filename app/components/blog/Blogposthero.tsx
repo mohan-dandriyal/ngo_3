@@ -39,10 +39,6 @@ const word: Variants = {
   show: { y: 0, transition: { duration: 1, ease } },
 };
 
-/**
- * next/image throws if a local src does not start with "/".
- * "post-1-1.png" -> "/post-1-1.png". Absolute URLs and data URIs pass through.
- */
 function normalizeSrc(src?: string): string | undefined {
   const value = src?.trim();
   if (!value) return undefined;
@@ -59,7 +55,6 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
   const [imgFailed, setImgFailed] = useState(!coverSrc);
   const [avatarFailed, setAvatarFailed] = useState(!avatarSrc);
 
-  // The cover picture drifts slowly inside its frame while scrolling
   const frameRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: frameRef,
@@ -82,47 +77,45 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
   return (
     <section
       id="post-hero"
-      className="relative w-full overflow-hidden bg-[#0a0a09] bg-[radial-gradient(45%_45%_at_100%_0%,#1c2a22_0%,transparent_70%)]
-                 text-[#bdb7aa] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="relative w-full overflow-hidden bg-[#faf8f5] text-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <motion.div
           variants={container}
           initial={reduce ? false : "hidden"}
           animate="show"
-          className="pb-14 pt-10 lg:pb-20 lg:pt-14"
+          className="pb-10 pt-8 lg:pb-12 lg:pt-10"
         >
           {/* Breadcrumb and back link */}
           <motion.nav
             variants={fadeUp}
             aria-label="Breadcrumb"
-            className="mb-10 flex flex-wrap items-center justify-between gap-4 lg:mb-14"
+            className="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8"
           >
-            <ol className="flex min-w-0 items-center gap-2.5 text-[13px]">
+            <ol className="flex min-w-0 items-center gap-2.5 text-xs font-medium text-[#737a73]">
               <li>
-                <Link href="/" className="text-[#8f8a80] transition-colors hover:text-[#e8c99a]">
+                <Link href="/" className="transition-colors hover:text-[#e0503a]">
                   {labels.homeLabel}
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-[#8f8a80]">/</li>
+              <li aria-hidden="true" className="text-[#adb3ad]">/</li>
               <li>
-                <Link href="/blog" className="text-[#8f8a80] transition-colors hover:text-[#e8c99a]">
+                <Link href="/blog" className="transition-colors hover:text-[#e0503a]">
                   {labels.blogLabel}
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-[#8f8a80]">/</li>
-              <li aria-current="page" className="truncate text-[#ece6da]">
+              <li aria-hidden="true" className="text-[#adb3ad]">/</li>
+              <li aria-current="page" className="truncate font-semibold text-[#141714]">
                 {post.category}
               </li>
             </ol>
 
             <Link
               href="/blog"
-              className="group inline-flex items-center gap-2 text-sm text-[#ece6da] outline-none transition-colors hover:text-[#e8c99a]
-                         focus-visible:ring-2 focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a09]"
+              className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#141714] outline-none transition-colors hover:text-[#e0503a] focus-visible:ring-2 focus-visible:ring-[#e0503a]"
             >
               <ArrowLeft
-                size={16}
+                size={15}
                 aria-hidden="true"
                 className="transition-transform duration-300 group-hover:-translate-x-1"
               />
@@ -130,21 +123,20 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
             </Link>
           </motion.nav>
 
-          <div className="mx-auto max-w-5xl text-center">
+          <div className="max-w-4xl text-left">
             <motion.p
               variants={fadeUp}
-              className="mb-7 flex items-center justify-center gap-4 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]"
+              className="mb-6 flex items-center justify-start gap-3 text-xs font-bold uppercase tracking-[0.2em] text-[#e0503a]"
             >
-              <span className="h-px w-8 bg-[#e9a26b]" aria-hidden="true" />
+              <span className="h-px w-8 bg-[#e0503a]" aria-hidden="true" />
               {post.category}
-              <span className="h-px w-8 bg-[#e9a26b]" aria-hidden="true" />
             </motion.p>
 
             <motion.h1
               variants={headline}
               aria-label={post.title}
-              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(40px,6.2vw,92px)]
-                         font-medium leading-[1.02] tracking-[-0.02em] text-[#ece6da]"
+              className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(36px,5.5vw,76px)]
+                         font-bold leading-[1.06] tracking-[-0.02em] text-[#141714] text-left"
             >
               {post.title.split(" ").map((w, i) => (
                 <span
@@ -162,42 +154,42 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
             {/* Author and meta */}
             <motion.div
               variants={fadeUp}
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5"
+              className="mt-8 flex flex-wrap items-center justify-start gap-x-8 gap-y-4"
             >
               {post.author && (
-                <div className="flex items-center gap-3.5 text-left">
-                  <div className="relative h-12 w-12 flex-none overflow-hidden rounded-full bg-[#27382e] ring-2 ring-[#e8c99a]/40">
+                <div className="flex items-center gap-3 text-left">
+                  <div className="relative h-11 w-11 flex-none overflow-hidden rounded-full border-2 border-[#2a5c43]/20 bg-[#ede7dc]">
                     {!avatarFailed && avatarSrc ? (
                       <Image
                         src={avatarSrc}
                         alt={post.author.name}
                         fill
-                        sizes="48px"
+                        sizes="44px"
                         onError={() => setAvatarFailed(true)}
                         className="object-cover"
                       />
                     ) : (
-                      <span className="grid h-full w-full place-items-center text-sm font-semibold text-[#e8c99a]">
+                      <span className="grid h-full w-full place-items-center text-xs font-bold text-[#2a5c43]">
                         {initials}
                       </span>
                     )}
                   </div>
                   <div>
-                    <p className="text-[15px] font-semibold text-[#ece6da]">
+                    <p className="text-sm font-bold text-[#141714]">
                       {post.author.name}
                     </p>
                     {post.author.role && (
-                      <p className="text-[13px] text-[#8f8a80]">{post.author.role}</p>
+                      <p className="text-xs text-[#737a73]">{post.author.role}</p>
                     )}
                   </div>
                 </div>
               )}
 
-              <p className="flex items-center text-[14px] text-[#bdb7aa]">
+              <p className="flex items-center text-xs font-medium text-[#737a73]">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
                 {post.readTime && (
                   <>
-                    <span aria-hidden="true" className="mx-3 text-[#8f8a80]">/</span>
+                    <span aria-hidden="true" className="mx-2.5 text-[#adb3ad]">/</span>
                     <span>{post.readTime}</span>
                   </>
                 )}
@@ -210,16 +202,16 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
             ref={frameRef}
             initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            transition={{ duration: 1.4, ease: [0.7, 0, 0.2, 1], delay: 0.5 }}
-            className="relative m-0 mt-14 aspect-[4/3] w-full overflow-hidden bg-[#161a17] ring-1 ring-[#e8c99a]/15 sm:aspect-[16/9] lg:mt-20 lg:aspect-[21/9]"
+            transition={{ duration: 1.4, ease: [0.7, 0, 0.2, 1], delay: 0.3 }}
+            className="relative m-0 mt-12 aspect-[4/3] w-full overflow-hidden rounded-xs border border-[#e5dfd5] bg-[#ede7dc] shadow-[0_16px_40px_-16px_rgba(20,24,20,0.1)] sm:aspect-[16/9] lg:mt-16 lg:aspect-[21/9]"
           >
             {!imgFailed && coverSrc ? (
               <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y: imageY }}>
                 <motion.div
                   className="absolute inset-0"
-                  initial={reduce ? false : { scale: 1.18 }}
+                  initial={reduce ? false : { scale: 1.15 }}
                   animate={{ scale: 1 }}
-                  transition={{ duration: 2.2, ease, delay: 0.5 }}
+                  transition={{ duration: 2, ease, delay: 0.3 }}
                 >
                   <Image
                     src={coverSrc}
@@ -234,7 +226,7 @@ export default function BlogPostHero({ post, labels }: BlogPostHeroProps) {
               </motion.div>
             ) : (
               <div
-                className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]"
+                className="absolute inset-0 bg-[linear-gradient(160deg,#2a5c43,#141714)]"
                 aria-hidden="true"
               />
             )}

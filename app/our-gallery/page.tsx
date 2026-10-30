@@ -14,7 +14,7 @@ const data = galleryData as GalleryPageData;
 
 export default function GalleryPage() {
   return (
-    <main className="min-h-screen bg-[#0A0B09]">
+    <main className="min-h-screen">
       <GalleryHero data={data.galleryHero} />
       <GallerySection data={data.gallerySection} />
     </main>

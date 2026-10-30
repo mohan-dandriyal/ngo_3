@@ -13,7 +13,6 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import type { JoinMission as JoinMissionType } from "@/app/types/about";
 import MainContainer from "../ui/MainContainer";
-import PrimaryButton from "../ui/PrimaryButton";
 import { Description, SectionTitle } from "../ui/SectionContent";
 
 interface JoinMissionProps {
@@ -22,7 +21,6 @@ interface JoinMissionProps {
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so SectionTitle and Description join the same stagger */
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
@@ -48,13 +46,12 @@ const caption: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease, delay: 0.8 } },
 };
 
-/* The closing line scrolls sideways forever; the second row makes the loop seamless */
 function Marquee({ text, reduce }: { text: string; reduce: boolean | null }) {
   const row = (key: string) => (
     <div key={key} aria-hidden="true" className="flex flex-none items-center">
       {Array.from({ length: 4 }).map((_, i) => (
         <span key={i} className="flex items-center">
-          <span className="whitespace-nowrap px-8 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(36px,5.4vw,80px)] font-medium italic leading-none text-[#ece6da]/90">
+          <span className="whitespace-nowrap px-8 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(36px,5.4vw,80px)] font-medium italic leading-none text-[#141714]/80">
             {text}
           </span>
           <span className="h-2.5 w-2.5 rounded-full bg-[#e0503a]" />
@@ -64,7 +61,7 @@ function Marquee({ text, reduce }: { text: string; reduce: boolean | null }) {
   );
 
   return (
-    <div className="overflow-hidden border-y border-[#ece6da]/15 py-7">
+    <div className="overflow-hidden border-y border-[#141714]/15 py-7">
       <p className="sr-only">{text}</p>
       <motion.div
         className="flex w-max"
@@ -87,7 +84,6 @@ export default function JoinMission({ data }: JoinMissionProps) {
     image,
     imageCaption,
     primaryButton,
-    secondaryButton,
     bottomNote,
     footerText,
   } = data ?? ({} as JoinMissionType);
@@ -95,7 +91,6 @@ export default function JoinMission({ data }: JoinMissionProps) {
   const reduce = useReducedMotion();
   const [imgFailed, setImgFailed] = useState(!image?.src);
 
-  // The picture drifts slowly inside its frame while scrolling
   const frameRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -44, reduce ? 0 : 44]);
@@ -103,14 +98,14 @@ export default function JoinMission({ data }: JoinMissionProps) {
   return (
     <section
       id="join-our-mission"
-      className="relative w-full overflow-hidden bg-[#0a0a09] py-18 text-[#ece6da] sm:py-18 md:py-20
+      className="relative w-full overflow-hidden bg-[#faf8f5] py-20 text-[#141714] sm:py-24 md:py-28
                  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
-      {/* Soft red glow behind the headline, slowly breathing */}
+      {/* Background glow */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-0 h-[460px] w-[760px] max-w-full -translate-x-1/2 rounded-full
-                   bg-[#e0503a]/15 blur-[140px]"
+                   bg-[#e0503a]/[0.06] blur-[140px]"
         animate={reduce ? undefined : { opacity: [0.4, 0.9, 0.4] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -122,31 +117,30 @@ export default function JoinMission({ data }: JoinMissionProps) {
           initial={reduce ? false : "hidden"}
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="relative mx-auto max-w-5xl text-center"
+          className="relative max-w-5xl text-left"
         >
           {eyebrow && (
             <motion.p
               variants={fadeUp}
-              className="mb-8 flex items-center justify-center gap-4 text-xs font-medium uppercase tracking-[0.2em] text-[#e9a26b]"
+              className="mb-6 flex items-center justify-start gap-4 text-xs font-bold uppercase tracking-[0.2em] text-[#2a5c43]"
             >
-              <motion.span variants={ruleLeft} aria-hidden="true" className="h-px w-8 origin-right bg-[#e9a26b]" />
+              <motion.span variants={ruleLeft} aria-hidden="true" className="h-px w-8 origin-left bg-[#2a5c43]" />
               {eyebrow}
-              <motion.span variants={ruleLeft} aria-hidden="true" className="h-px w-8 origin-left bg-[#e9a26b]" />
             </motion.p>
           )}
 
           <SectionTitle
             titleStart={titleStart}
             titleAccent={titleAccent}
-            className="text-center !text-[clamp(52px,8vw,80px)] !leading-[0.98]"
+            tone="light"
+            className="text-left !text-[clamp(44px,7vw,76px)] !leading-[1.02]"
           />
 
           {description && (
-            <div className="mx-auto mt-8 max-w-[36rem] text-center">
-              <Description description={description} variant="body" />
+            <div className="mt-6 max-w-[36rem] text-left">
+              <Description description={description} variant="body" tone="light" />
             </div>
           )}
-
         </motion.div>
 
         {/* Scrolling closing line */}
@@ -173,7 +167,7 @@ export default function JoinMission({ data }: JoinMissionProps) {
           <motion.div
             ref={frameRef}
             variants={frame}
-            className="relative h-[300px] overflow-hidden bg-[#202820] ring-1 ring-[#e8c99a]/15 sm:h-[400px] md:h-[500px] lg:h-[560px]"
+            className="relative h-[280px] overflow-hidden rounded-xs border border-[#e5dfd5] bg-[#ede7dc] shadow-[0_16px_40px_-16px_rgba(20,24,20,0.1)] sm:h-[360px] md:h-[420px] lg:h-[460px]"
           >
             {!imgFailed && image?.src ? (
               <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y: imageY }}>
@@ -189,11 +183,11 @@ export default function JoinMission({ data }: JoinMissionProps) {
                 </motion.div>
               </motion.div>
             ) : (
-              <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
+              <div className="absolute inset-0 bg-[linear-gradient(160deg,#2a5c43,#141714)]" aria-hidden="true" />
             )}
 
             <div
-              className="absolute inset-0 bg-gradient-to-t from-[#0a0a09]/80 via-[#0a0a09]/10 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"
               aria-hidden="true"
             />
 
@@ -203,20 +197,19 @@ export default function JoinMission({ data }: JoinMissionProps) {
                 className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-4 p-5 sm:flex-row sm:items-end sm:p-8 md:p-10"
               >
                 {imageCaption && (
-                  <p className="max-w-xl font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-2xl leading-snug text-[#ece6da] sm:text-3xl md:text-4xl">
+                  <p className="max-w-xl font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-2xl font-medium leading-snug text-white sm:text-3xl md:text-4xl">
                     {imageCaption}
                   </p>
                 )}
 
-                {/* The arrow is now a real link to the main action */}
                 {primaryButton?.link && (
                   <Link
                     href={primaryButton.link}
                     aria-label={primaryButton.text || "Get involved"}
-                    className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#ece6da]/50
-                               text-[#ece6da] outline-none transition-colors duration-300
-                               hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-[#14110c]
-                               focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+                    className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/60
+                               text-white outline-none transition-colors duration-300
+                               hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-white
+                               focus-visible:ring-2 focus-visible:ring-[#e0503a]"
                   >
                     <ArrowUpRight
                       size={21}
@@ -232,7 +225,7 @@ export default function JoinMission({ data }: JoinMissionProps) {
           {footerText && (
             <motion.p
               variants={fadeUp}
-              className="mx-auto mt-10 max-w-2xl text-center font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[22px] italic leading-snug text-[#bdb7aa] sm:text-[26px]"
+              className="mx-auto mt-10 max-w-2xl text-center font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[22px] italic leading-snug text-[#525a52] sm:text-[26px]"
             >
               {footerText}
             </motion.p>

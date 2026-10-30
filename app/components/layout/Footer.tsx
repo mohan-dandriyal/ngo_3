@@ -1,9 +1,9 @@
-
 "use client";
 
-import { useState, } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import {
   motion,
   useReducedMotion,
@@ -154,18 +154,17 @@ function FooterLink({
   return (
     <Link
       href={href || "#"}
-      className="group relative inline-block py-1 text-[14px] text-[#bdb7aa]
-      outline-none transition-colors duration-200 hover:text-[#f1ece1]
-      focus-visible:text-[#f1ece1] focus-visible:ring-2
-      focus-visible:ring-[#e8c99a] focus-visible:ring-offset-4
-      focus-visible:ring-offset-[#0a0a09]"
+      className="group relative inline-block py-1 text-[14px] text-[#555d55]
+      outline-none transition-colors duration-200 hover:text-[#e0503a]
+      focus-visible:text-[#e0503a] focus-visible:ring-2
+      focus-visible:ring-[#e0503a] focus-visible:ring-offset-2"
     >
       {children}
 
       <span
         aria-hidden="true"
         className="absolute bottom-0 left-0 h-px w-full origin-left
-        scale-x-0 bg-[#e8c99a] transition-transform duration-300
+        scale-x-0 bg-[#e0503a] transition-transform duration-300
         group-hover:scale-x-100 group-focus-visible:scale-x-100"
       />
     </Link>
@@ -181,17 +180,12 @@ export default function Footer() {
     contact,
     socials = [],
     copyright,
-    legalLinks = [],
     wordmark,
     labels,
   } = data;
 
   const reduce = useReducedMotion();
-
   const [logoFailed, setLogoFailed] = useState(false);
-
-
-
 
   const toTop = () => {
     window.scrollTo({
@@ -204,9 +198,8 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden border-t border-[#e8c99a]/15
-      bg-[#0a0a09] bg-[radial-gradient(50%_70%_at_0%_100%,#1c2a22_0%,transparent_70%)]
-      font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa]"
+      className="relative overflow-hidden border-t border-[#ede7dc]
+      bg-[#faf8f5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#555d55]"
     >
       <MainContainer>
         <div className="mx-auto px-5">
@@ -218,58 +211,57 @@ export default function Footer() {
               initial={reduce ? false : "hidden"}
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className="grid items-center gap-8 border-b border-[#e8c99a]/15
-              py-14 sm:py-16 lg:grid-cols-[1.5fr_1fr] lg:gap-20 lg:py-20"
+              className="relative isolate overflow-hidden border-b border-[#ede7dc] py-14 sm:py-18 lg:py-20"
             >
-              <SectionTitle
-                titleStart={cta.title}
-                titleAccent={cta.titleAccent}
-                tone="dark"
+              {/* Soft light decorative glow */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-20 top-0 -z-10 h-80 w-80 rounded-full bg-[#e0503a]/[0.08] blur-[100px]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-20 bottom-0 -z-10 h-72 w-72 rounded-full bg-[#2a5c43]/[0.05] blur-[100px]"
               />
 
-              <motion.div variants={rise} className="max-w-[27rem]">
-                {cta.text && (
-                  <p className="text-[15px] leading-[1.9] text-[#bdb7aa]">
-                    {cta.text}
-                  </p>
-                )}
+              {/* CTA content */}
+              <div className="relative grid items-center gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
+                {/* Heading */}
+                <motion.div variants={rise}>
+                  <SectionTitle
+                    titleStart={cta.title}
+                    titleAccent={cta.titleAccent}
+                    tone="light"
+                  />
+                </motion.div>
 
-                {cta.btnText && (
-                  <Link
-                    href={cta.linkTo || "#"}
-                    className="group relative mt-7 inline-flex items-center
-                    gap-5 overflow-hidden bg-[#e0503a] px-6 py-4
-                    text-[14px] font-semibold text-[#14110c]
-                    transition-shadow duration-300
-                    hover:shadow-[0_10px_34px_-8px_rgba(224,80,58,0.7)]
-                    focus-visible:outline focus-visible:outline-2
-                    focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 -translate-x-full bg-[#ef6e58]
-                      transition-transform duration-500 group-hover:translate-x-0"
-                    />
+                {/* Description and button */}
+                <motion.div
+                  variants={rise}
+                  className="max-w-[27rem]"
+                >
+                  {cta.text && (
+                    <p className="text-[15px] leading-[1.8] text-[#4e554e]">
+                      {cta.text}
+                    </p>
+                  )}
 
-                    <span className="relative">{cta.btnText}</span>
-
-                    <svg
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      className="relative h-3.5 w-3.5 transition-transform
-                      duration-300 group-hover:-translate-y-0.5
-                      group-hover:translate-x-0.5"
+                  {cta.btnText && (
+                    <Link
+                      href={cta.linkTo || "#"}
+                      className="group relative mt-7 inline-flex items-center gap-4 overflow-hidden rounded-xs bg-[#e0503a] px-7 py-4 text-[14px] font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#c94230] hover:shadow-[0_10px_30px_-8px_rgba(224,80,58,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                     >
-                      <path d="M3 11L11 3M4.5 3H11v6.5" />
-                    </svg>
-                  </Link>
-                )}
-              </motion.div>
+                      <span className="relative">
+                        {cta.btnText}
+                      </span>
+
+                      <ArrowUpRight
+                        size={17}
+                        className="relative transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      />
+                    </Link>
+                  )}
+                </motion.div>
+              </div>
             </motion.div>
           )}
 
@@ -279,18 +271,14 @@ export default function Footer() {
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="grid gap-12 py-14 sm:py-16 lg:grid-cols-12
-            lg:gap-10 lg:py-20"
+            className="grid gap-12 py-14 sm:py-16 lg:grid-cols-12 lg:gap-10 lg:py-20"
           >
-
             {/* BRAND */}
             <motion.div variants={rise} className="lg:col-span-4">
               <Link
                 href="/"
                 aria-label={labels.homeLink}
-                className="inline-flex items-center rounded-sm outline-none
-                focus-visible:ring-2 focus-visible:ring-[#e8c99a]
-                focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a09]"
+                className="inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2"
               >
                 {!logoFailed && logo?.src ? (
                   <Image
@@ -299,15 +287,14 @@ export default function Footer() {
                     width={200}
                     height={70}
                     onError={() => setLogoFailed(true)}
-                    className="h-14 w-auto max-w-[250px] object-contain object-left sm:h-16"
+                    className="h-20 w-auto max-w-[250px] object-contain object-left sm:h-28"
                   />
                 ) : (
                   <span className="flex items-center gap-3">
-                    <span className="grid h-11 w-11 place-items-center
-                    border border-[#e8c99a]/50 text-lg font-semibold text-[#e8c99a]">
+                    <span className="grid h-11 w-11 place-items-center rounded-xs border border-[#2a5c43]/40 bg-[#2a5c43]/10 text-lg font-semibold text-[#2a5c43]">
                       W
                     </span>
-                    <span className="text-lg font-semibold tracking-wide text-[#f1ece1]">
+                    <span className="text-lg font-semibold tracking-wide text-[#141714]">
                       WKX Foundation
                     </span>
                   </span>
@@ -315,7 +302,7 @@ export default function Footer() {
               </Link>
 
               {about && (
-                <p className="mt-6 max-w-[22rem] text-[14px] leading-[1.9] text-[#a9a398]">
+                <p className="mt-6 max-w-[22rem] text-[14px] leading-[1.8] text-[#555d55]">
                   {about}
                 </p>
               )}
@@ -326,7 +313,7 @@ export default function Footer() {
                   aria-label={labels.socialNavigation}
                   className="mt-7"
                 >
-                  <ul className="flex flex-wrap gap-3">
+                  <ul className="flex flex-wrap gap-2.5">
                     {socials.map((social) => (
                       <li key={social.label}>
                         <motion.a
@@ -334,14 +321,9 @@ export default function Footer() {
                           aria-label={social.label}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={reduce ? undefined : { y: -3 }}
-                          whileTap={reduce ? undefined : { scale: 0.95 }}
-                          className="grid h-10 w-10 place-items-center
-                          border border-[#e8c99a]/25 text-[#ece6da]
-                          outline-none transition-colors duration-300
-                          hover:border-[#e8c99a] hover:bg-[#e8c99a]
-                          hover:text-[#14110c]
-                          focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+                          whileHover={reduce ? undefined : { y: -2 }}
+                          whileTap={reduce ? undefined : { scale: 0.96 }}
+                          className="grid h-10 w-10 place-items-center rounded-xs border border-[#ede7dc] bg-white text-[#141714] shadow-xs outline-none transition-all duration-300 hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-white focus-visible:ring-2 focus-visible:ring-[#e0503a]"
                         >
                           <SocialIcon name={social.icon || social.label} />
                         </motion.a>
@@ -364,8 +346,7 @@ export default function Footer() {
               >
                 {columns.map((column) => (
                   <nav key={column.title} aria-label={column.title}>
-                    <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-                    text-2xl font-medium text-[#ece6da]">
+                    <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-2xl font-bold text-[#141714]">
                       {column.title}
                     </h3>
 
@@ -383,20 +364,18 @@ export default function Footer() {
               </motion.div>
             )}
 
-            {/* CONTACT + NEWSLETTER */}
+            {/* CONTACT */}
             <motion.div
               variants={rise}
               className="lg:col-span-3"
             >
               {contact && (
                 <div>
-                  <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-                  text-2xl font-medium text-[#ece6da]">
+                  <h3 className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-2xl font-bold text-[#141714]">
                     {contact.title}
                   </h3>
 
-                  <address className="mt-5 space-y-3 text-[14px] not-italic leading-[1.8]">
-
+                  <address className="mt-5 space-y-3 text-[14px] not-italic leading-[1.8] text-[#555d55]">
                     {contact.address && (
                       <p>
                         {(contact as typeof contact & { mapLink?: string }).mapLink ? (
@@ -404,9 +383,7 @@ export default function Footer() {
                             href={(contact as typeof contact & { mapLink?: string }).mapLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="transition-colors hover:text-[#e8c99a]
-                            focus-visible:outline focus-visible:outline-2
-                            focus-visible:outline-[#e8c99a]"
+                            className="transition-colors hover:text-[#e0503a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#e0503a]"
                           >
                             {contact.address}
                           </a>
@@ -420,7 +397,7 @@ export default function Footer() {
                       <p>
                         <a
                           href={`mailto:${contact.email}`}
-                          className="transition-colors hover:text-[#e8c99a]"
+                          className="transition-colors hover:text-[#e0503a]"
                         >
                           {contact.email}
                         </a>
@@ -431,7 +408,7 @@ export default function Footer() {
                       <p>
                         <a
                           href={`tel:${phoneHref}`}
-                          className="transition-colors hover:text-[#e8c99a]"
+                          className="transition-colors hover:text-[#e0503a]"
                         >
                           {contact.phone}
                         </a>
@@ -440,8 +417,6 @@ export default function Footer() {
                   </address>
                 </div>
               )}
-
-            
             </motion.div>
           </motion.div>
         </div>
@@ -458,12 +433,7 @@ export default function Footer() {
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto -mb-[0.16em] max-w-[1600px]
-            whitespace-nowrap text-center
-            font-['Cormorant_Garamond','EB_Garamond',Georgia,serif]
-            text-[clamp(110px,24vw,380px)] font-medium leading-[0.8]
-            tracking-[-0.04em] bg-gradient-to-b from-[#e8c99a]/30
-            to-transparent bg-clip-text text-transparent"
+            className="mx-auto -mb-[0.16em] max-w-[1600px] whitespace-nowrap text-center font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(110px,24vw,380px)] font-medium leading-[0.8] tracking-[-0.04em] text-[#141714]/[0.04]"
           >
             {wordmark}
           </motion.p>
@@ -471,34 +441,21 @@ export default function Footer() {
       )}
 
       {/* BOTTOM BAR */}
-      <div className="relative border-t border-[#e8c99a]/15 bg-[#0a0a09]/60 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-[1600px] flex-col gap-5
-        px-5 py-6 text-center sm:px-8 md:flex-row
-        md:items-center md:justify-between md:text-left lg:px-16">
-
-          <p className="text-[13px] leading-relaxed text-[#8f8a80]">
+      <div className="relative border-t border-[#ede7dc] bg-[#f4f0e8]">
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-5 px-5 py-6 text-center sm:px-8 md:flex-row md:items-center md:justify-between md:text-left lg:px-16">
+          <p className="text-[13px] leading-relaxed text-[#737a73]">
             {copyright}
           </p>
 
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center md:justify-end">
-
-           
-
             <button
               type="button"
               onClick={toTop}
-              className="group inline-flex items-center gap-2.5
-              text-[13px] text-[#ece6da] outline-none
-              transition-colors hover:text-[#e8c99a]
-              focus-visible:ring-2 focus-visible:ring-[#e8c99a]
-              focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a09]"
+              className="group inline-flex items-center gap-2.5 text-[13px] font-medium text-[#555d55] outline-none transition-colors hover:text-[#e0503a] focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2"
             >
               {labels.backToTop}
 
-              <span className="grid h-9 w-9 place-items-center
-              border border-[#e8c99a]/30 transition-colors
-              group-hover:border-[#e8c99a] group-hover:bg-[#e8c99a]
-              group-hover:text-[#14110c]">
+              <span className="grid h-9 w-9 place-items-center rounded-xs border border-[#ede7dc] bg-white text-[#141714] shadow-xs transition-all group-hover:border-[#e0503a] group-hover:bg-[#e0503a] group-hover:text-white">
                 <svg
                   viewBox="0 0 14 14"
                   fill="none"
@@ -507,8 +464,7 @@ export default function Footer() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  className="h-3.5 w-3.5 transition-transform
-                  duration-300 group-hover:-translate-y-0.5"
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5"
                 >
                   <path d="M7 12V2M3 6l4-4 4 4" />
                 </svg>

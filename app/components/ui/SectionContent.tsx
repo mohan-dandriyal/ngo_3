@@ -1,19 +1,9 @@
-"use client"
+"use client";
 
 import React, { ReactNode } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
-
-/*
-  How the animation works
-  -----------------------
-  Every component uses the variant names "hidden" and "show".
-  - Inside a motion parent that sets initial="hidden" and animate/whileInView="show",
-    they join the parent's stagger automatically (this is how Hero and the other sections use them).
-  - Used on their own, add the `standalone` prop and they animate themselves when scrolled into view.
-  - With no motion parent and no `standalone`, they simply render with no animation.
-*/
 
 const fade: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -35,11 +25,10 @@ const word: Variants = {
   show: { y: 0, transition: { duration: 1, ease } },
 };
 
-type Tone = "dark" | "light"; // dark = dark background section, light = sand background section
+type Tone = "dark" | "light";
 
 type StandaloneProp = { standalone?: boolean };
 
-/* Props that make a component animate by itself when it scrolls into view */
 function useStandalone(standalone?: boolean) {
   const reduce = useReducedMotion();
   if (!standalone) return {};
@@ -57,25 +46,24 @@ interface EyebrowProps extends StandaloneProp {
   tone?: Tone;
 }
 
-export function Eyebrow({ eyebrow, tone = "dark", standalone }: EyebrowProps) {
+export function Eyebrow({ eyebrow, tone = "light", standalone }: EyebrowProps) {
   const motionProps = useStandalone(standalone);
-  const color = tone === "dark" ? "text-[#e9a26b]" : "text-[#3f6b57]";
-  const line = tone === "dark" ? "bg-[#e9a26b]" : "bg-[#3f6b57]";
+  const color = tone === "dark" ? "text-[#d6d9c9]" : "text-[#2a5c43]";
+  const line = tone === "dark" ? "bg-[#a8c686]" : "bg-[#2a5c43]";
 
   return (
     <motion.p
       variants={fade}
       {...motionProps}
-      className={`mb-8 flex items-center gap-4 text-xs font-medium uppercase tracking-[0.18em] ${color}`}
+      className={`mb-3 sm:mb-4 flex items-center justify-start gap-3 text-left text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] ${color}`}
     >
-      {/* The rule draws from left to right */}
-      <motion.span variants={rule} className={`h-px w-9 origin-left ${line}`} aria-hidden="true" />
-      {eyebrow}
+      <motion.span variants={rule} className={`h-px w-8 origin-left ${line}`} aria-hidden="true" />
+      <span>{eyebrow}</span>
     </motion.p>
   );
 }
 
-/* ---------- Section title ---------- */
+/* ---------- Words Helper ---------- */
 
 function Words({ text, className = "" }: { text: string; className?: string }) {
   return (
@@ -110,28 +98,34 @@ export function HeroTitle({
   titleStart = "",
   titleAccent = "",
   titleEnd = "",
-  tone = "dark",
+  tone = "light",
   className = "",
   standalone,
 }: SectionTitleProps) {
   const motionProps = useStandalone(standalone);
-  const color = tone === "dark" ? "text-[#ece6da]" : "text-[#14110c]";
+  const color = tone === "dark" ? "text-[#f0eadf]" : "text-[#141714]";
 
   return (
-    <motion.h2
+    <motion.h1
       variants={headline}
       {...motionProps}
       aria-label={[titleStart, titleAccent, titleEnd].filter(Boolean).join(" ")}
-      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(56px,8.6vw,90px)] font-medium leading-[0.98] tracking-[-0.02em]  ${color} ${className}`}
+      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(38px,5vw,62px)] font-medium leading-[1.02] tracking-[-0.03em] text-left ${color} ${className}`}
     >
-      <Words text={titleStart} />
+      <span className="block text-left">
+        <Words text={titleStart} />
+      </span>
       {titleAccent && (
-        <em className="font-medium italic text-[#e0503a]">
+        <span className="mt-1 block font-medium italic text-[#e0503a] text-left">
           <Words text={titleAccent} />
-        </em>
+        </span>
       )}
-      <Words text={titleEnd} />
-    </motion.h2>
+      {titleEnd && (
+        <span className="mt-1 block text-left">
+          <Words text={titleEnd} />
+        </span>
+      )}
+    </motion.h1>
   );
 }
 
@@ -139,34 +133,36 @@ export function SectionTitle({
   titleStart = "",
   titleAccent = "",
   titleEnd = "",
-  tone = "dark",
+  tone = "light",
   className = "",
   standalone,
 }: SectionTitleProps) {
   const motionProps = useStandalone(standalone);
-  const color = tone === "dark" ? "text-[#ece6da]" : "text-[#14110c]";
+  const color = tone === "dark" ? "text-[#ece6da]" : "text-[#141714]";
 
   return (
     <motion.h2
       variants={headline}
       {...motionProps}
       aria-label={[titleStart, titleAccent, titleEnd].filter(Boolean).join(" ")}
-      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(44px,6.4vw,70px)]
-                  font-medium leading-none tracking-[-0.02em] ${color} ${className}`}
+      className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(36px,5vw,58px)]
+                  font-medium leading-[1.05] tracking-[-0.025em] text-left ${color} ${className}`}
     >
-      <Words text={titleStart} />
+      <span className="text-left">
+        <Words text={titleStart} />
+      </span>
       {titleAccent && (
         <em className="font-medium italic text-[#e0503a]">
+          {" "}
           <Words text={titleAccent} />
         </em>
       )}
-      <Words text={titleEnd} />
+      {titleEnd && <Words text={` ${titleEnd}`} />}
     </motion.h2>
   );
 }
 
-/* Accent-coloured italic text for use inside your own headings */
-export function SectionTitleDarkText({ text }: { text: ReactNode }) {
+export function TitleAccent({ text }: { text: string }) {
   return (
     <span>
       <em className="italic text-[#e0503a]">{text}</em>
@@ -178,32 +174,30 @@ export function SectionTitleDarkText({ text }: { text: ReactNode }) {
 
 interface DescriptionProps extends StandaloneProp {
   description: ReactNode;
-  /** "label" keeps your original small uppercase look; "body" is a normal paragraph */
   variant?: "label" | "body";
   tone?: Tone;
 }
 
-export function Description({ description, variant = "label", tone = "dark", standalone }: DescriptionProps) {
+export function Description({ description, variant = "label", tone = "light", standalone }: DescriptionProps) {
   const motionProps = useStandalone(standalone);
 
   if (variant === "body") {
-    const color = tone === "dark" ? "text-[#bdb7aa]" : "text-[#5a544c]";
+    const color = tone === "dark" ? "text-[#d6d9c9]/90" : "text-[#4b524b]";
     return (
-      <motion.p variants={fade} {...motionProps} className={`max-w-[34rem] m text-base leading-[1.9] ${color}`}>
+      <motion.p variants={fade} {...motionProps} className={`max-w-[34rem] text-left text-[14px] sm:text-[15px] leading-[1.85] ${color}`}>
         {description}
       </motion.p>
     );
   }
 
-  const color = tone === "dark" ? "text-[#e9a26b]" : "text-[#3f6b57]";
+  const color = tone === "dark" ? "text-[#d6d9c9]" : "text-[#2a5c43]";
 
   return (
     <motion.p
       variants={fade}
       {...motionProps}
-      className={`mb-8 flex items-center gap-4 text-xs font-medium uppercase leading-6 tracking-[0.18em] ${color}`}
+      className={`mb-6 flex items-center justify-start gap-4 text-left text-xs font-semibold uppercase leading-6 tracking-[0.18em] ${color}`}
     >
-      {/* <motion.span variants={rule} className={`h-px w-9 origin-left ${line}`} aria-hidden="true" /> */}
       {description}
     </motion.p>
   );

@@ -69,27 +69,28 @@ export default function GallerySection({ data }: GallerySectionProps) {
   return (
     <section
       id="gallery-collection"
-      className="scroll-mt-10 bg-[#0A0B09] px-5 pb-20 text-[#EAE3D6] sm:px-8 md:pb-28 lg:px-16"
+      className="scroll-mt-10 bg-[#faf8f5] px-5 pb-20 text-[#141714] sm:px-8 md:pb-28 lg:px-16"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col pt-20 gap-8 border-t border-white/10 py-10 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col pt-20 gap-8 border-t border-[#ede7dc] py-10 md:flex-row md:items-end md:justify-between">
           <div>
-            {data.eyebrow && <Eyebrow eyebrow={data.eyebrow} />}
+            {data.eyebrow && <Eyebrow eyebrow={data.eyebrow} tone="light" />}
 
             {data.titleStart && (
               <SectionTitle
                 titleStart={data.titleStart}
                 titleAccent={data.titleAccent}
+                tone="light"
               />
             )}
 
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#B9B5AC] md:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#555d55] md:text-base">
               {data.description}
             </p>
           </div>
 
-          <p className="text-xs uppercase tracking-[0.15em] text-[#B9B5AC]">
-            {String(filteredItems.length).padStart(2, "0")} photographs
+          <p className="text-xs uppercase tracking-[0.15em] text-[#737a73]">
+            {String(filteredItems.length).padStart(2, "0")} {(data as any).countSuffix || "photographs"}
           </p>
         </div>
 
@@ -108,10 +109,10 @@ export default function GallerySection({ data }: GallerySectionProps) {
                   type="button"
                   onClick={() => handleCategoryChange(category.id)}
                   aria-pressed={isActive}
-                  className={`rounded-full border px-5 py-3 text-xs transition-all duration-300 ${
+                  className={`rounded-full border px-5 py-3 text-xs font-semibold transition-all duration-300 ${
                     isActive
-                      ? "border-[#EE503B] bg-[#EE503B] text-white"
-                      : "border-white/15 text-[#B9B5AC] hover:border-[#EE503B] hover:text-[#EAE3D6]"
+                      ? "border-[#e0503a] bg-[#e0503a] text-white"
+                      : "border-[#ede7dc] bg-white text-[#555d55] hover:border-[#e0503a] hover:text-[#e0503a]"
                   }`}
                 >
                   {category.label}
@@ -137,9 +138,8 @@ export default function GallerySection({ data }: GallerySectionProps) {
                   }}
                   className={`group ${isLarge ? "lg:col-span-2" : ""}`}
                 >
-                  {/* Bracket syntax works on both Tailwind v3 and v4 */}
                   <div
-                    className={`relative w-full overflow-hidden bg-[#20211C] ${
+                    className={`relative w-full overflow-hidden rounded-xs border border-[#ede7dc] bg-[#ede7dc] shadow-xs ${
                       isLarge ? "aspect-[5/3]" : "aspect-[4/5]"
                     }`}
                   >
@@ -155,13 +155,13 @@ export default function GallerySection({ data }: GallerySectionProps) {
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
 
-                    <span className="absolute left-5 top-5 border border-white/30 bg-black/20 px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+                    <span className="absolute left-5 top-5 rounded-xs border border-white/25 bg-black/40 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white backdrop-blur-md">
                       {item.categoryLabel}
                     </span>
 
-                    <span className="absolute right-5 top-5 text-xs text-white/80">
+                    <span className="absolute right-5 top-5 text-xs font-medium text-white/85">
                       {item.year}
                     </span>
 
@@ -170,7 +170,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                         <p className="mb-2 text-xs text-white/75">
                           {String(item.id).padStart(2, "0")} / WKX
                         </p>
-                        <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl">
+                        <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-2xl leading-tight text-white sm:text-3xl">
                           {item.title}
                         </h3>
                       </div>
@@ -181,7 +181,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                       type="button"
                       onClick={() => setSelectedIndex(index)}
                       aria-label={`View ${item.title} full size`}
-                      className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#EE503B]"
+                      className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#e0503a]"
                     />
                   </div>
                 </motion.article>
@@ -189,7 +189,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
             })}
           </div>
         ) : (
-          <div className="border border-white/10 px-6 py-16 text-center text-sm text-[#B9B5AC]">
+          <div className="rounded-xs border border-[#ede7dc] bg-white px-6 py-16 text-center text-sm text-[#737a73]">
             {data.emptyMessage}
           </div>
         )}
@@ -214,7 +214,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
               type="button"
               onClick={closeLightbox}
               aria-label="Close"
-              className="absolute right-4 top-4 z-10 rounded-full border border-white/20 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:right-8 sm:top-8"
+              className="absolute right-4 top-4 z-10 rounded-full border border-white/20 p-3 text-white transition-colors hover:border-[#e0503a] hover:bg-[#e0503a] sm:right-8 sm:top-8"
             >
               <X size={20} aria-hidden="true" />
             </button>
@@ -228,7 +228,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                     showPrev();
                   }}
                   aria-label="Previous photograph"
-                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:left-8"
+                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#e0503a] hover:bg-[#e0503a] sm:left-8"
                 >
                   <ChevronLeft size={20} aria-hidden="true" />
                 </button>
@@ -240,7 +240,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                     showNext();
                   }}
                   aria-label="Next photograph"
-                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#EE503B] hover:bg-[#EE503B] sm:right-8"
+                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-3 text-white transition-colors hover:border-[#e0503a] hover:bg-[#e0503a] sm:right-8"
                 >
                   <ChevronRight size={20} aria-hidden="true" />
                 </button>
@@ -255,11 +255,6 @@ export default function GallerySection({ data }: GallerySectionProps) {
               onClick={(e) => e.stopPropagation()}
               className="flex w-full max-w-5xl flex-col items-center"
             >
-              {/*
-                Explicit height is required for `fill` images.
-                dvh = real visible viewport on mobile; the subtracted rem
-                reserves room for padding + caption so nothing overflows.
-              */}
               <div className="relative h-[calc(100dvh-10rem)] w-full sm:h-[calc(100dvh-13rem)]">
                 <Image
                   src={selectedItem.image.src}
@@ -276,7 +271,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
                   <p className="mb-1 text-xs uppercase tracking-[0.18em] text-white/60">
                     {selectedItem.categoryLabel} · {selectedItem.year}
                   </p>
-                  <h3 className="font-serif text-2xl sm:text-3xl">
+                  <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-2xl sm:text-3xl">
                     {selectedItem.title}
                   </h3>
                 </div>

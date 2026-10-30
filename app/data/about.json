@@ -85,6 +85,7 @@
             "src": "/about-3.jpg",
             "alt": "Community members working together toward a brighter future"
         },
+        "imageCaption": "Community members working together toward a brighter future",
         "tag": "THE FUTURE WE BELIEVE IN",
         "highlights": [
             {
@@ -117,8 +118,8 @@
         },
         "imageCaption": "Change begins when we come together.",
         "primaryButton": {
-            "text": "",
-            "link": ""
+            "text": "Get involved",
+            "link": "/contact-us"
         },
         "secondaryButton": {
             "text": "Support our work",

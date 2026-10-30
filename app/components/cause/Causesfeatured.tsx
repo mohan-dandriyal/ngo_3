@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-    AnimatePresence,
     motion,
     useReducedMotion,
     useScroll,
@@ -13,10 +12,8 @@ import {
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { CauseItem, CausesFeaturedLabels } from "@/app/types/cause";
-import { formatMoney, percentOf } from "@/app/lib/causes-utils";
 import MainContainer from "../ui/MainContainer";
-import { Eyebrow, HeroTitle, SectionTitle } from "../ui/SectionContent";
-import CountUp from "@/app/components/program/Countup";
+import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
 interface CausesFeaturedProps {
     cause: CauseItem;
@@ -41,46 +38,19 @@ const picture: Variants = {
     hidden: { scale: 1.2 },
     show: { scale: 1, transition: { duration: 2, ease } },
 };
-const bar: Variants = {
-    hidden: { scaleX: 0 },
-    show: (pct: number) => ({ scaleX: pct / 100, transition: { duration: 1.8, ease, delay: 0.4 } }),
-};
 
 export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     const reduce = useReducedMotion();
     const [imgFailed, setImgFailed] = useState(!cause.image);
-    const [picked] = useState(0);
 
-    const amounts = cause.amounts ?? [];
-    const chosen = amounts[picked];
-
-    // Days left is worked out in the browser so server and client output always match
-    const [daysLeft, setDaysLeft] = useState<number | null>(null);
-    useEffect(() => {
-        const timeout = window.setTimeout(() => {
-            if (!cause.endDate) {
-                setDaysLeft(null);
-                return;
-            }
-
-            const diff = Math.ceil((new Date(cause.endDate).getTime() - Date.now()) / 86400000);
-            setDaysLeft(diff > 0 ? diff : null);
-        }, 0);
-
-        return () => window.clearTimeout(timeout);
-    }, [cause.endDate]);
-
-    // The picture drifts slowly inside its frame while scrolling
     const frameRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
     const y = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -36, reduce ? 0 : 36]);
 
-  
-
     return (
         <section
             id="featured-cause"
-            className="w-full overflow-hidden bg-[#0A0B09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+            className="w-full overflow-hidden bg-white text-[#141714] py-16 lg:py-24 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
         >
             <MainContainer>
                 <motion.div
@@ -88,13 +58,13 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
                     initial={reduce ? false : "hidden"}
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
-                    className="grid items-center gap-12 py-8 lg:grid-cols-2 lg:gap-20 "
+                    className="grid items-center gap-12 py-8 lg:grid-cols-2 lg:gap-20"
                 >
                     {/* Image */}
                     <motion.div
                         ref={frameRef}
                         variants={frame}
-                        className="relative aspect-[4/5] w-full overflow-hidden bg-[#161a17] sm:aspect-[5/4] lg:aspect-[4/5]"
+                        className="relative aspect-[4/5] w-full overflow-hidden rounded-xs border border-[#e5dfd5] bg-[#ede7dc] shadow-[0_12px_30px_-10px_rgba(20,24,20,0.08)] sm:aspect-[5/4] lg:aspect-[4/5]"
                     >
                         {!imgFailed && cause.image ? (
                             <motion.div className="absolute inset-x-0 -top-[10%] h-[120%]" style={{ y }}>
@@ -110,37 +80,35 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
                                 </motion.div>
                             </motion.div>
                         ) : (
-                            <div className="absolute inset-0 bg-[linear-gradient(160deg,#3b7a68,#0a0a09)]" aria-hidden="true" />
+                            <div className="absolute inset-0 bg-[linear-gradient(160deg,#2a5c43,#141714)]" aria-hidden="true" />
                         )}
-                        <span className="absolute bottom-5 left-5 bg-[#0a0a09] px-3.5 py-2 text-[13px] font-medium text-[#e8c99a]">
+                        <span className="absolute bottom-5 left-5 border border-black/10 bg-white/95 px-3.5 py-2 text-[13px] font-semibold uppercase tracking-wider text-[#141714] shadow-xs backdrop-blur-md">
                             {cause.category}
                         </span>
-                        
                     </motion.div>
 
                     {/* Content */}
                     <div>
-                        {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} />}
+                        {labels.eyebrow && <Eyebrow eyebrow={labels.eyebrow} tone="light" />}
 
-                        <SectionTitle titleStart={cause.title} />
+                        <SectionTitle titleStart={cause.title} tone="light" />
 
-                        <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#c8c8c8]">
+                        <motion.p variants={fadeUp} className="mt-6 max-w-xl text-[17px] leading-[1.85] text-[#4e554e]">
                             {cause.description}
                         </motion.p>
 
-                        
                         <motion.div variants={fadeUp} className="mt-8">
                             <Link
                                 href={cause.linkTo}
                                 className="group relative inline-flex items-center gap-4 overflow-hidden bg-[#e0503a] px-7 py-[18px]
-                           text-[15px] font-semibold text-[#14110c] outline-none transition-shadow duration-300
-                           hover:shadow-[0_10px_34px_-8px_rgba(224,80,58,0.7)]
-                           focus-visible:ring-2 focus-visible:ring-[#14110c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#e8e1d5]"
+                                   text-[15px] font-semibold text-white outline-none transition-shadow duration-300
+                                   hover:shadow-[0_10px_34px_-8px_rgba(224,80,58,0.5)]
+                                   focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-4"
                             >
                                 <span
                                     aria-hidden="true"
-                                    className="absolute inset-0 -translate-x-full bg-[#ef6e58] transition-transform duration-500 ease-out
-                             group-hover:translate-x-0 motion-reduce:transition-none"
+                                    className="absolute inset-0 -translate-x-full bg-[#f06450] transition-transform duration-500 ease-out
+                                     group-hover:translate-x-0 motion-reduce:transition-none"
                                 />
                                 <span className="relative">
                                     {labels.donateText}

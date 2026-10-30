@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -21,7 +20,6 @@ interface TeamSectionProps {
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/* Names are "hidden" and "show" so Eyebrow, SectionTitle and Description join the stagger */
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1 } },
@@ -32,7 +30,6 @@ const fadeUp: Variants = {
   exit: { opacity: 0, scale: 0.94, transition: { duration: 0.25 } },
 };
 
-/* Small brand icons, drawn inline so no extra icon package is needed */
 function LinkedinIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-[18px] w-[18px]">
@@ -55,9 +52,9 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
       aria-label={label}
       target={href.startsWith("mailto:") ? undefined : "_blank"}
       rel="noopener noreferrer"
-      className="grid h-10 w-10 place-items-center border border-[#ece6da]/40 text-[#ece6da] outline-none transition-colors
-                 duration-300 hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-[#14110c]
-                 focus-visible:ring-2 focus-visible:ring-[#e8c99a]"
+      className="grid h-10 w-10 place-items-center border border-white/40 text-white outline-none transition-colors
+                 duration-300 hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-white
+                 focus-visible:ring-2 focus-visible:ring-[#e0503a]"
     >
       {children}
     </a>
@@ -82,7 +79,7 @@ function MemberCard({ member }: { member: TeamMember }) {
       exit="exit"
       className="group"
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-[#161a17]">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xs border border-[#ede7dc] bg-[#ede7dc] shadow-xs">
         {!failed && member.image ? (
           <Image
             src={member.image}
@@ -90,27 +87,27 @@ function MemberCard({ member }: { member: TeamMember }) {
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
             onError={() => setFailed(true)}
-            className="object-cover grayscale transition-all duration-[900ms] ease-out group-hover:scale-[1.05]
+            className="object-cover grayscale transition-all duration-[800ms] ease-out group-hover:scale-[1.04]
                        group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:transition-none"
           />
         ) : (
-          <div className="grid h-full w-full place-items-center bg-[linear-gradient(160deg,#27382e,#0a0a09)]">
-            <span className="font-['Cormorant_Garamond',Georgia,serif] text-6xl font-semibold text-[#e8c99a]">
+          <div className="grid h-full w-full place-items-center bg-gradient-to-br from-[#f0ebe1] to-[#e4ded3]">
+            <span className="font-['Cormorant_Garamond',Georgia,serif] text-6xl font-semibold text-[#2a5c43]">
               {initials}
             </span>
           </div>
         )}
 
-        {/* Bio and social links slide up on hover or keyboard focus (large screens) */}
+        {/* Bio and social links slide up on hover (large screens) */}
         {(member.bio || hasSocials) && (
           <div
-            className="absolute inset-0 hidden translate-y-full flex-col justify-end gap-5 bg-gradient-to-t from-[#0a0a09] via-[#0a0a09]/85
+            className="absolute inset-0 hidden translate-y-full flex-col justify-end gap-4 bg-gradient-to-t from-black/90 via-black/70
                        to-transparent p-6 transition-transform duration-500 ease-out group-hover:translate-y-0
                        group-focus-within:translate-y-0 lg:flex motion-reduce:transition-none"
           >
-            {member.bio && <p className="text-[15px] leading-relaxed text-[#ece6da]">{member.bio}</p>}
+            {member.bio && <p className="text-[14px] leading-relaxed text-white/90">{member.bio}</p>}
             {hasSocials && (
-              <div className="flex gap-2.5">
+              <div className="flex gap-2">
                 {member.linkedin && (
                   <SocialLink href={member.linkedin} label={`${member.name} on LinkedIn`}>
                     <LinkedinIcon />
@@ -132,32 +129,32 @@ function MemberCard({ member }: { member: TeamMember }) {
         )}
       </div>
 
-      <div className="mt-5">
-        <h3 className="text-white/80 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[28px] font-medium leading-tight text-[#14110c]">
+      <div className="mt-4">
+        <h3 className="font-['Cormorant_Garamond',Georgia,serif] text-[24px] font-bold leading-tight text-[#141714] sm:text-[26px]">
           {member.name}
         </h3>
-        <p className="mt-1 text-sm font-medium text-[#e0503a]">{member.role}</p>
+        <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-[#e0503a]">{member.role}</p>
 
-        {/* Touch screens have no hover, so the bio and links show here instead */}
-        {member.bio && <p className="mt-3 text-[15px] leading-relaxed text-[#5a544c] lg:hidden">{member.bio}</p>}
+        {/* Touch screens display */}
+        {member.bio && <p className="mt-2.5 text-[14px] leading-relaxed text-[#555d55] lg:hidden">{member.bio}</p>}
         {hasSocials && (
-          <div className="mt-4 flex gap-2.5 text-[#14110c] lg:hidden">
+          <div className="mt-3.5 flex gap-2 text-[#141714] lg:hidden">
             {member.linkedin && (
               <a href={member.linkedin} aria-label={`${member.name} on LinkedIn`} target="_blank" rel="noopener noreferrer"
-                className="grid h-10 w-10 place-items-center border border-[#14110c]/25">
+                className="grid h-9 w-9 place-items-center rounded-xs border border-[#ede7dc] bg-white text-[#555d55] hover:border-[#e0503a] hover:text-[#e0503a]">
                 <LinkedinIcon />
               </a>
             )}
             {member.twitter && (
               <a href={member.twitter} aria-label={`${member.name} on X`} target="_blank" rel="noopener noreferrer"
-                className="grid h-10 w-10 place-items-center border border-[#14110c]/25">
+                className="grid h-9 w-9 place-items-center rounded-xs border border-[#ede7dc] bg-white text-[#555d55] hover:border-[#e0503a] hover:text-[#e0503a]">
                 <XIcon />
               </a>
             )}
             {member.email && (
               <a href={`mailto:${member.email}`} aria-label={`Email ${member.name}`}
-                className="grid h-10 w-10 place-items-center border border-[#14110c]/25">
-                <Mail size={17} aria-hidden="true" />
+                className="grid h-9 w-9 place-items-center rounded-xs border border-[#ede7dc] bg-white text-[#555d55] hover:border-[#e0503a] hover:text-[#e0503a]">
+                <Mail size={16} aria-hidden="true" />
               </a>
             )}
           </div>
@@ -174,7 +171,6 @@ export default function TeamSection({ data }: TeamSectionProps) {
   const reduce = useReducedMotion();
   const [active, setActive] = useState<string>("all");
 
-  // Filter chips come from the departments found in your data
   const departments = useMemo(
     () => Array.from(new Set(members.map((m) => m.department).filter(Boolean))) as string[],
     [members]
@@ -185,7 +181,7 @@ export default function TeamSection({ data }: TeamSectionProps) {
   return (
     <section
       id="team"
-      className="w-full overflow-hidden bg-[#0a0a09] text-[#14110c] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+      className="w-full overflow-hidden bg-[#faf8f5] text-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
         <div className="py-20 lg:py-[130px]">
@@ -198,12 +194,12 @@ export default function TeamSection({ data }: TeamSectionProps) {
             className="grid items-end gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-20"
           >
             <div>
-              {eyebrow && <Eyebrow eyebrow={eyebrow} />}
-              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} />
+              {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
+              <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
             </div>
             {description && (
               <div className="lg:pb-3">
-                <Description description={description} variant="body" />
+                <Description description={description} variant="body" tone="light" />
               </div>
             )}
           </motion.div>
@@ -227,16 +223,15 @@ export default function TeamSection({ data }: TeamSectionProps) {
                     type="button"
                     aria-pressed={isActive}
                     onClick={() => setActive(d)}
-                    className={`relative px-5 py-2.5 text-sm font-medium outline-none transition-colors duration-300
-                                focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#e8e1d5]
-                                ${isActive ? "text-[#f1ece1]" : "border border-[#ffff]/20 text-[#fff] hover:border-[#fffff]"}`}
+                    className={`relative rounded-full px-5 py-2.5 text-sm font-semibold outline-none transition-all duration-300
+                                focus-visible:ring-2 focus-visible:ring-[#e0503a] focus-visible:ring-offset-2
+                                ${isActive ? "text-white" : "border border-[#ede7dc] bg-white text-[#555d55] hover:border-[#e0503a] hover:text-[#e0503a]"}`}
                   >
-                    {/* One dark pill slides between the chips */}
                     {isActive && (
                       <motion.span
                         layoutId="team-filter-pill"
                         aria-hidden="true"
-                        className="absolute inset-0 bg-[#404040]"
+                        className="absolute inset-0 rounded-full bg-[#e0503a]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
@@ -265,23 +260,23 @@ export default function TeamSection({ data }: TeamSectionProps) {
             </motion.div>
           )}
 
-          {/* Join us */}
+          {/* Join us CTA */}
           {cta?.linkText && (
             <motion.div
               variants={fadeUp}
               initial={reduce ? false : "hidden"}
               whileInView="show"
               viewport={{ once: true, amount: 0.5 }}
-              className="mt-20 flex flex-col gap-5 border-t border-[#14110c]/20 pt-10 sm:flex-row sm:items-center sm:justify-between"
+              className="mt-20 flex flex-col gap-5 border-t border-[#ede7dc] pt-10 sm:flex-row sm:items-center sm:justify-between"
             >
               {cta.text && (
-                <p className="max-w-xl text-white font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(26px,2.8vw,38px)] font-medium italic leading-tight">
+                <p className="max-w-xl font-['Cormorant_Garamond',Georgia,serif] text-[clamp(26px,2.8vw,38px)] font-medium italic leading-tight text-[#141714]">
                   {cta.text}
                 </p>
               )}
               <Link
                 href={cta.linkTo || "#"}
-                className="group relative inline-flex items-center gap-3 self-start pb-2 text-sm tracking-[0.02em] text-[#14110c]
+                className="group relative inline-flex items-center gap-3 self-start pb-2 text-sm font-semibold tracking-[0.02em] text-[#141714] transition-colors hover:text-[#e0503a]
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
               >
                 {cta.linkText}
@@ -292,7 +287,7 @@ export default function TeamSection({ data }: TeamSectionProps) {
                 />
                 <span
                   aria-hidden="true"
-                  className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
+                  className="absolute bottom-0 left-0 h-0.5 w-full bg-[#e0503a] transition-all duration-300 group-hover:h-1"
                 />
               </Link>
             </motion.div>

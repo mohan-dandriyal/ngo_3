@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -20,11 +19,7 @@ import {
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
-
-
-const ease: [number, number, number, number] = [
-  0.2, 0.8, 0.15, 1,
-];
+const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
 const headingContainer: Variants = {
   hidden: {},
@@ -78,32 +73,31 @@ const slide: Variants = {
 type TestimonialItem = {
   id?: string;
   name: string;
+  role?: string;
   quote: string;
   image?: string;
   imageAlt?: string;
-  role?: string;
 };
 
 type HomeTestimonialsContent = {
   data: {
     eyebrow?: string;
     titleStart: string;
-    titleAccent: string;
-    titleEnd: string;
+    titleAccent?: string;
+    titleEnd?: string;
     slider: {
       autoplay: boolean;
-      interval?: number;
+      interval: number;
+      imageFallbackLabel: string;
       previousLabel: string;
       nextLabel: string;
-      imageFallbackLabel: string;
       paginationLabel: string;
       slideLabel: string;
     };
-    testimonials?: TestimonialItem[];
+    testimonials: TestimonialItem[];
   };
 };
 
-// Avatar with automatic initials fallback
 function Avatar({
   person,
   fallbackLabel,
@@ -114,15 +108,14 @@ function Avatar({
   const [failed, setFailed] = useState(!person.image);
 
   const initials = person.name
-    .trim()
-    .split(/\s+/)
-    .map((word: string) => word.charAt(0))
+    .split(" ")
+    .map((word) => word[0])
     .slice(0, 2)
     .join("")
     .toUpperCase();
 
   return (
-    <div className="relative h-14 w-14 flex-none overflow-hidden rounded-full border border-[#a8c686]/40 bg-[#1d2921] sm:h-16 sm:w-16">
+    <div className="relative h-14 w-14 flex-none overflow-hidden rounded-full border-2 border-[#2a5c43]/30 bg-white shadow-xs sm:h-16 sm:w-16">
       {person.image && !failed ? (
         <Image
           src={person.image}
@@ -136,7 +129,7 @@ function Avatar({
         <div
           role="img"
           aria-label={`${fallbackLabel}: ${person.name}`}
-          className="grid h-full w-full place-items-center font-['Cormorant_Garamond',Georgia,serif] text-xl font-semibold text-[#a8c686]"
+          className="grid h-full w-full place-items-center font-['Cormorant_Garamond',Georgia,serif] text-xl font-bold text-[#2a5c43]"
         >
           {initials}
         </div>
@@ -197,17 +190,16 @@ export default function HomeTestimonials({
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#0a0a09] py-5 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#ece6da] "
+      className="relative overflow-hidden bg-[#f4f0e8] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-24 lg:py-28"
     >
       {/* Background atmosphere */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-32 top-0 h-[450px] w-[450px] rounded-full bg-[#27382e]/40 blur-[130px]"
+        className="pointer-events-none absolute -right-32 top-0 h-[450px] w-[450px] rounded-full bg-[#2a5c43]/[0.05] blur-[130px]"
       />
 
       <MainContainer>
         <div className="relative grid gap-12 lg:grid-cols-[0.8fr_1.5fr] lg:gap-20">
-
           {/* Left: Heading and navigation */}
           <motion.div
             variants={headingContainer}
@@ -221,17 +213,17 @@ export default function HomeTestimonials({
           >
             <div>
               {eyebrow && (
-                <motion.div variants={rise}>
-                  <Eyebrow eyebrow={eyebrow} />
+                <motion.div variants={rise} className="mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="light" />
                 </motion.div>
               )}
 
-              <motion.div variants={rise} className="mt-5">
+              <motion.div variants={rise}>
                 <SectionTitle
                   titleStart={titleStart}
                   titleAccent={titleAccent}
                   titleEnd={titleEnd}
-                  tone="dark"
+                  tone="light"
                 />
               </motion.div>
             </div>
@@ -242,12 +234,12 @@ export default function HomeTestimonials({
                 variants={rise}
                 className="flex items-center gap-5"
               >
-                <div className="flex gap-2">
+                <div className="flex gap-2.5">
                   <button
                     type="button"
                     onClick={goPrev}
                     aria-label={slider.previousLabel}
-                    className="grid h-11 w-11 place-items-center border border-white/20 text-[#ece6da] transition-all duration-300 hover:border-[#a8c686] hover:bg-[#a8c686] hover:text-[#0a0a09] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
+                    className="grid h-11 w-11 place-items-center border border-[#141714]/20 bg-white text-[#141714] shadow-xs transition-all duration-300 hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                   >
                     <ArrowLeft size={17} />
                   </button>
@@ -256,17 +248,17 @@ export default function HomeTestimonials({
                     type="button"
                     onClick={goNext}
                     aria-label={slider.nextLabel}
-                    className="grid h-11 w-11 place-items-center border border-white/20 text-[#ece6da] transition-all duration-300 hover:border-[#a8c686] hover:bg-[#a8c686] hover:text-[#0a0a09] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
+                    className="grid h-11 w-11 place-items-center border border-[#141714]/20 bg-white text-[#141714] shadow-xs transition-all duration-300 hover:border-[#e0503a] hover:bg-[#e0503a] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                   >
                     <ArrowRight size={17} />
                   </button>
                 </div>
 
                 <p
-                  className="font-mono text-xs tracking-widest text-[#8f8a80]"
+                  className="font-mono text-xs font-semibold tracking-widest text-[#727a72]"
                   aria-hidden="true"
                 >
-                  <span className="text-[#a8c686]">
+                  <span className="text-[#e0503a]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {" / "}
@@ -300,18 +292,18 @@ export default function HomeTestimonials({
                 setPaused(false);
               }
             }}
-            className="relative min-w-0"
+            className="relative min-w-0 rounded-xs border border-[#e5dfd5] bg-white p-8 shadow-[0_4px_24px_-4px_rgba(20,24,20,0.06)] sm:p-10 lg:p-12"
           >
             {/* Quote icon */}
             <Quote
               aria-hidden="true"
-              className="mb-6 h-11 w-11 fill-[#e0503a] text-[#e0503a]"
+              className="mb-6 h-10 w-10 fill-[#e0503a] text-[#e0503a]"
               strokeWidth={1}
             />
 
             {/* Animated quote */}
             <div
-              className="relative min-h-[290px] sm:min-h-[260px] lg:min-h-[310px]"
+              className="relative min-h-[220px] sm:min-h-[200px]"
               aria-live="polite"
               aria-atomic="true"
               aria-roledescription="testimonial"
@@ -328,17 +320,17 @@ export default function HomeTestimonials({
                   initial={reduce ? false : "enter"}
                   animate="center"
                   exit={reduce ? undefined : "exit"}
-                  className="m-0 flex h-full flex-col"
+                  className="m-0 flex h-full flex-col justify-between"
                 >
                   {/* Quote text */}
                   <blockquote className="m-0">
-                    <p className="max-w-[36ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(16px,3.5vw,30px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#ece6da]">
-                      {current.quote}
+                    <p className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(20px,2.8vw,32px)] font-medium leading-[1.3] tracking-[-0.015em] text-[#141714]">
+                      &ldquo;{current.quote}&rdquo;
                     </p>
                   </blockquote>
 
                   {/* Author */}
-                  <figcaption className="mt-9 flex items-center gap-4 border-t border-white/10 pt-6 sm:mt-10">
+                  <figcaption className="mt-8 flex items-center gap-4 border-t border-[#ede7dc] pt-6">
                     <Avatar
                       key={current.id || index}
                       person={current}
@@ -346,12 +338,12 @@ export default function HomeTestimonials({
                     />
 
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#ece6da] sm:text-base">
+                      <p className="text-base font-bold text-[#141714]">
                         {current.name}
                       </p>
 
                       {current.role && (
-                        <p className="mt-1 text-xs leading-relaxed text-[#92958c] sm:text-sm">
+                        <p className="mt-0.5 text-xs font-medium uppercase tracking-wider text-[#737a73]">
                           {current.role}
                         </p>
                       )}
@@ -364,7 +356,7 @@ export default function HomeTestimonials({
             {/* Pagination */}
             {total > 1 && (
               <div
-                className="flex items-center gap-2 "
+                className="mt-8 flex items-center gap-2"
                 role="group"
                 aria-label={slider.paginationLabel}
               >
@@ -379,9 +371,9 @@ export default function HomeTestimonials({
                       onClick={() => goTo(i)}
                       aria-label={`${slider.slideLabel} ${item.name}`}
                       aria-current={active ? "step" : undefined}
-                      className="group relative flex h-8 flex-1 items-center outline-none focus-visible:ring-2 focus-visible:ring-[#a8c686]"
+                      className="group relative flex h-6 flex-1 items-center outline-none focus-visible:ring-2 focus-visible:ring-[#e0503a]"
                     >
-                      <span className="relative block h-[3px] w-full overflow-hidden bg-white/15 transition-all duration-300 group-hover:h-[5px]">
+                      <span className="relative block h-[3px] w-full overflow-hidden rounded-full bg-[#ede7dc] transition-all duration-300 group-hover:h-[4px]">
                         <span
                           key={`${item.id || i}-${active ? index : "inactive"}`}
                           onAnimationEnd={() => {
@@ -389,7 +381,7 @@ export default function HomeTestimonials({
                               goNext();
                             }
                           }}
-                          className="block h-full origin-left bg-[#e0503a]"
+                          className="block h-full origin-left rounded-full bg-[#e0503a]"
                           style={{
                             transform:
                               past || (active && !autoplay)
@@ -412,7 +404,6 @@ export default function HomeTestimonials({
                 })}
               </div>
             )}
-
           </motion.div>
         </div>
       </MainContainer>

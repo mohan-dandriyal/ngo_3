@@ -13,6 +13,7 @@ export type BlogAuthor = {
 };
 
 export type BlogPost = {
+    id?: string | number;
     slug: string;
     title: string;
     excerpt: string;

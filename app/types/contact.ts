@@ -6,6 +6,8 @@ export type ContactHero = {
     titleStart: string;
     titleAccent: string;
     description?: string;
+    ideaNote?: string;
+    ideaHighlight?: string;
     image?: { src: string; alt?: string };
     imageCaption?: string;
     scrollText?: string;
@@ -34,10 +36,13 @@ export type ContactSection = {
     titleStart: string;
     titleAccent: string;
     description?: string;
+    ideaNote?: string;
+    ideaHighlight?: string;
     contactMethods?: ContactMethod[];
     form?: {
         eyebrow?: string;
         title?: string;
+        description?: string;
         fields: ContactField[];
         submitText: string;
         successMessage: string;

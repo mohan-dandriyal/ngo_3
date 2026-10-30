@@ -1,15 +1,12 @@
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-
 import {
   motion,
   useReducedMotion,
   type Variants,
 } from "framer-motion";
-
 import {
   ArrowUpRight,
   CalendarDays,
@@ -18,9 +15,7 @@ import {
 import MainContainer from "../ui/MainContainer";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
 
-import type {
-  BlogPost,
-} from "@/app/types/blog";
+import type { BlogPost } from "@/app/types/blog";
 
 type HomeBlogProps = {
   data: BlogSectionData;
@@ -37,12 +32,12 @@ type BlogSectionData = {
   readMoreText: string;
   dateLocale?: string;
   featuredLabel?: string;
-  posts?: BlogPost[];
+  recentUpdatesLabel?: string;
+  articlesLabel?: string;
+  posts?: any[];
 };
 
-const ease: [number, number, number, number] = [
-  0.2, 0.8, 0.15, 1,
-];
+const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
 const headingContainer: Variants = {
   hidden: {},
@@ -83,7 +78,6 @@ const cardVariants: Variants = {
   },
 };
 
-// Date formatter
 function formatDate(date: string, locale: string) {
   const parsedDate = new Date(`${date}T00:00:00`);
 
@@ -98,23 +92,17 @@ function formatDate(date: string, locale: string) {
   }).format(parsedDate);
 }
 
-// Shared image component
-function BlogImage({
-  post,
-}: {
-  post: BlogPost;
-}) {
+function BlogImage({ post }: { post: BlogPost }) {
   return (
-    <div className="relative aspect-[16/10] overflow-hidden bg-[#20251f]">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-xs bg-[#ede7dc]">
       <Image
         src={post.image}
-        alt={post.imageAlt ?? post.title}
+        alt={post.imageAlt || post.title}
         fill
-        sizes="(max-width: 1023px) 100vw, 50vw"
+        sizes="(max-width: 1023px) 100vw, 55vw"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-black/5 transition-colors group-hover:bg-transparent" />
     </div>
   );
 }
@@ -136,50 +124,48 @@ function FeaturedBlog({
       variants={cardVariants}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3, ease }}
-      className="group flex h-full flex-col"
+      className="group flex h-full flex-col rounded-xs border border-[#e5dfd5] bg-white p-6 shadow-[0_4px_20px_-4px_rgba(20,24,20,0.06)] transition-all duration-300 hover:border-[#e0503a]/40 hover:shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)] sm:p-7"
     >
       <Link
         href={post.linkTo}
-        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
+        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
         aria-label={`${readMoreText}: ${post.title}`}
       >
         <BlogImage post={post} />
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <span className="border border-[#a8c686]/40 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#a8c686]">
+          <span className="border border-[#2a5c43]/30 bg-[#2a5c43]/[0.06] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#2a5c43]">
             {label}
           </span>
 
-          <span className="text-[10px] uppercase tracking-[0.14em] text-[#a8c686]">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e0503a]">
             {post.category}
           </span>
         </div>
 
-        <h3 className="mt-4 max-w-[22ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(28px,3vw,30px)] font-medium leading-[1.12] tracking-[-0.02em] text-[#ece6da] transition-colors duration-300 group-hover:text-[#a8c686]">
+        <h3 className="mt-4 max-w-[24ch] font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(26px,2.8vw,32px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#141714] transition-colors duration-300 group-hover:text-[#e0503a]">
           {post.title}
         </h3>
 
         {post.excerpt && (
-          <p className="mt-4 line-clamp-3 max-w-[55ch] text-sm leading-[1.9] text-[#aaa99f]">
+          <p className="mt-3.5 line-clamp-3 max-w-[55ch] text-[14px] leading-[1.85] text-[#505750]">
             {post.excerpt}
           </p>
         )}
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-5">
-          <div className="flex items-center gap-2 text-xs text-[#8f9489]">
-            <CalendarDays size={14} />
-
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#ede7dc] pt-5">
+          <div className="flex items-center gap-2 text-xs font-medium text-[#737a73]">
+            <CalendarDays size={14} className="text-[#e0503a]" />
             <time dateTime={post.date}>
               {formatDate(post.date, locale)}
             </time>
           </div>
 
-          <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#ece6da] transition-colors group-hover:text-[#a8c686]">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#141714] transition-colors group-hover:text-[#e0503a]">
             {readMoreText}
-
             <ArrowUpRight
-              size={15}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              size={14}
+              className="text-[#e0503a] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </span>
         </div>
@@ -203,51 +189,50 @@ function RecentBlog({
       variants={cardVariants}
       whileHover={{ x: 4 }}
       transition={{ duration: 0.3, ease }}
-      className="group border-b border-white/10 py-6 first:pt-0 last:border-b-0"
+      className="group border-b border-[#ede7dc] py-6 first:pt-0 last:border-b-0"
     >
       <Link
         href={post.linkTo}
-        className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686] sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6"
+        className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a] sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6"
         aria-label={`${readMoreText}: ${post.title}`}
       >
         {/* Thumbnail */}
-        <div className="overflow-hidden rounded-sm">
+        <div className="overflow-hidden rounded-xs">
           <BlogImage post={post} />
         </div>
 
         {/* Text */}
         <div className="flex min-h-full flex-col">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#a8c686]">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#e0503a]">
               {post.category}
             </span>
 
-            <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:block" />
+            <span className="hidden h-1 w-1 rounded-full bg-[#141714]/20 sm:block" />
 
             <time
               dateTime={post.date}
-              className="text-[10px] text-[#8f9489]"
+              className="text-[11px] font-medium text-[#737a73]"
             >
               {formatDate(post.date, locale)}
             </time>
           </div>
 
-          <h3 className="mt-3 line-clamp-3 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-xl font-medium leading-[1.2] text-[#ece6da] transition-colors duration-300 group-hover:text-[#a8c686] sm:text-2xl">
+          <h3 className="mt-2 line-clamp-2 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-xl font-bold leading-[1.25] text-[#141714] transition-colors duration-300 group-hover:text-[#e0503a] sm:text-2xl">
             {post.title}
           </h3>
 
           {post.excerpt && (
-            <p className="mt-2 hidden line-clamp-2 text-sm leading-[1.8] text-[#96988e] sm:block">
+            <p className="mt-2 hidden line-clamp-2 text-xs leading-[1.75] text-[#555d55] sm:block">
               {post.excerpt}
             </p>
           )}
 
-          <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-medium text-[#c6c2b8] transition-colors group-hover:text-[#a8c686]">
+          <span className="mt-3.5 inline-flex items-center gap-1.5 text-xs font-semibold text-[#141714] transition-colors group-hover:text-[#e0503a]">
             {readMoreText}
-
             <ArrowUpRight
               size={13}
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              className="text-[#e0503a] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </span>
         </div>
@@ -269,29 +254,20 @@ export default function HomeBlog({ data }: HomeBlogProps) {
     linkTo,
     readMoreText,
     dateLocale = "en-IN",
-    featuredLabel = "Featured story",
+    featuredLabel = "Featured",
     posts = [],
   } = data;
 
-  const [featured, ...remainingPosts] = posts;
-  const recentPosts = remainingPosts.slice(0, 3);
-
-  if (!featured) return null;
+  const featured = posts[0];
+  const recents = posts.slice(1, 4);
 
   return (
     <section
       id="blog"
-      className="relative overflow-hidden bg-[#0a0a09] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#bdb7aa] sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-white py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-24 lg:py-28"
     >
-      {/* Background decoration */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-[#27382e]/30 blur-[130px]"
-      />
-
       <MainContainer>
-        <div className="relative mx-auto">
-
+        <div className="relative">
           {/* Section heading */}
           <motion.div
             variants={headingContainer}
@@ -299,93 +275,94 @@ export default function HomeBlog({ data }: HomeBlogProps) {
             whileInView="show"
             viewport={{
               once: true,
-              amount: 0.3,
+              amount: 0.25,
             }}
-            className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+            className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end lg:gap-12"
           >
-            <div>
+            <div className="max-w-[700px]">
               {eyebrow && (
-                <motion.div variants={rise}>
-                  <Eyebrow eyebrow={eyebrow} />
+                <motion.div variants={rise} className="mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="light" />
                 </motion.div>
               )}
 
-              <motion.div variants={rise} className="mt-4">
+              <motion.div variants={rise}>
                 <SectionTitle
                   titleStart={titleStart}
                   titleAccent={titleAccent}
                   titleEnd={titleEnd}
-                  tone="dark"
+                  tone="light"
                 />
               </motion.div>
+            </div>
 
+            <div className="max-w-[420px] lg:pb-3">
               {description && (
                 <motion.p
                   variants={rise}
-                  className="mt-5 max-w-[500px] text-sm leading-[1.9] text-[#aaa99f] sm:text-base"
+                  className="text-sm leading-7 text-[#525a52] sm:text-base sm:leading-8"
                 >
                   {description}
                 </motion.p>
               )}
+
+              {linkText && (
+                <motion.div variants={rise} className="mt-6">
+                  <Link
+                    href={linkTo || "/blog"}
+                    className="group inline-flex items-center gap-3 border-b-2 border-[#e0503a] pb-1.5 text-sm font-semibold text-[#141714] transition-colors hover:text-[#e0503a]"
+                  >
+                    {linkText}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </motion.div>
+              )}
             </div>
-
-            {linkText && linkTo && (
-              <motion.div variants={rise} className="lg:pb-3">
-                <Link
-                  href={linkTo}
-                  className="group inline-flex items-center gap-3 border-b border-[#e0503a]/60 pb-2 text-sm text-[#ece6da] transition-colors hover:border-[#a8c686] hover:text-[#a8c686] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a8c686]"
-                >
-                  {linkText}
-
-                  <ArrowUpRight
-                    size={15}
-                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </Link>
-              </motion.div>
-            )}
           </motion.div>
 
-          {/* Featured and recent stories */}
-          <motion.div
-            initial={reduce ? false : "hidden"}
-            whileInView="show"
-            viewport={{
-              once: true,
-              amount: 0.1,
-              margin: "0px 0px -50px 0px",
-            }}
-            variants={{
-              hidden: {},
-              show: {
-                transition: {
-                  staggerChildren: 0.16,
-                  delayChildren: 0.1,
-                },
-              },
-            }}
-            className="mt-12 grid items-stretch gap-10 lg:mt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16"
-          >
-            <FeaturedBlog
-              post={featured}
-              label={featuredLabel}
-              readMoreText={readMoreText}
-              locale={dateLocale}
-            />
-
-            {recentPosts.length > 0 && (
-              <div className="flex flex-col border-t border-white/10 lg:border-t-0">
-                {recentPosts && recentPosts.map((post: BlogPost, index:number) => (
-                  <RecentBlog
-                    key={index +1}
-                    post={post}
+          {/* Blog layout */}
+          {posts.length > 0 && (
+            <div className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+              {/* Featured story */}
+              {featured && (
+                <div>
+                  <FeaturedBlog
+                    post={featured}
+                    label={featuredLabel}
                     readMoreText={readMoreText}
                     locale={dateLocale}
                   />
-                ))}
-              </div>
-            )}
-          </motion.div>
+                </div>
+              )}
+
+              {/* Recent list */}
+              {recents.length > 0 && (
+                <div className="flex flex-col justify-between rounded-xs border border-[#e5dfd5] bg-[#faf8f5] p-6 sm:p-8">
+                  <div className="mb-6 flex items-center justify-between border-b border-[#ede7dc] pb-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#2a5c43]">
+                      {data.recentUpdatesLabel || "Recent Updates"}
+                    </span>
+                    <span className="text-xs font-semibold text-[#737a73]">
+                      {recents.length} {data.articlesLabel || "articles"}
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {recents.map((post) => (
+                      <RecentBlog
+                        key={post.slug || post.id}
+                        post={post}
+                        readMoreText={readMoreText}
+                        locale={dateLocale}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </MainContainer>
     </section>

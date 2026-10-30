@@ -1,7 +1,7 @@
-
 export type breadcrumb = {
-     breadcrumb: {
+  breadcrumb: {
     label: string;
     linkTo?: string | undefined;
-}[]
-}
+  }[];
+  className?: string;
+};

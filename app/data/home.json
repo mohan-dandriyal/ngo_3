@@ -40,7 +40,7 @@
       },
       {
         "id": "future-generation",
-       "src": "/banner/slide-3.webp",
+        "src": "/banner/slide-3.webp",
         "alt": "Children participating in a community learning activity",
         "eyebrow": "Building a better tomorrow",
         "titleLight": "Small actions",
@@ -85,7 +85,9 @@
         "description": "Building access to clean, safe water through community-led solutions that support healthier everyday lives.",
         "image": "/program/pro-1.jpg",
         "imageAlt": "Community members accessing clean drinking water from a shared water point.",
-        "href": "/our-program"
+        "href": "/our-program",
+        "theme": "sand",
+        "linkText": "Explore program"
       },
       {
         "id": "her-next-chapter",
@@ -93,7 +95,9 @@
         "description": "Supporting women with opportunities, practical skills and resources to build independent and sustainable livelihoods.",
         "image": "/cause-1.webp",
         "imageAlt": "Women participating together in a community empowerment initiative.",
-        "href": "/our-program"
+        "href": "/our-program",
+        "theme": "sand",
+        "linkText": "Explore program"
       },
       {
         "id": "open-classroom",
@@ -101,7 +105,9 @@
         "description": "Creating welcoming learning opportunities where children can discover their potential and build brighter futures.",
         "image": "/image/cause-2.jpg",
         "imageAlt": "Children participating in a community education activity.",
-        "href": "/our-program"
+        "href": "/our-program",
+        "theme": "sand",
+        "linkText": "Explore program"
       }
     ],
     "button": {
@@ -118,6 +124,10 @@
     "linkText": "See all causes",
     "linkTo": "/our-cause",
     "donateButtonText": "Donate Now",
+    "fundsUseLabel": "Where your gift goes",
+    "raisedLabel": "Raised so far",
+    "targetLabel": "Target",
+    "fundedLabel": "funded",
     "causes": [
       {
         "id": "school-for-every-child",
@@ -129,7 +139,12 @@
         "fundsUse": "Your donation helps provide school supplies, learning materials, uniforms and nutritious meals.",
         "linkText": "Explore cause",
         "linkTo": "/our-cause/school-for-every-child",
-        "donateTo": "#"
+        "donateTo": "#",
+        "fundraising": {
+          "raised": 85000,
+          "goal": 120000,
+          "currency": "INR"
+        }
       },
       {
         "id": "clean-water-for-villages",
@@ -141,7 +156,12 @@
         "fundsUse": "Your donation supports water infrastructure, filtration systems and community-led maintenance.",
         "linkText": "Explore cause",
         "linkTo": "/our-cause/clean-water-for-villages",
-        "donateTo": "#"
+        "donateTo": "#",
+        "fundraising": {
+          "raised": 145000,
+          "goal": 200000,
+          "currency": "INR"
+        }
       },
       {
         "id": "health-camps-on-wheels",
@@ -153,7 +173,12 @@
         "fundsUse": "Your donation helps support medical supplies, essential medicines and mobile healthcare visits.",
         "linkText": "Explore cause",
         "linkTo": "/our-cause/health-camps-on-wheels",
-        "donateTo": "#"
+        "donateTo": "#",
+        "fundraising": {
+          "raised": 62000,
+          "goal": 90000,
+          "currency": "INR"
+        }
       }
     ]
   },

@@ -78,8 +78,8 @@ async function CauseDetailContent({ params }: PageProps) {
       labels={data.featured}
       grid={{
         eyebrow: data.grid.eyebrow,
-        titleStart: "Other ways to",
-        titleAccent: "make a difference.",
+        titleStart: (data.grid as any).relatedTitleStart || "Other ways to",
+        titleAccent: (data.grid as any).relatedTitleAccent || "make a difference.",
         raisedLabel: data.grid.raisedLabel,
       }}
       cta={data.cta}

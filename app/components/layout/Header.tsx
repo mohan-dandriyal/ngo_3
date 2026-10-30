@@ -1,16 +1,22 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   AnimatePresence,
   motion,
   useReducedMotion,
 } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+
+import {
+  ArrowUpRight,
+  Menu,
+  X,
+} from "lucide-react";
 
 import content from "@/app/data/header_footer.json";
 import { headerContent } from "@/app/types/header";
@@ -28,16 +34,32 @@ export default function Header() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
 
-  const [menuState, setMenuState] = useState({ pathname, open: false });
-  const open = menuState.pathname === pathname && menuState.open;
-  const setOpen = (nextOpen: boolean) => {
-    setMenuState({ pathname, open: nextOpen });
-  };
+  const [menuState, setMenuState] = useState({
+    pathname,
+    open: false,
+  });
+
+  const open =
+    menuState.pathname === pathname && menuState.open;
+
+  const setOpen = useCallback(
+    (nextOpen: boolean) => {
+      setMenuState({
+        pathname,
+        open: nextOpen,
+      });
+    },
+    [pathname]
+  );
+
   const [scrolled, setScrolled] = useState(false);
   const [logoFailed, setLogoFailed] = useState(!logo?.src);
   const [activeHash, setActiveHash] = useState("");
 
-  // Sticky header scroll state
+  // --------------------------------
+  // Sticky Header Scroll Detection
+  // --------------------------------
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 12);
@@ -54,7 +76,10 @@ export default function Header() {
     };
   }, []);
 
-  // Track section anchor
+  // --------------------------------
+  // Track Active Hash
+  // --------------------------------
+
   useEffect(() => {
     const updateHash = () => {
       setActiveHash(window.location.hash);
@@ -69,7 +94,21 @@ export default function Header() {
     };
   }, [pathname]);
 
-  // Close menu on Escape and prevent background scrolling
+  // --------------------------------
+  // Close Menu on Route Change
+  // --------------------------------
+
+  useEffect(() => {
+    setMenuState({
+      pathname,
+      open: false,
+    });
+  }, [pathname]);
+
+  // --------------------------------
+  // Escape Key & Body Scroll Lock
+  // --------------------------------
+
   useEffect(() => {
     if (!open) return;
 
@@ -79,386 +118,523 @@ export default function Header() {
       }
     };
 
+    const previousOverflow = document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
+
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [open, setOpen]);
 
-  // Active route detection
+  // --------------------------------
+  // Active Navigation Detection
+  // --------------------------------
+
   const isActive = (href?: string) => {
     if (!href || href === "#") return false;
 
-    // Section navigation
     if (href.startsWith("#")) {
       return activeHash === href;
     }
 
-    // Separate page + section navigation
-    const url = new URL(href, "https://example.com");
-    const targetPath = url.pathname;
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#");
 
-    if (targetPath !== pathname) return false;
-
-    if (url.hash) {
-      return activeHash === url.hash;
+      return (
+        pathname === path &&
+        activeHash === `#${hash}`
+      );
     }
 
-    // Exact and nested routes
-    if (targetPath === "/") {
-      return pathname === "/";
+    if (href === "/") {
+      return pathname === "/" && !activeHash;
     }
 
-    return (
-      pathname === targetPath ||
-      pathname.startsWith(`${targetPath}/`)
-    );
+    return pathname === href ||
+      pathname.startsWith(`${href}/`);
   };
 
-  const closeMenu = () => {
-    setOpen(false);
-  };
+  const closeMenu = () => setOpen(false);
+
+  // --------------------------------
+  // Animation Settings
+  // --------------------------------
 
   const menuTransition = reduceMotion
     ? { duration: 0 }
     : {
-      duration: 0.3,
-      ease: [0.22, 1, 0.36, 1] as const,
-    };
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1] as const,
+      };
 
   return (
-    <header
-      className={`
-        sticky top-0 z-50 w-full
-        border-b
-        font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-        text-[#bdb7aa]
-        transition-all duration-300
-        ${scrolled
-          ? "border-[#e8c99a]/25 bg-[#0a0a09]/95 shadow-[0_12px_32px_-16px_rgba(0,0,0,0.8)] backdrop-blur-xl"
-          : "border-[#e8c99a]/15 bg-[#0a0a09] bg-[radial-gradient(60%_220%_at_88%_0%,#27382e_0%,transparent_70%)]"
-        }
-      `}
-    >
-      {/* Bottom Gold Line */}
+    <>
+      {/* ==================================
+          FIXED HEADER
+      ================================== */}
 
-      <span
-        aria-hidden="true"
+      <motion.header
+        role="banner"
+        initial={false}
+        animate={{
+          backgroundColor: scrolled
+            ? "rgba(255,255,255,0.97)"
+            : "rgba(250,248,245,0.90)",
+
+          boxShadow: scrolled
+            ? "0 8px 30px -12px rgba(20,24,20,0.14)"
+            : "0 0px 0px rgba(20,24,20,0)",
+
+          borderColor: scrolled
+            ? "rgba(229,223,213,1)"
+            : "rgba(237,231,220,1)",
+        }}
+        transition={{
+          duration: reduceMotion ? 0 : 0.3,
+          ease: "easeInOut",
+        }}
         className="
-          pointer-events-none absolute
-          inset-x-0 -bottom-px h-px
-          bg-gradient-to-r
-          from-transparent via-[#e8c99a]/60
-          to-transparent
+          fixed left-0 top-0 z-[100]
+          w-full border-b
+          backdrop-blur-xl
         "
-      />
-
-      {/* Header Container */}
-
-      <div
-        className={`
-          relative mx-auto grid max-w-[1440px]
-          grid-cols-[1fr_auto] items-center
-          gap-3 px-4 sm:px-8
-          lg:px-12 xl:px-[72px]
-          transition-[height] duration-300
-          min-[1024px]:grid-cols-[auto_1fr_auto]
-          ${scrolled
-            ? "h-[68px] min-[1024px]:h-[90px]"
-            : "h-[68px] min-[1024px]:h-[90px]"
-          }
-        `}
       >
-        {/* Logo */}
+        {/* Bottom Accent Line */}
 
-        <Link
-          href="/"
-          aria-label="WKX Foundation home"
-          onClick={closeMenu}
+        <span
+          aria-hidden="true"
           className="
-            flex min-w-0 items-center
-            justify-self-start rounded-sm
-            outline-none
-            focus-visible:ring-2
-            focus-visible:ring-[#e8c99a]
+            pointer-events-none absolute
+            inset-x-0 -bottom-px h-px
+            bg-gradient-to-r
+            from-transparent
+            via-[#e0503a]/40
+            to-transparent
+          "
+        />
+
+        {/* Header Container */}
+
+        <div
+          className="
+            relative mx-auto grid
+            max-w-[1440px]
+            grid-cols-[1fr_auto]
+            items-center gap-3
+            px-4 sm:px-8
+            lg:px-12 xl:px-[72px]
+            h-[72px]
+            min-[1024px]:h-[86px]
+            min-[1024px]:grid-cols-[auto_1fr_auto]
           "
         >
-          {!logoFailed && logo?.src &&
-            <Image
-              src={logo.src}
-              alt={logo.alt ?? "WKX Foundation"}
-              width={250}
-              height={70}
-              priority
-              onError={() => setLogoFailed(true)}
-              className={`
-                block h-auto w-auto
-                max-w-[185px] object-contain
-                transition-all duration-300
-                sm:max-w-[225px]
-                ${scrolled
-                  ? "max-h-30"
-                  : "max-h-50"
-                }
-              `}
-            />
-          }
-        </Link>
+          {/* Logo */}
 
-        {/* Desktop Navigation */}
+          <Link
+            href="/"
+            aria-label="WKX Foundation home"
+            onClick={closeMenu}
+            className="
+              flex min-w-0 items-center
+              justify-self-start rounded-sm
+              outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#e0503a]
+            "
+          >
+            {!logoFailed && logo?.src ? (
+              <Image
+                src={logo.src}
+                alt={logo.alt ?? "WKX Foundation"}
+                width={230}
+                height={64}
+                priority
+                onError={() => setLogoFailed(true)}
+                className="
+                  block h-auto w-auto
+                  max-w-[170px]
+                  sm:max-w-[210px]
+                  max-h-[90px]
+                  object-contain
+                  transition-all duration-300
+                "
+              />
+            ) : (
+              <span
+                className="
+                  font-['Cormorant_Garamond',Georgia,serif]
+                  text-2xl font-bold
+                  tracking-tight text-[#141714]
+                "
+              >
+                WKX{" "}
+                <span className="text-[#e0503a]">
+                  Foundation
+                </span>
+              </span>
+            )}
+          </Link>
 
-        <nav
-          aria-label="Main navigation"
-          className="
-            hidden items-center justify-center
-            gap-5
-            min-[1024px]:flex
-            xl:gap-8
-          "
-        >
-          {navItems
-            .filter((item) => item.label && item.linkTo)
-            .map((item) => {
-              const active = isActive(item.linkTo);
+          {/* ==================================
+              DESKTOP NAVIGATION
+          ================================== */}
 
-              return (
-                <Link
-                  key={item.label}
-                  href={item.linkTo}
-                  aria-current={active ? "page" : undefined}
-                  className={`
-                    relative whitespace-nowrap
-                    py-3 text-[14px]
-                    font-medium tracking-wide
-                    outline-none transition-colors
-                    hover:text-[#f1ece1]
-                    focus-visible:text-[#f1ece1]
-                    after:absolute after:bottom-1
-                    after:left-0 after:h-[2px]
-                    after:w-full after:origin-left
-                    after:bg-[#e8c99a]
-                    after:transition-transform
-                    after:duration-300
-                    ${active
-                      ? "text-[#f1ece1] after:scale-x-100"
-                      : "after:scale-x-0 hover:after:scale-x-100"
+          <nav
+            aria-label="Main navigation"
+            className="
+              hidden items-center justify-center
+              gap-6
+              min-[1024px]:flex
+              xl:gap-9
+            "
+          >
+            {navItems
+              .filter(
+                (item) => item.label && item.linkTo
+              )
+              .map((item) => {
+                const active = isActive(item.linkTo);
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.linkTo}
+                    aria-current={
+                      active ? "page" : undefined
                     }
-                  `}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-        </nav>
+                    className={`
+                      relative whitespace-nowrap
+                      py-2.5 text-[14px]
+                      font-medium capitalize
+                      tracking-wide outline-none
+                      transition-colors duration-200
+                      hover:text-[#e0503a]
+                      focus-visible:text-[#e0503a]
 
-        {/* Header Actions */}
+                      after:absolute after:bottom-0
+                      after:left-0 after:h-[2px]
+                      after:w-full
+                      after:origin-left
+                      after:bg-[#e0503a]
+                      after:transition-transform
+                      after:duration-300
 
-        <div className="
-          flex items-center justify-self-end
-          gap-2 sm:gap-3
-        ">
-          {/* Primary CTA */}
+                      ${
+                        active
+                          ? "font-semibold text-[#e0503a] after:scale-x-100"
+                          : "text-[#343a34] after:scale-x-0 hover:after:scale-x-100"
+                      }
+                    `}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+          </nav>
 
-          {btnText && (
-            <Link
-              href={linkToBtn || "#"}
-              onClick={closeMenu}
+          {/* ==================================
+              HEADER ACTIONS
+          ================================== */}
+
+          <div
+            className="
+              flex items-center
+              justify-self-end gap-2 sm:gap-3
+            "
+          >
+            {/* CTA Button */}
+
+            {btnText && (
+              <Link
+                href={linkToBtn || "/#causes"}
+                onClick={closeMenu}
+                className="
+                  group relative inline-flex
+                  shrink-0 items-center
+                  justify-center gap-2
+                  overflow-hidden
+                  bg-[#e0503a]
+                  px-4 py-2.5
+                  sm:px-6 sm:py-3
+                  text-xs sm:text-sm
+                  font-semibold tracking-wider
+                  uppercase text-white
+                  outline-none
+                  transition-all duration-300
+                  hover:bg-[#cb3d28]
+                  hover:shadow-[0_8px_24px_-6px_rgba(224,80,58,0.45)]
+                  focus-visible:ring-2
+                  focus-visible:ring-[#e0503a]
+                  focus-visible:ring-offset-2
+                "
+              >
+                <span
+                  aria-hidden="true"
+                  className="
+                    absolute inset-0
+                    -translate-x-full
+                    bg-[#f06450]
+                    transition-transform duration-500
+                    ease-out
+                    group-hover:translate-x-0
+                    motion-reduce:transition-none
+                  "
+                />
+
+                <span className="relative whitespace-nowrap">
+                  {btnText}
+                </span>
+
+                <ArrowUpRight
+                  size={15}
+                  className="
+                    relative shrink-0
+                    transition-transform duration-300
+                    group-hover:translate-x-0.5
+                    group-hover:-translate-y-0.5
+                  "
+                />
+              </Link>
+            )}
+
+            {/* Mobile Menu Button */}
+
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls="wkx-mobile-nav"
+              aria-label={
+                open ? "Close menu" : "Open menu"
+              }
+              onClick={() => setOpen(!open)}
               className="
-                group relative inline-flex
-                shrink-0 items-center justify-center
-                gap-2 overflow-hidden
-                bg-[#e8c99a]
-                px-3 py-3
-                text-[12px] font-semibold
-                tracking-wide text-[#14110c]
-                outline-none
-                transition-shadow duration-300
-                hover:shadow-[0_8px_28px_-6px_rgba(232,201,154,0.55)]
+                relative grid h-10 w-10
+                shrink-0 place-items-center
+                border border-[#141714]/15
+                bg-white text-[#141714]
+                transition-colors
+                hover:border-[#e0503a]
+                hover:text-[#e0503a]
+                focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#f1d9b3]
-                focus-visible:ring-offset-2
-                focus-visible:ring-offset-[#0a0a09]
-                sm:px-5 sm:text-sm
+                focus-visible:ring-[#e0503a]
+                min-[1024px]:hidden
               "
             >
-              <span
+              <AnimatePresence
+                mode="wait"
+                initial={false}
+              >
+                {open ? (
+                  <motion.span
+                    key="close"
+                    initial={{
+                      opacity: 0,
+                      rotate: -90,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      rotate: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      rotate: 90,
+                    }}
+                    transition={menuTransition}
+                  >
+                    <X size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{
+                      opacity: 0,
+                      rotate: 90,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      rotate: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      rotate: -90,
+                    }}
+                    transition={menuTransition}
+                  >
+                    <Menu size={20} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+
+        {/* ==================================
+            MOBILE NAVIGATION
+        ================================== */}
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <>
+              {/* Mobile Overlay */}
+
+              <motion.div
+                key="mobile-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={menuTransition}
+                onClick={closeMenu}
                 aria-hidden="true"
                 className="
-                  absolute inset-0
-                  -translate-x-full
-                  bg-[#f6e3c3]
-                  transition-transform duration-500
-                  ease-out
-                  group-hover:translate-x-0
-                  motion-reduce:transition-none
+                  fixed inset-0 top-[72px]
+                  z-[-1] bg-black/30
+                  min-[1024px]:hidden
                 "
               />
 
-              <span className="relative whitespace-nowrap">
-                {btnText}
-              </span>
+              {/* Mobile Menu */}
 
-              <ArrowUpRight
-                size={16}
+              <motion.div
+                id="wkx-mobile-nav"
+                key="mobile-navigation"
+                initial={{
+                  opacity: 0,
+                  height: 0,
+                  y: -8,
+                }}
+                animate={{
+                  opacity: 1,
+                  height: "auto",
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  height: 0,
+                  y: -8,
+                }}
+                transition={menuTransition}
                 className="
-                  relative shrink-0
-                  transition-transform duration-300
-                  group-hover:translate-x-0.5
-                  group-hover:-translate-y-0.5
+                  absolute left-0 right-0 top-full
+                  z-40 overflow-hidden
+                  border-b border-[#e5dfd5]
+                  bg-white shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)]
+                  backdrop-blur-xl
+                  min-[1024px]:hidden
                 "
-              />
-            </Link>
-          )}
-
-          {/* Mobile Menu Toggle */}
-
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-controls="wkx-mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen(!open)}
-            className="
-              relative grid h-10 w-10
-              shrink-0 place-items-center
-              border border-[#e8c99a]/30
-              text-[#f1ece1]
-              transition-colors
-              hover:border-[#e8c99a]
-              hover:bg-[#e8c99a]/10
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#e8c99a]
-              min-[1024px]:hidden
-            "
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {open ? (
-                <motion.span
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={menuTransition}
+              >
+                <nav
+                  aria-label="Mobile navigation"
+                  className="
+                    mx-auto flex max-w-[1440px]
+                    flex-col px-5 pb-6 pt-3
+                    sm:px-8
+                  "
                 >
-                  <X size={22} />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={menuTransition}
-                >
-                  <Menu size={22} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
-        </div>
-      </div>
+                  {navItems
+                    .filter(
+                      (item) =>
+                        item.label && item.linkTo
+                    )
+                    .map((item, index) => {
+                      const active = isActive(
+                        item.linkTo
+                      );
 
-      {/* Mobile Navigation */}
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id="wkx-mobile-nav"
-            key="mobile-navigation"
-            initial={{
-              opacity: 0,
-              height: 0,
-              y: -8,
-            }}
-            animate={{
-              opacity: 1,
-              height: "auto",
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-              y: -8,
-            }}
-            transition={menuTransition}
-            className="
-              absolute left-0 right-0 top-full
-              z-40 overflow-hidden
-              border-b border-[#e8c99a]/20
-              bg-[#0a0a09]/[98%]
-              shadow-[0_18px_35px_-15px_rgba(0,0,0,0.8)]
-              backdrop-blur-xl
-              min-[1024px]:hidden
-            "
-          >
-            <nav
-              aria-label="Mobile navigation"
-              className="
-                mx-auto flex max-w-[1440px]
-                flex-col px-5 pb-5 pt-2
-                sm:px-8
-              "
-            >
-              {navItems
-                .filter((item) => item.label && item.linkTo)
-                .map((item, index) => {
-                  const active = isActive(item.linkTo);
-
-                  return (
-                    <motion.div
-                      key={item.label}
-                      initial={
-                        reduceMotion
-                          ? false
-                          : { opacity: 0, x: -12 }
-                      }
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: reduceMotion ? 0 : 0.25,
-                        delay: reduceMotion ? 0 : index * 0.04,
-                      }}
-                    >
-                      <Link
-                        href={item.linkTo}
-                        onClick={closeMenu}
-                        aria-current={active ? "page" : undefined}
-                        className={`
-                          flex items-center
-                          justify-between
-                          border-b border-[#e8c99a]/10
-                          py-4 text-base
-                          font-medium
-                          transition-colors
-                          hover:text-[#e8c99a]
-                          ${active
-                            ? "text-[#e8c99a]"
-                            : "text-[#d5d0c6]"
+                      return (
+                        <motion.div
+                          key={item.label}
+                          initial={
+                            reduceMotion
+                              ? false
+                              : {
+                                  opacity: 0,
+                                  x: -10,
+                                }
                           }
-                        `}
-                      >
-                        {item.label}
+                          animate={{
+                            opacity: 1,
+                            x: 0,
+                          }}
+                          transition={{
+                            duration: reduceMotion
+                              ? 0
+                              : 0.2,
+                            delay: reduceMotion
+                              ? 0
+                              : index * 0.03,
+                          }}
+                        >
+                          <Link
+                            href={item.linkTo}
+                            onClick={closeMenu}
+                            aria-current={
+                              active ? "page" : undefined
+                            }
+                            className={`
+                              flex items-center
+                              justify-between
+                              border-b border-[#141714]/[0.07]
+                              py-3.5 text-base
+                              font-medium capitalize
+                              transition-colors
+                              hover:text-[#e0503a]
 
-                        {active && (
-                          <span
-                            className="
-                              h-1.5 w-1.5
-                              rounded-full
-                              bg-[#e8c99a]
-                            "
-                          />
-                        )}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+                              ${
+                                active
+                                  ? "font-semibold text-[#e0503a]"
+                                  : "text-[#222823]"
+                              }
+                            `}
+                          >
+                            {item.label}
+
+                            {active && (
+                              <span
+                                className="
+                                  h-1.5 w-1.5
+                                  rounded-full
+                                  bg-[#e0503a]
+                                "
+                              />
+                            )}
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+
+                  {/* Mobile CTA */}
+
+                  {btnText && (
+                    <Link
+                      href={linkToBtn || "/#causes"}
+                      onClick={closeMenu}
+                      className="
+                        mt-5 flex w-full
+                        items-center justify-center
+                        gap-2 bg-[#e0503a]
+                        px-6 py-3.5
+                        text-sm font-semibold
+                        uppercase tracking-wider
+                        text-white transition-colors
+                        hover:bg-[#cb3d28]
+                      "
+                    >
+                      {btnText}
+                      <ArrowUpRight size={17} />
+                    </Link>
+                  )}
+                </nav>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </>
   );
 }

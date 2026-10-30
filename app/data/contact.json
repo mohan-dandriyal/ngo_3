@@ -26,6 +26,8 @@
     "titleStart": "Let's make something",
     "titleAccent": "meaningful happen.",
     "description": "Whether you want to volunteer, partner with us, or learn more about our work, there's a place for you.",
+    "ideaNote": "Have an idea for change?",
+    "ideaHighlight": "We'd love to hear it.",
     "contactMethods": [
       {
         "id": "email",
@@ -85,7 +87,9 @@
           "required": true
         }
       ],
+      "description": "Tell us a little about what brings you here.",
       "submitText": "Send your message",
+      "resetText": "Send another message",
       "successMessage": "Thank you for reaching out. We'll be in touch soon."
     }
   }

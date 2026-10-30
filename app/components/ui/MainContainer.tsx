@@ -1,16 +1,16 @@
-
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 
 interface mainContainerProps {
-    children: ReactNode
+  children: ReactNode;
+  className?: string;
 }
 
-function MainContainer({ children }: mainContainerProps) {
-    return (
-        <div className='max-w-360 mx-auto px-5 sm:px-8 lg:px-[50px]'>
-            {children}
-        </div>
-    )
+function MainContainer({ children, className = '' }: mainContainerProps) {
+  return (
+    <div className={`mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 ${className}`}>
+      {children}
+    </div>
+  );
 }
 
-export default MainContainer
+export default MainContainer;

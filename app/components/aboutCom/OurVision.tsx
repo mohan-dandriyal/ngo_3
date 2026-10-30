@@ -15,10 +15,6 @@ interface OurVisionProps {
 
 const ease: [number, number, number, number] = [0.2, 0.8, 0.15, 1];
 
-/*
-  Variant names are "hidden" and "show" so Eyebrow, SectionTitle and Description
-  (from SectionContent) join the same stagger.
-*/
 const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
@@ -40,7 +36,6 @@ const picture: Variants = {
   show: { scale: 1, transition: { duration: 2, ease } },
 };
 
-
 export default function OurVision({ data }: OurVisionProps) {
   const {
     eyebrow,
@@ -61,7 +56,7 @@ export default function OurVision({ data }: OurVisionProps) {
   return (
     <section
       id="our-vision"
-      className="w-full overflow-hidden bg-[#0a0a09] pb-18 lg:pb-20 sm:pt-0 pt-14 text-[#ece6da] 
+      className="w-full overflow-hidden bg-white py-20 lg:py-28 text-[#141714] 
                  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
@@ -74,13 +69,13 @@ export default function OurVision({ data }: OurVisionProps) {
             viewport={{ once: true, amount: 0.15 }}
             className="lg:col-span-6"
           >
-            {eyebrow && <Eyebrow eyebrow={eyebrow} />}
+            {eyebrow && <Eyebrow eyebrow={eyebrow} tone="light" />}
 
-            <SectionTitle titleStart={titleStart} titleAccent={titleAccent} />
+            <SectionTitle titleStart={titleStart} titleAccent={titleAccent} tone="light" />
 
             {description && (
               <div className="mt-7">
-                <Description description={description} variant="body" />
+                <Description description={description} variant="body" tone="light" />
               </div>
             )}
 
@@ -88,20 +83,19 @@ export default function OurVision({ data }: OurVisionProps) {
               <motion.div variants={fadeUp} className="mt-7">
                 <Link
                   href={linkTo || "#"}
-                  className="group relative inline-flex items-center gap-3 pb-2 text-sm text-[#ece6da]
-                             transition-colors hover:text-white
+                  className="group relative inline-flex items-center gap-3 pb-2 text-sm font-semibold text-[#141714]
+                             transition-colors hover:text-[#e0503a]
                              focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e0503a]"
                 >
                   {linkText}
                   <ArrowUpRight
                     size={17}
                     aria-hidden="true"
-                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    className="text-[#e0503a] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
-                  {/* Underline thickens on hover */}
                   <span
                     aria-hidden="true"
-                    className="absolute bottom-0 left-0 h-px w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
+                    className="absolute bottom-0 left-0 h-0.5 w-full bg-[#e0503a] transition-[height] duration-300 group-hover:h-[3px]"
                   />
                 </Link>
               </motion.div>
@@ -120,23 +114,23 @@ export default function OurVision({ data }: OurVisionProps) {
                     <motion.span
                       variants={line}
                       aria-hidden="true"
-                      className="absolute left-0 top-0 h-px w-full origin-left bg-[#ece6da]/20"
+                      className="absolute left-0 top-0 h-px w-full origin-left bg-[#141714]/15"
                     />
 
                     {item.number && (
-                      <span className="pt-1 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-lg italic text-[#e0503a]">
+                      <span className="pt-1 font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-lg font-bold italic text-[#e0503a]">
                         {item.number}
                       </span>
                     )}
 
                     <div className={item.number ? "" : "col-span-2"}>
                       <h3
-                        className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-xl transition-all duration-300
+                        className="font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-xl font-bold leading-tight text-[#141714] transition-all duration-300
                                    group-hover:translate-x-1.5 group-hover:text-[#e0503a] sm:text-2xl"
                       >
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-6 text-[#bdb7aa]">{item.description}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#505750]">{item.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -154,7 +148,7 @@ export default function OurVision({ data }: OurVisionProps) {
           >
             <motion.div
               variants={frame}
-              className="group relative min-h-[380px] overflow-hidden bg-[#202820] ring-1 ring-[#e8c99a]/15
+              className="group relative min-h-[380px] overflow-hidden rounded-xs border border-[#e5dfd5] bg-[#ede7dc] shadow-[0_12px_30px_-10px_rgba(20,24,20,0.08)]
                          sm:min-h-[520px] lg:min-h-[650px]"
             >
               {!imgFailed && image?.src ? (
@@ -165,12 +159,12 @@ export default function OurVision({ data }: OurVisionProps) {
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     onError={() => setImgFailed(true)}
-                    className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]
+                    className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]
                                motion-reduce:transition-none"
                   />
                 </motion.div>
               ) : (
-                <div className="absolute inset-0 bg-[linear-gradient(160deg,#27382e,#0a0a09)]" aria-hidden="true" />
+                <div className="absolute inset-0 bg-[linear-gradient(160deg,#2a5c43,#141714)]" aria-hidden="true" />
               )}
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" aria-hidden="true" />
@@ -178,10 +172,10 @@ export default function OurVision({ data }: OurVisionProps) {
               {(tag || imageCaption) && (
                 <motion.div className="absolute bottom-0 left-0 right-0 p-6 sm:p-9">
                   {tag && (
-                    <p className="text-xs uppercase tracking-[0.22em] text-[#ece6da]/80">{tag}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e8c99a]">{tag}</p>
                   )}
                   {imageCaption && (
-                    <p className="mt-3 max-w-md font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-3xl leading-tight text-[#ece6da] sm:text-4xl">
+                    <p className="mt-2.5 max-w-md font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-3xl font-medium leading-tight text-white sm:text-4xl">
                       {imageCaption}
                     </p>
                   )}

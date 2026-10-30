@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef } from "react";
@@ -10,13 +9,9 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { ArrowDown, ArrowDownRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
-import type {
-  ProgramItem,
-  ProgramsHeroData,
-} from "@/app/types/program";
-
+import type { ProgramsHeroData, ProgramItem } from "@/app/types/program";
 import MainContainer from "../ui/MainContainer";
 import {
   Description,
@@ -37,44 +32,33 @@ const container: Variants = {
   show: {
     transition: {
       staggerChildren: 0.12,
-      delayChildren: 0.15,
+      delayChildren: 0.1,
     },
   },
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: { opacity: 0, y: 22 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.85, ease },
-  },
-};
-
-const line: Variants = {
-  hidden: { scaleX: 0 },
-  show: {
-    scaleX: 1,
-    transition: { duration: 1, ease },
+    transition: { duration: 0.75, ease },
   },
 };
 
 export default function ProgramsHero({
   data,
-  programs = [],
 }: ProgramsHeroProps) {
-  const reduce = useReducedMotion();
-
   const {
-    eyebrow,
     breadcrumb,
+    eyebrow,
     titleStart,
     titleAccent,
     description,
-    indexLabel,
     image,
   } = data;
 
+  const reduce = useReducedMotion();
   const bannerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -85,22 +69,21 @@ export default function ProgramsHero({
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    reduce ? [0, 0] : [-45, 45]
+    reduce ? [0, 0] : [-30, 30]
   );
 
   return (
     <section
       ref={bannerRef}
       id="programs-hero"
-      className="relative w-full overflow-hidden bg-[#0a0a09] text-[#ece6da]"
+      className="relative w-full overflow-hidden text-[#ece6da]"
     >
       {/* Full image banner */}
-      <div className="relative min-h-[680px] overflow-hidden lg:min-h-[760px]">
-
+      <div className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px]">
         {/* Background image */}
         {image?.src && (
           <motion.div
-            className="absolute inset-0"
+            className="absolute inset-0 -z-20"
             style={{ y: imageY }}
           >
             <Image
@@ -115,74 +98,65 @@ export default function ProgramsHero({
         )}
 
         {/* Image overlays */}
-        <div className="absolute inset-0 bg-black/35" />
-
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080b09]/85 via-[#080b09]/70 to-[#080b09]/15" />
-
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a09] via-transparent to-black/20" /> */}
+        <div className="absolute inset-0 -z-10 bg-black/50" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/25" />
 
         {/* Decorative glow */}
         <div
           aria-hidden="true"
-          className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#a8c686]/10 blur-[120px]"
+          className="absolute -left-32 top-1/4 -z-10 h-96 w-96 rounded-full bg-[#a8c686]/10 blur-[120px]"
         />
 
         {/* Banner content */}
         <MainContainer>
-          <div className="relative z-10 flex min-h-[680px] flex-col justify-between py-10 lg:min-h-[760px] lg:py-14">
+          <div className="relative z-10 flex w-full flex-col items-start justify-center py-10 text-left sm:py-12 lg:py-14">
+            {breadcrumb && (
+              <motion.div
+                variants={fadeUp}
+                initial={reduce ? false : "hidden"}
+                animate="show"
+                className="w-full text-left"
+              >
+                <BreadCrumb breadcrumb={breadcrumb} className="mb-3 sm:mb-4 text-left" />
+              </motion.div>
+            )}
 
             <motion.div
               variants={container}
               initial={reduce ? false : "hidden"}
               animate="show"
-              className="max-w-4xl pt-8 lg:pt-14"
+              className="max-w-[850px] text-left"
             >
-              <motion.div variants={fadeUp}>
-                <BreadCrumb breadcrumb={breadcrumb} />
-              </motion.div>
-
               {eyebrow && (
-                <motion.div variants={fadeUp} className="mt-10">
-                  <Eyebrow eyebrow={eyebrow} />
+                <motion.div variants={fadeUp} className="mb-3 sm:mb-4">
+                  <Eyebrow eyebrow={eyebrow} tone="dark" />
                 </motion.div>
               )}
 
-              <motion.div variants={fadeUp} className="mt-8">
+              <motion.div variants={fadeUp}>
                 <HeroTitle
                   titleStart={titleStart}
                   titleAccent={titleAccent}
+                  tone="dark"
                 />
               </motion.div>
 
               {description && (
                 <motion.div
                   variants={fadeUp}
-                  className="mt-7 max-w-2xl"
+                  className="mt-4 max-w-2xl text-left"
                 >
                   <Description
                     description={description}
                     variant="body"
+                    tone="dark"
                   />
                 </motion.div>
               )}
-
-              <motion.a
-                variants={fadeUp}
-                href="#programs"
-                className="group mt-10 inline-flex items-center gap-4 border border-[#e8c99a]/50 px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#ece6da] transition-all duration-300 hover:border-[#e8c99a] hover:bg-[#e8c99a] hover:text-[#0a0a09]"
-              >
-                <span>Explore our programs</span>
-                <ArrowDown
-                  size={17}
-                  className="transition-transform duration-300 group-hover:translate-y-1"
-                />
-              </motion.a>
             </motion.div>
-
           </div>
         </MainContainer>
       </div>
-
     </section>
   );
 }
