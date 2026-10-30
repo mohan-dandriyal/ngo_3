@@ -364,7 +364,7 @@ export default function HomeTestimonials({
             {/* Pagination */}
             {total > 1 && (
               <div
-                className="mt-7 flex items-center gap-2 sm:mt-9"
+                className="flex items-center gap-2 "
                 role="group"
                 aria-label={slider.paginationLabel}
               >
