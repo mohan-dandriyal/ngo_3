@@ -34,23 +34,23 @@
         "icon": "mail",
         "title": "Email us",
         "description": "For questions, ideas, and collaboration.",
-        "value": "hello@.changestarts.org",
-        "link": "mailto:hello@.Changestarts.org"
+        "value": "info@xyz.com",
+        "link": "mailto:info@xyz.com"
       },
       {
         "id": "partner",
         "icon": "handshake",
         "title": "Contact Number",
         "description": "Let's work together to create lasting change.",
-        "value": "++1 213 555 1234",
-        "link": "tel:+1 213 555 1234"
+        "value": "+1 000000000",
+        "link": "tel:+1 000000000"
       },
       {
         "id": "address",
         "icon": "Address",
         "title": "Address",
         "description": "Bring your time, skills, and passion to our mission.",
-        "value": "2309 Mayflower Dr, Lynchburg, VA 24501, United States",
+        "value": "3170 Rosewood Lane Unit 200 , Beverly Hills, CA 90210",
         "link": "#"
       }
     ],
