@@ -175,7 +175,7 @@ export default function ContactSection({
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden bg-[#faf8f5] py-16 text-[#141714] sm:py-20 lg:py-24"
+      className="relative isolate overflow-hidden bg-[#faf8f5] py-14 text-[#141714] sm:py-16"
     >
       {/* Background decoration */}
       <div

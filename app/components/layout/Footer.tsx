@@ -211,7 +211,7 @@ export default function Footer() {
               initial={reduce ? false : "hidden"}
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className="relative isolate overflow-hidden border-b border-[#ede7dc] py-14 sm:py-18 lg:py-20"
+              className="relative isolate overflow-hidden border-b border-[#ede7dc] py-14 sm:py-16"
             >
               {/* Soft light decorative glow */}
               <div
@@ -271,7 +271,7 @@ export default function Footer() {
             initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="grid gap-12 py-14 sm:py-16 lg:grid-cols-12 lg:gap-10 lg:py-20"
+            className="grid gap-12 py-14 lg:grid-cols-12 sm:py-16"
           >
             {/* BRAND */}
             <motion.div variants={rise} className="lg:col-span-4">

@@ -50,7 +50,7 @@ export default function CausesFeatured({ cause, labels }: CausesFeaturedProps) {
     return (
         <section
             id="featured-cause"
-            className="w-full overflow-hidden bg-white text-[#141714] py-16 lg:py-24 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
+            className="w-full overflow-hidden bg-white text-[#141714] py-14 sm:py-16 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
         >
             <MainContainer>
                 <motion.div

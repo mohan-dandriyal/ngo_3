@@ -18,7 +18,6 @@
         "titleLight": "Every child",
         "titleAccent": "deserves a chance.",
         "description": "We help children access learning opportunities, build confidence and create a brighter future for their communities.",
-        "badge": "Education creates opportunity",
         "primaryBtn": {
           "text": "Explore our programs",
           "linkTo": "/our-program"
@@ -32,7 +31,6 @@
         "titleLight": "Change begins",
         "titleAccent": "with community.",
         "description": "We stand alongside local people, supporting ideas and solutions that make everyday life fairer, safer and more sustainable.",
-        "badge": "People powered change",
         "primaryBtn": {
           "text": "Our approach",
           "linkTo": "/about"
@@ -46,7 +44,6 @@
         "titleLight": "Small actions",
         "titleAccent": "create big change.",
         "description": "From clean water to better healthcare, we work toward a future where every person has the opportunity to thrive.",
-        "badge": "A future for everyone",
         "primaryBtn": {
           "text": "Discover our story",
           "linkTo": "/about"

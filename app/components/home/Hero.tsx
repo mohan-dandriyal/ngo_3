@@ -69,7 +69,6 @@ export default function Hero({ data }: HeroContent) {
     description: (image as any).description || data.description,
     primaryBtn: (image as any).primaryBtn || data.primaryBtn,
     donateBtn: (image as any).donateBtn || data.secondaryBtn,
-    badge: (image as any).badge || (data as any).badge,
   }));
 
   const reduce = useReducedMotion();
@@ -304,27 +303,6 @@ export default function Hero({ data }: HeroContent) {
                     </Link>
                   )}
                 </motion.div>
-
-                {/* SLIDE BADGE */}
-                {activeSlide.badge && (
-                  <motion.div
-                    variants={itemVariants}
-                    className="mt-12 flex items-center gap-3"
-                  >
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full
-                      animate-ping rounded-full bg-[#a8c686]/60 motion-reduce:animate-none" />
-
-                      <span className="relative inline-flex h-2.5 w-2.5
-                      rounded-full bg-[#a8c686]" />
-                    </span>
-
-                    <span className="text-[10px] font-medium uppercase
-                    tracking-[0.19em] text-[#dedbd0]">
-                      {activeSlide.badge}
-                    </span>
-                  </motion.div>
-                )}
               </motion.div>
             </AnimatePresence>
           </div>

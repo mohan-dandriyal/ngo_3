@@ -237,7 +237,7 @@ export default function HomeCauses({ data }: HomeCausesContent) {
   return (
     <section
       id="causes"
-      className="relative overflow-hidden bg-[#faf8f5] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#faf8f5] py-16 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-16 lg:py-16"
     >
       {/* Background decoration */}
       <div

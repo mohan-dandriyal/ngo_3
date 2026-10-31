@@ -264,7 +264,7 @@ export default function HomeBlog({ data }: HomeBlogProps) {
   return (
     <section
       id="blog"
-      className="relative overflow-hidden bg-white py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-white py-16 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-16 lg:py-16"
     >
       <MainContainer>
         <div className="relative">

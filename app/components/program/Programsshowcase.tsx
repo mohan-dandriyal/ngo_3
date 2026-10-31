@@ -189,7 +189,7 @@ export default function ProgramsShowcase({ data, programs = [] }: ProgramsShowca
       className="w-full overflow-hidden bg-[#faf8f5] text-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
-        <div className="pb-16 pt-20 lg:pb-24 lg:pt-24">
+        <div className="pb-16 pt-20 lg:pb-20 lg:pt-20">
           <motion.div
             variants={container}
             initial={reduce ? false : "hidden"}

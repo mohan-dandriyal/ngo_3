@@ -69,7 +69,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
   return (
     <section
       id="gallery-collection"
-      className="scroll-mt-10 bg-[#faf8f5] px-5 pb-20 text-[#141714] sm:px-8 md:pb-28 lg:px-16"
+      className="scroll-mt-10 bg-[#faf8f5] px-5 pb-14 text-[#141714] sm:px-8 sm:py-16"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col pt-20 gap-8 border-t border-[#ede7dc] py-10 md:flex-row md:items-end md:justify-between">

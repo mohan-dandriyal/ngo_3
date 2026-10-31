@@ -56,7 +56,7 @@ export default function OurVision({ data }: OurVisionProps) {
   return (
     <section
       id="our-vision"
-      className="w-full overflow-hidden bg-white py-20 lg:py-28 text-[#141714] 
+      className="w-full overflow-hidden bg-white py-14 sm:py-16 text-[#141714] 
                  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>

@@ -98,7 +98,7 @@ export default function JoinMission({ data }: JoinMissionProps) {
   return (
     <section
       id="join-our-mission"
-      className="relative w-full overflow-hidden bg-[#faf8f5] py-20 text-[#141714] sm:py-24 md:py-28
+      className="relative w-full overflow-hidden bg-[#faf8f5] py-14 text-[#141714] sm:py-16
                  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       {/* Background glow */}

@@ -90,7 +90,7 @@ export default function HomePrograms({ data }: HomeProgramsContent) {
   return (
     <section
       id="programs"
-      className="relative w-full overflow-hidden bg-white py-20 text-[#141714] sm:py-24 lg:py-28"
+      className="relative w-full overflow-hidden bg-white py-16 text-[#141714] sm:py-16 lg:py-16"
     >
       {/* Background glow */}
       <div

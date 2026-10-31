@@ -80,7 +80,7 @@ export default function CausesGrid({ causes, labels }: CausesGridProps) {
   return (
     <section
       id="causes-grid"
-      className="w-full overflow-hidden bg-[#faf8f5] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714]"
+      className="w-full overflow-hidden bg-[#faf8f5] py-14 sm:py-16  font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714]"
     >
       <MainContainer>
         <div>

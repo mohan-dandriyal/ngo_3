@@ -190,7 +190,7 @@ export default function HomeTestimonials({
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#f4f0e8] py-20 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#f4f0e8] py-16 font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#141714] sm:py-16 lg:py-16"
     >
       {/* Background atmosphere */}
       <div
