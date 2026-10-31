@@ -117,7 +117,7 @@ export default function TeamHero({
       className="relative isolate w-full overflow-hidden bg-[#faf8f5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#ece6da]"
     >
       {/* Full-width banner - STANDARDIZED HEIGHT */}
-      <div className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px]">
+      <div className="relative flex items-center overflow-hidden min-h-[740px] sm:min-h-[560px] lg:min-h-[650px]">
         {/* Full background image */}
         {bannerImage?.src && (
           <TeamBackground

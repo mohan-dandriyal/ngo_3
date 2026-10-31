@@ -139,7 +139,7 @@ export default function Hero({ data }: HeroContent) {
           setIsPaused(false);
         }
       }}
-      className="relative isolate min-h-[540px] w-full overflow-hidden
+      className="relative isolate min-h-[740px] w-full overflow-hidden
       bg-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
       text-[#ece6da] sm:min-h-[580px] lg:min-h-[640px]"
     >

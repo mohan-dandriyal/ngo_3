@@ -83,7 +83,7 @@ export default function CausesHero({ data }: CausesHeroProps) {
       {/* FULL WIDTH BANNER */}
       <div
         ref={bannerRef}
-        className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px] "
+        className="relative flex items-center overflow-hidden min-h-[740px] sm:min-h-[560px] lg:min-h-[650px] "
       >
         {/* BACKGROUND IMAGE */}
         {!imgFailed && image?.src ? (

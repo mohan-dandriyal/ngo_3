@@ -42,15 +42,15 @@
         "icon": "handshake",
         "title": "Contact Number",
         "description": "Let's work together to create lasting change.",
-        "value": "+1 00000 00000",
-        "link": "tel:+1000000000"
+        "value": "++1 213 555 1234",
+        "link": "tel:+1 213 555 1234"
       },
       {
         "id": "address",
         "icon": "Address",
         "title": "Address",
         "description": "Bring your time, skills, and passion to our mission.",
-        "value": "12 Foundation Road, New Delhi 110001",
+        "value": "2309 Mayflower Dr, Lynchburg, VA 24501, United States",
         "link": "#"
       }
     ],

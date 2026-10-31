@@ -52,7 +52,7 @@
       "titleAccent": "one life today",
       "text": "Give once or every month. Every donation is matched to a project, and you can follow where it goes.",
       "btnText": "Donate now",
-      "linkTo": "/donate",
+      "linkTo": "#",
       "backgroundImage": {
         "src": "/footer/cta-background.jpg",
         "alt": "WKX Foundation community volunteers working together"

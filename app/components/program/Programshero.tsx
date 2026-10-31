@@ -79,7 +79,7 @@ export default function ProgramsHero({
       className="relative w-full overflow-hidden text-[#ece6da]"
     >
       {/* Full image banner */}
-      <div className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px]">
+      <div className="relative flex items-center overflow-hidden min-h-[740px] sm:min-h-[560px] lg:min-h-[650px]">
         {/* Background image */}
         {image?.src && (
           <motion.div

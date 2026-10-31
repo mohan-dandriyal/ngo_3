@@ -138,7 +138,7 @@ export default function AboutHero({ data }: AboutHeroContent) {
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9 }}
-        className="relative flex items-center overflow-hidden sm:min-h-[560px] sm:min-h-[560px] lg:min-h-[650px]"
+        className="relative flex items-center overflow-hidden min-h-[740px] sm:min-h-[560px] lg:min-h-[650px]"
       >
         {/* BACKGROUND IMAGE */}
         {!imgFailed && image?.src ? (
