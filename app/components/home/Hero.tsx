@@ -140,7 +140,7 @@ export default function Hero({ data }: HeroContent) {
       }}
       className="relative isolate min-h-[740px] w-full overflow-hidden
       bg-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-      text-[#ece6da] sm:min-h-[600px] lg:min-h-[720px]"
+      text-[#ece6da] sm:min-h-[600px] lg:min-h-[780px]"
     >
       {/* BACKGROUND IMAGE */}
       <AnimatePresence initial={false}>
@@ -340,11 +340,10 @@ export default function Hero({ data }: HeroContent) {
                     >
                       <span
                         className={`h-[3px] w-full rounded-full
-                        transition-all duration-500 ${
-                          currentIndex === index
+                        transition-all duration-500 ${currentIndex === index
                             ? "bg-[#a8c686]"
                             : "bg-white/40 group-hover:bg-white/80"
-                        }`}
+                          }`}
                       />
                     </button>
                   ))}
