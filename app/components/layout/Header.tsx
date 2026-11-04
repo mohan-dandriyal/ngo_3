@@ -249,7 +249,7 @@ export default function Header() {
                 onError={() => setLogoFailed(true)}
                 className="
                   block h-auto w-auto
-                  max-w-[170px]
+                  max-w-[130px]
                   sm:max-w-[210px]
                   max-h-[90px]
                   object-contain
@@ -355,9 +355,9 @@ export default function Header() {
                   justify-center gap-2
                   overflow-hidden
                   bg-[#e0503a]
-                  px-4 py-2.5
+                  px-3 py-2.5
                   sm:px-6 sm:py-3
-                  text-xs sm:text-sm
+                  text-[9px] sm:text-sm
                   font-semibold tracking-wider
                   uppercase text-white
                   outline-none

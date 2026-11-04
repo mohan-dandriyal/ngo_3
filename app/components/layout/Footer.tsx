@@ -202,7 +202,7 @@ export default function Footer() {
       bg-[#faf8f5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#555d55]"
     >
       <MainContainer>
-        <div className="mx-auto px-5">
+        <div className="mx-auto sm:px-5 ">
 
           {/* CTA SECTION */}
           {cta && (
@@ -284,10 +284,13 @@ export default function Footer() {
                   <Image
                     src={logo.src}
                     alt={logo.alt ?? ""}
-                    width={200}
-                    height={70}
+                    width={230}
+                    height={64}
                     onError={() => setLogoFailed(true)}
-                    className="h-20 w-auto max-w-[250px] object-contain object-left sm:h-28"
+                    className="
+                  max-w-[130px]
+                  sm:max-w-[210px]
+                  max-h-[90px] object-contain object-left "
                   />
                 ) : (
                   <span className="flex items-center gap-3">
@@ -338,11 +341,10 @@ export default function Footer() {
             {columns.length > 0 && (
               <motion.div
                 variants={rise}
-                className={`grid grid-cols-2 gap-x-6 gap-y-10 ${
-                  columns.length >= 3
+                className={`grid grid-cols-2 gap-x-6 gap-y-10 ${columns.length >= 3
                     ? "lg:col-span-5 lg:grid-cols-3"
                     : "lg:col-span-4 lg:grid-cols-2"
-                }`}
+                  }`}
               >
                 {columns.map((column) => (
                   <nav key={column.title} aria-label={column.title}>
