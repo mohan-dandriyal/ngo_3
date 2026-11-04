@@ -1,15 +1,14 @@
 
-import React from 'react'
-import TeamHero from '../components/tems/TemsHero'
 
 import data from "@/app/data/tems.json"
 import TeamSection from '../components/tems/TeamSection'
+import InnerPageBanner from '../components/InnerPageBanner'
 
 function OurTeam() {
   return (
     <div>
       <div>
-        <TeamHero data={data.teamHero}  />
+         <InnerPageBanner data={data.teamHero} />
       </div>
 
       <div>

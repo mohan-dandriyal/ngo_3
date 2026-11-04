@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import data from "@/app/data/program.json";
-import ProgramsHero from "@/app/components/program/Programshero";
 import ProgramsShowcase from "@/app/components/program/Programsshowcase";
+import InnerPageBanner from "../components/InnerPageBanner";
 
 const title = `${data.meta.title} | ${data.meta.siteName}`;
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function ProgramsPage() {
   return (
     <main>
-      <ProgramsHero data={data.programsHero} programs={data.programs} />
+       <InnerPageBanner data={data.programsHero} />
       <ProgramsShowcase data={data.programsShowcase} programs={data.programs} />
     </main>
   );

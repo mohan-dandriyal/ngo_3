@@ -60,16 +60,28 @@ const itemVariants: Variants = {
 
 export default function Hero({ data }: HeroContent) {
   const { slider } = data;
-  const slides = (data.images && data.images.length > 0 ? data.images : []).map((image: any, index: number) => ({
-    ...image,
-    id: (image as any).id || `hero-${index}`,
-    eyebrow: (image as any).eyebrow || data.eyebrow,
-    titleLight: (image as any).titleLight || data.titleLight,
-    titleAccent: (image as any).titleAccent || data.titleAccent,
-    description: (image as any).description || data.description,
-    primaryBtn: (image as any).primaryBtn || data.primaryBtn,
-    donateBtn: (image as any).donateBtn || data.secondaryBtn,
-  }));
+  const slides = (data.images && data.images.length > 0 ? data.images : []).map((image, index) => {
+    const slideImage = image as typeof image & {
+      id?: string;
+      eyebrow?: typeof data.eyebrow;
+      titleLight?: typeof data.titleLight;
+      titleAccent?: typeof data.titleAccent;
+      description?: typeof data.description;
+      primaryBtn?: typeof data.primaryBtn;
+      donateBtn?: typeof data.secondaryBtn;
+    };
+
+    return {
+      ...slideImage,
+      id: slideImage.id || `hero-${index}`,
+      eyebrow: slideImage.eyebrow || data.eyebrow,
+      titleLight: slideImage.titleLight || data.titleLight,
+      titleAccent: slideImage.titleAccent || data.titleAccent,
+      description: slideImage.description || data.description,
+      primaryBtn: slideImage.primaryBtn || data.primaryBtn,
+      donateBtn: slideImage.donateBtn || data.secondaryBtn,
+    };
+  });
 
   const reduce = useReducedMotion();
 

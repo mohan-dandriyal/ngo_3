@@ -4,6 +4,7 @@ import type { CauseItem, HeroStat } from "@/app/types/cause";
 import CausesHero from "@/app/components/cause/Causeshero";
 import CausesFeatured from "@/app/components/cause/Causesfeatured";
 import CausesGrid from "@/app/components/cause/Causesgrid";
+import InnerPageBanner from "../components/InnerPageBanner";
 
 const causes = data.causes as CauseItem[];
 
@@ -34,7 +35,7 @@ export default function CausesPage() {
 
   return (
     <main>
-      <CausesHero data={data.hero} stats={stats} />
+       <InnerPageBanner data={data.hero} />
       {featured && <CausesFeatured cause={featured} labels={data.featured} />}
       <CausesGrid causes={others} labels={data.grid} />
     </main>

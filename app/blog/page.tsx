@@ -3,6 +3,7 @@ import data from "@/app/data/post.json";
 import type { BlogPost } from "@/app/types/blog";
 import BlogHero from "@/app/components/blog/Bloghero";
 import BlogList from "@/app/components/blog/Bloglist";
+import InnerPageBanner from "../components/InnerPageBanner";
 
 // The JSON is plain text, so tell TypeScript the content blocks match our types
 const posts = data.posts as unknown as BlogPost[];
@@ -22,7 +23,7 @@ export default function BlogPage() {
 
   return (
     <main>
-      <BlogHero data={data.blogHero} latest={sorted[0]} />
+       <InnerPageBanner data={data.blogHero} />
       <BlogList posts={sorted} labels={data.blogList} readText={data.labels.readText} />
     </main>
   );

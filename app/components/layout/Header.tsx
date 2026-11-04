@@ -56,9 +56,11 @@ export default function Header() {
   const [logoFailed, setLogoFailed] = useState(!logo?.src);
   const [activeHash, setActiveHash] = useState("");
 
-  // --------------------------------
-  // Sticky Header Scroll Detection
-  // --------------------------------
+  // ========================================
+  // SCROLL DETECTION
+  // Header stays in normal flow and becomes
+  // sticky when it reaches the top.
+  // ========================================
 
   useEffect(() => {
     const onScroll = () => {
@@ -76,9 +78,9 @@ export default function Header() {
     };
   }, []);
 
-  // --------------------------------
-  // Track Active Hash
-  // --------------------------------
+  // ========================================
+  // TRACK ACTIVE HASH
+  // ========================================
 
   useEffect(() => {
     const updateHash = () => {
@@ -94,20 +96,9 @@ export default function Header() {
     };
   }, [pathname]);
 
-  // --------------------------------
-  // Close Menu on Route Change
-  // --------------------------------
-
-  useEffect(() => {
-    setMenuState({
-      pathname,
-      open: false,
-    });
-  }, [pathname]);
-
-  // --------------------------------
-  // Escape Key & Body Scroll Lock
-  // --------------------------------
+  // ========================================
+  // ESCAPE KEY & BODY SCROLL LOCK
+  // ========================================
 
   useEffect(() => {
     if (!open) return;
@@ -126,14 +117,13 @@ export default function Header() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
-
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, setOpen]);
 
-  // --------------------------------
-  // Active Navigation Detection
-  // --------------------------------
+  // ========================================
+  // ACTIVE NAVIGATION DETECTION
+  // ========================================
 
   const isActive = (href?: string) => {
     if (!href || href === "#") return false;
@@ -155,15 +145,17 @@ export default function Header() {
       return pathname === "/" && !activeHash;
     }
 
-    return pathname === href ||
-      pathname.startsWith(`${href}/`);
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
   };
 
   const closeMenu = () => setOpen(false);
 
-  // --------------------------------
-  // Animation Settings
-  // --------------------------------
+  // ========================================
+  // ANIMATION SETTINGS
+  // ========================================
 
   const menuTransition = reduceMotion
     ? { duration: 0 }
@@ -175,7 +167,7 @@ export default function Header() {
   return (
     <>
       {/* ==================================
-          FIXED HEADER
+          STICKY HEADER
       ================================== */}
 
       <motion.header
@@ -199,7 +191,7 @@ export default function Header() {
           ease: "easeInOut",
         }}
         className="
-          fixed left-0 top-0 z-[100]
+          sticky top-0 z-[100]
           w-full border-b
           backdrop-blur-xl
         "
@@ -233,7 +225,7 @@ export default function Header() {
             min-[1024px]:grid-cols-[auto_1fr_auto]
           "
         >
-          {/* Logo */}
+          {/* LOGO */}
 
           <Link
             href="/"
@@ -288,8 +280,7 @@ export default function Header() {
             aria-label="Main navigation"
             className="
               hidden items-center justify-center
-              gap-6
-              min-[1024px]:flex
+              gap-6 min-[1024px]:flex
               xl:gap-9
             "
           >
@@ -307,6 +298,11 @@ export default function Header() {
                     aria-current={
                       active ? "page" : undefined
                     }
+                    onClick={() => {
+                      if (item.linkTo.startsWith("#")) {
+                        setActiveHash(item.linkTo);
+                      }
+                    }}
                     className={`
                       relative whitespace-nowrap
                       py-2.5 text-[14px]
@@ -347,7 +343,7 @@ export default function Header() {
               justify-self-end gap-2 sm:gap-3
             "
           >
-            {/* CTA Button */}
+            {/* CTA BUTTON */}
 
             {btnText && (
               <Link
@@ -402,7 +398,7 @@ export default function Header() {
               </Link>
             )}
 
-            {/* Mobile Menu Button */}
+            {/* MOBILE MENU BUTTON */}
 
             <button
               type="button"
@@ -480,161 +476,166 @@ export default function Header() {
 
         <AnimatePresence initial={false}>
           {open && (
-            <>
-              {/* Mobile Overlay */}
-
-              <motion.div
-                key="mobile-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={menuTransition}
-                onClick={closeMenu}
-                aria-hidden="true"
+            <motion.div
+              id="wkx-mobile-nav"
+              key="mobile-navigation"
+              initial={{
+                opacity: 0,
+                height: 0,
+                y: -8,
+              }}
+              animate={{
+                opacity: 1,
+                height: "auto",
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                height: 0,
+                y: -8,
+              }}
+              transition={menuTransition}
+              className="
+                absolute left-0 right-0 top-full
+                z-40 overflow-hidden
+                border-b border-[#e5dfd5]
+                bg-white
+                shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)]
+                backdrop-blur-xl
+                min-[1024px]:hidden
+              "
+            >
+              <nav
+                aria-label="Mobile navigation"
                 className="
-                  fixed inset-0 top-[72px]
-                  z-[-1] bg-black/30
-                  min-[1024px]:hidden
-                "
-              />
-
-              {/* Mobile Menu */}
-
-              <motion.div
-                id="wkx-mobile-nav"
-                key="mobile-navigation"
-                initial={{
-                  opacity: 0,
-                  height: 0,
-                  y: -8,
-                }}
-                animate={{
-                  opacity: 1,
-                  height: "auto",
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  height: 0,
-                  y: -8,
-                }}
-                transition={menuTransition}
-                className="
-                  absolute left-0 right-0 top-full
-                  z-40 overflow-hidden
-                  border-b border-[#e5dfd5]
-                  bg-white shadow-[0_20px_35px_-10px_rgba(20,24,20,0.12)]
-                  backdrop-blur-xl
-                  min-[1024px]:hidden
+                  mx-auto flex max-w-[1440px]
+                  flex-col px-5 pb-6 pt-3
+                  sm:px-8
                 "
               >
-                <nav
-                  aria-label="Mobile navigation"
-                  className="
-                    mx-auto flex max-w-[1440px]
-                    flex-col px-5 pb-6 pt-3
-                    sm:px-8
-                  "
-                >
-                  {navItems
-                    .filter(
-                      (item) =>
-                        item.label && item.linkTo
-                    )
-                    .map((item, index) => {
-                      const active = isActive(
-                        item.linkTo
-                      );
+                {navItems
+                  .filter(
+                    (item) =>
+                      item.label && item.linkTo
+                  )
+                  .map((item, index) => {
+                    const active = isActive(
+                      item.linkTo
+                    );
 
-                      return (
-                        <motion.div
-                          key={item.label}
-                          initial={
-                            reduceMotion
-                              ? false
-                              : {
-                                  opacity: 0,
-                                  x: -10,
-                                }
-                          }
-                          animate={{
-                            opacity: 1,
-                            x: 0,
-                          }}
-                          transition={{
-                            duration: reduceMotion
-                              ? 0
-                              : 0.2,
-                            delay: reduceMotion
-                              ? 0
-                              : index * 0.03,
-                          }}
-                        >
-                          <Link
-                            href={item.linkTo}
-                            onClick={closeMenu}
-                            aria-current={
-                              active ? "page" : undefined
-                            }
-                            className={`
-                              flex items-center
-                              justify-between
-                              border-b border-[#141714]/[0.07]
-                              py-3.5 text-base
-                              font-medium capitalize
-                              transition-colors
-                              hover:text-[#e0503a]
-
-                              ${
-                                active
-                                  ? "font-semibold text-[#e0503a]"
-                                  : "text-[#222823]"
+                    return (
+                      <motion.div
+                        key={item.label}
+                        initial={
+                          reduceMotion
+                            ? false
+                            : {
+                                opacity: 0,
+                                x: -10,
                               }
-                            `}
-                          >
-                            {item.label}
+                        }
+                        animate={{
+                          opacity: 1,
+                          x: 0,
+                        }}
+                        transition={{
+                          duration: reduceMotion ? 0 : 0.2,
+                          delay: reduceMotion
+                            ? 0
+                            : index * 0.03,
+                        }}
+                      >
+                        <Link
+                          href={item.linkTo}
+                          onClick={() => {
+                            if (item.linkTo.startsWith("#")) {
+                              setActiveHash(item.linkTo);
+                            }
+                            closeMenu();
+                          }}
+                          aria-current={
+                            active ? "page" : undefined
+                          }
+                          className={`
+                            flex items-center
+                            justify-between
+                            border-b border-[#141714]/[0.07]
+                            py-3.5 text-base
+                            font-medium capitalize
+                            transition-colors
+                            hover:text-[#e0503a]
 
-                            {active && (
-                              <span
-                                className="
-                                  h-1.5 w-1.5
-                                  rounded-full
-                                  bg-[#e0503a]
-                                "
-                              />
-                            )}
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
+                            ${
+                              active
+                                ? "font-semibold text-[#e0503a]"
+                                : "text-[#222823]"
+                            }
+                          `}
+                        >
+                          {item.label}
 
-                  {/* Mobile CTA */}
+                          {active && (
+                            <span
+                              className="
+                                h-1.5 w-1.5
+                                rounded-full
+                                bg-[#e0503a]
+                              "
+                            />
+                          )}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
 
-                  {btnText && (
-                    <Link
-                      href={linkToBtn || "/#causes"}
-                      onClick={closeMenu}
-                      className="
-                        mt-5 flex w-full
-                        items-center justify-center
-                        gap-2 bg-[#e0503a]
-                        px-6 py-3.5
-                        text-sm font-semibold
-                        uppercase tracking-wider
-                        text-white transition-colors
-                        hover:bg-[#cb3d28]
-                      "
-                    >
-                      {btnText}
-                      <ArrowUpRight size={17} />
-                    </Link>
-                  )}
-                </nav>
-              </motion.div>
-            </>
+                {/* MOBILE CTA */}
+
+                {btnText && (
+                  <Link
+                    href={linkToBtn || "/#causes"}
+                    onClick={closeMenu}
+                    className="
+                      mt-5 flex w-full
+                      items-center justify-center
+                      gap-2 bg-[#e0503a]
+                      px-6 py-3.5
+                      text-sm font-semibold
+                      uppercase tracking-wider
+                      text-white transition-colors
+                      hover:bg-[#cb3d28]
+                    "
+                  >
+                    {btnText}
+                    <ArrowUpRight size={17} />
+                  </Link>
+                )}
+              </nav>
+            </motion.div>
           )}
         </AnimatePresence>
       </motion.header>
+
+      {/* ==================================
+          MOBILE OVERLAY
+      ================================== */}
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={menuTransition}
+            onClick={closeMenu}
+            aria-hidden="true"
+            className="
+              fixed inset-0 z-[90]
+              bg-black/30
+              min-[1024px]:hidden
+            "
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

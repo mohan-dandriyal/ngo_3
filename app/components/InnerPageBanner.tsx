@@ -152,7 +152,8 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9 }}
-                className="relative flex items-center overflow-hidden min-h-[740px] sm:min-h-[560px] lg:min-h-[650px]"
+                className="relative flex items-center overflow-hidden"
+                style={{ minHeight: "60vh",}}
             >
                 {/* BACKGROUND IMAGE */}
                 {!imgFailed && image?.src ? (
@@ -198,7 +199,7 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                     className="pointer-events-none absolute -right-40 top-0 -z-10 h-[450px] w-[450px] rounded-full bg-[#a8c686]/10 blur-[150px]"
                 />
 
-                <MainContainer>
+                <MainContainer className="w-full">
                     <div className="relative z-10 flex w-full flex-col items-start justify-center py-10 text-left sm:py-12 lg:py-14">
                         {/* BREADCRUMB - LEFT ALIGNED */}
                         {breadcrumb.length > 0 && (
@@ -217,17 +218,17 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                             variants={container}
                             initial={reduce ? false : "hidden"}
                             animate="show"
-                            className="max-w-[850px] text-left"
+                            className=" md:w-[800px]"
                         >
                             {/* EYEBROW */}
-                            {eyebrow && (
+                            {/* {eyebrow && (
                                 <motion.div variants={fadeUp} className="mb-3 sm:mb-4">
                                     <Eyebrow eyebrow={eyebrow} tone="dark" />
                                 </motion.div>
-                            )}
+                            )} */}
 
                             {/* TITLE */}
-                            <motion.div variants={fadeUp}>
+                            <motion.div variants={fadeUp} className="mt-5">
                                 <HeroTitle
                                     titleStart={titleStart}
                                     titleAccent={titleAccent}
