@@ -211,7 +211,7 @@ export default function Hero({ data }: HeroContent) {
       
       <div className="w-full">
       <MainContainer>
-        <div className="relative flex  w-full flex-col justify-center text-left py-20 pb-32 sm:py-24 sm:pb-36  lg:py-18 lg:pb-40">
+        <div className="relative flex  w-full flex-col justify-center text-left py-5 pb-32 sm:py-18 sm:pb-36  lg:py-18 lg:pb-40">
 
 
 
@@ -226,7 +226,7 @@ export default function Hero({ data }: HeroContent) {
                 exit={reduce ? undefined : "exit"}
               >
                 {/* EYEBROW */}
-                {activeSlide.eyebrow && (
+                {/* {activeSlide.eyebrow && (
                   <motion.div
                     variants={itemVariants}
                     className="mb-7 flex items-center gap-4"
@@ -238,7 +238,7 @@ export default function Hero({ data }: HeroContent) {
                       {activeSlide.eyebrow}
                     </p>
                   </motion.div>
-                )}
+                )} */}
 
                 {/* HEADING */}
                 <motion.h1

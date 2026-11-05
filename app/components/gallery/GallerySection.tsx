@@ -211,7 +211,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={closeLightbox}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black/90 p-4 backdrop-blur-sm sm:p-8"
+            className="fixed inset-0 z-[1111] flex flex-col items-center justify-center overflow-hidden bg-black/90 p-4 backdrop-blur-sm sm:p-8"
           >
             <button
               type="button"
