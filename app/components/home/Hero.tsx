@@ -209,7 +209,7 @@ export default function Hero({ data }: HeroContent) {
         h-[500px] w-[500px] rounded-full bg-[#a8c686]/10 blur-[150px]"
       />
       
-      <div className="w-full">
+      <div className="w-full sm:pb-0 pb-10">
       <MainContainer>
         <div className="relative flex  w-full flex-col justify-center text-left py-5 pb-32 sm:py-18 sm:pb-36  lg:py-18 lg:pb-40">
 
