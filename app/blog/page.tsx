@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import data from "@/app/data/post.json";
 import type { BlogPost } from "@/app/types/blog";
-import BlogHero from "@/app/components/blog/Bloghero";
 import BlogList from "@/app/components/blog/Bloglist";
 import InnerPageBanner from "../components/InnerPageBanner";
 

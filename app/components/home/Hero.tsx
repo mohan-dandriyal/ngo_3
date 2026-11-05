@@ -150,9 +150,9 @@ export default function Hero({ data }: HeroContent) {
           setIsPaused(false);
         }
       }}
-      className="relative isolate min-h-[740px] w-full overflow-hidden
+      className="relative isolate w-full overflow-hidden
       bg-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-      text-[#ece6da] sm:min-h-[600px] lg:min-h-[780px]"
+      text-[#ece6da] lg:min-h-[80vh] flex items-center"
     >
       {/* BACKGROUND IMAGE */}
       <AnimatePresence initial={false}>
@@ -208,9 +208,10 @@ export default function Hero({ data }: HeroContent) {
         className="pointer-events-none absolute -right-40 top-0 -z-10
         h-[500px] w-[500px] rounded-full bg-[#a8c686]/10 blur-[150px]"
       />
-
+      
+      <div className="w-full">
       <MainContainer>
-        <div className="relative flex min-h-[540px] w-full flex-col justify-center text-left py-20 pb-32 sm:min-h-[580px] sm:py-24 sm:pb-36 lg:min-h-[640px] lg:py-28 lg:pb-40">
+        <div className="relative flex  w-full flex-col justify-center text-left py-20 pb-32 sm:py-24 sm:pb-36  lg:py-18 lg:pb-40">
 
 
 
@@ -326,7 +327,7 @@ export default function Hero({ data }: HeroContent) {
 
 
               {/* SLIDE NUMBER AND PROGRESS */}
-              <div className="flex min-w-0 flex-1 items-center gap-5">
+              <div className="sm:flex hidden min-w-0 flex-1 items-center gap-5">
                 <div className="flex shrink-0 items-center gap-2 font-mono">
                   <span className="text-xl text-[#a8c686]">
                     {String(currentIndex + 1).padStart(2, "0")}
@@ -398,6 +399,7 @@ export default function Hero({ data }: HeroContent) {
           )}
         </div>
       </MainContainer>
+      </div>
     </section>
   );
 }

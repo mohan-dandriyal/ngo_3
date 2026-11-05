@@ -6,17 +6,17 @@
                 "linkTo": "/"
             },
             {
-                "label": "Team"
+                "label": "Our Team"
             }
         ],
         "eyebrow": "The people behind the purpose",
-        "titleStart": "The people behind",
+        "titleStart": "Our Team",
         "titleAccent": "the mission.",
         "description": "Teachers, nurses, engineers and neighbours. A small team with one shared promise: to show up for the communities we serve.",
         "scrollText": "Meet the team",
         "scrollTarget": "#team",
-        "bannerImage": {
-            "src": "/banner/cause-banner.png",
+        "image": {
+            "src": "/banner/contact.webp",
             "alt": "WKX Foundation team working together with local communities"
         },
         "bannerCaption": "OUR PEOPLE. OUR PURPOSE."

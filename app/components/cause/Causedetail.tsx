@@ -74,7 +74,7 @@ export default function CauseDetail({
   return (
     <main className="overflow-hidden bg-[#faf8f5] text-[#141714]">
       {/* Breadcrumb */}
-      <div className="mx-auto max-w-[1440px] px-5 pt-8 sm:px-8 lg:px-16">
+      <div className="mx-auto max-w-[1366px] px-5 pt-8 sm:px-8 lg:px-16">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-2 text-xs font-medium text-[#737a73]">
             <li>
@@ -111,7 +111,7 @@ export default function CauseDetail({
       </div>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-12 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-16 lg:px-16">
+      <section className="mx-auto grid max-w-[1366px] items-center gap-10 px-5 py-12 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-16 lg:px-16">
         <div>
           <span className="inline-flex border border-[#2a5c43]/30 bg-[#2a5c43]/[0.06] px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#2a5c43]">
             {cause.category}
@@ -156,7 +156,7 @@ export default function CauseDetail({
       </section>
 
       {/* Cause details */}
-      <section className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 md:py-16 lg:px-16">
+      <section className="mx-auto max-w-[1366px] px-5 py-10 sm:px-8 md:py-16 lg:px-16">
         <div className="mx-auto max-w-4xl space-y-12 md:space-y-16">
           {details ? (
             <>

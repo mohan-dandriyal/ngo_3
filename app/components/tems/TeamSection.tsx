@@ -184,7 +184,7 @@ export default function TeamSection({ data }: TeamSectionProps) {
       className="w-full overflow-hidden bg-[#faf8f5] text-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]"
     >
       <MainContainer>
-        <div className="py-20 lg:py-[130px]">
+        <div className="py-20">
           {/* Heading */}
           <motion.div
             variants={container}

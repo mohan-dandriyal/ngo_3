@@ -23,7 +23,7 @@ function BreadCrumb({ breadcrumb, className }: breadcrumb) {
       aria-label="Breadcrumb"
       className={className || "mb-4 sm:mb-5"}
     >
-      <ol className="flex flex-wrap items-center gap-2 text-[13px]">
+      <ol className="flex flex-wrap items-center justify-center gap-2 sm:text-[14px] text-sx">
         {breadcrumb.map((item, index) => {
           const last = index === breadcrumb.length - 1;
 

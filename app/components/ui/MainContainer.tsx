@@ -7,8 +7,10 @@ interface mainContainerProps {
 
 function MainContainer({ children, className = '' }: mainContainerProps) {
   return (
-    <div className={`mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 ${className}`}>
+    <div className='px-4 sm:px-8 lg:px-12 '>
+    <div className={`mx-auto max-w-[1366px]   ${className}`}>
       {children}
+    </div>
     </div>
   );
 }

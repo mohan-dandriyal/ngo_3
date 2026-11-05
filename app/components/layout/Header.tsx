@@ -20,6 +20,7 @@ import {
 
 import content from "@/app/data/header_footer.json";
 import { headerContent } from "@/app/types/header";
+import MainContainer from "../ui/MainContainer";
 
 const data: headerContent = content.header;
 
@@ -212,14 +213,12 @@ export default function Header() {
 
         {/* Header Container */}
 
+        <MainContainer>
         <div
           className="
             relative mx-auto grid
-            max-w-[1440px]
             grid-cols-[1fr_auto]
             items-center gap-3
-            px-4 sm:px-8
-            lg:px-12 xl:px-[72px]
             h-[72px]
             min-[1024px]:h-[86px]
             min-[1024px]:grid-cols-[auto_1fr_auto]
@@ -469,6 +468,7 @@ export default function Header() {
             </button>
           </div>
         </div>
+        </MainContainer>
 
         {/* ==================================
             MOBILE NAVIGATION

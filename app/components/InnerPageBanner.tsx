@@ -119,10 +119,7 @@ function CountUp({
 export default function InnerPageBanner({ data }: innerPageBanner) {
     const {
         breadcrumb = [],
-        eyebrow,
         titleStart,
-        titleAccent,
-        description,
         image,
         stats = [],
     } = data;
@@ -152,8 +149,7 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9 }}
-                className="relative flex items-center overflow-hidden"
-                style={{ minHeight: "60vh",}}
+                className="relative overflow-hidden flex items-center min-h-[35vh] md:min-h-[60vh]"
             >
                 {/* BACKGROUND IMAGE */}
                 {!imgFailed && image?.src ? (
@@ -162,7 +158,7 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                         className="absolute inset-0 -z-20"
                     >
                         <Image
-                            src={image.src}
+                            src={image.src || "/banner/contact.webp"}
                             alt={image.alt || ""}
                             fill
                             priority
@@ -199,61 +195,51 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                     className="pointer-events-none absolute -right-40 top-0 -z-10 h-[450px] w-[450px] rounded-full bg-[#a8c686]/10 blur-[150px]"
                 />
 
-                <MainContainer className="w-full">
-                    <div className="relative z-10 flex w-full flex-col items-start justify-center py-10 text-left sm:py-12 lg:py-14">
-                        {/* BREADCRUMB - LEFT ALIGNED */}
-                        {breadcrumb.length > 0 && (
-                            <motion.div
-                                initial={reduce ? false : { opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="w-full text-left"
-                            >
-                                <BreadCrumb breadcrumb={breadcrumb} className="mb-3 sm:mb-4 text-left" />
-                            </motion.div>
-                        )}
+                <div className=" w-full">
+                    <MainContainer className="mx-auto flex-1">
+                        <div className="relative z-10 flex w-full flex-col items-start justify-center py-10 text-left sm:py-12 lg:py-14">
 
-                        {/* HERO CONTENT - LEFT ALIGNED */}
-                        <motion.div
-                            variants={container}
-                            initial={reduce ? false : "hidden"}
-                            animate="show"
-                            className=" md:w-[800px]"
-                        >
-                            {/* EYEBROW */}
-                            {/* {eyebrow && (
+
+                            {/* HERO CONTENT - LEFT ALIGNED */}
+                            <motion.div
+                                variants={container}
+                                initial={reduce ? false : "hidden"}
+                                animate="show"
+                                className="mx-auto text-center"
+                            >
+                                {/* EYEBROW */}
+                                {/* {eyebrow && (
                                 <motion.div variants={fadeUp} className="mb-3 sm:mb-4">
                                     <Eyebrow eyebrow={eyebrow} tone="dark" />
                                 </motion.div>
                             )} */}
 
-                            {/* TITLE */}
-                            <motion.div variants={fadeUp} className="mt-5">
-                                <HeroTitle
-                                    titleStart={titleStart}
-                                    titleAccent={titleAccent}
-                                    tone="dark"
-                                />
-                            </motion.div>
-
-                            {/* DESCRIPTION */}
-                            {description && (
-                                <motion.div
-                                    variants={fadeUp}
-                                    className="mt-4 max-w-[620px] text-left"
-                                >
-                                    <Description
-                                        description={description}
-                                        variant="body"
+                                {/* TITLE */}
+                                <motion.div variants={fadeUp} className="mx-auto text-center mt-5">
+                                    <HeroTitle
+                                        titleStart={titleStart}
+                                        titleAccent={''}
                                         tone="dark"
                                     />
+
+                                    {/* BREADCRUMB - LEFT ALIGNED */}
+                                    {breadcrumb.length > 0 && (
+                                        <motion.div
+                                            initial={reduce ? false : { opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.6 }}
+                                            className="mt-6 text-center"
+                                        >
+                                            <BreadCrumb breadcrumb={breadcrumb} className="mb-3 sm:mb-4 text-center" />
+                                        </motion.div>
+                                    )}
                                 </motion.div>
-                            )}
 
 
-                        </motion.div>
-                    </div>
-                </MainContainer>
+                            </motion.div>
+                        </div>
+                    </MainContainer>
+                </div>
             </motion.div>
 
             {/* STATS STRIP */}

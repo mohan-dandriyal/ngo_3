@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { GallerySectionData } from "@/app/types/gallery";
 import { Eyebrow, SectionTitle } from "../ui/SectionContent";
+import MainContainer from "../ui/MainContainer";
 
 type GallerySectionProps = {
   data: GallerySectionData;
@@ -69,10 +70,11 @@ export default function GallerySection({ data }: GallerySectionProps) {
   return (
     <section
       id="gallery-collection"
-      className="scroll-mt-10 bg-[#faf8f5] px-5 pb-14 text-[#141714] sm:px-8 sm:py-16"
+      className=" bg-[#faf8f5]  pb-14 text-[#141714]"
     >
-      <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col pt-20 gap-8 border-t border-[#ede7dc] py-10 md:flex-row md:items-end md:justify-between">
+      <MainContainer>
+      <div className="">
+        <div className="flex flex-col gap-8 border-t border-[#ede7dc] pt-20 pb-10 md:flex-row md:items-end md:justify-between">
           <div>
             {data.eyebrow && <Eyebrow eyebrow={data.eyebrow} tone="light" />}
 
@@ -194,6 +196,7 @@ export default function GallerySection({ data }: GallerySectionProps) {
           </div>
         )}
       </div>
+      </MainContainer>
 
       {/* Lightbox popup */}
       <AnimatePresence>

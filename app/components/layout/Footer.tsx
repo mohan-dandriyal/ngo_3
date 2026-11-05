@@ -202,7 +202,7 @@ export default function Footer() {
       bg-[#faf8f5] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif] text-[#555d55]"
     >
       <MainContainer>
-        <div className="mx-auto sm:px-5 ">
+        <div className="mx-auto">
 
           {/* CTA SECTION */}
           {cta && (

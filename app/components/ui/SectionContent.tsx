@@ -96,8 +96,6 @@ interface SectionTitleProps extends StandaloneProp {
 
 export function HeroTitle({
   titleStart = "",
-  titleAccent = "",
-  titleEnd = "",
   tone = "light",
   className = "",
   standalone,
@@ -109,22 +107,22 @@ export function HeroTitle({
     <motion.h1
       variants={headline}
       {...motionProps}
-      aria-label={[titleStart, titleAccent, titleEnd].filter(Boolean).join(" ")}
+      aria-label={titleStart}
       className={`font-['Cormorant_Garamond','EB_Garamond',Georgia,serif] text-[clamp(38px,5vw,62px)] font-medium leading-[1.02] tracking-[-0.03em] text-left ${color} ${className}`}
     >
       <span className="block text-left">
         <Words text={titleStart} />
       </span>
-      {titleAccent && (
+      {/* {titleAccent && (
         <span className="mt-1 block font-medium italic text-[#e0503a] text-left">
           <Words text={titleAccent} />
         </span>
-      )}
-      {titleEnd && (
+      )} */}
+      {/* {titleEnd && (
         <span className="mt-1 block text-left">
           <Words text={titleEnd} />
         </span>
-      )}
+      )} */}
     </motion.h1>
   );
 }
