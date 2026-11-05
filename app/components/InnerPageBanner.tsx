@@ -174,26 +174,26 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                 )}
 
                 {/* IMAGE OVERLAYS */}
-                <div
+                {/* <div
                     aria-hidden="true"
                     className="absolute inset-0 -z-10 bg-black/45"
-                />
+                /> */}
 
                 <div
                     aria-hidden="true"
-                    className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/25"
+                    className="absolute inset-0 -z-10 bg-gradient-to-r from-black/75 via-black/60 to-black/50"
                 />
 
-                <div
+                {/* <div
                     aria-hidden="true"
                     className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-black/25"
-                />
+                /> */}
 
                 {/* DECORATIVE LIGHT */}
-                <div
+                {/* <div
                     aria-hidden="true"
                     className="pointer-events-none absolute -right-40 top-0 -z-10 h-[450px] w-[450px] rounded-full bg-[#a8c686]/10 blur-[150px]"
-                />
+                /> */}
 
                 <div className=" w-full">
                     <MainContainer className="mx-auto flex-1">
