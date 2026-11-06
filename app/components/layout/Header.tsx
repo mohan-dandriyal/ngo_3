@@ -228,6 +228,7 @@ export default function Header() {
 
           <Link
             href="/"
+            scroll={true}
             aria-label="Change starts with showing up home"
             onClick={closeMenu}
             className="
@@ -294,6 +295,7 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.linkTo}
+                    scroll={true}
                     aria-current={
                       active ? "page" : undefined
                     }
