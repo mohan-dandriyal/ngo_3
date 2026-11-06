@@ -70,6 +70,42 @@
                 "image": "/profile-5.jpg",
                 "imageAlt": "Portrait of Imran Sheikh",
                 "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Dr. Meera Nair",
+                "role": "Medical Lead",
+                "department": "Programs",
+                "bio": "Runs our mobile clinics and trains local health workers.",
+                "image": "/profile-5.jpg",
+                "imageAlt": "Portrait of Dr. Meera Nair",
+                "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Karan Verma",
+                "role": "Finance and Transparency",
+                "department": "Leadership",
+                "bio": "Makes sure every rupee is tracked and reported publicly.",
+                "image": "/profile-6.jpg",
+                "imageAlt": "Portrait of Karan Verma",
+                "linkedin": "https://linkedin.com"
+            },
+            {
+                "name": "Priya Kapoor",
+                "role": "Communications",
+                "department": "Community",
+                "bio": "Tells the stories of the people we work with, with their permission.",
+                "image": "/profile5.jpg",
+                "imageAlt": "Portrait of Priya Kapoor",
+                "twitter": "https://x.com",
+                "email": "priya@yourfoundation.org"
+            },
+            {
+                "name": "Arjun Das",
+                "role": "Field Engineer",
+                "department": "Programs",
+                "bio": "Designs and installs the water systems that villages keep for decades.",
+                "image": "/profile-7.jpg",
+                "imageAlt": "Portrait of Arjun Das"
             }
         ],
         "cta": {
