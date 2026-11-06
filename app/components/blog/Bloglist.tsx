@@ -75,54 +75,6 @@ export default function BlogList({ posts, labels, readText }: BlogListProps) {
             </motion.div>
           )}
 
-          {/* Toolbar: category chips and search */}
-          <motion.div
-            variants={fadeUp}
-            initial={reduce ? false : "hidden"}
-            whileInView="show"
-            viewport={{ once: true }}
-            className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
-          >
-            <div role="group" aria-label="Filter stories by category" className="flex flex-wrap gap-2.5">
-              {["all", ...categories].map((c) => {
-                const active = category === c;
-                return (
-                  <button
-                    key={c}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => pickCategory(c)}
-                    className={`relative rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider outline-none transition-all duration-300
-                      ${active
-                        ? "bg-[#e0503a] text-white shadow-xs"
-                        : "border border-[#141714]/15 bg-white text-[#141714] hover:border-[#e0503a] hover:text-[#e0503a]"
-                      }`}
-                  >
-                    <span>{c === "all" ? labels.allLabel : c}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="relative w-full lg:max-w-xs">
-              <label htmlFor="blog-search" className="sr-only">
-                {labels.searchLabel}
-              </label>
-              <Search size={16} aria-hidden="true" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#737a73]" />
-              <input
-                id="blog-search"
-                type="search"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setCount(pageSize);
-                }}
-                placeholder={labels.searchPlaceholder}
-                className="w-full rounded-full border border-[#e5dfd5] bg-white py-2.5 pl-10 pr-4 text-sm text-[#141714] shadow-xs outline-none transition-colors placeholder:text-[#737a73] focus:border-[#e0503a]"
-              />
-            </div>
-          </motion.div>
-
           {/* Grid */}
           <motion.div
             layout

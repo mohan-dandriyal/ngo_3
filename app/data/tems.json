@@ -58,7 +58,7 @@
                 "role": "Community Coordinator",
                 "department": "Programs",
                 "bio": "Our first point of contact in the villages, and the person everyone trusts.",
-                "image": "/profile-4.jpg",
+                "image": "/sunita.jpg",
                 "imageAlt": "Portrait of Sunita Devi",
                 "email": "sunita@yourfoundation.org"
             },
@@ -67,45 +67,9 @@
                 "role": "Volunteer Manager",
                 "department": "Community",
                 "bio": "Matches volunteers with the projects where their skills help most.",
-                "image": "/profile-3.jpg",
+                "image": "/profile-5.jpg",
                 "imageAlt": "Portrait of Imran Sheikh",
                 "linkedin": "https://linkedin.com"
-            },
-            {
-                "name": "Dr. Meera Nair",
-                "role": "Medical Lead",
-                "department": "Programs",
-                "bio": "Runs our mobile clinics and trains local health workers.",
-                "image": "/team/meera.jpg",
-                "imageAlt": "Portrait of Dr. Meera Nair",
-                "linkedin": "https://linkedin.com"
-            },
-            {
-                "name": "Karan Verma",
-                "role": "Finance and Transparency",
-                "department": "Leadership",
-                "bio": "Makes sure every rupee is tracked and reported publicly.",
-                "image": "/team/karan.jpg",
-                "imageAlt": "Portrait of Karan Verma",
-                "linkedin": "https://linkedin.com"
-            },
-            {
-                "name": "Priya Kapoor",
-                "role": "Communications",
-                "department": "Community",
-                "bio": "Tells the stories of the people we work with, with their permission.",
-                "image": "/team/priya.jpg",
-                "imageAlt": "Portrait of Priya Kapoor",
-                "twitter": "https://x.com",
-                "email": "priya@yourfoundation.org"
-            },
-            {
-                "name": "Arjun Das",
-                "role": "Field Engineer",
-                "department": "Programs",
-                "bio": "Designs and installs the water systems that villages keep for decades.",
-                "image": "/team/arjun.jpg",
-                "imageAlt": "Portrait of Arjun Das"
             }
         ],
         "cta": {
