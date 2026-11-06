@@ -8,6 +8,11 @@ import HomeCauses from './components/home/Homecauses';
 import HomeBlog from './components/home/Homeblog';
 import HomeTestimonials from './components/home/Hometestimonials';
 
+export const metadata = {
+  title: "Home  | Change starts with showing up.",
+  description: "Learn about Educare Foundation's mission, story, leadership, and our journey from one classroom to 25+ centers.",
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-[#faf8f5] font-sans">
