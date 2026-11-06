@@ -41,12 +41,13 @@
     "btnText": "Donate Now",
     "linkToBtn": "#"
   },
+
   "footer": {
     "logo": {
       "src": "/logo-2.png",
-      "alt": "WKX Foundation"
+      "alt": "Change starts with showing up"
     },
-    "about": "WKX Foundation brings clean water, schooling and healthcare to communities that have been left waiting. Every rupee is tracked and reported.",
+    "about": "Change starts with showing up brings clean water, schooling and healthcare to communities that have been left waiting. Every rupee is tracked and reported.",
     "cta": {
       "title": "Your gift can change",
       "titleAccent": "one life today",
@@ -75,7 +76,7 @@
               "linkTo": "/our-cause"
             },
             {
-              "label": "Stories",
+              "label": "Blog",
               "linkTo": "/blog"
             },
             {

@@ -1,4 +1,8 @@
-{
+{ "meta": {
+        "siteName": "Change starts with showing up.",
+        "blogTitle": "Contact Us",
+        "blogDescription": "News, stories and updates from the communities we serve."
+    },
   "contactHero": {
     "breadcrumb": [
       {

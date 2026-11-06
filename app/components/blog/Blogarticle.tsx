@@ -143,47 +143,11 @@ export default function BlogArticle({ post, labels }: BlogArticleProps) {
       <MainContainer>
         <article
           ref={articleRef}
-          className="grid gap-12 py-16 lg:grid-cols-[240px_minmax(0,720px)] lg:justify-center lg:gap-20 lg:py-24"
+          className="grid gap-12 py-16 lg:justify-center lg:gap-20 lg:py-16"
         >
-          {/* Sidebar */}
-          <aside className="order-2 lg:order-1">
-            <div className="lg:sticky lg:top-32">
-              {headings.length > 0 && (
-                <nav aria-label={labels.tocTitle} className="hidden lg:block">
-                  <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#e0503a]">{labels.tocTitle}</p>
-                  <ol className="space-y-1 border-l-2 border-[#ede7dc]">
-                    {headings.map((h) => {
-                      const id = slugify(h.text);
-                      const active = activeId === id;
-                      return (
-                        <li key={id} className="relative">
-                          {active && (
-                            <motion.span
-                              layoutId="toc-marker"
-                              aria-hidden="true"
-                              className="absolute -left-[2px] top-0 h-full w-[2px] bg-[#e0503a]"
-                              transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                            />
-                          )}
-                          <a
-                            href={`#${id}`}
-                            aria-current={active ? "location" : undefined}
-                            className={`block py-1.5 pl-4 text-sm leading-snug outline-none transition-colors duration-200
-                              focus-visible:text-[#e0503a] ${active ? "font-bold text-[#e0503a]" : "text-[#737a73] hover:text-[#141714]"}`}
-                          >
-                            {h.text}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                </nav>
-              )}
-            </div>
-          </aside>
 
           {/* Body */}
-          <div className="order-1 space-y-7 lg:order-2">
+          <div className="order-1 space-y-7 md:w-8/12 mx-auto lg:order-2">
             {post.content.map((block, i) => (
               <Block key={i} block={block} reduce={reduce} />
             ))}

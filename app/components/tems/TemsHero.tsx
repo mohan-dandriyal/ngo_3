@@ -81,7 +81,7 @@ function TeamBackground({
       >
         <Image
           src={src}
-          alt={alt || "WKX Foundation team working together"}
+          alt={alt || "Change starts with showing up team working together"}
           fill
           priority
           sizes="100vw"

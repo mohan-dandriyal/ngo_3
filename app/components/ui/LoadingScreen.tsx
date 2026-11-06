@@ -16,7 +16,7 @@ type LoadingScreenProps = {
 };
 
 export default function LoadingScreen({
-  siteName = "WKX Foundation",
+  siteName = "Change starts with showing up",
   tagline = "Pick a cause. Watch it grow.",
   oncePerSession = true,
 }: LoadingScreenProps) {

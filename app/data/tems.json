@@ -1,4 +1,9 @@
 {
+     "meta": {
+        "siteName": "Change starts with showing up.",
+        "blogTitle": "Team",
+        "blogDescription": "News, stories and updates from the communities we serve."
+    },
     "teamHero": {
         "breadcrumb": [
             {
@@ -17,7 +22,7 @@
         "scrollTarget": "#team",
         "image": {
             "src": "/banner/contact.webp",
-            "alt": "WKX Foundation team working together with local communities"
+            "alt": "Change starts with showing up team working together with local communities"
         },
         "bannerCaption": "OUR PEOPLE. OUR PURPOSE."
     },

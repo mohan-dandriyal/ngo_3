@@ -298,7 +298,7 @@ export default function Footer() {
                       W
                     </span>
                     <span className="text-lg font-semibold tracking-wide text-[#141714]">
-                      WKX Foundation
+                      Change starts with showing up
                     </span>
                   </span>
                 )}

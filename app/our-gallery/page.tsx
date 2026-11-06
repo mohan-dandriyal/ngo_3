@@ -5,9 +5,9 @@ import type { GalleryPageData } from "@/app/types/gallery";
 import InnerPageBanner from "../components/InnerPageBanner";
 
 export const metadata = {
-  title: "Gallery | WKX Foundation",
+  title: "Gallery | Change starts with showing up",
   description:
-    "Explore the people, communities, and stories behind the work of WKX Foundation."
+    "Explore the people, communities, and stories behind the work of Change starts with showing up."
 };
 
 const data = galleryData as GalleryPageData;

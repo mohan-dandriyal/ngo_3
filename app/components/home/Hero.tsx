@@ -137,7 +137,7 @@ export default function Hero({ data }: HeroContent) {
     <section
       ref={sectionRef}
       aria-roledescription="carousel"
-      aria-label="WKX Foundation highlights"
+      aria-label="Change starts with showing up highlights"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}

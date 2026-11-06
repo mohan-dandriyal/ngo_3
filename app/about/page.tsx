@@ -4,6 +4,11 @@ import OurVision from '../components/aboutCom/OurVision'
 import JoinMission from '../components/aboutCom/JoinMission'
 import InnerPageBanner from '../components/InnerPageBanner'
 
+export const metadata = {
+  title: "About Us | Change starts with showing up.",
+  description: "Learn about Educare Foundation's mission, story, leadership, and our journey from one classroom to 25+ centers.",
+};
+
 function About() {
   return (
     <div>
@@ -20,9 +25,9 @@ function About() {
         <OurVision data={about.vision} />
       </div>
 
-      <div>
+      {/* <div>
         <JoinMission data={about.joinMission} />
-      </div>
+      </div> */}
     </div>
   )
 }

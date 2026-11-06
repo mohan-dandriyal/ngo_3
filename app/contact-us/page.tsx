@@ -1,9 +1,18 @@
 import React from 'react'
 
 import data from '@/app/data/contact.json'
-import ContactHero from '../components/contact/ContactHero'
 import ContactSection from '../components/contact/ContactSection'
 import InnerPageBanner from '../components/InnerPageBanner'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: `${data.meta.blogTitle} | ${data.meta.siteName}`,
+  description: data.meta.blogDescription,
+  openGraph: {
+    title: `${data.meta.blogTitle} | ${data.meta.siteName}`,
+    description: data.meta.blogDescription,
+  },
+};
 
 function ContactUs() {
   return (

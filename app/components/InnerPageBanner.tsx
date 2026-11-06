@@ -149,10 +149,16 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9 }}
-                className="relative overflow-hidden flex items-center min-h-[35vh] md:min-h-[60vh]"
+                className="relative  overflow-hidden flex items-center min-h-[40vh] md:min-h-[75vh]"
+                style={{
+                    backgroundImage: `linear-gradient(45deg, #29382d, #00000033), url(${image?.src})`,
+                    backgroundRepeat : "no-repeat",
+                    backgroundSize : 'cover'
+                }}
             >
+
                 {/* BACKGROUND IMAGE */}
-                {!imgFailed && image?.src ? (
+                {/* {!imgFailed && image?.src ? (
                     <motion.div
                         style={{ y: imageY }}
                         className="absolute inset-0 -z-20"
@@ -164,14 +170,12 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                             priority
                             sizes="100vw"
                             onError={() => setImgFailed(true)}
+                            
                             className="object-cover object-center"
                         />
                     </motion.div>
-                ) : (
-                    <div
-                        className="absolute inset-0 -z-20 bg-gradient-to-br from-[#29382d] via-[#17221b] to-[#0a0a09]"
-                    />
-                )}
+                ) : ( */}
+                {/* )} */}
 
                 {/* IMAGE OVERLAYS */}
                 {/* <div
@@ -179,10 +183,10 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                     className="absolute inset-0 -z-10 bg-black/45"
                 /> */}
 
-                <div
+                {/* <div
                     aria-hidden="true"
                     className="absolute inset-0 -z-10 bg-gradient-to-r from-black/75 via-black/60 to-black/50"
-                />
+                /> */}
 
                 {/* <div
                     aria-hidden="true"

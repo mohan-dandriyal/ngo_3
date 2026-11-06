@@ -228,7 +228,7 @@ export default function Header() {
 
           <Link
             href="/"
-            aria-label="WKX Foundation home"
+            aria-label="Change starts with showing up home"
             onClick={closeMenu}
             className="
               flex min-w-0 items-center
@@ -241,7 +241,7 @@ export default function Header() {
             {!logoFailed && logo?.src ? (
               <Image
                 src={logo.src}
-                alt={logo.alt ?? "WKX Foundation"}
+                alt={logo.alt ?? "Change starts with showing up"}
                 width={230}
                 height={64}
                 priority
