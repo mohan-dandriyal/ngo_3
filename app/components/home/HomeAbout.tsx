@@ -101,7 +101,7 @@ export default function HomeAbout({ data }: HomeAboutContent) {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-[#faf8f5] py-16 text-[#141714] sm:py-16 lg:py-16"
+      className="relative w-full overflow-hidden bg-[#faf8f5] py-16 text-[#141714] sm:py-16 lg:py-18  "
     >
       {/* Background glow */}
       <div

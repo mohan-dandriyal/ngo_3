@@ -152,7 +152,7 @@ export default function Hero({ data }: HeroContent) {
       }}
       className="relative isolate w-full overflow-hidden
       bg-[#141714] font-['Hanken_Grotesk','Helvetica_Neue',Arial,sans-serif]
-      text-[#ece6da] lg:min-h-[80vh] flex items-center"
+      text-[#ece6da] lg:min-h-[100vh] flex items-center"
     >
       {/* BACKGROUND IMAGE */}
       <AnimatePresence initial={false}>
@@ -274,7 +274,7 @@ export default function Hero({ data }: HeroContent) {
                   variants={itemVariants}
                   className="mt-9 flex flex-wrap items-center gap-4"
                 >
-                  {activeSlide.donateBtn && (
+                  {/* {activeSlide.donateBtn && (
                     <Link
                       href={activeSlide.donateBtn.linkTo}
                       className="group inline-flex min-h-[54px] items-center
@@ -314,7 +314,7 @@ export default function Hero({ data }: HeroContent) {
                         →
                       </span>
                     </Link>
-                  )}
+                  )} */}
                 </motion.div>
               </motion.div>
             </AnimatePresence>

@@ -149,7 +149,7 @@ export default function InnerPageBanner({ data }: innerPageBanner) {
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9 }}
-                className="relative  overflow-hidden flex items-center min-h-[40vh] md:min-h-[75vh]"
+                className="relative  overflow-hidden flex items-center min-h-[40vh] md:min-h-[60vh]"
                 style={{
                     backgroundImage: `linear-gradient(45deg, #29382d, #00000033), url(${image?.src})`,
                     backgroundRepeat : "no-repeat",
